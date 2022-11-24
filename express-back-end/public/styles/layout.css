@@ -1,0 +1,22 @@
+body,
+html {
+  margin: 0;
+}
+
+.image {
+  background-image: url("/img/restaurant-interior.jpg");
+  background-repeat: no-repeat;
+}
+
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: space-evenly;
+  align-self: center;
+}

@@ -1,0 +1,27 @@
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: "Poppins", sans-serif;
+  color: #444444;
+}
+body nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100px;
+  background: #a3a582;
+  padding: 1.5em;
+  position: fixed;
+  top: 0%;
+  width: 100%;
+}
+body nav span {
+  font-family: "poppins", sans-serif;
+  font-size: 2em;
+}
+body .fa-solid:hover {
+  color: green;
+}
