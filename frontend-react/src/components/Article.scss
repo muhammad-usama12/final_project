@@ -13,6 +13,7 @@ article {
   .screen-and-buttons {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 2rem;
   
     .screen {
       background-color: $secondary-colour;
@@ -76,22 +77,5 @@ article {
         }
       }
     }
-  }
-
-  .article-tags {
-    background-color: $secondary-colour;
-    font-size: medium;
-    display: flex;
-    justify-content: flex-start;
-    margin-top: 2rem;
-    padding: 0.5rem 1rem 0.5rem 1rem;
-    width: fit-content;
-    border-radius: 30px;
-    transition-duration: 200ms;
-  }
-
-  .article-tags:hover {
-    background-color: $primary-colour;
-    color: $secondary-colour;
   }
 }

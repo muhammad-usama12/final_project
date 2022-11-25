@@ -1,0 +1,18 @@
+@import "../styles/variables.scss";
+
+.article-tags {
+  background-color: $secondary-colour;
+  font-size: medium;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  width: fit-content;
+  border: 1px solid $secondary-colour;
+  border-radius: 30px;
+  transition-duration: 200ms;
+}
+
+.article-tags:hover {
+  background-color: $primary-colour;
+  color: $secondary-colour;
+}

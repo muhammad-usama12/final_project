@@ -1,5 +1,6 @@
 import React from "react";
 import "./Article.scss"
+import Category from "./Category"
 
 export default function Article() {
   return (
@@ -36,9 +37,9 @@ export default function Article() {
 
       </div>
 
-      <div className="article-tags">
-        the rehearsal
-      </div>
+      <Category
+        name="the rehearsal"
+      />
 
     </article>
   );

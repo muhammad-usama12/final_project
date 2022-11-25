@@ -5,6 +5,7 @@ import './App.scss';
 
 import Header from "./components/Header"
 import Article from './components/Article';
+import Category from './components/Category';
 
 function App() {
   const [movies, setMovies] = useState([]);
@@ -47,6 +48,24 @@ function App() {
       <div>
         <Header />
         <main>
+          <section>
+            <div className='general-filter'>
+              <Category
+                name="show all"
+              />
+              <Category
+                name="blur spoilers"
+              />
+            </div>
+
+            <hr />
+
+            <div className='specific-filter'>
+              <Category 
+                name="the rehearsal"
+              />
+            </div>
+          </section>
           <Article />
         </main>
       </div>

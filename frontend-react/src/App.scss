@@ -9,3 +9,17 @@ main {
   font-size: calc(10px + 2vmin);
   color: $primary-colour;
 }
+
+.general-filter {
+  display: flex ;
+  margin-top: 2rem;
+}
+
+hr {
+  width: 100%;
+}
+
+.specific-filter {
+  display: flex;
+  justify-content: center;
+}
