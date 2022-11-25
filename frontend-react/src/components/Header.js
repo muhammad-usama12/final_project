@@ -18,7 +18,7 @@ export default function Header() {
           alt="logo"
         >
         </img>
-        teeboo
+        teebo
       </div>
 
       <img 

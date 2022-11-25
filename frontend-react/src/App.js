@@ -64,9 +64,21 @@ function App() {
               <Category 
                 name="the rehearsal"
               />
+              <Category 
+                name="better call saul"
+              />
             </div>
           </section>
-          <Article />
+          <Article
+            text="when is somebody gonna talk to me about the rehearsal the same way guys talk about sports :|"
+            image={null}
+            category="the rehearsal"
+          />
+          <Article
+            text="what if we kissed at the pro homeless saul goodman bench 😳😳🙈"
+            image="https://pbs.twimg.com/media/FiXRrxpVEAEDLx4?format=jpg&name=900x900"
+            category="better call saul"
+          />
         </main>
       </div>
     </>

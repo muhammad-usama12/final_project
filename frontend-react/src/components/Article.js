@@ -2,7 +2,7 @@ import React from "react";
 import "./Article.scss"
 import Category from "./Category"
 
-export default function Article() {
+export default function Article(props) {
   return (
     <article>
 
@@ -10,14 +10,14 @@ export default function Article() {
 
         <div className="screen">
           <p>
-            when is somebody gonna talk to me about the rehearsal the same way guys talk about sports :|
+            {props.text}
           </p>
-          {/* <img 
+          <img 
             className="article-image"
-            src="https://pbs.twimg.com/media/FiXRrxpVEAEDLx4?format=jpg&name=900x900"
+            src={props.image}
             alt=""
           >
-          </img> */}
+          </img>
         </div>
 
         <div className="buttons">
@@ -38,7 +38,7 @@ export default function Article() {
       </div>
 
       <Category
-        name="the rehearsal"
+        name={props.category}
       />
 
     </article>
