@@ -2,6 +2,7 @@
 
 button {
   font-size: medium;
+  font-weight: 600;
   padding: 0.5rem 1rem 0.5rem 1rem;
   width: fit-content;
   border: 0px;
@@ -14,19 +15,9 @@ button {
   border-color: $confirm;
 }
 
-.button--confirm:hover {
-  color: $secondary-colour;
-  background-color: $confirm;
-}
-
 .button--cancel {
   background-color: $cancel;
   border-color: $cancel;
-}
-
-.button--cancel:hover {
-  color: $secondary-colour;
-  background-color: $cancel;
 }
 
 .button--image {
@@ -36,7 +27,7 @@ button {
   margin-right: 1rem;
 }
 
-.button--image:hover {
+.button--confirm:hover, .button--cancel:hover, .button--image:hover {
   color: $secondary-colour;
-  background-color: $image;
+  filter: brightness(90%);
 }
