@@ -1,12 +1,12 @@
 @import "../styles/variables.scss";
 
 header {
+  background-color: $article-shadow;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   padding: 1rem 15% 1rem 15%;
-  border-bottom: 3px solid $secondary-colour;
 }
 
 .fa-bars {

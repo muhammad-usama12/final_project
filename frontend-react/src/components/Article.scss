@@ -17,7 +17,6 @@ article {
   
     .screen {
       background-color: $secondary-colour;
-      min-height: 10rem;
       text-align: left;
       margin-right: 1rem;
       border-radius: 30px;
@@ -38,6 +37,11 @@ article {
       flex-direction: column;
       align-items: center;
       justify-content: space-between;
+      
+      p {
+        font-size: small;
+        margin-top: 0px;
+      }
 
       .actions {
         color: $primary-colour;
@@ -45,9 +49,10 @@ article {
         flex-direction: column;
         align-items: center;
         width: 30px;
+        margin-top: 1rem;
 
         i {
-          margin-top: 0.5rem;
+          margin-top: 0rem;
           transition-duration: 200ms;
         }
 

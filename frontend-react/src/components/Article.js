@@ -32,8 +32,10 @@ export default function Article(props) {
 
           <div className="actions">
             <i className="fa-solid fa-star"></i>
-            <i className="fa-solid fa-circle-plus"></i>
+            <p>{props.likes}</p>
             <i className="fa-solid fa-comment-dots"></i>
+            <p>{props.comments}</p>
+            <i className="fa-solid fa-circle-plus"></i>
           </div>
         </div>
 
