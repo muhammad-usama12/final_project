@@ -7,7 +7,7 @@ CREATE TABLE posts (
     spoiler BOOLEAN DEFAULT false,
     total_likes INTEGER DEFAULT 0,
     total_comments INTEGER DEFAULT 0,
-    created_at TIMESTAMP NOT NULL,
-    user_id INTEGER REFERENCES users(id) NOT NULL ON DELETE CASCADE,
-    tvshow_id VARCHAR (255) REFERENCES users(id) NOT NULL ON DELETE CASCADE
+    users_id INTEGER REFERENCES users(id) NOT NULL ON DELETE CASCADE,
+    tvshow_id VARCHAR (255) REFERENCES users(id) NOT NULL ON DELETE CASCADE,
+    created_at TIMESTAMP NOT NULL
 );

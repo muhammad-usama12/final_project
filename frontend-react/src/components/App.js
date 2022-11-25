@@ -1,13 +1,13 @@
-import { useState, useEffect } from 'react';
-import { Helmet } from 'react-helmet';
-import axios from 'axios';
-import './App.scss';
+import { useState } from "react";
+import { Helmet } from "react-helmet";
+// import axios from 'axios';
+import "./App.scss";
 
 import Header from "./Header";
-import Article from './Article';
-import Category from './Category';
-import Create from './Create';
-import Write from './Write'
+import Article from "./Article";
+import Category from "./Category";
+import Create from "./Create";
+import Write from "./Write";
 
 function App() {
   // const [movies, setMovies] = useState([]);
@@ -43,42 +43,36 @@ function App() {
   // ));
 
   //
-  const [write, setWrite] = useState(false)
+  const [write, setWrite] = useState(false);
 
   return (
     <>
       <Helmet>
-        <script src="https://kit.fontawesome.com/e21136580c.js" crossorigin="anonymous"></script>
+        <script
+          src="https://kit.fontawesome.com/e21136580c.js"
+          crossorigin="anonymous"
+        ></script>
       </Helmet>
       <div>
         <Header />
         <main>
-
-          <section className='category-filters'>
-            <div className='general-filter'>
-              <Category
-                name="show all"
-              />
-              <Category
-                name="blur spoilers"
-              />
+          <section className="category-filters">
+            <div className="general-filter">
+              <Category name="show all" />
+              <Category name="blur spoilers" />
             </div>
 
             {/* THESE ARE HARD CODED CATEGORY EXAMPLES */}
-            <div className='specific-filter'>
-              <Category 
-                name="the rehearsal"
-              />
-              <Category 
-                name="better call saul"
-              />
+            <div className="specific-filter">
+              <Category name="the rehearsal" />
+              <Category name="better call saul" />
             </div>
           </section>
 
           {/* THIS SHOWS THE NEW POST FORM DEPENDING ON THE WRITE STATE */}
-          { !write && <Create onClick={() => setWrite(true)} />}
+          {!write && <Create onClick={() => setWrite(true)} />}
           {/* THIS NEXT ONE DOESN'T WORK YET LOL */}
-          { write && <Write onCancel={() => setWrite(false)} /> }
+          {write && <Write onCancel={() => setWrite(false)} />}
 
           {/* THESE ARE HARD CODED ARTICLE EXAMPLES- 1 WITH JUST TEXT AND 1 WITH TEXT AND IMAGE */}
           <section className="article-container">
@@ -94,7 +88,6 @@ function App() {
               category="better call saul"
             />
           </section>
-
         </main>
       </div>
     </>
