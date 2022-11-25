@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet';
 import axios from 'axios';
 import './App.scss';
 
-import Header from "./components/Header"
-import Article from './components/Article';
-import Category from './components/Category';
+import Header from "./Header";
+import Article from './Article';
+import Category from './Category';
+import Create from './Create';
 
 function App() {
   const [movies, setMovies] = useState([]);
@@ -69,6 +70,7 @@ function App() {
               />
             </div>
           </section>
+          <Create />
           <Article
             text="when is somebody gonna talk to me about the rehearsal the same way guys talk about sports :|"
             image={null}

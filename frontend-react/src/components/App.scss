@@ -1,4 +1,4 @@
-@import "styles/variables.scss";
+@import "../styles/variables.scss";
 
 main {
   background-color: $primary-colour;
@@ -18,6 +18,7 @@ main {
 
 hr {
   width: 100%;
+  color: $secondary-colour;
 }
 
 .specific-filter {
