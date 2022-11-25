@@ -2,6 +2,8 @@ import React from "react";
 import "./Article.scss"
 import Category from "./Category"
 
+// We pass props from App.js
+// Will probably make another component that passes props to Article.js instead of App.js similar to DayList and DayListItem from scheduler
 export default function Article(props) {
   return (
     <article>

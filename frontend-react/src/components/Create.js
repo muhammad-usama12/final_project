@@ -1,11 +1,14 @@
 import React from "react";
 import "./Create.scss";
 
-export default function Create() {
+// We pass props from App.js
+export default function Create(props) {
   return (
     <section className="create-post">
       <h1>which pot are you stirring today?</h1>
-      <i class="fa-solid fa-marker fa-bounce"></i>
+      <i
+        className="fa-solid fa-marker fa-bounce"
+        onClick={props.onClick}></i>
     </section>
   );
 }

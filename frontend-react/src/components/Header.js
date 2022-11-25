@@ -4,7 +4,7 @@ import "./Header.scss"
 export default function Header() {
   return (
     <header>
-      <i class="fa-solid fa-bars"></i>
+      <i className="fa-solid fa-bars"></i>
 
       <div className="logo-name">
         <img

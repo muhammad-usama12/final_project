@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./Write.scss";
 import Button from "./Button";
 
-export default function Write() {
+export default function Write(props) {
   const [text, setText] = useState("");
   const [show, setShow] = useState("");
 
@@ -30,13 +30,14 @@ export default function Write() {
               cancel
               className="button--cancel"
               type="cancel"
+              onClick={props.onCancel}
             />
           </div>
           <div className="right-buttons">
             <Button
               image
               className="button--image"
-              type={<i class="fa-solid fa-image"></i>}
+              type={<i className="fa-solid fa-image"></i>}
             />
             <Button
               confirm

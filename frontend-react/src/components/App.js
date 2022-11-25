@@ -10,37 +10,40 @@ import Create from './Create';
 import Write from './Write'
 
 function App() {
-  const [movies, setMovies] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
+  // const [movies, setMovies] = useState([]);
+  // const [loading, setLoading] = useState(true);
+  // const [error, setError] = useState(false);
 
-  const getMovies = async () => {
-    try {
-      const result = await axios({
-        url: '/api/movies',
-        method: 'GET',
-      });
+  // const getMovies = async () => {
+  //   try {
+  //     const result = await axios({
+  //       url: '/api/movies',
+  //       method: 'GET',
+  //     });
 
-      setLoading(false);
-      setMovies(result.data);
+  //     setLoading(false);
+  //     setMovies(result.data);
 
-      console.log(result.data);
-    } catch (err) {
-      setLoading(false);
-      setError(err.message);
-    }
-  };
+  //     console.log(result.data);
+  //   } catch (err) {
+  //     setLoading(false);
+  //     setError(err.message);
+  //   }
+  // };
 
-  useEffect(() => {
-    getMovies();
-  }, []);
+  // useEffect(() => {
+  //   getMovies();
+  // }, []);
 
-  const movieList = movies.map((movie) => (
-    <li key={movie.id}>
-      Title: {movie.title} Release Date: {movie.release_date} Runtime(mins):{' '}
-      {movie.runtime_mins}
-    </li>
-  ));
+  // const movieList = movies.map((movie) => (
+  //   <li key={movie.id}>
+  //     Title: {movie.title} Release Date: {movie.release_date} Runtime(mins):{' '}
+  //     {movie.runtime_mins}
+  //   </li>
+  // ));
+
+  //
+  const [write, setWrite] = useState(false)
 
   return (
     <>
@@ -50,7 +53,8 @@ function App() {
       <div>
         <Header />
         <main>
-          <section>
+
+          <section className='category-filters'>
             <div className='general-filter'>
               <Category
                 name="show all"
@@ -60,6 +64,7 @@ function App() {
               />
             </div>
 
+            {/* THESE ARE HARD CODED CATEGORY EXAMPLES */}
             <div className='specific-filter'>
               <Category 
                 name="the rehearsal"
@@ -69,8 +74,13 @@ function App() {
               />
             </div>
           </section>
-          {/* <Create /> */}
-          <Write />
+
+          {/* THIS SHOWS THE NEW POST FORM DEPENDING ON THE WRITE STATE */}
+          { !write && <Create onClick={() => setWrite(true)} />}
+          {/* THIS NEXT ONE DOESN'T WORK YET LOL */}
+          { write && <Write onCancel={() => setWrite(false)} /> }
+
+          {/* THESE ARE HARD CODED ARTICLE EXAMPLES- 1 WITH JUST TEXT AND 1 WITH TEXT AND IMAGE */}
           <section className="article-container">
             <hr />
             <Article
@@ -84,6 +94,7 @@ function App() {
               category="better call saul"
             />
           </section>
+
         </main>
       </div>
     </>
