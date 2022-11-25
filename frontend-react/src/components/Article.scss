@@ -3,10 +3,10 @@ article {
   display: flex;
   flex-direction: column;
   word-wrap: break-word;
-  width: 30%;
-  padding: 3rem;
+  width: 40%;
+  padding: 2rem;
   margin: 2rem;
-  // box-shadow: 10px 10px grey;
+  box-shadow: 10px 10px grey;
 
   .screen-and-buttons {
     display: flex;
@@ -35,14 +35,41 @@ article {
       flex-direction: column;
       align-items: center;
       justify-content: space-between;
-  
+
       .actions {
+        color: #282c34;
         display: flex;
         flex-direction: column;
+        align-items: center;
         width: 30px;
 
-        img {
+        i {
           margin-top: 0.5rem;
+          transition-duration: 200ms;
+        }
+
+        .fa-star:hover {
+          // text-shadow: 30px -15px #FF8C00;
+          color: #FF8C00;
+          font-size:xx-large
+        }
+
+        .fa-star:active {
+          text-shadow: 30px -15px #FF8C00;
+        }
+
+        .fa-circle-plus:hover {
+          color: #006400;
+          font-size:xx-large
+        }
+
+        .fa-circle-plus:active {
+          text-shadow: 30px -15px #006400;
+        }
+
+        .fa-comment-dots:hover {
+          color: #483D8B;
+          font-size:xx-large
         }
       }
     }
@@ -50,6 +77,7 @@ article {
 
   .article-tags {
     background-color: #F6F1F1;
+    font-size: medium;
     display: flex;
     justify-content: flex-start;
     margin-top: 2rem;

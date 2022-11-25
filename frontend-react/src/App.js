@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Helmet } from 'react-helmet'
 import axios from 'axios';
 import './App.css';
 
@@ -39,12 +40,17 @@ function App() {
   ));
 
   return (
-    <div className="App">
-      <Header />
-      <main className="App-header">
-        <Article />
-      </main>
-    </div>
+    <>
+      <Helmet>
+        <script src="https://kit.fontawesome.com/e21136580c.js" crossorigin="anonymous"></script>
+      </Helmet>
+      <div>
+        <Header />
+        <main>
+          <Article />
+        </main>
+      </div>
+    </>
   );
 }
 

@@ -1,10 +1,6 @@
 import React from "react";
 import "./Article.scss"
 
-import like from './images/like.png'
-import watchlist from './images/watchlist.png'
-import comment from './images/comment.png'
-
 export default function Article() {
   return (
     <article>
@@ -13,14 +9,14 @@ export default function Article() {
 
         <div className="screen">
           <p>
-            what if we kissed at the non anti homeless saul goodman bench 😳😳🙈
+            when is somebody gonna talk to me about the rehearsal the same way guys talk about sports :|
           </p>
-          <img 
+          {/* <img 
             className="article-image"
             src="https://pbs.twimg.com/media/FiXRrxpVEAEDLx4?format=jpg&name=900x900"
             alt=""
           >
-          </img>
+          </img> */}
         </div>
 
         <div className="buttons">
@@ -32,16 +28,16 @@ export default function Article() {
           </img>
 
           <div className="actions">
-            <img src={like} alt="like" />
-            <img src={watchlist} alt="watchlist" />
-            <img src={comment} alt="comment" />
+            <i className="fa-solid fa-star"></i>
+            <i className="fa-solid fa-circle-plus"></i>
+            <i className="fa-solid fa-comment-dots"></i>
           </div>
         </div>
 
       </div>
 
       <div className="article-tags">
-        the office
+        the rehearsal
       </div>
 
     </article>
