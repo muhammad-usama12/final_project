@@ -1,0 +1,33 @@
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 20% 1rem 20%;
+}
+
+.settings {
+  width: 35px;
+  height: auto;
+}
+
+.logo-image {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  width: 35px;
+  height: auto;
+}
+
+.logo-name {
+  display: flex;
+  align-items: center;
+  font-size: x-large;
+  font-weight: 700;
+}
+
+.profile-icon {
+  width: 35px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 50%;
+}

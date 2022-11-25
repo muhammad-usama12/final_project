@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
 
+import Header from "./components/Header"
+
 function App() {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -37,13 +39,14 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
+      <Header />
+      <div className="App-header">
         {loading && <h3>Loading movies...</h3>}
 
         {error && <h3>{error}</h3>}
 
         {!loading && !error && <ul>{movieList}</ul>}
-      </header>
+      </div>
     </div>
   );
 }
