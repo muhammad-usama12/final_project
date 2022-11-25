@@ -29,7 +29,7 @@ export default function Write(props) {
             <Button
               cancel
               className="button--cancel"
-              type="cancel"
+              message="cancel"
               onClick={props.onCancel}
             />
           </div>
@@ -37,12 +37,13 @@ export default function Write(props) {
             <Button
               image
               className="button--image"
-              type={<i className="fa-solid fa-image"></i>}
+              // Below is icon of an image
+              message={<i className="fa-solid fa-image"></i>}
             />
             <Button
               confirm
               className="button--confirm"
-              type="greenlight"
+              message="greenlight"
             />
           </div>
         </div>

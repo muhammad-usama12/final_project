@@ -13,7 +13,7 @@ export default function Button(props) {
     <button
     className={buttonClass}
     >
-      {props.type}
+      {props.message}
     </button>
   );
 }

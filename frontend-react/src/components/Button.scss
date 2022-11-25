@@ -28,6 +28,5 @@ button {
 }
 
 .button--confirm:hover, .button--cancel:hover, .button--image:hover {
-  color: $secondary-colour;
-  filter: brightness(90%);
+  filter: saturate(200%);
 }
