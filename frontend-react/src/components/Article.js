@@ -20,7 +20,7 @@ export default function Article(props) {
           </img>
         </div>
 
-        <div className="buttons">
+        <div className="article-buttons">
           <img 
           className="profile-icon"
           src="https://i.pinimg.com/474x/ce/9c/ab/ce9cab218f2849c81f230e4296fd120c.jpg"

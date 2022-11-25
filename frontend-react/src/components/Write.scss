@@ -1,9 +1,38 @@
 @import "../styles/variables.scss";
 
 .write-post {
+  background-color: $secondary-colour;
+  margin: 2rem;
+  padding: 2rem;
+  width: 35%;
+  gap: 1rem;
+  border-radius: 30px;
 
   form {
     display: flex;
     flex-direction: column;
+    gap: 1rem;
+
+    textarea {
+      font-family: $font-fam;
+      resize: none;
+      height: 5rem;
+    }
+
+    textarea, input {
+      font-size: $primary-font-size;
+      background-color: $secondary-colour;
+      border: 0px;
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+
+  .write-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
   }
 }

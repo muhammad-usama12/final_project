@@ -1,0 +1,42 @@
+@import "../styles/variables.scss";
+
+button {
+  font-size: medium;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  width: fit-content;
+  border: 0px;
+  border-radius: 30px;
+  transition-duration: 200ms;
+}
+
+.button--confirm {
+  background-color: $confirm;
+  border-color: $confirm;
+}
+
+.button--confirm:hover {
+  color: $secondary-colour;
+  background-color: $confirm;
+}
+
+.button--cancel {
+  background-color: $cancel;
+  border-color: $cancel;
+}
+
+.button--cancel:hover {
+  color: $secondary-colour;
+  background-color: $cancel;
+}
+
+.button--image {
+  background-color: $image;
+  border-color: $image;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.button--image:hover {
+  color: $secondary-colour;
+  background-color: $image;
+}

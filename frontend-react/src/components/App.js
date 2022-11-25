@@ -69,8 +69,8 @@ function App() {
               />
             </div>
           </section>
-          <Create />
-          {/* <Write /> */}
+          {/* <Create /> */}
+          <Write />
           <section className="article-container">
             <hr />
             <Article
