@@ -1,4 +1,7 @@
+@import "../styles/variables.scss";
+
 header {
+  background-color: $secondary-colour;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

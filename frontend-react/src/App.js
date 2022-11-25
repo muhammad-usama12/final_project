@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet'
 import axios from 'axios';
-import './App.css';
+import './App.scss';
 
 import Header from "./components/Header"
 import Article from './components/Article';

@@ -1,9 +1,11 @@
+@import "styles/variables.scss";
+
 main {
-  background-color: #282c34;
+  background-color: $primary-colour;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   font-size: calc(10px + 2vmin);
-  color: #282c34;
+  color: $primary-colour;
 }

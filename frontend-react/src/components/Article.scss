@@ -1,19 +1,21 @@
+@import "../styles/variables.scss";
+
 article {
-  background-color: #D9D9D9;
+  background-color: $tertiary-colour;
   display: flex;
   flex-direction: column;
   word-wrap: break-word;
   width: 40%;
   padding: 2rem;
   margin: 2rem;
-  box-shadow: 10px 10px grey;
+  box-shadow: 10px 10px $article-shadow;
 
   .screen-and-buttons {
     display: flex;
     justify-content: space-between;
   
     .screen {
-      background-color: #F6F1F1;
+      background-color: $secondary-colour;
       min-height: 10rem;
       text-align: left;
       margin-right: 1rem;
@@ -37,7 +39,7 @@ article {
       justify-content: space-between;
 
       .actions {
-        color: #282c34;
+        color: $primary-colour;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -50,33 +52,34 @@ article {
 
         .fa-star:hover {
           // text-shadow: 30px -15px #FF8C00;
-          color: #FF8C00;
+          color: $star;
           font-size:xx-large
         }
-
         .fa-star:active {
-          text-shadow: 30px -15px #FF8C00;
+          text-shadow: 30px -15px $star;
         }
 
         .fa-circle-plus:hover {
-          color: #006400;
+          color: $watchlist;
           font-size:xx-large
         }
-
         .fa-circle-plus:active {
-          text-shadow: 30px -15px #006400;
+          text-shadow: 30px -15px $watchlist;
         }
 
         .fa-comment-dots:hover {
-          color: #483D8B;
+          color: $comment;
           font-size:xx-large
+        }
+        .fa-comment-dots:active {
+          text-shadow: 30px -15px $comment;
         }
       }
     }
   }
 
   .article-tags {
-    background-color: #F6F1F1;
+    background-color: $secondary-colour;
     font-size: medium;
     display: flex;
     justify-content: flex-start;
@@ -84,5 +87,11 @@ article {
     padding: 0.5rem 1rem 0.5rem 1rem;
     width: fit-content;
     border-radius: 30px;
+    transition-duration: 200ms;
+  }
+
+  .article-tags:hover {
+    background-color: $primary-colour;
+    color: $secondary-colour;
   }
 }
