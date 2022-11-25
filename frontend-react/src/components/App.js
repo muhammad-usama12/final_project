@@ -7,6 +7,7 @@ import Header from "./Header";
 import Article from './Article';
 import Category from './Category';
 import Create from './Create';
+import Write from './Write'
 
 function App() {
   const [movies, setMovies] = useState([]);
@@ -59,8 +60,6 @@ function App() {
               />
             </div>
 
-            <hr />
-
             <div className='specific-filter'>
               <Category 
                 name="the rehearsal"
@@ -71,16 +70,20 @@ function App() {
             </div>
           </section>
           <Create />
-          <Article
-            text="when is somebody gonna talk to me about the rehearsal the same way guys talk about sports :|"
-            image={null}
-            category="the rehearsal"
-          />
-          <Article
-            text="what if we kissed at the pro homeless saul goodman bench 😳😳🙈"
-            image="https://pbs.twimg.com/media/FiXRrxpVEAEDLx4?format=jpg&name=900x900"
-            category="better call saul"
-          />
+          {/* <Write /> */}
+          <section className="article-container">
+            <hr />
+            <Article
+              text="when is somebody gonna talk to me about the rehearsal the same way guys talk about sports :|"
+              image={null}
+              category="the rehearsal"
+            />
+            <Article
+              text="what if we kissed at the pro homeless saul goodman bench 😳😳🙈"
+              image="https://pbs.twimg.com/media/FiXRrxpVEAEDLx4?format=jpg&name=900x900"
+              category="better call saul"
+            />
+          </section>
         </main>
       </div>
     </>

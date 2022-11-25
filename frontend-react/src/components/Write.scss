@@ -1,0 +1,9 @@
+@import "../styles/variables.scss";
+
+.write-post {
+
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+}

@@ -1,17 +1,17 @@
 @import "../styles/variables.scss";
 
 header {
-  background-color: $secondary-colour;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 20% 1rem 20%;
+  padding: 1rem 15% 1rem 15%;
+  border-bottom: 3px solid $secondary-colour;
 }
 
-.settings {
-  width: 35px;
-  height: auto;
+.fa-bars {
+  font-size: x-large;
+  color: $secondary-colour;
 }
 
 .logo-image {
@@ -22,9 +22,10 @@ header {
 }
 
 .logo-name {
+  color: $secondary-colour;
   display: flex;
   align-items: center;
-  font-size: x-large;
+  font-size: xx-large;
   font-weight: 700;
 }
 
@@ -32,5 +33,6 @@ header {
   width: 35px;
   height: auto;
   object-fit: cover;
+  border: 3px solid $secondary-colour;
   border-radius: 50%;
 }

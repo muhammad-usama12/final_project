@@ -4,12 +4,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-height: 12rem;
+  color: $secondary-colour;
 
-  h1 {
-    color: $secondary-colour;
-  }
-
-  .fa-marker {
+  .fa-marker:hover {
     background-color: $tertiary-colour;
     display: flex;
     justify-content: center;
@@ -21,5 +19,10 @@
     width: 50px;
     height: 50px;
     border-radius: 50%;
+  }
+
+  .fa-marker:active {
+    width: 70px;
+    height: 70px;
   }
 }
