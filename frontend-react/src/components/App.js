@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet";
 import "./App.scss";
 
 import Header from "./Header";
-import Article from "./Article";
+import Article from "./article/Article";
 import Category from "./CategoryList";
 import Create from "./Create";
 import Write from "./Write";
