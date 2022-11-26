@@ -6,8 +6,8 @@ import "./App.scss";
 import Header from "./Header";
 import Article from "./article/Article";
 import Category from "./CategoryList";
-import Create from "./Create";
-import Write from "./Write";
+import Create from "./new-post/Create";
+import Write from "./new-post/Write";
 import useApplicationData from "../hooks/useApplicationData";
 // import { getShowCategories } from "../helpers/selectors"
 

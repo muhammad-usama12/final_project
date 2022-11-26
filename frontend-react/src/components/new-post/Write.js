@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Write.scss";
-import Button from "./Button";
+import Button from "../Button";
 
 export default function Write(props) {
   const [text, setText] = useState("");
@@ -47,8 +47,9 @@ export default function Write(props) {
             <Button
               confirm
               className="button--confirm"
+              message="greenlight"
               onClick={() => save()}
-            >greenlight</Button>
+            />
           </div>
         </div>
     </div>
