@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Article.scss"
 import CategoryTag from "./CategoryTag";
 import ArticleRightButtons from "./ArticleRightButtons";
+import CommentList from "./CommentList";
 
 // We pass props from App.js
 // Will probably make another component that passes props to Article.js instead of App.js similar to DayList and DayListItem from scheduler
 export default function Article(props) {
+
+  const [comments, setComments] = useState(false)
+
   return (
     <article>
 
@@ -19,11 +23,14 @@ export default function Article(props) {
           >
           </img>
         </div>
-        <ArticleRightButtons />
+        <ArticleRightButtons
+          onComment={() => setComments(true)}
+        />
       </div>
       <CategoryTag
         show={props.show}
       />
+      { comments && <CommentList />}
 
     </article>
   );

@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function ArticleRightButtons() {
+export default function ArticleRightButtons(props) {
   return (
     <div className="article-buttons">
       <img 
@@ -12,7 +12,11 @@ export default function ArticleRightButtons() {
       <div className="actions">
         <i className="fa-solid fa-star"></i>
         <i className="fa-solid fa-circle-plus"></i>
-        <i className="fa-solid fa-comment-dots"></i>
+        <i
+          className="fa-solid fa-comment-dots"
+          onClick={props.onComment}
+        >
+        </i>
       </div>
     </div>
   );
