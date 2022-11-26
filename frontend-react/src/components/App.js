@@ -4,10 +4,10 @@ import { Helmet } from "react-helmet";
 import "./App.scss";
 
 import Header from "./Header";
-import Article from "./Article";
-import Category from "./Category";
-import Create from "./Create";
-import Write from "./Write";
+import Article from "./article/Article";
+import Category from "./CategoryList";
+import Create from "./new-post/Create";
+import Write from "./new-post/Write";
 import useApplicationData from "../hooks/useApplicationData";
 // import { getShowCategories } from "../helpers/selectors"
 
@@ -17,12 +17,13 @@ function App() {
   
   const { state } = useApplicationData();
  
-  const showList = state.posts.map((post) => {
+  const articleList = state.posts.map((post) => {
     return (
       <Article
         key={post.id}
         text={post.text}
         img={post.image}
+        show={post.show}
       />
     )
   });
@@ -36,7 +37,7 @@ function App() {
           crossorigin="anonymous"
         ></script>
       </Helmet>
-
+      <Header />
       <main>
         <section className='category-filters'>
           <div className='general-filter'>
@@ -52,7 +53,7 @@ function App() {
         {write && <Write onCancel={() => setWrite(false)} />}
 
         <section className="article-container">
-          {showList}
+          {articleList}
         </section>
       </main>
     </div>
