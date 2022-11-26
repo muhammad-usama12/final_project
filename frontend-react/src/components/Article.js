@@ -13,14 +13,14 @@ export default function Article(props) {
         <div className="screen">
          
           
-            <p>{props.desc}</p>
+            <p>{props.text}</p>
          
-          {/* <img 
+          <img 
             className="article-image"
-            src=
+            src={props.img}
             alt=""
           >
-          </img> */}
+          </img>
         </div>
 
         <div className="article-buttons">

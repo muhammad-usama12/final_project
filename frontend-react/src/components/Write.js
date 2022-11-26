@@ -6,6 +6,10 @@ export default function Write(props) {
   const [text, setText] = useState("");
   const [show, setShow] = useState("");
 
+  const save = () => {
+    
+  }
+
   return (
     <div className="write-post">
       <form onSubmit={event => event.preventDefault()} autoComplete="off">
@@ -43,8 +47,8 @@ export default function Write(props) {
             <Button
               confirm
               className="button--confirm"
-              message="greenlight"
-            />
+              onClick={() => save()}
+            >greenlight</Button>
           </div>
         </div>
     </div>

@@ -42,10 +42,11 @@ import { default as widgetApiRoutes } from "./routes/widgets-api.js";
 // Note: Feel free to replace the example routes below with your own
 // Note: Endpoints that return data (eg. JSON) usually start with `/api`
 
-import { default as movieRoutes } from "./routes/movieRoutes.js";
+import { default as showRoutes } from "./routes/showRoutes.js";
+app.use("/api/shows", showRoutes);
 
-// Note: mount other resources here, using the same pattern above
-app.use("/api/movies", movieRoutes);
+import { default as postRoutes } from "./routes/postRoutes.js";
+app.use("/api/posts", postRoutes);
 
 // Home page
 // Warning: avoid creating more routes in this file!

@@ -9,23 +9,24 @@ import Category from "./Category";
 import Create from "./Create";
 import Write from "./Write";
 import useApplicationData from "../hooks/useApplicationData";
-import  { getShowCategories } from "../helpers/selectors"
+// import { getShowCategories } from "../helpers/selectors"
 
 function App() {
 
-const { shows } = useApplicationData();
-
-  const showList = shows.map((show) => {
-            return (
-            <Article 
-                  id={show.id}
-                  name={show.name}
-                  desc = {show.description}
-                  img = {show.image_url}
-            />
- )
-});
   const [write, setWrite] = useState(false)
+  
+  const { state } = useApplicationData();
+ 
+  const showList = state.posts.map((post) => {
+    return (
+      <Article
+        key={post.id}
+        text={post.text}
+        img={post.image}
+      />
+    )
+  });
+
 
   return (
     <div>
@@ -35,25 +36,25 @@ const { shows } = useApplicationData();
           crossorigin="anonymous"
         ></script>
       </Helmet>
-     
-    <main>
-    <section className='category-filters'>
-            <div className='general-filter'>
-              <Category
-              name={ shows }
-              />
-            </div>
-          </section>
-         
-           {/* THIS SHOWS THE NEW POST FORM DEPENDING ON THE WRITE STATE */}
-           { !write && <Create onClick={() => setWrite(true)} />}
-          {/* THIS NEXT ONE DOESN'T WORK YET LOL */}
-          {write && <Write onCancel={() => setWrite(false)} />}
 
-          <section className="article-container">
-          { showList }
-          </section>  
-    </main>
+      <main>
+        <section className='category-filters'>
+          <div className='general-filter'>
+            <Category
+              name={state}
+            />
+          </div>
+        </section>
+
+        {/* THIS SHOWS THE NEW POST FORM DEPENDING ON THE WRITE STATE */}
+        {!write && <Create onClick={() => setWrite(true)} />}
+        {/* THIS NEXT ONE DOESN'T WORK YET LOL */}
+        {write && <Write onCancel={() => setWrite(false)} />}
+
+        <section className="article-container">
+          {showList}
+        </section>
+      </main>
     </div>
   );
 }

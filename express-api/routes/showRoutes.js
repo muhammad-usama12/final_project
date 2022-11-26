@@ -1,5 +1,5 @@
 import express from 'express';
-import { getMovieById, getMovies, updateMovie } from '../db/queries/movies.js';
+import { getMovieById, getMovies, updateMovie } from '../db/queries/shows.js';
 
 const router = express.Router();
 
