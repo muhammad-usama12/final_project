@@ -5,7 +5,7 @@ import "./App.scss";
 
 import Header from "./Header";
 import Article from "./Article";
-import Category from "./Category";
+import Category from "./CategoryList";
 import Create from "./Create";
 import Write from "./Write";
 import useApplicationData from "../hooks/useApplicationData";
@@ -23,6 +23,7 @@ function App() {
         key={post.id}
         text={post.text}
         img={post.image}
+        category={post.tvshow_id}
       />
     )
   });
@@ -36,7 +37,7 @@ function App() {
           crossorigin="anonymous"
         ></script>
       </Helmet>
-
+      <Header />
       <main>
         <section className='category-filters'>
           <div className='general-filter'>
