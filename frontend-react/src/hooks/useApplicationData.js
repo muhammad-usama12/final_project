@@ -20,7 +20,6 @@ export default function useApplicationData() {
       ])
       .then((response) => {
         setState(prev => ({...prev, posts: response[0].data, shows: response[1].data}))
-       
       })
   }, []);
 
