@@ -11,7 +11,8 @@ export default function Button(props) {
 
   return (
     <button
-    className={buttonClass}
+      className={buttonClass}
+      onClick={props.onClick}
     >
       {props.message}
     </button>

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Helmet } from "react-helmet";
 
 import "./App.scss";
@@ -6,14 +5,12 @@ import "./App.scss";
 import Header from "./Header";
 import Article from "./article/Article";
 import CategoryList from "./CategoryList";
-import Create from "./new-post/Create";
-import Write from "./new-post/Write";
+import NewPost from "./new-post/NewPost";
+
 import useApplicationData from "../hooks/useApplicationData";
 // import { getShowCategories } from "../helpers/selectors"
 
 function App() {
-
-  const [write, setWrite] = useState(false)
   
   const { state } = useApplicationData();
  
@@ -48,9 +45,7 @@ function App() {
         </section>
 
         {/* THIS SHOWS THE NEW POST FORM DEPENDING ON THE WRITE STATE */}
-        {!write && <Create onClick={() => setWrite(true)} />}
-        {/* THIS NEXT ONE DOESN'T WORK YET LOL */}
-        {write && <Write onCancel={() => setWrite(false)} />}
+        <NewPost />
 
         <section className="article-container">
           {articleList}

@@ -30,7 +30,7 @@ export default function Article(props) {
       <CategoryTag
         show={props.show}
       />
-      { comments && <CommentList />}
+      { comments && <CommentList  />}
 
     </article>
   );
