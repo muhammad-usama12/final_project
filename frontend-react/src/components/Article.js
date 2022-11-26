@@ -1,6 +1,6 @@
 import React from "react";
 import "./Article.scss"
-import CategoryTag from "./CategoryListItem";
+import CategoryTag from "./CategoryTag";
 import ArticleRightButtons from "./ArticleRightButtons";
 
 // We pass props from App.js
@@ -21,9 +21,8 @@ export default function Article(props) {
         </div>
         <ArticleRightButtons />
       </div>
-
       <CategoryTag
-        name={props.category}
+        show={props.show}
       />
 
     </article>

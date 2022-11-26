@@ -17,13 +17,13 @@ function App() {
   
   const { state } = useApplicationData();
  
-  const showList = state.posts.map((post) => {
+  const articleList = state.posts.map((post) => {
     return (
       <Article
         key={post.id}
         text={post.text}
         img={post.image}
-        category={post.tvshow_id}
+        show={post.show}
       />
     )
   });
@@ -53,7 +53,7 @@ function App() {
         {write && <Write onCancel={() => setWrite(false)} />}
 
         <section className="article-container">
-          {showList}
+          {articleList}
         </section>
       </main>
     </div>
