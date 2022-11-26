@@ -11,15 +11,16 @@ export default function Article(props) {
       <div className="screen-and-buttons">
 
         <div className="screen">
-          <p>
-            {props.text}
-          </p>
-          <img 
+         
+          
+            <p>{props.desc}</p>
+         
+          {/* <img 
             className="article-image"
-            src={props.image}
+            src=
             alt=""
           >
-          </img>
+          </img> */}
         </div>
 
         <div className="article-buttons">
@@ -39,9 +40,9 @@ export default function Article(props) {
 
       </div>
 
-      <Category
-        name={props.category}
-      />
+      {/* <Category
+        name={props.name}
+      /> */}
 
     </article>
   );

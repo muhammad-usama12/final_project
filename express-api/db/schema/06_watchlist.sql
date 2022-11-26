@@ -1,0 +1,7 @@
+DROP TABLE IF EXISTS watchlist CASCADE;
+
+CREATE TABLE watchlist (
+    id SERIAL PRIMARY KEY NOT NULL,
+    users_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    tvshow_id INTEGER REFERENCES tvshows(id) ON DELETE CASCADE
+);
