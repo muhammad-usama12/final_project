@@ -1,14 +1,12 @@
 import express from 'express';
-import {  getPosts } from '../db/queries/posts.js';
+import { getComments } from '../db/queries/comments.js';
 
 const router = express.Router();
 
-// create the routes for movies
-// /api/movies
 router.get('/', async (req, res) => {
   try {
-    const posts = await getPosts();
-    res.json(posts);
+    const comments = await getComments();
+    res.json(comments);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

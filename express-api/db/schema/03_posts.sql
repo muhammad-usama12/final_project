@@ -8,5 +8,6 @@ CREATE TABLE posts (
     total_likes INTEGER DEFAULT 0,
     total_comments INTEGER DEFAULT 0,
     user_id INTEGER REFERENCES users(id)ON DELETE CASCADE NOT NULL,
-    tvshow_id INTEGER REFERENCES tvshows(id) ON DELETE CASCADE NOT NULL
+    tvshow_id INTEGER REFERENCES tvshows(id) ON DELETE CASCADE NOT NULL,
+    created_at TIMESTAMP DEFAULT NOW()
 );

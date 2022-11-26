@@ -5,11 +5,11 @@ export default function CommentListItem(props) {
     <div className="comment-item">
       <div className="comment-profile">
         <div className="screen">
-          <p>{props.comment}</p>
+          <p>{props.text}</p>
         </div>
         <img 
           className="profile-icon"
-          src={props.profile}
+          src={props.img}
           alt="profile"
         >
         </img>

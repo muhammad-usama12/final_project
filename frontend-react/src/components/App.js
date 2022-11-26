@@ -5,7 +5,7 @@ import "./App.scss";
 
 import Header from "./Header";
 import Article from "./article/Article";
-import Category from "./CategoryList";
+import CategoryList from "./CategoryList";
 import Create from "./new-post/Create";
 import Write from "./new-post/Write";
 import useApplicationData from "../hooks/useApplicationData";
@@ -41,7 +41,7 @@ function App() {
       <main>
         <section className='category-filters'>
           <div className='general-filter'>
-            <Category
+            <CategoryList
               name={state}
             />
           </div>

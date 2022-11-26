@@ -1,20 +1,25 @@
 import React from "react";
 import CommentListItem from "./CommentListItem";
+import useApplicationData from "../../hooks/useApplicationData";
 
 export default function CommentList(props) {
+  const { state } = useApplicationData();
+ 
+  const comments = state.comments.map((comment) => {
+    return (
+      <CommentListItem
+        key={comment.id}
+        text={comment.text}
+        img={comment.icon_url}
+        timestamp={comment.created_at}
+      />
+    )
+  });
+
   return (
     <section className="comments-container">
       <h1>the discourse:</h1>
-      <CommentListItem
-        comment="nathan fielder the man that you are nathan fielder the man that you are nathan fielder the man that you are"
-        timestamp="10 mins ago"
-        profile="https://i.kym-cdn.com/photos/images/newsfeed/002/069/850/076.jpg"
-      />
-      <CommentListItem
-        comment="this man was my injury attorney and we lost"
-        timestamp="4 hours ago"
-        profile="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRReyhqGZwHLHLRL4YLcPNJ4FIcOC9QzxRNfQ&usqp=CAU"
-      />
+      {comments}
     </section>
   );
 }

@@ -48,6 +48,9 @@ app.use("/api/shows", showRoutes);
 import { default as postRoutes } from "./routes/postRoutes.js";
 app.use("/api/posts", postRoutes);
 
+import { default as commentsRoutes } from "./routes/commentsRoutes.js";
+app.use("/api/comments", commentsRoutes);
+
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
