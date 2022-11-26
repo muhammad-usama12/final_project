@@ -1,7 +1,8 @@
 import React from "react";
 import "./Article.scss"
-import Category from "./Category"
 import ArticleRightButtons from "./ArticleRightButtons";
+import Category from "./Category"
+import CommentList from "./CommentList";
 
 // We pass props from App.js
 // Will probably make another component that passes props to Article.js instead of App.js similar to DayList and DayListItem from scheduler
@@ -23,6 +24,7 @@ export default function Article(props) {
         <ArticleRightButtons />
       </div>
       <Category name={props.category} />
+      <CommentList />
     </article>
   );
 }

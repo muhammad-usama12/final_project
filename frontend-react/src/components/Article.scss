@@ -14,24 +14,6 @@ article {
     display: flex;
     justify-content: space-between;
     margin-bottom: 1rem;
-  
-    .screen {
-      background-color: $secondary-colour;
-      min-height: 10rem;
-      text-align: left;
-      margin-right: 1rem;
-      border-radius: 30px;
-
-      p {
-        margin: 1rem;
-      }
-
-      img {
-        display: flex;
-        max-width: 100%;
-        border-radius: 0 0 30px 30px;
-      }
-    }
 
     .article-buttons {
       display: flex;
@@ -75,6 +57,47 @@ article {
         .fa-comment-dots:active {
           text-shadow: 30px -15px $comment;
         }
+      }
+    }
+  }
+
+  .screen {
+    display: flex;
+    flex-direction: column;
+    background-color: $secondary-colour;
+    text-align: left;
+    margin-right: 1rem;
+    border-radius: 30px;
+    width: 100%;
+
+    p {
+      margin: 1rem;
+    }
+
+    img {
+      display: flex;
+      max-width: 100%;
+      border-radius: 0 0 30px 30px;
+    }
+  }
+
+  .comments-container {
+
+    h1 {
+      margin-bottom: 0px;
+    }
+
+    .comment-item {
+      margin-top: 1rem;
+  
+      .comment-profile {
+        display: flex;
+        font-size: medium;
+      }
+    
+      .timestamp {
+        font-size: medium;
+        margin: 0.3rem 1rem 0.3rem 1rem;
       }
     }
   }
