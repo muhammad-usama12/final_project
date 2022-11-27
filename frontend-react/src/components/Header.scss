@@ -17,6 +17,7 @@ header {
   font-size: x-large;
   color: $secondary-colour;
   transition-duration: 200ms;
+  left: 10vw;
 }
 
 .fa-bars:hover {
@@ -43,4 +44,8 @@ header {
   align-items: center;
   font-size: xx-large;
   font-weight: 700;
+}
+
+.header-icon {
+  right: 10vw
 }

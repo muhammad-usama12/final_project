@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Profile.scss";
 import Button from "../Button";
-import useApplicationData from "../../hooks/useApplicationData";
 
 export default function EditProfile(props) {
   const [selectedImage, setSelectedImage] = useState("");

@@ -7,8 +7,7 @@ export default function useApplicationData() {
   const [state, setState] = useState({
     posts: [],
     shows:[],
-    comments: [],
-    users: []
+    comments: []
   });
  
   // const [loading, setLoading] = useState(true);

@@ -38,7 +38,7 @@ export default function Header() {
         </div>
 
         <img 
-          className="profile-icon"
+          className="profile-icon header-icon"
           src="https://i.pinimg.com/474x/ce/9c/ab/ce9cab218f2849c81f230e4296fd120c.jpg"
           alt="profile"
         >

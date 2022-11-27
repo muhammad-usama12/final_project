@@ -31,20 +31,20 @@ function App() {
     <div>
       <Header onClick/>
       <main>
-        <EditProfile />
-        <Profile />
-        {/* <section className='category-filters'>
+        {/* <EditProfile /> */}
+        {/* <Profile /> */}
+        <section className='category-filters'>
             <CategoryList
               name={state}
             />
-        </section> */}
+        </section>
 
         {/* THIS SHOWS THE NEW POST FORM DEPENDING ON THE WRITE STATE */}
-        {/* <NewPost /> */}
+        <NewPost />
 
-        {/* <section className="article-container">
+        <section className="article-container">
           {articleList}
-        </section> */}
+        </section>
       </main>
     </div>
   );
