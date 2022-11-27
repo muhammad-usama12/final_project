@@ -6,6 +6,7 @@ import Header from "./Header";
 import Article from "./article/Article";
 import CategoryList from "./CategoryList";
 import NewPost from "./new-post/NewPost";
+import Profile from "./Profile";
 
 import useApplicationData from "../hooks/useApplicationData";
 // import { getShowCategories } from "../helpers/selectors"
@@ -36,6 +37,7 @@ function App() {
       </Helmet>
       <Header />
       <main>
+        <Profile />
         <section className='category-filters'>
           <div className='general-filter'>
             <CategoryList
