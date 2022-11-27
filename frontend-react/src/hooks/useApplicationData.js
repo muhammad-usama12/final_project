@@ -6,7 +6,8 @@ export default function useApplicationData() {
 
   const [state, setState] = useState({
     posts: [],
-    shows:[]
+    shows:[],
+    comments: []
   });
  
   // const [loading, setLoading] = useState(true);
@@ -16,10 +17,11 @@ export default function useApplicationData() {
     Promise.all
       ([
         axios.get("/api/posts"),
-        axios.get("/api/shows")
+        axios.get("/api/shows"),
+        axios.get("/api/comments")
       ])
       .then((response) => {
-        setState(prev => ({...prev, posts: response[0].data, shows: response[1].data}))
+        setState(prev => ({...prev, posts: response[0].data, shows: response[1].data, comments: response[2].data}))
       })
   }, []);
 

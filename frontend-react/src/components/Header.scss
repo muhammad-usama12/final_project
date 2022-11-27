@@ -1,12 +1,16 @@
 @import "../styles/variables.scss";
 
 header {
+  background-color: $primary-colour;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   padding: 1rem 15% 1rem 15%;
   border-bottom: 3px solid $secondary-colour;
+  position: fixed;
+  width: 70vw;
+  height: 64px;
 }
 
 .fa-bars {
@@ -27,12 +31,4 @@ header {
   align-items: center;
   font-size: xx-large;
   font-weight: 700;
-}
-
-.profile-icon {
-  width: 35px;
-  height: auto;
-  object-fit: cover;
-  border: 3px solid $secondary-colour;
-  border-radius: 50%;
 }

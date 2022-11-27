@@ -17,14 +17,14 @@ main {
   flex-direction: row;
 }
 .general-filter {
-  // display: flex;
-  // justify-content: center;
-  // margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
 }
 
 .specific-filter {
-  // display: flex;
-  // justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .article-container {
@@ -36,4 +36,12 @@ main {
 
 hr {
   width: 50%;
+}
+
+.profile-icon {
+  width: 35px;
+  height: 35px;
+  object-fit: cover;
+  border: 3px solid $secondary-colour;
+  border-radius: 50%;
 }

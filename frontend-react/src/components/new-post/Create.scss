@@ -1,4 +1,4 @@
-@import "../styles/variables.scss";
+@import "../../styles/variables.scss";
 
 .create-post {
   display: flex;
@@ -6,7 +6,13 @@
   align-items: center;
   min-height: 12rem;
   margin-top: 1rem;
+  margin-bottom: 0px;
   color: $secondary-colour;
+
+  .fa-marker {
+    transition-duration: 200ms;
+    border-radius: 30%;
+  }
 
   .fa-marker:hover {
     background-color: $tertiary-colour;

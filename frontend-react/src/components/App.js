@@ -1,58 +1,53 @@
-import { useState } from "react";
 import { Helmet } from "react-helmet";
 
 import "./App.scss";
 
+import Scripts from "./Scripts";
 import Header from "./Header";
-import Article from "./Article";
-import Category from "./Category";
-import Create from "./Create";
-import Write from "./Write";
+import Article from "./article/Article";
+import CategoryList from "./CategoryList";
+import NewPost from "./new-post/NewPost";
+import Profile from "./Profile";
+import SettingsBar from "./settings/SettingsBar";
+
 import useApplicationData from "../hooks/useApplicationData";
 // import { getShowCategories } from "../helpers/selectors"
 
 function App() {
-
-  const [write, setWrite] = useState(false)
   
   const { state } = useApplicationData();
  
-  const showList = state.posts.map((post) => {
+  const articleList = state.posts.map((post) => {
     return (
       <Article
         key={post.id}
         text={post.text}
         img={post.image}
+        show={post.show}
       />
     )
   });
 
-
   return (
     <div>
-      <Helmet>
-        <script
-          src="https://kit.fontawesome.com/e21136580c.js"
-          crossorigin="anonymous"
-        ></script>
-      </Helmet>
-
+      <Scripts />
+      <Header />
       <main>
+        {/* <SettingsBar /> */}
+        <Profile />
         <section className='category-filters'>
           <div className='general-filter'>
-            <Category
+            <CategoryList
               name={state}
             />
           </div>
         </section>
 
         {/* THIS SHOWS THE NEW POST FORM DEPENDING ON THE WRITE STATE */}
-        {!write && <Create onClick={() => setWrite(true)} />}
-        {/* THIS NEXT ONE DOESN'T WORK YET LOL */}
-        {write && <Write onCancel={() => setWrite(false)} />}
+        <NewPost />
 
         <section className="article-container">
-          {showList}
+          {articleList}
         </section>
       </main>
     </div>

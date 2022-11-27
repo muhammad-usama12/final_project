@@ -1,17 +1,34 @@
 import React, { useState } from "react";
 import "./Write.scss";
-import Button from "./Button";
+import Button from "../Button";
 
 export default function Write(props) {
   const [text, setText] = useState("");
   const [show, setShow] = useState("");
+  const [error, setError] = useState("");
 
-  const save = () => {
-    
+
+  function cancel() {
+    props.onCancel();
+  }
+
+  function validate() {
+    if (text === "") {
+      setError("you can't stir nothing");
+      return;
+    }
+    if (show === "") {
+      setError("what show are you even talking about??");
+      return;
+    }
+  
+    setError("");
+    props.onSave(text, show);
   }
 
   return (
     <div className="write-post">
+      {error !== "" && <section>{error}</section>}
       <form onSubmit={event => event.preventDefault()} autoComplete="off">
           <textarea
             name="text"
@@ -34,7 +51,7 @@ export default function Write(props) {
               cancel
               className="button--cancel"
               message="cancel"
-              onClick={props.onCancel}
+              onClick={cancel}
             />
           </div>
           <div className="right-buttons">
@@ -47,8 +64,9 @@ export default function Write(props) {
             <Button
               confirm
               className="button--confirm"
-              onClick={() => save()}
-            >greenlight</Button>
+              message="greenlight"
+              onClick={validate}
+            />
           </div>
         </div>
     </div>
