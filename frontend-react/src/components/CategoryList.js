@@ -14,10 +14,8 @@ export default function CategoryList(props) {
     />
   ))
   return (
-    <div className="category-tags">
-
-      <ul className="category-list"> { eachcategory } </ul>
-   
-    </div>
+    <section className="category-list">
+      { eachcategory }
+    </section>
   );
 }

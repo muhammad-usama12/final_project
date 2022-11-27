@@ -1,7 +1,8 @@
 @import "../styles/variables.scss";
 
-.article-tags {
+.pill-container {
   background-color: $secondary-colour;
+  display: flex;
   font-size: medium;
   font-weight: 600;
   margin: 0.5rem 1rem 0rem 1rem;
@@ -12,18 +13,42 @@
   transition-duration: 200ms;
 }
 
-.article-tags:hover {
+.pill-container:hover {
   background-color: $primary-colour;
   color: $secondary-colour;
 }
 
 .category-list{
+  color: $primary-colour;
   display: flex;
-  
-    li {
-      list-style: none;
-      margin: 10px;
-      border: 1px solid rgb(234, 225, 225);
-      border-radius: 10px;
+
+  p {
+    margin: 0px;
+    align-self: center;
+    vertical-align: middle;
+  }
+
+  img {
+    display: none;
+  }
+
+    .category-item:hover {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0;
+
+      img {
+        display: block;
+        object-fit: cover;
+        object-position: 0 30%;
+        border-radius: 30px;
+        width: 200px;
+        height: 5rem;
+      }
+
+      p {
+        display: none;
+      }
     }
 }
