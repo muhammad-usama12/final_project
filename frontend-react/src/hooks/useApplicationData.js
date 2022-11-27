@@ -18,10 +18,11 @@ export default function useApplicationData() {
       ([
         axios.get("/api/posts"),
         axios.get("/api/shows"),
-        axios.get("/api/comments")
+        axios.get("/api/comments"),
       ])
       .then((response) => {
         setState(prev => ({...prev, posts: response[0].data, shows: response[1].data, comments: response[2].data}))
+        console.log(state)
       })
   }, []);
 

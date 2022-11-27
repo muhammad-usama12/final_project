@@ -5,7 +5,7 @@ article {
   display: flex;
   flex-direction: column;
   word-wrap: break-word;
-  width: 40vw;
+  width: 35vw;
   padding: 2rem;
   margin-top: 0;
   margin-bottom: 4rem;
@@ -34,10 +34,13 @@ article {
           transition-duration: 200ms;
         }
 
+        p {
+          font-size: small;
+          margin: 0%;
+        }
+
         .fa-star:hover {
-          // text-shadow: 30px -15px #FF8C00;
           color: $star;
-          font-size:xx-large
         }
         .fa-star:active {
           text-shadow: 30px -15px $star;
@@ -45,7 +48,6 @@ article {
 
         .fa-circle-plus:hover {
           color: $watchlist;
-          font-size:xx-large
         }
         .fa-circle-plus:active {
           text-shadow: 30px -15px $watchlist;
@@ -53,7 +55,6 @@ article {
 
         .fa-comment-dots:hover {
           color: $comment;
-          font-size:xx-large
         }
         .fa-comment-dots:active {
           text-shadow: 30px -15px $comment;
@@ -75,7 +76,7 @@ article {
     p {
       margin: 1rem 2rem 1rem 2rem;
       font-family: monospace;
-      font-size: 20px;
+      font-size: xx-large;
     }
 
     img {
@@ -93,10 +94,14 @@ article {
 
     .comment-item {
       margin-top: 1rem;
+
+      p {
+        font-size: larger;
+      }
   
       .comment-profile {
         display: flex;
-        font-size: medium;
+        font-size: large;
       }
     
       .timestamp {

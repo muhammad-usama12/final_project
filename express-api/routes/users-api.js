@@ -5,14 +5,14 @@
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
 
-import express from 'express';
+import express from "express";
 const router = express.Router();
-import { getUsers } from '../db/queries/users.js';
+import { getUsers } from "../db/queries/users.js";
 
-router.get('/', (req, res) => {
+router.get("/", (req, res) => {
   getUsers()
     .then((users) => {
-      res.json({ users });
+      res.json(users);
     })
     .catch((err) => {
       res.status(500).json({ error: err.message });

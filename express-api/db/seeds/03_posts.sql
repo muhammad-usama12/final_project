@@ -19,3 +19,6 @@ VALUES (
 );
 
 INSERT INTO posts (text, total_likes, total_comments, user_id, tvshow_id) VALUES ('Worst season ever', 267, 8, 2, 2);
+
+
+
