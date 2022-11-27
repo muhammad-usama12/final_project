@@ -22,9 +22,9 @@ export default function useApplicationData() {
       ])
       .then((response) => {
         setState(prev => ({...prev, posts: response[0].data, shows: response[1].data, comments: response[2].data}))
+        console.log(state)
       })
   }, []);
 
-console.log(state)
   return { state }  
 }

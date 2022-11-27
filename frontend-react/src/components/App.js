@@ -24,6 +24,8 @@ function App() {
         text={post.text}
         img={post.image}
         show={post.show}
+        likes={post.total_likes}
+        comments={post.total_comments}
       />
     )
   });

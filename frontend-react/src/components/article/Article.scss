@@ -5,7 +5,7 @@ article {
   display: flex;
   flex-direction: column;
   word-wrap: break-word;
-  width: 40vw;
+  width: 35vw;
   padding: 2rem;
   margin-top: 0;
   margin-bottom: 4rem;
@@ -32,6 +32,11 @@ article {
         i {
           margin-top: 0.5rem;
           transition-duration: 200ms;
+        }
+
+        p {
+          font-size: small;
+          margin: 0%;
         }
 
         .fa-star:hover {
@@ -75,7 +80,7 @@ article {
     p {
       margin: 1rem 2rem 1rem 2rem;
       font-family: monospace;
-      font-size: 20px;
+      font-size: xx-large;
     }
 
     img {
@@ -93,10 +98,14 @@ article {
 
     .comment-item {
       margin-top: 1rem;
+
+      p {
+        font-size: larger;
+      }
   
       .comment-profile {
         display: flex;
-        font-size: medium;
+        font-size: large;
       }
     
       .timestamp {
