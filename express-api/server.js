@@ -10,15 +10,22 @@ const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
 import sassMiddleware from "./lib/sass-middleware.js";
 import express from "express";
 import morgan from "morgan";
+import session from "express-session";
+// const cors = require("cors");
 
 const PORT = process.env.PORT || 3001;
 const app = express();
+
+// var corsOptions = {
+//   origin: "http://localhost:3001",
+// };
 
 app.set("view engine", "ejs");
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
+// app.use(cors(corsOptions));
 app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -31,14 +38,28 @@ app.use(
   })
 );
 app.use(express.static("public"));
+app.use(
+  session({
+    secret: process.env.COOKIE_SECRET,
+    credentials: true,
+    name: "sid",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      secure: process.env.ENVIRONMENT === "production" ? "true" : "auto",
+      httpOnly: true,
+      expires: 1000 * 60 * 60 * 24 * 7,
+      sameSite: process.env.ENVIRONMENT === "production" ? "none" : "lax",
+    },
+  })
+);
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
-import { default as userApiRoutes } from "./routes/users-api.js";
-app.use("/api/users", userApiRoutes);
+// import { default as userApiRoutes } from "./routes/users-api.js";
+// app.use("/api/users", userApiRoutes);
 
-import { default as usersRoutes } from "./routes/users.js";
-import { default as widgetApiRoutes } from "./routes/widgets-api.js";
+// import { default as usersRoutes } from "./routes/users.js";
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -49,6 +70,9 @@ app.use("/api/shows", showRoutes);
 
 import { default as postRoutes } from "./routes/postRoutes.js";
 app.use("/api/posts", postRoutes);
+
+import { default as authRoutes } from "./routes/authRoutes.js";
+app.use("/auth", authRoutes);
 
 import { default as commentsRoutes } from "./routes/commentsRoutes.js";
 app.use("/api/comments", commentsRoutes);
