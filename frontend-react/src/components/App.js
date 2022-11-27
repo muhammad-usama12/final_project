@@ -1,13 +1,11 @@
-import { Helmet } from "react-helmet";
-
 import "./App.scss";
 
 import Header from "./Header";
 import Article from "./article/Article";
 import CategoryList from "./CategoryList";
 import NewPost from "./new-post/NewPost";
-import Profile from "./Profile";
-import SettingsBar from "./settings/SettingsBar";
+import Profile from "./profile/Profile";
+import EditProfile from "./profile/EditProfile";
 
 import useApplicationData from "../hooks/useApplicationData";
 // import { getShowCategories } from "../helpers/selectors"
@@ -33,21 +31,20 @@ function App() {
     <div>
       <Header onClick/>
       <main>
+        <EditProfile />
         <Profile />
-        <section className='category-filters'>
-          <div className='general-filter'>
+        {/* <section className='category-filters'>
             <CategoryList
               name={state}
             />
-          </div>
-        </section>
+        </section> */}
 
         {/* THIS SHOWS THE NEW POST FORM DEPENDING ON THE WRITE STATE */}
-        <NewPost />
+        {/* <NewPost /> */}
 
-        <section className="article-container">
+        {/* <section className="article-container">
           {articleList}
-        </section>
+        </section> */}
       </main>
     </div>
   );

@@ -35,6 +35,8 @@ app.use(express.static("public"));
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 import { default as userApiRoutes } from "./routes/users-api.js";
+app.use("/api/users", userApiRoutes);
+
 import { default as usersRoutes } from "./routes/users.js";
 import { default as widgetApiRoutes } from "./routes/widgets-api.js";
 

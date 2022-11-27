@@ -40,9 +40,7 @@ article {
         }
 
         .fa-star:hover {
-          // text-shadow: 30px -15px #FF8C00;
           color: $star;
-          font-size:xx-large
         }
         .fa-star:active {
           text-shadow: 30px -15px $star;
@@ -50,7 +48,6 @@ article {
 
         .fa-circle-plus:hover {
           color: $watchlist;
-          font-size:xx-large
         }
         .fa-circle-plus:active {
           text-shadow: 30px -15px $watchlist;
@@ -58,7 +55,6 @@ article {
 
         .fa-comment-dots:hover {
           color: $comment;
-          font-size:xx-large
         }
         .fa-comment-dots:active {
           text-shadow: 30px -15px $comment;

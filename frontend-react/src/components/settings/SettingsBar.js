@@ -6,10 +6,10 @@ export default function SettingsBar() {
   return (
     <section className="settings">
       <div className="pill-container">
-        Sign Out
+        Edit Profile
       </div>
       <div className="pill-container">
-        Edit Profile
+        Sign Out
       </div>
     </section>
   );
