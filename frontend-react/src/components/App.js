@@ -8,28 +8,22 @@ import Article from "./Article";
 import Category from "./Category";
 import Create from "./Create";
 import Write from "./Write";
+import Views from "./views";
 import useApplicationData from "../hooks/useApplicationData";
 // import { getShowCategories } from "../helpers/selectors"
 
 function App() {
+  const [write, setWrite] = useState(false);
 
-  const [write, setWrite] = useState(false)
-  
   const { state } = useApplicationData();
- 
-  const showList = state.posts.map((post) => {
-    return (
-      <Article
-        key={post.id}
-        text={post.text}
-        img={post.image}
-      />
-    )
-  });
 
+  const showList = state.posts.map((post) => {
+    return <Article key={post.id} text={post.text} img={post.image} />;
+  });
 
   return (
     <div>
+      <Views />
       <Helmet>
         <script
           src="https://kit.fontawesome.com/e21136580c.js"
@@ -38,11 +32,9 @@ function App() {
       </Helmet>
 
       <main>
-        <section className='category-filters'>
-          <div className='general-filter'>
-            <Category
-              name={state}
-            />
+        <section className="category-filters">
+          <div className="general-filter">
+            <Category name={state} />
           </div>
         </section>
 
@@ -51,9 +43,7 @@ function App() {
         {/* THIS NEXT ONE DOESN'T WORK YET LOL */}
         {write && <Write onCancel={() => setWrite(false)} />}
 
-        <section className="article-container">
-          {showList}
-        </section>
+        <section className="article-container">{showList}</section>
       </main>
     </div>
   );
