@@ -1,14 +1,24 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Article.scss"
 import CategoryTag from "./CategoryTag";
 import ArticleRightButtons from "./ArticleRightButtons";
 import CommentList from "./CommentList";
+import useVisualMode from "../../hooks/useVisualMode";
 
-// We pass props from App.js
-// Will probably make another component that passes props to Article.js instead of App.js similar to DayList and DayListItem from scheduler
+
 export default function Article(props) {
+  const SHOW = "SHOW";
+  const HIDE = "HIDE";
+  
+  const { mode, transition, back } = useVisualMode(HIDE);
 
-  const [comments, setComments] = useState(false)
+  function toggleComments() {
+    if (mode === SHOW) {
+      back();
+    } else {
+      transition(SHOW);
+    }
+  }
 
   return (
     <article>
@@ -24,13 +34,13 @@ export default function Article(props) {
           </img>
         </div>
         <ArticleRightButtons
-          onComment={() => setComments(true)}
+          onComment={toggleComments}
         />
       </div>
       <CategoryTag
         show={props.show}
       />
-      { comments && <CommentList  />}
+      { mode === SHOW && <CommentList />}
 
     </article>
   );
