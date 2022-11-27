@@ -35,7 +35,7 @@ function App() {
       <Scripts />
       <Header />
       <main>
-        {/* <SettingsBar /> */}
+        <SettingsBar />
         <Profile />
         <section className='category-filters'>
           <div className='general-filter'>

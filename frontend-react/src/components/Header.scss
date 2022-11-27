@@ -10,7 +10,7 @@ header {
   border-bottom: 3px solid $secondary-colour;
   position: fixed;
   width: 70vw;
-  height: 64px;
+  z-index: 1;
 }
 
 .fa-bars {
