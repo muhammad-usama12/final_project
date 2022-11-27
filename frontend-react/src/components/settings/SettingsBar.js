@@ -2,6 +2,7 @@ import React from "react";
 import "./SettingsBar.scss";
 
 export default function SettingsBar() {
+
   return (
     <section className="settings">
       <div className="pill-container">

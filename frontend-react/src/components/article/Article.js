@@ -34,7 +34,7 @@ export default function Article(props) {
           </img>
         </div>
         <ArticleRightButtons
-          onComment={toggleComments}
+          toggleComments={toggleComments}
           likes={props.likes}
           comments={props.comments}
         />

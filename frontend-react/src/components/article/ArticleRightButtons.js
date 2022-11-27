@@ -14,7 +14,7 @@ export default function ArticleRightButtons(props) {
           <p>{props.likes}</p>
         <i
           className="fa-solid fa-comment-dots"
-          onClick={props.onComment}
+          onClick={props.toggleComments}
         >
         </i>
           <p>{props.comments}</p>

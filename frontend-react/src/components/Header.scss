@@ -16,6 +16,18 @@ header {
 .fa-bars {
   font-size: x-large;
   color: $secondary-colour;
+  transition-duration: 200ms;
+}
+
+.fa-bars:hover {
+  background-color: $secondary-colour;
+  box-shadow: 0 0 0 7px $secondary-colour;
+  color: $primary-colour;
+  border-radius: 5px;
+}
+
+.fa-bars:active {
+  box-shadow: 0 0 0 5px $secondary-colour;
 }
 
 .logo-image {
