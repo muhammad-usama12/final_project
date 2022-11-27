@@ -11,20 +11,6 @@ main {
   min-height: 100vh;
   font-size: $primary-font-size;
 }
-.category-filters{
-  display: flex;
-  flex-direction: row;
-}
-.general-filter {
-  display: flex;
-  justify-content: center;
-  margin-top: 2rem;
-}
-
-.specific-filter {
-  display: flex;
-  justify-content: center;
-}
 
 .article-container {
   display: flex;

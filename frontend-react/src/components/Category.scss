@@ -17,6 +17,16 @@
   color: $secondary-colour;
 }
 
+.general-filter {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+
+  p {
+    margin: 0px;
+  }
+}
+
 .category-list{
   color: $primary-colour;
   display: flex;
