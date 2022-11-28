@@ -20,7 +20,7 @@ export default function Write(props) {
    
      axios.post("/api/posts/new",{
         text: text,
-       show: show
+        show: show
     })
 
   .then((res) => {
