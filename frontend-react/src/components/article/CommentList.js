@@ -6,7 +6,7 @@ import useApplicationData from "../../hooks/useApplicationData";
 export default function CommentList(props) {
   const { state } = useApplicationData();
  
-  const comments = state.comments.map((comment) => {
+  const comments = state.comments.reverse().map((comment) => {
     return (
       <CommentListItem
         key={comment.id}
@@ -22,7 +22,9 @@ export default function CommentList(props) {
       <h1>the discourse:</h1>
       <CommentForm />
       <hr />
-      {comments}
+      <div className="comment-list">
+        {comments}
+      </div>
     </section>
   );
 }
