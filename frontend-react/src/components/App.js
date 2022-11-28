@@ -1,8 +1,6 @@
 import "./App.scss";
 import "./App.scss";
 
-import Scripts from "./Scripts";
-
 import GuestHeader from "./GuestHeader";
 import UserHeader from "./UserHeader";
 import Article from "./Article";
@@ -31,16 +29,17 @@ function App() {
   console.log("cookie", document.cookie);
   return (
     <div>
-      <Scripts />
       {document.cookie && <UserHeader />}
       {!document.cookie && <GuestHeader />}
 
       <main>
+        
         {/* <EditProfile /> */}
         {/* <Profile /> */}
         <section className="category-filters">
           <CategoryList name={state} />
         </section>
+
         {/* <button onClick={getCookie}>getCookie</button> */}
 
         {/* THIS SHOWS THE NEW POST FORM DEPENDING ON THE WRITE STATE */}

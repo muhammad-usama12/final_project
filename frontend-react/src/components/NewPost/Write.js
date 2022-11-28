@@ -1,12 +1,15 @@
 import "./Write.scss";
+
 import Button from "../Button";
+import Dropdown from "./Dropdown";
+import MenuItem from '@mui/material/MenuItem';
 
 import axios from "axios";
 import useApplicationData from "../../hooks/useApplicationData";
 
-
 export default function Write(props) {
   const {
+    state,
     text, setText,
     show, setShow,
     error, setError
@@ -16,13 +19,17 @@ export default function Write(props) {
     props.onCancel();
   }
 
+  const handleChange = (event) => {
+    setShow(event.target.value);
+  };
+
   const saveProduct = () => {
     axios.post("/api/posts/new",{
         text: text,
         show: show
     })
       .then((res) => {
-        console.log("res from write.js",res)
+        console.log("res from write.js", res)
       });
   }
 
@@ -38,6 +45,17 @@ export default function Write(props) {
     }
   }
 
+  const shows = state.shows.reverse().map((show) => {
+    return (
+      <MenuItem
+        key={show.id}
+        value={show.id}
+      >
+        {show.name}
+      </MenuItem>
+    )
+  });
+
   return (
     <div className="write-post">
       {error !== "" && <section>{error}</section>}
@@ -49,12 +67,9 @@ export default function Write(props) {
           value={text}
           onChange={(event) => setText(event.target.value)}
         />
-        <input
-          name="show"
-          type="text"
-          placeholder="sorry, which show again?"
-          value={show}
-          onChange={(event) => setShow(event.target.value)}
+        <Dropdown
+          handleChange={handleChange}
+          shows={shows}
         />
       </form>
         <div className="write-buttons">
