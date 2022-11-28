@@ -1,10 +1,10 @@
-import React from "react";
 import "./Article.scss"
+
 import CategoryTag from "./CategoryTag";
 import ArticleRightButtons from "./ArticleRightButtons";
 import CommentList from "./CommentList";
-import useVisualMode from "../../hooks/useVisualMode";
 
+import useVisualMode from "../../hooks/useVisualMode";
 
 export default function Article(props) {
   const SHOW = "SHOW";
@@ -43,7 +43,6 @@ export default function Article(props) {
         show={props.show}
       />
       { mode === SHOW && <CommentList />}
-
     </article>
   );
 }

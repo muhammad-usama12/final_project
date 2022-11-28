@@ -1,5 +1,6 @@
-import React from "react";
+import CommentForm from "./CommentForm";
 import CommentListItem from "./CommentListItem";
+
 import useApplicationData from "../../hooks/useApplicationData";
 
 export default function CommentList(props) {
@@ -19,6 +20,8 @@ export default function CommentList(props) {
   return (
     <section className="comments-container">
       <h1>the discourse:</h1>
+      <CommentForm />
+      <hr />
       {comments}
     </section>
   );

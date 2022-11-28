@@ -99,7 +99,7 @@ article {
         font-size: larger;
       }
   
-      .comment-profile {
+      .comment-and-profile-image {
         display: flex;
         font-size: large;
       }
@@ -107,6 +107,40 @@ article {
       .timestamp {
         font-size: medium;
         margin: 0.3rem 1rem 0.3rem 1rem;
+      }
+    }
+  }
+}
+
+hr {
+  width: 100%;
+}
+
+.comment-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1rem;
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    width: 100%;
+    
+    textarea {
+      background-color: $secondary-colour;
+      color: $primary-colour;
+      resize: none;
+      border: 0px;
+      border-radius: 30px;
+      padding: 1rem;
+      font-family: $font-fam;
+      font-size: medium;
+
+      &:focus {
+        outline: none;
       }
     }
   }
