@@ -1,7 +1,7 @@
 import React from "react";
 import "./Header.scss";
 import axios from 'axios';
-import SettingsBar from "./settings/SettingsBar";
+import SettingsBar from "./Settings/SettingsBar";
 import useVisualMode from "../hooks/useVisualMode";
 
 export default function Header() {
