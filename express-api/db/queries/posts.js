@@ -5,3 +5,19 @@ export const getPosts = async () => {
 
   return data.rows;
 };
+
+
+export const addPosts = async (post) => {
+
+ const setColumns = [...Object.values(post)]
+
+ const data = await db.query
+ (`
+    INSERT INTO posts (text, tvshow_id) VALUES ($1,$2)
+    RETURNING *;
+    `, [...setColumns],
+ )
+  return data.rows[0];
+};
+
+

@@ -13,7 +13,7 @@ const Login = () => {
       onSubmit={(values, actions) => {
         const vals = { ...values };
         actions.resetForm();
-        fetch("/auth/login", {
+        fetch("/api/auth/login", {
           method: "POST",
           credentials: "include",
           headers: {
@@ -35,7 +35,7 @@ const Login = () => {
             if (data.status) {
               setError(data.status);
             } else if (data.loggedIn) {
-              navigate("/home");
+              navigate("/api/posts");
             }
           });
       }}
@@ -71,7 +71,8 @@ const Login = () => {
           <Button colorScheme="teal" type="submit">
             Log In
           </Button>
-          <Button onClick={() => navigate("/register")}>Create Account</Button>
+         
+          {/* <Button onClick={() => navigate("/")}>Create Account</Button> */}
         </ButtonGroup>
       </VStack>
     </Formik>

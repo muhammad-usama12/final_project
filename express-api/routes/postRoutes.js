@@ -1,5 +1,5 @@
 import express from 'express';
-import { getPosts } from '../db/queries/posts.js';
+import { getPosts, addPosts } from '../db/queries/posts.js';
 
 const router = express.Router();
 
@@ -13,5 +13,15 @@ router.get('/', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
+router.post("/new", async (req, res) => {
+    // addPosts(req.body);
+    try {
+      const movie = await addPosts( req.body);
+      res.json(movie);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+})
 
 export default router;

@@ -49,3 +49,10 @@ header {
 .header-icon {
   right: 10vw
 }
+.header-buttons{
+  display: flex;
+  button {
+    margin-left: 10px;
+  }
+  
+}

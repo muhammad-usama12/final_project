@@ -1,17 +1,23 @@
 import "./App.scss";
 import "./App.scss";
-
-import Header from "./Header";
-import Article from "./article/Article";
+import axios from 'axios';
+import useVisualMode from "../hooks/useVisualMode";
+import { useState, useEffect } from "react";
+import GuestHeader from "./GuestHeader";
+import UserHeader from "./UserHeader";
+import Article from "./Article"
 import CategoryList from "./CategoryList";
-import NewPost from "./new-post/NewPost";
-import Profile from "./profile/Profile";
-import EditProfile from "./profile/EditProfile";
+import NewPost from "./NewPost";
+import Profile from "./Profile";
+import EditProfile from "./Profile/EditProfile";
 import Views from "./views";
 import Scripts from "./Scripts";
 
+
+
 import useApplicationData from "../hooks/useApplicationData";
-// import { getShowCategories } from "../helpers/selectors"
+
+
 
 function App() {
   const { state } = useApplicationData();
@@ -28,18 +34,22 @@ function App() {
       />
     );
   });
-
+console.log("cookie", document.cookie)
   return (
     <div>
-      <Views />
+      
       <Scripts />
-      <Header onClick />
+{document.cookie && <UserHeader/>}
+{!document.cookie && <GuestHeader/>}
+     
+
       <main>
         {/* <EditProfile /> */}
         {/* <Profile /> */}
         <section className="category-filters">
           <CategoryList name={state} />
         </section>
+  {/* <button onClick={getCookie}>getCookie</button> */}
 
         {/* THIS SHOWS THE NEW POST FORM DEPENDING ON THE WRITE STATE */}
         <NewPost />
