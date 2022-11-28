@@ -1,6 +1,7 @@
 // load .env data into process.env
 import dotenv from "dotenv";
 dotenv.config();
+import db from "./db/connection.js";
 
 // Enable __dirname with ES6 modules
 import * as url from "url";
@@ -42,13 +43,13 @@ app.use(
   session({
     secret: process.env.COOKIE_SECRET,
     credentials: true,
-    name: "sid",
+    name: "sessionId",
     resave: false,
     saveUninitialized: false,
     cookie: {
       secure: process.env.ENVIRONMENT === "production" ? "true" : "auto",
-      httpOnly: true,
-      expires: 1000 * 60 * 60 * 24 * 7,
+      httpOnly: false,
+      expires: 1000*60*60*24,
       sameSite: process.env.ENVIRONMENT === "production" ? "none" : "lax",
     },
   })
@@ -72,7 +73,7 @@ import { default as postRoutes } from "./routes/postRoutes.js";
 app.use("/api/posts", postRoutes);
 
 import { default as authRoutes } from "./routes/authRoutes.js";
-app.use("/auth", authRoutes);
+app.use("/api/auth", authRoutes);
 
 import { default as commentsRoutes } from "./routes/commentsRoutes.js";
 app.use("/api/comments", commentsRoutes);
@@ -82,9 +83,13 @@ app.use("/api/comments", commentsRoutes);
 // Separate them into separate routes files (see above).
 
 app.get("/", (req, res) => {
+  res.redirect("/api/auth/login");
+});
+app.get("/api/dashboard", (req, res) => {
   res.render("index");
 });
 
 app.listen(PORT, () => {
+
   console.log(`App listening on port ${PORT}`);
 });

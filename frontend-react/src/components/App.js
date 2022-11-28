@@ -31,10 +31,7 @@ function App() {
 
   return (
     <div>
-      <EditProfile />
-      <Profile />
       <Views />
-      <Scripts />
       <Header onClick />
       <main>
         {/* <EditProfile /> */}

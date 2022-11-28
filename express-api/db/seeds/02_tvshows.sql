@@ -5,3 +5,6 @@ INSERT INTO tvshows (name, description, image_url) VALUES ('Brooklyn Nine-Nine',
 
 
 INSERT INTO tvshows (name, description, image_url) VALUES ('Breaking Bad', 'The series explores how a fatal diagnosis such as White releases a typical man from the daily concerns and constraints of normal society and follows his transformation from mild family man to a kingpin of the drug trade.', 'https://static.tvmaze.com/uploads/images/medium_portrait/0/2400.jpg');
+
+
+INSERT INTO tvshows (name, description, image_url) VALUES ('Friends', 'Six young men and women live in the same apartment complex and face life and love together in Manhattan, New York City.', 'https://static.tvmaze.com/uploads/images/medium_portrait/41/104550.jpg');

@@ -26,5 +26,6 @@ export default function useApplicationData() {
       })
   }, []);
 
+  console.log(state)
   return { state }  
 }

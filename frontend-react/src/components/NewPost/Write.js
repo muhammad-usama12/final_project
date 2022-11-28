@@ -2,29 +2,46 @@ import React, { useState } from "react";
 import "./Write.scss";
 import Button from "../Button";
 
+import axios from "axios";
+
+
 export default function Write(props) {
   const [text, setText] = useState("");
   const [show, setShow] = useState("");
   const [error, setError] = useState("");
 
 
+
   function cancel() {
     props.onCancel();
   }
 
+  const saveProduct = () => {
+   
+     axios.post("/api/posts/new",{
+        text: text,
+       show: show
+    })
+
+  .then((res) => {
+    console.log("res from write.js",res)
+  });
+}
   function validate() {
     if (text === "") {
       setError("you can't stir nothing");
       return;
     }
-    if (show === "") {
+    else if (show === "") {
       setError("what show are you even talking about??");
       return;
     }
-  
-    setError("");
-    props.onSave(text, show);
+    else {
+      saveProduct()
+    }
   }
+
+  
 
   return (
     <div className="write-post">

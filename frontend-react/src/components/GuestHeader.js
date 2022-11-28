@@ -1,11 +1,20 @@
-import React from "react";
-import "./Header.scss"
+import React, { useState } from "react";
+import "./Header.scss";
+import axios from 'axios';
 import SettingsBar from "./settings/SettingsBar";
 import useVisualMode from "../hooks/useVisualMode";
+import { Route, Routes } from "react-router-dom";
+import Login from "./Registration/Login";
+import SignUp from "./Registration/SignUp";
+import { useNavigate } from "react-router-dom";
+import Views from "./views";
 
 export default function Header() {
   const SHOW = "SHOW";
   const HIDE = "HIDE";
+  const LOGIN = "LOGIN";
+  const SIGNUP = "SIGNUP";
+
   
   const { mode, transition, back } = useVisualMode(HIDE);
 
@@ -16,10 +25,20 @@ export default function Header() {
       transition(SHOW);
     }
   }
-  
+ 
+ const [state, setState ]  = useState()
+   
+  const loginComponent = () => { 
+    setState(LOGIN); 
+  } 
+
+  const signupComponent = () => { 
+    setState(SIGNUP); 
+  }
+
   return (
     <>
-      {mode === SHOW && <SettingsBar />}
+      
       <header>
         <i
           className="fa-solid fa-bars"
@@ -36,14 +55,19 @@ export default function Header() {
           </img>
           teebo
         </div>
-
-        <img 
-          className="profile-icon header-icon"
-          src="https://i.pinimg.com/474x/ce/9c/ab/ce9cab218f2849c81f230e4296fd120c.jpg"
-          alt="profile"
-        >
-        </img>
+        <div>  
+        {/* <button onClick={handleClick} type="button">Login</button>
+        <button onClick={handleClick} type="button">Sign Up</button> */}
+           <div> 
+            <button onClick={loginComponent}>Login</button> 
+   
+            <button onClick={signupComponent}>Sign Up</button> 
+          </div>  
+        </div>
+      
       </header>
+      {state === LOGIN ? <Login /> : null} 
+      {state === SIGNUP ? <SignUp /> : null} 
     </>
   );
 }
