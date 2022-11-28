@@ -26,14 +26,14 @@ export default function Header() {
     }
   }
  
- const [state, setState ]  = useState()
+ const [loggedIn, setLoggedIn ]  = useState()
    
   const loginComponent = () => { 
-    setState(LOGIN); 
+    setLoggedIn(LOGIN); 
   } 
 
   const signupComponent = () => { 
-    setState(SIGNUP); 
+    setLoggedIn(SIGNUP); 
   }
 
   return (
@@ -66,8 +66,8 @@ export default function Header() {
         </div>
       
       </header>
-      {state === LOGIN ? <Login /> : null} 
-      {state === SIGNUP ? <SignUp /> : null} 
+      {loggedIn === LOGIN ? <Login /> : null} 
+      {loggedIn === SIGNUP ? <SignUp /> : null} 
     </>
   );
 }

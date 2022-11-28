@@ -3,6 +3,9 @@ import axios from 'axios';
 import { useState, useEffect } from "react";
 
 export default function useApplicationData() {
+  const [text, setText] = useState("");
+  const [show, setShow] = useState("");
+  const [error, setError] = useState("");
 
   const [state, setState] = useState({
     posts: [],
@@ -27,5 +30,10 @@ export default function useApplicationData() {
   }, []);
 
   console.log(state)
-  return { state }  
+  return {
+    state,
+    text, setText,
+    show, setShow,
+    error, setError
+  }  
 }

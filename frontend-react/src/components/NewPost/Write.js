@@ -1,16 +1,16 @@
-import React, { useState } from "react";
 import "./Write.scss";
 import Button from "../Button";
 
 import axios from "axios";
+import useApplicationData from "../../hooks/useApplicationData";
 
 
 export default function Write(props) {
-  const [text, setText] = useState("");
-  const [show, setShow] = useState("");
-  const [error, setError] = useState("");
-
-
+  const {
+    text, setText,
+    show, setShow,
+    error, setError
+  } = useApplicationData();
 
   function cancel() {
     props.onCancel();
@@ -18,15 +18,14 @@ export default function Write(props) {
 
   const saveProduct = () => {
    
-     axios.post("/api/posts/new",{
+    axios.post("/api/posts/new",{
         text: text,
-       show: show
+        show: show
     })
-
-  .then((res) => {
-    console.log("res from write.js",res)
-  });
-}
+      .then((res) => {
+        console.log("res from write.js",res)
+      });
+  }
   function validate() {
     if (text === "") {
       setError("you can't stir nothing");
@@ -40,8 +39,6 @@ export default function Write(props) {
       saveProduct()
     }
   }
-
-  
 
   return (
     <div className="write-post">
