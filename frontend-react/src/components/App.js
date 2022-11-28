@@ -1,8 +1,8 @@
 import "./App.scss";
 import "./App.scss";
-import axios from "axios";
-import useVisualMode from "../hooks/useVisualMode";
-import { useState, useEffect } from "react";
+
+import Scripts from "./Scripts";
+
 import GuestHeader from "./GuestHeader";
 import UserHeader from "./UserHeader";
 import Article from "./Article";
@@ -11,7 +11,6 @@ import NewPost from "./NewPost";
 import Profile from "./Profile";
 import EditProfile from "./Profile/EditProfile";
 import Views from "./views";
-import Scripts from "./Scripts";
 
 import useApplicationData from "../hooks/useApplicationData";
 

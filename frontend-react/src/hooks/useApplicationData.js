@@ -3,10 +3,20 @@ import axios from 'axios';
 import { useState, useEffect } from "react";
 
 export default function useApplicationData() {
+  // Form states
   const [text, setText] = useState("");
   const [show, setShow] = useState("");
+
+  // Edit Profile states
+  const [selectedImage, setSelectedImage] = useState("");
+  const [username, setUsername] = useState("");
+  const [bio, setBio] = useState("i don't like to talk about myself");
+
+  // Session states
+  const [loggedIn, setLoggedIn]  = useState();
   const [error, setError] = useState("");
 
+  // Data state
   const [state, setState] = useState({
     posts: [],
     shows:[],
@@ -14,7 +24,6 @@ export default function useApplicationData() {
   });
  
   // const [loading, setLoading] = useState(true);
-  // const [error, setError] = useState(false);
 
   useEffect(() => {
     Promise.all
@@ -29,11 +38,16 @@ export default function useApplicationData() {
       })
   }, []);
 
-  console.log(state)
+  console.log(state);
+
   return {
     state,
     text, setText,
     show, setShow,
+    selectedImage, setSelectedImage,
+    username, setUsername,
+    bio, setBio,
+    loggedIn, setLoggedIn,
     error, setError
   }  
 }

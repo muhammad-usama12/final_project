@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Header.scss";
 import axios from 'axios';
 import SettingsBar from "./Settings/SettingsBar";
-import useVisualMode from "../hooks/useVisualMode";
 import { Route, Routes } from "react-router-dom";
 import Login from "./Registration/Login";
 import SignUp from "./Registration/SignUp";
 import { useNavigate } from "react-router-dom";
 import Views from "./views";
+
+import useApplicationData from "../hooks/useApplicationData";
+import useVisualMode from "../hooks/useVisualMode";
 
 export default function Header() {
   const SHOW = "SHOW";
@@ -26,8 +28,8 @@ export default function Header() {
     }
   }
  
- const [loggedIn, setLoggedIn ]  = useState()
-   
+  const { loggedIn, setLoggedIn } = useApplicationData();
+
   const loginComponent = () => { 
     setLoggedIn(LOGIN); 
   } 
