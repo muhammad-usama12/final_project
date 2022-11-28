@@ -49,7 +49,7 @@ app.use(
     cookie: {
       secure: process.env.ENVIRONMENT === "production" ? "true" : "auto",
       httpOnly: false,
-      expires: 1000*60*60*24,
+      expires: 1000 * 60 * 60 * 24,
       sameSite: process.env.ENVIRONMENT === "production" ? "none" : "lax",
     },
   })
@@ -90,6 +90,5 @@ app.get("/api/dashboard", (req, res) => {
 });
 
 app.listen(PORT, () => {
-
   console.log(`App listening on port ${PORT}`);
 });

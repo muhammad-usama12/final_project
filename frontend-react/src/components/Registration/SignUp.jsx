@@ -37,7 +37,7 @@ const SignUp = () => {
             if (data.status) {
               setError(data.status);
             } else if (data.loggedIn) {
-              navigate("/api/posts");
+              navigate("/home");
             }
           });
       }}

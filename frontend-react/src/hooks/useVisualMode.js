@@ -12,22 +12,22 @@ export default function useVisualMode(initial) {
       newHistory.pop(newHistory[newHistory.length - 1]);
       newHistory.push(mode);
       setHistory(newHistory);
-      setMode(mode)
+      setMode(mode);
     } else {
       newHistory.push(mode);
-      setHistory(newHistory)
+      setHistory(newHistory);
       setMode(mode);
     }
   };
 
-  console.log(history)
+  console.log(history);
   const back = () => {
     if (history.length > 1) {
-      let newHistory = [...history]
+      let newHistory = [...history];
       newHistory.pop(mode);
       setHistory(newHistory);
       setMode(newHistory[newHistory.length - 1]);
-      console.log(history)
+      console.log(history);
     }
   };
 

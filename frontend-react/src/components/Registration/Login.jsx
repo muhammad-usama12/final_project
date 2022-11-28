@@ -35,7 +35,7 @@ const Login = () => {
             if (data.status) {
               setError(data.status);
             } else if (data.loggedIn) {
-              navigate("/api/posts");
+              navigate("/home");
             }
           });
       }}
@@ -71,7 +71,6 @@ const Login = () => {
           <Button colorScheme="teal" type="submit">
             Log In
           </Button>
-         
           {/* <Button onClick={() => navigate("/")}>Create Account</Button> */}
         </ButtonGroup>
       </VStack>

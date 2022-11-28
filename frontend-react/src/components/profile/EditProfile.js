@@ -12,17 +12,16 @@ export default function EditProfile(props) {
   const getUsers = async () => {
     try {
       const result = await axios({
-        url: '/api/users',
-        method: 'GET',
+        url: "/api/users",
+        method: "GET",
       });
 
       const user = result.data[0];
-      console.log("user: ", user)
+      console.log("user: ", user);
 
-      setSelectedImage(user.icon_url)
-      setUsername(user.username)
-      setBio(user.bio)
-
+      setSelectedImage(user.icon_url);
+      setUsername(user.username);
+      setBio(user.bio);
     } catch (err) {
       setError(err.message);
     }
@@ -30,14 +29,14 @@ export default function EditProfile(props) {
 
   useEffect(() => {
     getUsers();
-  }, [])
+  }, []);
 
   function validate() {
     if (username === "") {
       setError("you gotta be called SOMETHING");
       return;
     }
-  
+
     setError("");
     props.onSave(username, bio);
   }
@@ -45,12 +44,11 @@ export default function EditProfile(props) {
   return (
     <section className="edit-profile">
       <div className="profile-header">
-        <img 
+        <img
           className="profile-display-picture"
           src={selectedImage}
           alt="profile"
-        >
-        </img>
+        ></img>
         <form>
           <input
             name="show"
@@ -74,13 +72,13 @@ export default function EditProfile(props) {
             name="myImage"
             onChange={(event) => {
               if (event.target.files.length !== 0) {
-                setSelectedImage(URL.createObjectURL(event.target.files[0]))
+                setSelectedImage(URL.createObjectURL(event.target.files[0]));
               }
             }}
           />
           <i className="fa-solid fa-image"></i>
         </label>
-        <Button confirm message="Save" onSave={validate}/>
+        <Button confirm message="Save" onSave={validate} />
       </div>
       {error !== "" && <section>{error}</section>}
     </section>

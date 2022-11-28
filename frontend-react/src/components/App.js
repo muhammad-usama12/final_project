@@ -16,6 +16,7 @@ import Scripts from "./Scripts";
 import useApplicationData from "../hooks/useApplicationData";
 
 function App() {
+  <Views />
   const { state } = useApplicationData();
   const articleList = state.posts.map((post) => {
     return (
