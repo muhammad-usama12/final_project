@@ -42,7 +42,7 @@ app.use(
   session({
     secret: process.env.COOKIE_SECRET,
     credentials: true,
-    name: "sid",
+    name: "sessionId",
     resave: false,
     saveUninitialized: false,
     cookie: {
@@ -84,6 +84,7 @@ app.use("/api/comments", commentsRoutes);
 app.get("/", (req, res) => {
   res.render("index");
 });
+
 
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);
