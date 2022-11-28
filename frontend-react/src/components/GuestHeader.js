@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Header.scss";
-import axios from 'axios';
+import axios from "axios";
 import SettingsBar from "./Settings/SettingsBar";
 import useVisualMode from "../hooks/useVisualMode";
 import { Route, Routes } from "react-router-dom";
@@ -15,7 +15,6 @@ export default function Header() {
   const LOGIN = "LOGIN";
   const SIGNUP = "SIGNUP";
 
-  
   const { mode, transition, back } = useVisualMode(HIDE);
 
   function toggleSettings() {
@@ -25,49 +24,42 @@ export default function Header() {
       transition(SHOW);
     }
   }
- 
- const [state, setState ]  = useState()
-   
-  const loginComponent = () => { 
-    setState(LOGIN); 
-  } 
 
-  const signupComponent = () => { 
-    setState(SIGNUP); 
-  }
+  const [state, setState] = useState();
+
+  const loginComponent = () => {
+    setState(LOGIN);
+  };
+
+  const signupComponent = () => {
+    setState(SIGNUP);
+  };
 
   return (
     <>
-      
       <header>
-        <i
-          className="fa-solid fa-bars"
-          onClick={toggleSettings}
-        >
-        </i>
+        <i className="fa-solid fa-bars" onClick={toggleSettings}></i>
 
         <div className="logo-name">
           <img
             className="logo-image"
             src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjQgMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTE5IDZoLTQuNTlsMi4zLTIuMjlhMSAxIDAgMSAwLTEuNDItMS40MkwxMiA1LjU5bC0zLjI5LTMuM2ExIDEgMCAxIDAtMS40MiAxLjQyTDkuNTkgNkg1YTMgMyAwIDAgMC0zIDN2MTBhMyAzIDAgMCAwIDMgM2gxNGEzIDMgMCAwIDAgMy0zVjlhMyAzIDAgMCAwLTMtM1ptLTMgMTBhMiAyIDAgMCAxLTIgMkg2YTIgMiAwIDAgMS0yLTJ2LTZhMiAyIDAgMCAxIDItMmg4YTIgMiAwIDAgMSAyIDJabTMgM2ExIDEgMCAxIDEgMS0xIDEgMSAwIDAgMS0xIDFabTAtNGExIDEgMCAxIDEgMS0xIDEgMSAwIDAgMS0xIDFabTAtNGExIDEgMCAxIDEgMS0xIDEgMSAwIDAgMS0xIDFaIiBmaWxsPSIjZjZmMWYxIiBjbGFzcz0iZmlsbC00NjQ2NDYiPjwvcGF0aD48L3N2Zz4="
             alt="logo"
-          >
-          </img>
+          ></img>
           teebo
         </div>
-        <div>  
-        {/* <button onClick={handleClick} type="button">Login</button>
+        <div>
+          {/* <button onClick={handleClick} type="button">Login</button>
         <button onClick={handleClick} type="button">Sign Up</button> */}
-           <div> 
-            <button onClick={loginComponent}>Login</button> 
-   
-            <button onClick={signupComponent}>Sign Up</button> 
-          </div>  
+          <div>
+            <button onClick={loginComponent}>Login</button>
+
+            <button onClick={signupComponent}>Sign Up</button>
+          </div>
         </div>
-      
       </header>
-      {state === LOGIN ? <Login /> : null} 
-      {state === SIGNUP ? <SignUp /> : null} 
+      {state === LOGIN ? <Login /> : null}
+      {state === SIGNUP ? <SignUp /> : null}
     </>
   );
 }
