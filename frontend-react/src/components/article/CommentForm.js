@@ -12,7 +12,7 @@ export default function CommentForm(props) {
   } = useApplicationData()
 
   const saveComment = () => {
-    axios.post("/api/posts/new",{
+    axios.post("/api/comments/new",{
         text: text,
     })
       .then((res) => {
