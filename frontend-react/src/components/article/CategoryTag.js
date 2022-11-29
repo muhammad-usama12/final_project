@@ -5,7 +5,7 @@ import "../Category.scss"
 export default function CategoryTag(props) {
   return (
     <div className="pill-container">
-      {props.show}
+      {props.name}
     </div>
   );
 }

@@ -27,9 +27,15 @@ export default function useApplicationData() {
         axios.get("/api/users"),
       ])
       .then((res) => {
-        setState(prev => ({...prev, posts: res[0].data, shows: res[1].data, comments: res[2].data, users: res[3].data}))
-        console.log(state)
-      })
+        setState(prev => ({
+          ...prev,
+          posts: res[0].data,
+          shows: res[1].data, 
+          comments: res[2].data,
+          users: res[3].data
+        }))
+        console.log(state);
+      });
   }, []);
 
   const getAllShows = () => {
@@ -43,7 +49,7 @@ export default function useApplicationData() {
     return axios.get("/api/posts")
       .then((res) => {
         setState(prev => ({...prev, posts: res.data}))
-        console.log("lolol", res.data)
+        console.log("before filtering", res.data)
         return res.data;
       })
       .then((res) => {
@@ -61,6 +67,15 @@ export default function useApplicationData() {
         return res.data;
       })
   };
+
+  const saveComment = (text) => {
+    axios.post("/api/comments/new",{
+        text: text,
+    })
+      .then((res) => {
+        console.log("res from commentForm.js: ", res)
+      });
+  }
 
   const handleSpoilerToggle = () => {
     if (hideSpoiler) {
@@ -81,6 +96,7 @@ export default function useApplicationData() {
     handleSpoilerToggle,
     getFilteredShows,
     getAllShows,
-    getUsers
+    getUsers,
+    saveComment
   }  
 }

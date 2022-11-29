@@ -1,7 +1,7 @@
 import db from '../connection.js';
 
 export const getPosts = async () => {
-  const data = await db.query('SELECT posts.*, tvshows.name as show FROM posts JOIN tvshows ON tvshows.id = tvshow_id ORDER BY posts.id DESC');
+  const data = await db.query('SELECT * FROM posts ORDER BY posts.id DESC');
 
   return data.rows;
 };

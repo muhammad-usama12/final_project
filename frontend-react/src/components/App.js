@@ -10,19 +10,20 @@ import EditProfile from "./Profile/EditProfile";
 import Views from "./views";
 
 import useApplicationData from "../hooks/useApplicationData";
+import { getShowForPost } from "../helpers/selectors";
 
 function App() {
   const { state, hideSpoiler, handleSpoilerToggle, getFilteredShows, getAllShows } = useApplicationData();
 
   const articleList = state.posts.map((post) => {
+    const show = getShowForPost(state, post.tvshow_id);
+    console.log("post: ", post)
+
     return (
       <Article
         key={post.id}
-        text={post.text}
-        img={post.image}
-        show={post.show}
-        likes={post.total_likes}
-        comments={post.total_comments}
+        {...post}
+        show={show}
         spoiler={hideSpoiler && post.spoiler}
       />
     );
@@ -42,7 +43,7 @@ function App() {
         {/* <Profile /> */}
         <section className="category-filters">
           <CategoryList
-            name={state}
+            shows={state.shows}
             hideSpoilers={handleSpoilerToggle}
             getFilteredShows={getFilteredShows}
             getAllShows={getAllShows}
@@ -51,9 +52,10 @@ function App() {
 
         {/* <button onClick={getCookie}>getCookie</button> */}
 
-        {/* THIS SHOWS THE NEW POST FORM DEPENDING ON THE WRITE STATE */}
         <NewPost />
-        <section className="article-container">{articleList}</section>
+        <section className="article-container">
+          {articleList}
+        </section>
       </main>
     </div>
   );

@@ -32,7 +32,7 @@ export default function Article(props) {
           <p>{props.text}</p>
           <img 
             className="article-image"
-            src={props.img}
+            src={props.image}
             alt=""
           >
           </img>
@@ -44,7 +44,7 @@ export default function Article(props) {
         />
       </div>
       <CategoryTag
-        show={props.show}
+        name={props.show.name}
       />
       { mode === SHOW && <CommentList />}
     </article>
