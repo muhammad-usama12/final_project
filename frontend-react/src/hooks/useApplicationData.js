@@ -69,7 +69,7 @@ export default function useApplicationData() {
   };
 
   const saveComment = (text, postId) => {
-    axios.post("/api/comments/new",{
+    return axios.post("/api/comments/new",{
         text: text,
         postId: postId
     })
@@ -85,8 +85,6 @@ export default function useApplicationData() {
       setHideSpoiler(true)
     }
   }
-
-  console.log("state: ", state);
 
   return {
     state, setState,
