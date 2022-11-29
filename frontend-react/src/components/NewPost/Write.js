@@ -69,6 +69,13 @@ export default function Write(props) {
           value={text}
           onChange={(event) => setText(event.target.value)}
         />
+        <input
+          name="image-link"
+          type="text"
+          placeholder="got a spicy image link?"
+          value={selectedImage}
+          onChange={(event) => setSelectedImage(event.target.value)}
+        />
         <Dropdown
           handleChange={handleChange}
           shows={shows}
@@ -84,18 +91,6 @@ export default function Write(props) {
             />
           </div>
           <div className="right-buttons">
-            <label className="upload-image">
-              <input
-                type="file"
-                name="myImage"
-                onChange={(event) => {
-                  if (event.target.files.length !== 0) {
-                    setSelectedImage(URL.createObjectURL(event.target.files[0]))
-                  }
-                }}
-              />
-              <i className="fa-solid fa-image"></i>
-            </label>
             <Button
               confirm
               className="button--confirm"
