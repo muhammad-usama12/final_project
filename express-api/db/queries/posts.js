@@ -13,7 +13,7 @@ export const addPost = async (post) => {
 
  const data = await db.query
  (`
-    INSERT INTO posts (text, tvshow_id) VALUES ($1,$2)
+    INSERT INTO posts (text, image, tvshow_id) VALUES ($1,$2,$3)
     RETURNING *;
     `, [...setColumns],
  )

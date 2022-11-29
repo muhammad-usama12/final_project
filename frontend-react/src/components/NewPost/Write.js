@@ -12,6 +12,7 @@ export default function Write(props) {
     state,
     text, setText,
     show, setShow,
+    selectedImage, setSelectedImage,
     error, setError
   } = useApplicationData();
 
@@ -26,6 +27,7 @@ export default function Write(props) {
   const saveProduct = () => {
     axios.post("/api/posts/new",{
         text: text,
+        img: selectedImage,
         show: show
     })
       .then((res) => {
@@ -82,12 +84,18 @@ export default function Write(props) {
             />
           </div>
           <div className="right-buttons">
-            <Button
-              image
-              className="button--image"
-              // Below is icon of an image
-              message={<i className="fa-solid fa-image"></i>}
-            />
+            <label className="upload-image">
+              <input
+                type="file"
+                name="myImage"
+                onChange={(event) => {
+                  if (event.target.files.length !== 0) {
+                    setSelectedImage(URL.createObjectURL(event.target.files[0]))
+                  }
+                }}
+              />
+              <i className="fa-solid fa-image"></i>
+            </label>
             <Button
               confirm
               className="button--confirm"
