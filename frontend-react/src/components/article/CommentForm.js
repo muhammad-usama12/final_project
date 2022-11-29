@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Button from "../Button";
 import useApplicationData from "../../hooks/useApplicationData";
 
-export default function CommentForm() {
+export default function CommentForm(props) {
   const [text, setText] = useState("");
   const [error, setError] = useState(null);
 
@@ -14,7 +14,7 @@ export default function CommentForm() {
       setError("can't get his ass with no words, bestie");
     }
     else {
-      saveComment(text);
+      saveComment(text, props.postId);
     }
   }
 

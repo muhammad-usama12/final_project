@@ -68,9 +68,10 @@ export default function useApplicationData() {
       })
   };
 
-  const saveComment = (text) => {
+  const saveComment = (text, postId) => {
     axios.post("/api/comments/new",{
         text: text,
+        postId: postId
     })
       .then((res) => {
         console.log("res from commentForm.js: ", res)

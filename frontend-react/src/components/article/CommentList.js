@@ -22,7 +22,7 @@ export default function CommentList(props) {
   return (
     <section className="comments-container">
       <h1>the discourse:</h1>
-      <CommentForm />
+      <CommentForm postId={props.postId}/>
       <hr />
       {commentsList}
     </section>
