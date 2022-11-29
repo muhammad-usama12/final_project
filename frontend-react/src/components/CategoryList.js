@@ -13,7 +13,7 @@ export default function CategoryList(props) {
       key={category.id}
       name={category.name} 
       img={category.image_url}
-      onClick={() => props.filterShows(props.name, category.id)}
+      onClick={() => props.getFilteredShows(props.name, category.id)}
     />
   ))
 
@@ -22,6 +22,7 @@ export default function CategoryList(props) {
       <div className="general-filter">
         <CategoryListItem
           name="Show All"
+          onClick={props.getAllShows}
         />
         <CategoryListItem
           name="Hide Spoilers"

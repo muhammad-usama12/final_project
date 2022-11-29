@@ -39,29 +39,26 @@ export default function useApplicationData() {
       })
   }, []);
 
-  // const hideSpoilers = () => {
-  //   return axios.get("/api/posts/hide-spoilers")
-  //     .then((res) => {
-  //       setState(prev => ({...prev, posts: res.data}))
-  //       console.log("res after hiding spoilers", res)
-  //     });
-  // }
-
-  const filterShows = (state, id) => {
-    return axios.get("/api/posts/")
+  const getAllShows = () => {
+    return axios.get("/api/posts")
       .then((res) => {
         setState(prev => ({...prev, posts: res.data}))
-        console.log("lolol", res)
-        return res;
+      });
+  }
+
+  const getFilteredShows = (state, id) => {
+    return axios.get("/api/posts")
+      .then((res) => {
+        setState(prev => ({...prev, posts: res.data}))
+        console.log("lolol", res.data)
+        return res.data;
       })
       .then((res) => {
-        let processedPosts = res.data.filter(post => post.tvshow_id === id);
+        let processedPosts = res.filter(post => post.tvshow_id === id);
         console.log("after filtering shows: ", processedPosts)
         setState(prev => ({...prev, posts: processedPosts}));
       })
   }
-
-  console.log(state);
 
   const handleSpoilerToggle = () => {
     if (hideSpoiler) {
@@ -70,6 +67,8 @@ export default function useApplicationData() {
       setHideSpoiler(true)
     }
   }
+
+  console.log("state: ", state);
 
   return {
     state, setState,
@@ -83,6 +82,7 @@ export default function useApplicationData() {
     error, setError,
 
     handleSpoilerToggle,
-    filterShows
+    getFilteredShows,
+    getAllShows
   }  
 }
