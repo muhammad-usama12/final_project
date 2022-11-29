@@ -92,29 +92,23 @@ article {
       margin-bottom: 0px;
     }
 
-    .comment-list {
-      display: flex;
-      flex-direction: column-reverse;
-      
-      .comment-item {
-        margin-top: 1rem;
+    .comment-item {
+      margin-top: 1rem;
+
+      p {
+        font-size: larger;
+      }
   
-        p {
-          font-size: larger;
-        }
+      .comment-and-profile-image {
+        display: flex;
+        font-size: large;
+      }
     
-        .comment-and-profile-image {
-          display: flex;
-          font-size: large;
-        }
-      
-        .timestamp {
-          font-size: medium;
-          margin: 0.3rem 1rem 0.3rem 1rem;
-        }
+      .timestamp {
+        font-size: medium;
+        margin: 0.3rem 1rem 0.3rem 1rem;
       }
     }
-
   }
 }
 
