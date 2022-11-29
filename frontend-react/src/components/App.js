@@ -12,15 +12,7 @@ import Views from "./views";
 import useApplicationData from "../hooks/useApplicationData";
 
 function App() {
-  const { state, hideSpoiler, setHideSpoiler } = useApplicationData();
-
-  const handleSpoilerToggle = () => {
-    if (hideSpoiler) {
-      setHideSpoiler(false);
-    } else {
-      setHideSpoiler(true)
-    }
-  }
+  const { state, hideSpoiler, handleSpoilerToggle } = useApplicationData();
 
   const articleList = state.posts.map((post) => {
     return (

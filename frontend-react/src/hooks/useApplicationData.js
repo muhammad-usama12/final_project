@@ -49,9 +49,18 @@ export default function useApplicationData() {
 
   console.log(state);
 
+  const handleSpoilerToggle = () => {
+    if (hideSpoiler) {
+      setHideSpoiler(false);
+    } else {
+      setHideSpoiler(true)
+    }
+  }
+
   return {
     state, setState,
     hideSpoiler, setHideSpoiler,
+    handleSpoilerToggle,
     text, setText,
     show, setShow,
     selectedImage, setSelectedImage,
