@@ -7,6 +7,7 @@ import NewPost from "./NewPost";
 import Profile from "./Profile";
 import EditProfile from "./Profile/EditProfile";
 import Views from "./views";
+import UserContext from "./AccountContext";
 
 import useApplicationData from "../hooks/useApplicationData";
 import { getShowForPost, getUserForPost } from "../helpers/selectors";
@@ -17,7 +18,7 @@ function App() {
     hideSpoiler,
     handleSpoilerToggle,
     getFilteredShows,
-    getAllShows
+    getAllShows,
   } = useApplicationData();
 
   const articleList = state.posts.map((post) => {
@@ -38,27 +39,27 @@ function App() {
   console.log("cookie", document.cookie);
 
   return (
-    <div>
-      <Header />
+    <UserContext>
       <Views />
-      <main>
-        {/* <EditProfile /> */}
-        {/* <Profile /> */}
-        <section className="category-filters">
-          <CategoryList
-            shows={state.shows}
-            hideSpoilers={handleSpoilerToggle}
-            getFilteredShows={getFilteredShows}
-            getAllShows={getAllShows}
-          />
-        </section>
-        {/* <button onClick={getCookie}>getCookie</button> */}
-        {document.cookie && <NewPost />}
-        <section className="article-container">
-          {articleList}
-        </section>
-      </main>
-    </div>
+      <div>
+        <Header />
+        <main>
+          {/* <EditProfile /> */}
+          {/* <Profile /> */}
+          <section className="category-filters">
+            <CategoryList
+              shows={state.shows}
+              hideSpoilers={handleSpoilerToggle}
+              getFilteredShows={getFilteredShows}
+              getAllShows={getAllShows}
+            />
+          </section>
+          {/* <button onClick={getCookie}>getCookie</button> */}
+          {document.cookie && <NewPost />}
+          <section className="article-container">{articleList}</section>
+        </main>
+      </div>
+    </UserContext>
   );
 }
 export default App;
