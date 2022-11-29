@@ -5,6 +5,9 @@ import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
 
 import axios from "axios";
 import { useState } from "react";
@@ -14,6 +17,7 @@ export default function Write(props) {
   const [text, setText] = useState("")
   const [show, setShow] = useState("")
   const [selectedImage, setSelectedImage] = useState("")
+  const [spoiler, setSpoiler] = useState(false)
   const [error, setError] = useState(null)
 
   const { state, setState } = useApplicationData();
@@ -38,11 +42,20 @@ export default function Write(props) {
     }
   }
 
+  const handleSpoilerToggle = () => {
+    if (spoiler) {
+      setSpoiler(false);
+    } else {
+      setSpoiler(true)
+    }
+  }
+
   const addPost = () => {
     axios.post("/api/posts/new",{
         text: text,
         img: selectedImage,
-        show: show
+        show: show,
+        spoiler: spoiler
     })
       .then((res) => {
         setState(prev => ({...prev, posts: [...prev.posts, res.data] }))
@@ -100,6 +113,13 @@ export default function Write(props) {
               onClick={cancel}
             />
           </div>
+          <FormGroup>
+            <FormControlLabel
+              control={<Checkbox color="default" />}
+              label="Spoiler"
+              onClick={() => handleSpoilerToggle(spoiler, setSpoiler)}
+            />
+          </FormGroup>
           <div className="right-buttons">
             <Button
               confirm
