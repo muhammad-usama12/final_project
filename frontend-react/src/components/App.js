@@ -40,9 +40,9 @@ function App() {
 
   return (
     <div>
-      <Views />
       {document.cookie && <UserHeader />}
       {!document.cookie && <GuestHeader />}
+      <Views />
       <main>
         {/* <EditProfile /> */}
         {/* <Profile /> */}
@@ -55,7 +55,7 @@ function App() {
           />
         </section>
         {/* <button onClick={getCookie}>getCookie</button> */}
-        <NewPost />
+        {document.cookie && <NewPost />}
         <section className="article-container">
           {articleList}
         </section>
