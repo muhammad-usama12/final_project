@@ -29,6 +29,7 @@ function App() {
   console.log("cookie", document.cookie);
   return (
     <div>
+      <Views />
       {document.cookie && <UserHeader />}
       {!document.cookie && <GuestHeader />}
 
