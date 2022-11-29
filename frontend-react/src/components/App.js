@@ -12,7 +12,7 @@ import Views from "./views";
 import useApplicationData from "../hooks/useApplicationData";
 
 function App() {
-  const { state, hideSpoiler, handleSpoilerToggle } = useApplicationData();
+  const { state, hideSpoiler, handleSpoilerToggle, filterShows } = useApplicationData();
 
   const articleList = state.posts.map((post) => {
     return (
@@ -44,6 +44,7 @@ function App() {
           <CategoryList
             name={state}
             hideSpoilers={handleSpoilerToggle}
+            filterShows={filterShows}
           />
         </section>
 

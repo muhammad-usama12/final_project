@@ -33,8 +33,8 @@ export default function useApplicationData() {
         axios.get("/api/shows"),
         axios.get("/api/comments"),
       ])
-      .then((response) => {
-        setState(prev => ({...prev, posts: response[0].data, shows: response[1].data, comments: response[2].data}))
+      .then((res) => {
+        setState(prev => ({...prev, posts: res[0].data, shows: res[1].data, comments: res[2].data}))
         console.log(state)
       })
   }, []);
@@ -46,6 +46,20 @@ export default function useApplicationData() {
   //       console.log("res after hiding spoilers", res)
   //     });
   // }
+
+  const filterShows = (state, id) => {
+    return axios.get("/api/posts/")
+      .then((res) => {
+        setState(prev => ({...prev, posts: res.data}))
+        console.log("lolol", res)
+        return res;
+      })
+      .then((res) => {
+        let processedPosts = res.data.filter(post => post.tvshow_id === id);
+        console.log("after filtering shows: ", processedPosts)
+        setState(prev => ({...prev, posts: processedPosts}));
+      })
+  }
 
   console.log(state);
 
@@ -60,13 +74,15 @@ export default function useApplicationData() {
   return {
     state, setState,
     hideSpoiler, setHideSpoiler,
-    handleSpoilerToggle,
     text, setText,
     show, setShow,
     selectedImage, setSelectedImage,
     username, setUsername,
     bio, setBio,
     loggedIn, setLoggedIn,
-    error, setError
+    error, setError,
+
+    handleSpoilerToggle,
+    filterShows
   }  
 }

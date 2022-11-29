@@ -1,21 +1,11 @@
 import express from 'express';
-import { getPosts, getNonSpoilerPosts, addPost } from '../db/queries/posts.js';
+import { getPosts, getPostsByShow, addPost } from '../db/queries/posts.js';
 
 const router = express.Router();
-
 
 router.get('/', async (req, res) => {
   try {
     const posts = await getPosts();
-    res.json(posts);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
-
-router.get('/hide-spoilers', async (req, res) => {
-  try {
-    const posts = await getNonSpoilerPosts();
     res.json(posts);
   } catch (err) {
     res.status(500).json({ error: err.message });
