@@ -2,23 +2,32 @@ import React from "react";
 import "./Header.scss";
 import axios from "axios";
 import SettingsBar from "./Settings/SettingsBar";
-import { Route, Routes } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Login from "./Registration/Login";
 import SignUp from "./Registration/SignUp";
-import { useNavigate } from "react-router-dom";
 import Views from "./views";
 
 import useApplicationData from "../hooks/useApplicationData";
 import useVisualMode from "../hooks/useVisualMode";
 
 export default function Header() {
+  // const LOGIN = "LOGIN";
+  // const SIGNUP = "SIGNUP";
+  // const { loggedIn, setLoggedIn } = useApplicationData();
+
+  // const loginComponent = () => { 
+  //   setLoggedIn(LOGIN); 
+  // } 
+
+  // const signupComponent = () => { 
+  //   setLoggedIn(SIGNUP); 
+  // }
+
   const SHOW = "SHOW";
   const HIDE = "HIDE";
   const LOGIN = "LOGIN";
   const SIGNUP = "SIGNUP";
-
   const { mode, transition, back } = useVisualMode(HIDE);
-
   function toggleSettings() {
     if (mode === SHOW) {
       back();
@@ -26,21 +35,11 @@ export default function Header() {
       transition(SHOW);
     }
   }
- 
-  const { loggedIn, setLoggedIn } = useApplicationData();
-
-  const loginComponent = () => { 
-    setLoggedIn(LOGIN); 
-  } 
-
-  const signupComponent = () => { 
-    setLoggedIn(SIGNUP); 
-  }
 
   return (
     <>
       <header>
-        <i className="fa-solid fa-bars" onClick={toggleSettings}></i>
+      <i className="fa-solid fa-bars" onClick={toggleSettings}></i>
 
         <div className="logo-name">
           <img
@@ -54,14 +53,13 @@ export default function Header() {
           {/* <button onClick={handleClick} type="button">Login</button>
         <button onClick={handleClick} type="button">Sign Up</button> */}
           <div>
-            <button onClick={loginComponent}>Login</button>
-
-            <button onClick={signupComponent}>Sign Up</button>
+            <Link to="/login">Login</Link>
+            <Link to="/signup">SignUp</Link>
           </div>
         </div>
       </header>
-      {loggedIn === LOGIN ? <Login /> : null} 
-      {loggedIn === SIGNUP ? <SignUp /> : null} 
+      {/* {loggedIn === LOGIN ? <Login /> : null} 
+      {loggedIn === SIGNUP ? <SignUp /> : null}  */}
     </>
   );
 }

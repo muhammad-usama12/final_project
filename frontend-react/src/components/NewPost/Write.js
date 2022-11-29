@@ -7,6 +7,7 @@ import useApplicationData from "../../hooks/useApplicationData";
 
 export default function Write(props) {
   const {
+    setState,
     text, setText,
     show, setShow,
     error, setError
@@ -16,13 +17,14 @@ export default function Write(props) {
     props.onCancel();
   }
 
-  const saveProduct = () => {
+  const addPost = () => {
     axios.post("/api/posts/new",{
         text: text,
         show: show
     })
       .then((res) => {
-        console.log("res from write.js",res)
+        setState(prev => ({...prev, posts: [...prev.posts, res.data] }))
+        console.log("res from write.js", res)
       });
   }
 
@@ -34,7 +36,7 @@ export default function Write(props) {
       setError("what show are you even talking about??");
     }
     else {
-      saveProduct()
+      addPost()
     }
   }
 

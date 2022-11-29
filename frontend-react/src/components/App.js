@@ -13,6 +13,7 @@ import EditProfile from "./Profile/EditProfile";
 import Views from "./views";
 
 import useApplicationData from "../hooks/useApplicationData";
+import SignUp from "./Registration/SignUp";
 
 function App() {
   const { state } = useApplicationData();
@@ -31,6 +32,7 @@ function App() {
   console.log("cookie", document.cookie);
   return (
     <div>
+      <Views />
       <Scripts />
       {document.cookie && <UserHeader />}
       {!document.cookie && <GuestHeader />}
