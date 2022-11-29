@@ -1,23 +1,21 @@
 import db from '../connection.js';
 
 export const getPosts = async () => {
-  const data = await db.query('SELECT *, tvshows.name as show FROM posts JOIN tvshows ON tvshows.id = tvshow_id ORDER BY posts.id DESC');
+  const data = await db.query('SELECT * FROM posts ORDER BY posts.id DESC');
 
   return data.rows;
 };
 
-
 export const addPost = async (post) => {
 
- const setColumns = [...Object.values(post)]
+  const setColumns = [...Object.values(post)]
 
- const data = await db.query
- (`
-    INSERT INTO posts (text, tvshow_id) VALUES ($1,$2)
-    RETURNING *;
-    `, [...setColumns],
- )
+  const data = await db.query
+    (`
+      INSERT INTO posts (text, image, tvshow_id, spoiler, user_id) VALUES ($1,$2,$3,$4,$5)
+      RETURNING *;
+      `, [...setColumns]
+    )
+
   return data.rows[0];
 };
-
-

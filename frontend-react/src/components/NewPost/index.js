@@ -4,7 +4,7 @@ import Write from "./Write";
 import useVisualMode from "../../hooks/useVisualMode";
 
 // We pass props from App.js
-export default function NewPost(props) {
+export default function NewPost() {
   const CREATE = "CREATE";
   const WRITE = "WRITE";
   

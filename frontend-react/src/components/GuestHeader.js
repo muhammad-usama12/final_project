@@ -2,7 +2,7 @@ import React from "react";
 import "./Header.scss";
 import axios from "axios";
 import SettingsBar from "./Settings/SettingsBar";
-import { Route, Routes } from "react-router-dom";
+import { Link, Route, Routes } from "react-router-dom";
 import Login from "./Registration/Login";
 import SignUp from "./Registration/SignUp";
 import { useNavigate } from "react-router-dom";
@@ -27,15 +27,15 @@ export default function Header() {
     }
   }
  
-  const { loggedIn, setLoggedIn } = useApplicationData();
+  // const { loggedIn, setLoggedIn } = useApplicationData();
 
-  const loginComponent = () => { 
-    setLoggedIn(LOGIN); 
-  } 
+  // const loginComponent = () => { 
+  //   setLoggedIn(LOGIN); 
+  // } 
 
-  const signupComponent = () => { 
-    setLoggedIn(SIGNUP); 
-  }
+  // const signupComponent = () => { 
+  //   setLoggedIn(SIGNUP); 
+  // }
 
   return (
     <>
@@ -54,14 +54,17 @@ export default function Header() {
           {/* <button onClick={handleClick} type="button">Login</button>
         <button onClick={handleClick} type="button">Sign Up</button> */}
           <div>
-            <button onClick={loginComponent}>Login</button>
-
-            <button onClick={signupComponent}>Sign Up</button>
+            <Link to="/login">
+            <button>Login</button>
+            </Link>
+            <Link to="/signup">
+            <button>SignUp</button>
+            </Link>
           </div>
         </div>
       </header>
-      {loggedIn === LOGIN ? <Login /> : null} 
-      {loggedIn === SIGNUP ? <SignUp /> : null} 
+      {"/login" === LOGIN ? <Login /> : null} 
+      {"/signup" === SIGNUP ? <SignUp /> : null} 
     </>
   );
 }

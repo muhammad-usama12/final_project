@@ -5,6 +5,7 @@ import reportWebVitals from "./reportWebVitals";
 
 import "./index.css";
 
+import Scripts from "./components/Scripts";
 import App from "./components/App";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -12,6 +13,7 @@ root.render(
   <React.StrictMode>
 
       <BrowserRouter>
+        <Scripts />
         <App />
       </BrowserRouter>
 

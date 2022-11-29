@@ -1,30 +1,34 @@
 import "./Write.scss";
+
 import Button from "../Button";
+import MenuItem from '@mui/material/MenuItem';
+import InputLabel from '@mui/material/InputLabel';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
 
 import axios from "axios";
+import { useState } from "react";
 import useApplicationData from "../../hooks/useApplicationData";
 
-
 export default function Write(props) {
-  const {
-    text, setText,
-    show, setShow,
-    error, setError
-  } = useApplicationData();
+  const [text, setText] = useState("")
+  const [show, setShow] = useState("")
+  const [selectedImage, setSelectedImage] = useState("")
+  const [spoiler, setSpoiler] = useState(false)
+  const [error, setError] = useState(null)
+
+  const { state, setState } = useApplicationData();
 
   function cancel() {
     props.onCancel();
   }
 
-  const saveProduct = () => {
-    axios.post("/api/posts/new",{
-        text: text,
-        show: show
-    })
-      .then((res) => {
-        console.log("res from write.js",res)
-      });
-  }
+  const handleChange = (event) => {
+    setShow(event.target.value);
+  };
 
   function validate() {
     if (text === "") {
@@ -34,9 +38,42 @@ export default function Write(props) {
       setError("what show are you even talking about??");
     }
     else {
-      saveProduct()
+      addPost()
     }
   }
+
+  const handleSpoilerToggle = () => {
+    if (spoiler) {
+      setSpoiler(false);
+    } else {
+      setSpoiler(true)
+    }
+  }
+
+  // hard coded user_id for now
+  const addPost = () => {
+    axios.post("/api/posts/new",{
+        text: text,
+        img: selectedImage,
+        show: show,
+        spoiler: spoiler,
+        user_id: 1
+    })
+      .then((res) => {
+        setState(prev => ({...prev, posts: [...prev.posts, res.data] }))
+        console.log("res from write.js", res)
+      });
+  }
+  const shows = state.shows.reverse().map((show) => {
+    return (
+      <MenuItem
+        key={show.id}
+        value={show.id}
+      >
+        {show.name}
+      </MenuItem>
+    )
+  });
 
   return (
     <div className="write-post">
@@ -50,12 +87,24 @@ export default function Write(props) {
           onChange={(event) => setText(event.target.value)}
         />
         <input
-          name="show"
+          name="image-link"
           type="text"
-          placeholder="sorry, which show again?"
-          value={show}
-          onChange={(event) => setShow(event.target.value)}
+          placeholder="got a spicy image link?"
+          value={selectedImage}
+          onChange={(event) => setSelectedImage(event.target.value)}
         />
+        <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+          <InputLabel id="demo-select-small">show</InputLabel>
+          <Select
+            labelId="demo-select-small"
+            id="demo-select-small"
+            value={show}
+            label="show"
+            onChange={handleChange}
+          >
+            {shows}
+          </Select>
+        </FormControl>
       </form>
         <div className="write-buttons">
           <div className="left-buttons">
@@ -66,13 +115,14 @@ export default function Write(props) {
               onClick={cancel}
             />
           </div>
-          <div className="right-buttons">
-            <Button
-              image
-              className="button--image"
-              // Below is icon of an image
-              message={<i className="fa-solid fa-image"></i>}
+          <FormGroup>
+            <FormControlLabel
+              control={<Checkbox color="default" />}
+              label="Spoiler"
+              onClick={() => handleSpoilerToggle(spoiler, setSpoiler)}
             />
+          </FormGroup>
+          <div className="right-buttons">
             <Button
               confirm
               className="button--confirm"

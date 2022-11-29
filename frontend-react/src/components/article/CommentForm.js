@@ -1,31 +1,20 @@
-import React from "react";
-import axios from "axios";
+import React, { useState } from "react";
 
 import Button from "../Button";
-
 import useApplicationData from "../../hooks/useApplicationData";
 
 export default function CommentForm(props) {
-  const {
-    text, setText,
-    error, setError
-  } = useApplicationData()
+  const [text, setText] = useState("");
+  const [error, setError] = useState(null);
 
-  const saveComment = () => {
-    axios.post("/api/comments/new",{
-        text: text,
-    })
-      .then((res) => {
-        console.log("res from commentForm.js: ", res)
-      });
-  }
+  const { saveComment } = useApplicationData();
 
   function validate() {
     if (text === "") {
       setError("can't get his ass with no words, bestie");
     }
     else {
-      saveComment();
+      saveComment(text, props.postId);
     }
   }
 

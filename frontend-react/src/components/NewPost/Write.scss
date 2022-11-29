@@ -3,6 +3,8 @@
 .write-post {
   background-color: $secondary-colour;
   margin: 2rem;
+  margin-top: 0rem;
+  margin-bottom: 4rem;
   padding: 2rem;
   width: 35vw;
   gap: 1rem;
@@ -30,9 +32,17 @@
     }
   }
 
+  #demo-select-small {
+    font-family: monospace;
+  }
+
   .write-buttons {
     display: flex;
     justify-content: space-between;
     margin-top: 1rem;
+  }
+
+  .dropdown {
+    width: 100%;
   }
 }
