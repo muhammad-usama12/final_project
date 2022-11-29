@@ -37,7 +37,7 @@ const Login = () => {
             if (data.status) {
               setError(data.status);
             } else if (data.loggedIn) {
-              navigate("/home");
+              navigate("/");
             }
           });
       }}
