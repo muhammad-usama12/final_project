@@ -1,13 +1,14 @@
-import { ArrowBackIcon } from "@chakra-ui/icons";
+import { useContext } from "react";
 import { Button, ButtonGroup, Heading, Text, VStack } from "@chakra-ui/react";
 import { Form, Formik } from "formik";
 import { useNavigate } from "react-router";
 import TextField from "./TextField";
+import { AccountContext } from "../AccountContext";
 
 import useApplicationData from "../../hooks/useApplicationData";
 
 const SignUp = () => {
-  // const { setUser } = useContext(AccountContext);
+  const { setUser } = useContext(AccountContext);
   const { error, setError } = useApplicationData();
 
   const navigate = useNavigate();
@@ -40,6 +41,7 @@ const SignUp = () => {
             if (data.status) {
               setError(data.status);
             } else if (data.loggedIn) {
+              setUser({ ...data });
               navigate("/login");
             }
           });
