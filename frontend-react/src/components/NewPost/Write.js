@@ -5,16 +5,17 @@ import Dropdown from "./Dropdown";
 import MenuItem from '@mui/material/MenuItem';
 
 import axios from "axios";
+import { useState } from "react";
 import useApplicationData from "../../hooks/useApplicationData";
 
 export default function Write(props) {
-  const {
-    state, setState,
-    text, setText,
-    show, setShow,
-    selectedImage, setSelectedImage,
-    error, setError
-  } = useApplicationData();
+  const [text, setText] = useState("")
+  const [show, setShow] = useState("")
+  const [selectedImage, setSelectedImage] = useState("")
+  const [error, setError] = useState(null)
+
+
+  const { state, setState } = useApplicationData();
 
   function cancel() {
     props.onCancel();

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 import "./Profile.scss";
@@ -7,34 +7,26 @@ import Button from "../Button";
 import useApplicationData from "../../hooks/useApplicationData";
 
 export default function EditProfile(props) {
-  const {
-    selectedImage, setSelectedImage,
-    username, setUsername,
-    bio, setBio,
-    error, setError
-  } = useApplicationData()
 
-  const getUsers = async () => {
-    try {
-      const result = await axios({
-        url: '/api/users',
-        method: 'GET',
-      });
+  const [selectedImage, setSelectedImage] = useState("");
+  const [username, setUsername] = useState("");
+  const [bio, setBio] = useState("");
+  const [error, setError] = useState(null);
 
-      const user = result.data[0];
-      console.log("user: ", user)
-
-      setSelectedImage(user.icon_url)
-      setUsername(user.username)
-      setBio(user.bio)
-
-    } catch (err) {
-      setError(err.message);
-    }
-  };
+  const { getUsers } = useApplicationData();
 
   useEffect(() => {
-    getUsers();
+    getUsers()
+      .then((res) => {
+        const user = res.data[0];
+        console.log("user: ", user)
+  
+        setSelectedImage(user.icon_url)
+        setUsername(user.username)
+        setBio(user.bio)
+  
+      })
+      .catch(err => setError(err.message))
   }, [])
 
   function validate() {

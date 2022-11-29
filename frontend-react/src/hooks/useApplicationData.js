@@ -3,15 +3,6 @@ import axios from 'axios';
 import { useState, useEffect } from "react";
 
 export default function useApplicationData() {
-  // Form states
-  const [text, setText] = useState("");
-  const [show, setShow] = useState("");
-
-  // Edit Profile states
-  const [selectedImage, setSelectedImage] = useState("");
-  const [username, setUsername] = useState("");
-  const [bio, setBio] = useState("i don't like to talk about myself");
-
   // Session states
   const [loggedIn, setLoggedIn]  = useState();
   const [error, setError] = useState("");
@@ -21,7 +12,8 @@ export default function useApplicationData() {
   const [state, setState] = useState({
     posts: [],
     shows:[],
-    comments: []
+    comments: [],
+    users: []
   });
  
   // const [loading, setLoading] = useState(true);
@@ -32,9 +24,10 @@ export default function useApplicationData() {
         axios.get("/api/posts"),
         axios.get("/api/shows"),
         axios.get("/api/comments"),
+        axios.get("/api/users"),
       ])
       .then((res) => {
-        setState(prev => ({...prev, posts: res[0].data, shows: res[1].data, comments: res[2].data}))
+        setState(prev => ({...prev, posts: res[0].data, shows: res[1].data, comments: res[2].data, users: res[3].data}))
         console.log(state)
       })
   }, []);
@@ -60,6 +53,15 @@ export default function useApplicationData() {
       })
   }
 
+  const getUsers = async () => {
+    return axios.get("/api/users")
+      .then((res) => {
+        setState(prev => ({...prev, users: res.data}))
+        console.log("lolol", res.data)
+        return res.data;
+      })
+  };
+
   const handleSpoilerToggle = () => {
     if (hideSpoiler) {
       setHideSpoiler(false);
@@ -73,16 +75,12 @@ export default function useApplicationData() {
   return {
     state, setState,
     hideSpoiler, setHideSpoiler,
-    text, setText,
-    show, setShow,
-    selectedImage, setSelectedImage,
-    username, setUsername,
-    bio, setBio,
     loggedIn, setLoggedIn,
     error, setError,
 
     handleSpoilerToggle,
     getFilteredShows,
-    getAllShows
+    getAllShows,
+    getUsers
   }  
 }
