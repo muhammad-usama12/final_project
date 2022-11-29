@@ -10,7 +10,7 @@ import EditProfile from "./Profile/EditProfile";
 import Views from "./views";
 
 import useApplicationData from "../hooks/useApplicationData";
-import { getShowForPost } from "../helpers/selectors";
+import { getShowForPost, getUserForPost } from "../helpers/selectors";
 
 function App() {
   const {
@@ -23,12 +23,14 @@ function App() {
 
   const articleList = state.posts.map((post) => {
     const show = getShowForPost(state, post.tvshow_id);
+    const user = getUserForPost(state, post.user_id);
 
     return (
       <Article
         key={post.id}
         {...post}
         show={show}
+        user={user}
         spoiler={hideSpoiler && post.spoiler}
       />
     );

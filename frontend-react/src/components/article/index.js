@@ -39,8 +39,8 @@ export default function Article(props) {
         <div className="article-buttons">
           <img 
             className="profile-icon"
-            src="https://i.pinimg.com/474x/ce/9c/ab/ce9cab218f2849c81f230e4296fd120c.jpg"
-            alt="profile"
+            src={props.user.icon_url}
+            alt={props.user.user_name}
           >
           </img>
           <div className="actions">
