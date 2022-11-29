@@ -7,7 +7,7 @@ export const getPosts = async () => {
 };
 
 export const getNonSpoilerPosts = async () => {
-  const data = await db.query('SELECT *, tvshows.name as show FROM posts JOIN tvshows ON tvshows.id = tvshow_id ORDER BY posts.id DESC');
+  const data = await db.query('SELECT *, tvshows.name as show FROM posts JOIN tvshows ON tvshows.id = tvshow_id WHERE posts.spoiler = false ORDER BY posts.id DESC');
 
   return data.rows;
 };

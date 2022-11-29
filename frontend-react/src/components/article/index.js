@@ -5,12 +5,14 @@ import ArticleRightButtons from "./ArticleRightButtons";
 import CommentList from "./CommentList";
 
 import useVisualMode from "../../hooks/useVisualMode";
+import classNames from "classnames";
 
 export default function Article(props) {
+
+  const ifSpoilerClass = classNames("screen", { "spoiler": props.spoiler })
   const SHOW = "SHOW";
   const HIDE = "HIDE";
   
-
   const { mode, transition, back } = useVisualMode(HIDE);
 
   function toggleComments() {
@@ -24,7 +26,7 @@ export default function Article(props) {
   return (
     <article>
       <div className="screen-and-buttons">
-        <div className="screen">
+        <div className={ifSpoilerClass}>
           <p>{props.text}</p>
           <img 
             className="article-image"

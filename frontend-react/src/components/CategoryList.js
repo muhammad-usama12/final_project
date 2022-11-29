@@ -1,5 +1,7 @@
 import React from "react";
+
 import "./Category.scss"
+
 import CategoryListItem from "./CategoryListItem"
 
 // We pass props from Article.js, and App.js
@@ -13,6 +15,7 @@ export default function CategoryList(props) {
       img={category.image_url}
     />
   ))
+
   return (
     <section>
       <div className="general-filter">
@@ -21,6 +24,7 @@ export default function CategoryList(props) {
         />
         <CategoryListItem
           name="Hide Spoilers"
+          onClick={props.hideSpoilers}
         />
       </div>
       <div className="category-list">

@@ -86,6 +86,10 @@ article {
     }
   }
 
+  .spoiler {
+    filter: blur(10px);
+  }
+
   .comments-container {
 
     h1 {
