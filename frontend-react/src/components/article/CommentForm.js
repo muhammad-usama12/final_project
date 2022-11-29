@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import axios from "axios";
 
 import Button from "../Button";
 import useApplicationData from "../../hooks/useApplicationData";
 
-export default function CommentForm(props) {
+export default function CommentForm() {
   const [text, setText] = useState("");
   const [error, setError] = useState(null);
 

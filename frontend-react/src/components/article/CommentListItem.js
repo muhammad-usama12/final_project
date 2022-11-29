@@ -9,7 +9,7 @@ export default function CommentListItem(props) {
         </div>
         <img 
           className="profile-icon"
-          src={props.img}
+          src={props.image}
           alt="profile"
         >
         </img>

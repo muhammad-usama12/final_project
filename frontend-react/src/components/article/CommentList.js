@@ -13,7 +13,7 @@ export default function CommentList(props) {
       <CommentListItem
         key={comment.id}
         text={comment.text}
-        img={comment.icon_url}
+        image={comment.icon_url}
         timestamp={comment.created_at}
       />
     )
