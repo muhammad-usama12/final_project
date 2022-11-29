@@ -8,7 +8,7 @@ import CategoryListItem from "./CategoryListItem"
 export default function CategoryList(props) {
 
   const categoriesArray = props.shows
-  const eachcategory = categoriesArray.map((category) => (
+  const categories = categoriesArray.map((category) => (
     <CategoryListItem
       key={category.id}
       name={category.name} 
@@ -30,7 +30,7 @@ export default function CategoryList(props) {
         />
       </div>
       <div className="category-list">
-        { eachcategory }
+        {categories}
       </div>
     </section>
   );

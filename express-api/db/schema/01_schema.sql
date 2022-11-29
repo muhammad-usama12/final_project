@@ -16,7 +16,6 @@ CREATE TABLE users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-
 CREATE TABLE tvshows (
     id SERIAL PRIMARY KEY NOT NULL,
     name VARCHAR(255) NOT NULL,
@@ -25,10 +24,9 @@ CREATE TABLE tvshows (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-
 CREATE TABLE posts (
     id SERIAL PRIMARY KEY NOT NULL,
-    text TEXT,
+    text TEXT NOT NULL,
     image VARCHAR(255),
     spoiler BOOLEAN DEFAULT false,
     total_likes INTEGER DEFAULT 0,

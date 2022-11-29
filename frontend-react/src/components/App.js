@@ -13,7 +13,13 @@ import useApplicationData from "../hooks/useApplicationData";
 import { getShowForPost } from "../helpers/selectors";
 
 function App() {
-  const { state, hideSpoiler, handleSpoilerToggle, getFilteredShows, getAllShows } = useApplicationData();
+  const {
+    state,
+    hideSpoiler,
+    handleSpoilerToggle,
+    getFilteredShows,
+    getAllShows
+  } = useApplicationData();
 
   const articleList = state.posts.map((post) => {
     const show = getShowForPost(state, post.tvshow_id);
@@ -35,9 +41,7 @@ function App() {
       <Views />
       {document.cookie && <UserHeader />}
       {!document.cookie && <GuestHeader />}
-
       <main>
-        
         {/* <EditProfile /> */}
         {/* <Profile /> */}
         <section className="category-filters">
@@ -48,9 +52,7 @@ function App() {
             getAllShows={getAllShows}
           />
         </section>
-
         {/* <button onClick={getCookie}>getCookie</button> */}
-
         <NewPost />
         <section className="article-container">
           {articleList}

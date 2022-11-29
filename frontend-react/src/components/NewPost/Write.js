@@ -26,18 +26,6 @@ export default function Write(props) {
     setShow(event.target.value);
   };
 
-  const addPost = () => {
-    axios.post("/api/posts/new",{
-        text: text,
-        img: selectedImage,
-        show: show
-    })
-      .then((res) => {
-        setState(prev => ({...prev, posts: [...prev.posts, res.data] }))
-        console.log("res from write.js", res)
-      });
-  }
-
   function validate() {
     if (text === "") {
       setError("you can't stir nothing");
@@ -50,6 +38,17 @@ export default function Write(props) {
     }
   }
 
+  const addPost = () => {
+    axios.post("/api/posts/new",{
+        text: text,
+        img: selectedImage,
+        show: show
+    })
+      .then((res) => {
+        setState(prev => ({...prev, posts: [...prev.posts, res.data] }))
+        console.log("res from write.js", res)
+      });
+  }
   const shows = state.shows.reverse().map((show) => {
     return (
       <MenuItem
