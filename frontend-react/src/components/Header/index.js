@@ -1,15 +1,14 @@
 import React from "react";
-import "./Header.scss";
 import axios from "axios";
-import SettingsBar from "./Settings/SettingsBar";
-import { Link, Route, Routes } from "react-router-dom";
-import Login from "./Registration/Login";
-import SignUp from "./Registration/SignUp";
-import { useNavigate } from "react-router-dom";
-import Views from "./views";
 
-import useApplicationData from "../hooks/useApplicationData";
-import useVisualMode from "../hooks/useVisualMode";
+import "./Header.scss";
+
+import GuestActions from "./GuestActions";
+import SettingsBar from "./SettingsBar";
+import Login from "./../Registration/Login";
+import SignUp from "./../Registration/SignUp";
+
+import useVisualMode from "../../hooks/useVisualMode";
 
 export default function Header() {
   const SHOW = "SHOW";
@@ -26,21 +25,22 @@ export default function Header() {
       transition(SHOW);
     }
   }
- 
-  // const { loggedIn, setLoggedIn } = useApplicationData();
-
-  // const loginComponent = () => { 
-  //   setLoggedIn(LOGIN); 
-  // } 
-
-  // const signupComponent = () => { 
-  //   setLoggedIn(SIGNUP); 
-  // }
+  const logout = async () => {
+    try {
+      const result = await axios({
+        url: "/api/auth/logout",
+        method: "POST",
+      });
+    } catch (err) {
+      console.log("Err", err);
+    }
+  };
 
   return (
     <>
+      {mode === SHOW && <SettingsBar onLogOut={logout}/>}
       <header>
-        <i className="fa-solid fa-bars" onClick={toggleSettings}></i>
+        <i className="fa-solid fa-bars" onClick={document.cookie && toggleSettings}></i>
 
         <div className="logo-name">
           <img
@@ -50,21 +50,17 @@ export default function Header() {
           ></img>
           teebo
         </div>
-        <div>
-          {/* <button onClick={handleClick} type="button">Login</button>
-        <button onClick={handleClick} type="button">Sign Up</button> */}
-          <div>
-            <Link to="/login">
-            <button>Login</button>
-            </Link>
-            <Link to="/signup">
-            <button>SignUp</button>
-            </Link>
-          </div>
+        <div className="header-buttons">
+          {!document.cookie && <GuestActions />}
+          {document.cookie && <img
+            className="profile-icon header-icon"
+            src="https://i.pinimg.com/474x/ce/9c/ab/ce9cab218f2849c81f230e4296fd120c.jpg"
+            alt="profile"
+          ></img>}
+          {"/login" === LOGIN ? <Login /> : null} 
+          {"/signup" === SIGNUP ? <SignUp /> : null} 
         </div>
       </header>
-      {"/login" === LOGIN ? <Login /> : null} 
-      {"/signup" === SIGNUP ? <SignUp /> : null} 
     </>
   );
 }
