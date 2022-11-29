@@ -1,5 +1,5 @@
 import express from 'express';
-import { getPosts, addPost } from '../db/queries/posts.js';
+import { getPosts, getNonSpoilerPosts, addPost } from '../db/queries/posts.js';
 
 const router = express.Router();
 
@@ -13,10 +13,19 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.get('/hide-spoilers', async (req, res) => {
+  try {
+    const posts = await getNonSpoilerPosts();
+    res.json(posts);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 router.post("/new", async (req, res) => {
 
     try {
-      const post = await addPost( req.body);
+      const post = await addPost(req.body);
       res.json(post);
     } catch (err) {
       res.status(500).json({ error: err.message });

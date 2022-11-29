@@ -22,9 +22,7 @@ export default function CommentList(props) {
       <h1>the discourse:</h1>
       <CommentForm />
       <hr />
-      <div className="comment-list">
-        {comments}
-      </div>
+      {comments}
     </section>
   );
 }

@@ -17,6 +17,7 @@ export default function useApplicationData() {
   const [error, setError] = useState("");
 
   // Data state
+  const [hideSpoiler, setHideSpoiler] = useState(false)
   const [state, setState] = useState({
     posts: [],
     shows:[],
@@ -38,10 +39,19 @@ export default function useApplicationData() {
       })
   }, []);
 
+  // const hideSpoilers = () => {
+  //   return axios.get("/api/posts/hide-spoilers")
+  //     .then((res) => {
+  //       setState(prev => ({...prev, posts: res.data}))
+  //       console.log("res after hiding spoilers", res)
+  //     });
+  // }
+
   console.log(state);
 
   return {
-    state,
+    state, setState,
+    hideSpoiler, setHideSpoiler,
     text, setText,
     show, setShow,
     selectedImage, setSelectedImage,

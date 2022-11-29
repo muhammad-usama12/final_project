@@ -1,5 +1,4 @@
 import "./App.scss";
-import "./App.scss";
 
 import GuestHeader from "./GuestHeader";
 import UserHeader from "./UserHeader";
@@ -13,7 +12,16 @@ import Views from "./views";
 import useApplicationData from "../hooks/useApplicationData";
 
 function App() {
-  const { state } = useApplicationData();
+  const { state, hideSpoiler, setHideSpoiler } = useApplicationData();
+
+  const handleSpoilerToggle = () => {
+    if (hideSpoiler) {
+      setHideSpoiler(false);
+    } else {
+      setHideSpoiler(true)
+    }
+  }
+
   const articleList = state.posts.map((post) => {
     return (
       <Article
@@ -23,10 +31,13 @@ function App() {
         show={post.show}
         likes={post.total_likes}
         comments={post.total_comments}
+        spoiler={hideSpoiler && post.spoiler}
       />
     );
   });
+
   console.log("cookie", document.cookie);
+
   return (
     <div>
       <Views />
@@ -38,7 +49,10 @@ function App() {
         {/* <EditProfile /> */}
         {/* <Profile /> */}
         <section className="category-filters">
-          <CategoryList name={state} />
+          <CategoryList
+            name={state}
+            hideSpoilers={handleSpoilerToggle}
+          />
         </section>
 
         {/* <button onClick={getCookie}>getCookie</button> */}
