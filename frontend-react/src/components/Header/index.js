@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-
+import { useNavigate } from "react-router-dom";
 import "./Header.scss";
 
 import GuestActions from "./GuestActions";
@@ -31,6 +31,7 @@ export default function Header() {
         url: "/api/auth/logout",
         method: "POST",
       });
+      console.log("successfully logged out");
     } catch (err) {
       console.log("Err", err);
     }
@@ -38,9 +39,12 @@ export default function Header() {
 
   return (
     <>
-      {mode === SHOW && <SettingsBar onLogOut={logout}/>}
+      {mode === SHOW && <SettingsBar onLogOut={logout} />}
       <header>
-        <i className="fa-solid fa-bars" onClick={document.cookie && toggleSettings}></i>
+        <i
+          className="fa-solid fa-bars"
+          onClick={document.cookie && toggleSettings}
+        ></i>
 
         <div className="logo-name">
           <img
@@ -52,13 +56,15 @@ export default function Header() {
         </div>
         <div className="header-buttons">
           {!document.cookie && <GuestActions />}
-          {document.cookie && <img
-            className="profile-icon header-icon"
-            src="https://i.pinimg.com/474x/ce/9c/ab/ce9cab218f2849c81f230e4296fd120c.jpg"
-            alt="profile"
-          ></img>}
-          {"/login" === LOGIN ? <Login /> : null} 
-          {"/signup" === SIGNUP ? <SignUp /> : null} 
+          {document.cookie && (
+            <img
+              className="profile-icon header-icon"
+              src="https://i.pinimg.com/474x/ce/9c/ab/ce9cab218f2849c81f230e4296fd120c.jpg"
+              alt="profile"
+            ></img>
+          )}
+          {"/login" === LOGIN ? <Login /> : null}
+          {"/signup" === SIGNUP ? <SignUp /> : null}
         </div>
       </header>
     </>
