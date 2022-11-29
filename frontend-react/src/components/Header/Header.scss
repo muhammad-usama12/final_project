@@ -1,4 +1,4 @@
-@import "../styles/variables.scss";
+@import "../../styles/variables.scss";
 
 header {
   background-color: $primary-colour;
@@ -11,6 +11,19 @@ header {
   position: fixed;
   width: 70vw;
   z-index: 1;
+}
+
+.settings {
+  background-color: $tertiary-colour;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 7.5rem;
+  width: 200px;
+  position: fixed;
+  left: 10vw;
+  padding-top: 100px;
+  border-radius: 30px;
 }
 
 .fa-bars {
@@ -49,10 +62,15 @@ header {
 .header-icon {
   right: 10vw
 }
+
 .header-buttons{
   display: flex;
-  button {
-    margin-left: 10px;
+
+  .guest-actions {
+    display: flex;
+
+    .pill-container {
+
+    }
   }
-  
 }

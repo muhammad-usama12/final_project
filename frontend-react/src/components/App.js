@@ -1,7 +1,6 @@
 import "./App.scss";
 
-import GuestHeader from "./GuestHeader";
-import UserHeader from "./UserHeader";
+import Header from "./Header/index";
 import Article from "./Article";
 import CategoryList from "./CategoryList";
 import NewPost from "./NewPost";
@@ -40,8 +39,7 @@ function App() {
 
   return (
     <div>
-      {document.cookie && <UserHeader />}
-      {!document.cookie && <GuestHeader />}
+      <Header />
       <Views />
       <main>
         {/* <EditProfile /> */}
