@@ -1,14 +1,17 @@
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import { Button, ButtonGroup, Heading, Text, VStack } from "@chakra-ui/react";
 import { Form, Formik } from "formik";
-import { useState } from "react";
 import { useNavigate } from "react-router";
 import TextField from "./TextField";
 
+import useApplicationData from "../../hooks/useApplicationData";
+
 const SignUp = () => {
   // const { setUser } = useContext(AccountContext);
-  const [error, setError] = useState(null);
+  const { error, setError } = useApplicationData();
+
   const navigate = useNavigate();
+
   return (
     <Formik
       initialValues={{ username: "", password: "" }}

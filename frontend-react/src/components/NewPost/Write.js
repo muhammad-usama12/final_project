@@ -1,67 +1,62 @@
-import React, { useState } from "react";
 import "./Write.scss";
 import Button from "../Button";
 
 import axios from "axios";
+import useApplicationData from "../../hooks/useApplicationData";
 
 
 export default function Write(props) {
-  const [text, setText] = useState("");
-  const [show, setShow] = useState("");
-  const [error, setError] = useState("");
-
-
+  const {
+    text, setText,
+    show, setShow,
+    error, setError
+  } = useApplicationData();
 
   function cancel() {
     props.onCancel();
   }
 
   const saveProduct = () => {
-   
-     axios.post("/api/posts/new",{
+    axios.post("/api/posts/new",{
         text: text,
         show: show
     })
+      .then((res) => {
+        console.log("res from write.js",res)
+      });
+  }
 
-  .then((res) => {
-    console.log("res from write.js",res)
-  });
-}
   function validate() {
     if (text === "") {
       setError("you can't stir nothing");
-      return;
     }
     else if (show === "") {
       setError("what show are you even talking about??");
-      return;
     }
     else {
       saveProduct()
     }
   }
 
-  
-
   return (
     <div className="write-post">
       {error !== "" && <section>{error}</section>}
       <form onSubmit={event => event.preventDefault()} autoComplete="off">
-          <textarea
-            name="text"
-            type="text"
-            placeholder="what do the people need to hear..."
-            value={text}
-            onChange={(event) => setText(event.target.value)}
-          />
-          <input
-            name="show"
-            type="text"
-            placeholder="sorry, which show again?"
-            value={show}
-            onChange={(event) => setShow(event.target.value)}
-          />
-        </form>
+        <textarea
+          name="text"
+          type="text"
+          placeholder="what do the people need to hear..."
+          value={text}
+          onChange={(event) => setText(event.target.value)}
+        />
+        <input
+          name="show"
+          type="text"
+          placeholder="sorry, which show again?"
+          value={show}
+          onChange={(event) => setShow(event.target.value)}
+        />
+      </form>
         <div className="write-buttons">
           <div className="left-buttons">
             <Button

@@ -1,27 +1,21 @@
 import "./App.scss";
 import "./App.scss";
-import axios from 'axios';
-import useVisualMode from "../hooks/useVisualMode";
-import { useState, useEffect } from "react";
+
+import Scripts from "./Scripts";
+
 import GuestHeader from "./GuestHeader";
 import UserHeader from "./UserHeader";
-import Article from "./Article"
+import Article from "./Article";
 import CategoryList from "./CategoryList";
 import NewPost from "./NewPost";
 import Profile from "./Profile";
 import EditProfile from "./Profile/EditProfile";
 import Views from "./views";
-import Scripts from "./Scripts";
-
-
 
 import useApplicationData from "../hooks/useApplicationData";
 
-
-
 function App() {
   const { state } = useApplicationData();
-
   const articleList = state.posts.map((post) => {
     return (
       <Article
@@ -34,14 +28,12 @@ function App() {
       />
     );
   });
-console.log("cookie", document.cookie)
+  console.log("cookie", document.cookie);
   return (
     <div>
-      
       <Scripts />
-{document.cookie && <UserHeader/>}
-{!document.cookie && <GuestHeader/>}
-     
+      {document.cookie && <UserHeader />}
+      {!document.cookie && <GuestHeader />}
 
       <main>
         {/* <EditProfile /> */}
@@ -49,15 +41,13 @@ console.log("cookie", document.cookie)
         <section className="category-filters">
           <CategoryList name={state} />
         </section>
-  {/* <button onClick={getCookie}>getCookie</button> */}
+        {/* <button onClick={getCookie}>getCookie</button> */}
 
         {/* THIS SHOWS THE NEW POST FORM DEPENDING ON THE WRITE STATE */}
         <NewPost />
-
         <section className="article-container">{articleList}</section>
       </main>
     </div>
   );
 }
-
 export default App;

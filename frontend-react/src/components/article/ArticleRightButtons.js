@@ -1,6 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
+
 
 export default function ArticleRightButtons(props) {
+
+  const [like, setLike] = useState(props.likes);
+  const handleClick = () => {
+    setLike( like + 1 );
+  };
+
+
   return (
     <div className="article-buttons">
       <img 
@@ -10,8 +18,10 @@ export default function ArticleRightButtons(props) {
       >
       </img>
       <div className="actions">
+      <button onClick={handleClick} >
         <i className="fa-solid fa-star"></i>
-          <p>{props.likes}</p>
+          <p>{like}</p>
+          </button>
         <i
           className="fa-solid fa-comment-dots"
           onClick={props.toggleComments}

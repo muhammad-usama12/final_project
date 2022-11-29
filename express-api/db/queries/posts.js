@@ -7,7 +7,7 @@ export const getPosts = async () => {
 };
 
 
-export const addPosts = async (post) => {
+export const addPost = async (post) => {
 
  const setColumns = [...Object.values(post)]
 

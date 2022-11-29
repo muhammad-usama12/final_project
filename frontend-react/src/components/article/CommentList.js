@@ -1,11 +1,12 @@
-import React from "react";
+import CommentForm from "./CommentForm";
 import CommentListItem from "./CommentListItem";
+
 import useApplicationData from "../../hooks/useApplicationData";
 
 export default function CommentList(props) {
   const { state } = useApplicationData();
  
-  const comments = state.comments.map((comment) => {
+  const comments = state.comments.reverse().map((comment) => {
     return (
       <CommentListItem
         key={comment.id}
@@ -19,7 +20,11 @@ export default function CommentList(props) {
   return (
     <section className="comments-container">
       <h1>the discourse:</h1>
-      {comments}
+      <CommentForm />
+      <hr />
+      <div className="comment-list">
+        {comments}
+      </div>
     </section>
   );
 }

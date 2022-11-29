@@ -1,13 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
+
 import "./Profile.scss";
 import Button from "../Button";
 
+import useApplicationData from "../../hooks/useApplicationData";
+
 export default function EditProfile(props) {
-  const [selectedImage, setSelectedImage] = useState("");
-  const [username, setUsername] = useState("");
-  const [bio, setBio] = useState("i don't like to talk about myself");
-  const [error, setError] = useState("");
+  const {
+    selectedImage, setSelectedImage,
+    username, setUsername,
+    bio, setBio,
+    error, setError
+  } = useApplicationData()
 
   const getUsers = async () => {
     try {
