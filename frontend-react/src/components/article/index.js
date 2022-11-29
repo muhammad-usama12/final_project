@@ -9,7 +9,9 @@ import classNames from "classnames";
 
 export default function Article(props) {
 
-  const ifSpoilerClass = classNames("screen", { "spoiler": props.spoiler })
+  // This checks if props.spoiler is true, and if it is, apply the "spoiler" class to blur spoiler posts
+  const ifSpoilerClass = classNames("screen", { "spoiler": props.spoiler });
+
   const SHOW = "SHOW";
   const HIDE = "HIDE";
   
