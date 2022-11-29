@@ -2,11 +2,13 @@ import CommentForm from "./CommentForm";
 import CommentListItem from "./CommentListItem";
 
 import useApplicationData from "../../hooks/useApplicationData";
+import { getCommentsForPost } from "../../helpers/selectors";
 
 export default function CommentList(props) {
   const { state } = useApplicationData();
  
-  const comments = state.comments.reverse().map((comment) => {
+  const comments = getCommentsForPost(state, props.postId)
+  const commentsList = comments.reverse().map((comment) => {
     return (
       <CommentListItem
         key={comment.id}
@@ -22,7 +24,7 @@ export default function CommentList(props) {
       <h1>the discourse:</h1>
       <CommentForm />
       <hr />
-      {comments}
+      {commentsList}
     </section>
   );
 }

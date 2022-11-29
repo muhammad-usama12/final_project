@@ -1,7 +1,6 @@
 import "./Article.scss"
 
 import CategoryTag from "./CategoryTag";
-import ArticleRightButtons from "./ArticleRightButtons";
 import CommentList from "./CommentList";
 
 import useVisualMode from "../../hooks/useVisualMode";
@@ -37,16 +36,30 @@ export default function Article(props) {
           >
           </img>
         </div>
-        <ArticleRightButtons
-          toggleComments={toggleComments}
-          likes={props.likes}
-          comments={props.comments}
-        />
+        <div className="article-buttons">
+          <img 
+            className="profile-icon"
+            src="https://i.pinimg.com/474x/ce/9c/ab/ce9cab218f2849c81f230e4296fd120c.jpg"
+            alt="profile"
+          >
+          </img>
+          <div className="actions">
+            <i className="fa-solid fa-star"></i>
+              <p>{props.total_likes}</p>
+            <i
+              className="fa-solid fa-comment-dots"
+              onClick={toggleComments}
+            >
+            </i>
+              <p>{props.total_comments}</p>
+            <i className="fa-solid fa-circle-plus"></i>
+          </div>
+        </div>
       </div>
       <CategoryTag
         name={props.show.name}
       />
-      { mode === SHOW && <CommentList />}
+      { mode === SHOW && <CommentList postId={props.id}/>}
     </article>
   );
 }

@@ -6,3 +6,11 @@ export function getShowForPost(state, tvShowId) {
 
   return showObj;
 }
+
+export function getCommentsForPost(state, postId) {
+  const comments = state.comments;
+
+  let foundCommentsArr = comments.filter(comment => comment.post_id === postId);
+
+  return foundCommentsArr;
+}

@@ -17,7 +17,6 @@ function App() {
 
   const articleList = state.posts.map((post) => {
     const show = getShowForPost(state, post.tvshow_id);
-    console.log("post: ", post)
 
     return (
       <Article
