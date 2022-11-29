@@ -12,12 +12,10 @@ export const addPost = async (post) => {
 
   const data = await db.query
     (`
-      INSERT INTO posts (text, image, tvshow_id, spoiler) VALUES ($1,$2,$3,$4)
+      INSERT INTO posts (text, image, tvshow_id, spoiler, user_id) VALUES ($1,$2,$3,$4,$5)
       RETURNING *;
       `, [...setColumns]
     )
 
   return data.rows[0];
 };
-
-

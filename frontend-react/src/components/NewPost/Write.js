@@ -50,12 +50,14 @@ export default function Write(props) {
     }
   }
 
+  // hard coded user_id for now
   const addPost = () => {
     axios.post("/api/posts/new",{
         text: text,
         img: selectedImage,
         show: show,
-        spoiler: spoiler
+        spoiler: spoiler,
+        user_id: 1
     })
       .then((res) => {
         setState(prev => ({...prev, posts: [...prev.posts, res.data] }))
