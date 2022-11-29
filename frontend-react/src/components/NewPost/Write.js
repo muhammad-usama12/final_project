@@ -9,7 +9,7 @@ import useApplicationData from "../../hooks/useApplicationData";
 
 export default function Write(props) {
   const {
-    state,
+    state, setState,
     text, setText,
     show, setShow,
     selectedImage, setSelectedImage,
@@ -24,13 +24,14 @@ export default function Write(props) {
     setShow(event.target.value);
   };
 
-  const saveProduct = () => {
+  const addPost = () => {
     axios.post("/api/posts/new",{
         text: text,
         img: selectedImage,
         show: show
     })
       .then((res) => {
+        setState(prev => ({...prev, posts: [...prev.posts, res.data] }))
         console.log("res from write.js", res)
       });
   }
@@ -43,7 +44,7 @@ export default function Write(props) {
       setError("what show are you even talking about??");
     }
     else {
-      saveProduct()
+      addPost()
     }
   }
 
