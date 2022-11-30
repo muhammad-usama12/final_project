@@ -4,6 +4,7 @@ import { useContext } from "react";
 import Login from "./Registration/Login";
 import SignUp from "./Registration/SignUp";
 import Profile from "./Profile";
+import EditProfile from "./EditProfile/EditProfile";
 import PrivateRoutes from "./PrivateRoutes";
 import Compilation from "./Article/Compilation";
 import Guest from "./Article/Guest";
@@ -51,7 +52,16 @@ const Views = () => {
             getAllShows={getAllShows}
             handleSpoilerToggle={handleSpoilerToggle}
           />} />
+          <Route path="/profile/edit" element={<EditProfile
+            state={state}
+            user={user}
+            hideSpoiler={hideSpoiler}
+            getFilteredShows={getFilteredShows}
+            getAllShows={getAllShows}
+            handleSpoilerToggle={handleSpoilerToggle}
+          />} />
         </Route>
+        
         <Route path="*" element={<Login />} />
       </Routes>
     </>
