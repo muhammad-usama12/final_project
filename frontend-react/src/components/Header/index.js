@@ -63,8 +63,6 @@ export default function Header() {
               alt="profile"
             ></img>
           )}
-          {"/login" === LOGIN ? <Login /> : null}
-          {"/signup" === SIGNUP ? <SignUp /> : null}
         </div>
       </header>
     </>
