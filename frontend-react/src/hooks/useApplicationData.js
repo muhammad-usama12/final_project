@@ -42,28 +42,28 @@ export default function useApplicationData() {
     });
   };
 
-  const getFilteredShows = (state, id) => {
+  const getFilteredShows = (id) => {
     return axios
       .get("/api/posts")
       .then((res) => {
         setState((prev) => ({ ...prev, posts: res.data }));
-        console.log("before filtering", res.data);
         return res.data;
       })
       .then((res) => {
         let processedPosts = res.filter((post) => post.tvshow_id === id);
-        console.log("after filtering shows: ", processedPosts);
         setState((prev) => ({ ...prev, posts: processedPosts }));
       });
   };
 
-  const getUsers = async () => {
-    return axios.get("/api/users").then((res) => {
-      setState((prev) => ({ ...prev, users: res.data }));
-      console.log("lolol", res.data);
-      return res.data;
-    });
-  };
+  const updateProfile = (userObj, userId) => {
+    console.log("userobj: ", userObj)
+    return axios
+      .put(`/api/users/${userId}`, userObj)
+      .then(() => {
+        console.log("update success");
+      })
+      .catch((err) => console.log("update failed: ", err));
+  }
 
   const saveComment = (text, postId) => {
     return axios
@@ -71,9 +71,6 @@ export default function useApplicationData() {
         text: text,
         postId: postId,
       })
-      .then((res) => {
-        console.log("res from commentForm.js: ", res);
-      });
   };
 
   const handleSpoilerToggle = () => {
@@ -97,7 +94,7 @@ export default function useApplicationData() {
     handleSpoilerToggle,
     getFilteredShows,
     getAllShows,
-    getUsers,
     saveComment,
+    updateProfile
   };
 }

@@ -13,6 +13,7 @@ export default function EditProfile(props) {
   const state = props.state;
   const currentUser = getCurrentUser(state, props.user.userId);
 
+  const [save, setSave] = useState()
   const [previewSelectedImage, setPreviewSelectedImage] = useState(currentUser.icon_url);
   const [selectedImage, setSelectedImage] = useState(currentUser.icon_url);
   const [username, setUsername] = useState(currentUser.username);
@@ -26,9 +27,18 @@ export default function EditProfile(props) {
     }
     setError("");
     uploadImage()
-      .then()
-    // props.onSave(username, bio, selectedImage);
   }
+
+  // updateProfile is called only when save state is changed
+  useEffect(()=> {
+    if (save) {
+      props.updateProfile({
+        username: username,
+        bio: bio,
+        icon_url: selectedImage
+      }, props.user.userId) 
+    }
+  }, [ save ])
 
   const uploadImage = () => {
     if (selectedImage === null) return;
@@ -36,9 +46,11 @@ export default function EditProfile(props) {
     uploadBytes(imageRef, selectedImage)
       .then((snapshot) => {
         getDownloadURL(snapshot.ref).then((url) => {
-          setPreviewSelectedImage(url);
-          console.log(url)
-        });
+          setSelectedImage(url)
+          setSave(true)
+          console.log("url: ", url)
+          console.log("upload success")
+        })
       })
       .catch(err => console.log("err message: ", err.message))
   };
@@ -80,7 +92,7 @@ export default function EditProfile(props) {
           />
           <i className="fa-solid fa-image"></i>
         </label>
-        <Button confirm message="Save" onClick={uploadImage}/>
+        <Button confirm message="Save" onClick={validate}/>
       </div>
       {error !== "" && <section>{error}</section>}
     </section>

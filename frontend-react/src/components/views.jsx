@@ -22,6 +22,7 @@ const Views = () => {
     handleSpoilerToggle,
     getFilteredShows,
     getAllShows,
+    updateProfile
   } = useApplicationData();
   const { user } = useContext(AccountContext);
 
@@ -59,6 +60,7 @@ const Views = () => {
             getFilteredShows={getFilteredShows}
             getAllShows={getAllShows}
             handleSpoilerToggle={handleSpoilerToggle}
+            updateProfile={updateProfile}
           />} />
         </Route>
         
