@@ -16,5 +16,7 @@ code {
 You can only see id="root" when you look in dev tools*/
 #root {
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
 }

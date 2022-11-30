@@ -8,6 +8,7 @@ import UserContext from "../AccountContext";
 
 import useApplicationData from "../../hooks/useApplicationData";
 import { getShowForPost, getUserForPost } from "../../helpers/selectors";
+import Spacing from "../Spacing";
 
 function Compilation() {
   const {
@@ -39,8 +40,7 @@ function Compilation() {
     <UserContext>
       <div>
         <main>
-          {/* <EditProfile /> */}
-          {/* <Profile /> */}
+          <Spacing />
           <section className="category-filters">
             <CategoryList
               shows={state.shows}
