@@ -2,7 +2,6 @@
 import dotenv from "dotenv";
 dotenv.config();
 import db from "./db/connection.js";
-
 // Enable __dirname with ES6 modules
 import * as url from "url";
 const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
@@ -49,7 +48,7 @@ app.use(
     cookie: {
       secure: process.env.ENVIRONMENT === "production" ? "true" : "auto",
       httpOnly: false,
-      expires: 1000*60*60*24,
+      expires: 1000 * 60 * 60 * 24 * 7,
       sameSite: process.env.ENVIRONMENT === "production" ? "none" : "lax",
     },
   })
@@ -90,6 +89,5 @@ app.get("/api/dashboard", (req, res) => {
 });
 
 app.listen(PORT, () => {
-
   console.log(`App listening on port ${PORT}`);
 });

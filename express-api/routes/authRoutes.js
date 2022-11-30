@@ -9,8 +9,11 @@ router
 
   .get(async (req, res) => {
     if (req.session.user && req.session.user.username) {
-
-      res.json({ loggedIn: true, username: req.session.user.username });
+      res.json({
+        loggedIn: true,
+        username: req.session.user.username,
+        userId: req.session.user.id,
+      });
     } else {
       res.json({ loggedIn: false });
     }
@@ -34,10 +37,14 @@ router
           id: potentialLogin.rows[0].id,
         };
         ////USER ID FOR SESSION
-        console.log("req.session.user from login", req.session.user)
+        console.log("req.session.user from login", req.session.user);
 
-        console.log("req.body", req.body)
-        res.json({ loggedIn: true, username: req.body.username });
+        console.log("req.body", req.body);
+        res.json({
+          loggedIn: true,
+          username: req.body.username,
+          userId: req.session.user.id,
+        });
       } else {
         res.json({ loggedIn: false, status: "Wrong username or password!" });
         console.log("Wrong username or password!");
@@ -66,18 +73,22 @@ router.post("/signup", async (req, res) => {
       id: newUserQuery.rows[0].id,
     };
     ////USER ID FOR SESSION
-    console.log("req.session.user from signup", req.session.user.id)
-    res.json({ loggedIn: true, username: req.body.username });
+    console.log("req.session.user from signup", req.session.user.id);
+    res.json({
+      loggedIn: true,
+      username: req.body.username,
+      userId: req.session.user.id,
+    });
   } else {
     res.json({ loggedIn: false, status: "Username taken" });
   }
 });
 
-router.post('/logout', (req, res) => {
+router.post("/logout", (req, res) => {
   req.session.destroy();
-  res.clearCookie("sessionId")
-  res.end()
-  console.log("Logged out successfully")
-})
+  res.clearCookie("sessionId");
+  res.end();
+  console.log("Logged out successfully");
+});
 
 export default router;
