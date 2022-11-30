@@ -6,6 +6,7 @@ import "./Profile.scss";
 import Header from "../Header";
 import Article from "../Article";
 import CategoryList from "../CategoryList";
+import Spacing from "../Spacing";
 
 import useApplicationData from "../../hooks/useApplicationData";
 import { getCurrentUser, getPostsByUser, getShowForPost } from "../../helpers/selectors";
@@ -41,6 +42,7 @@ export default function Profile() {
   return (
     <>
       <Header />
+      <Spacing />
       <section className="profile-header">
         <img
           className="profile-display-picture"
@@ -53,11 +55,8 @@ export default function Profile() {
           </div>
           <div className="bio">
             <p> 
-              asd
+            { currentUser && currentUser.bio }
             </p>
-            <Link to="/dash">
-              <div className="pill-container">Dashboard</div>
-            </Link>
           </div>
         </div>
       </section>

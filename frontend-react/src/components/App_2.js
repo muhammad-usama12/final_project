@@ -8,6 +8,7 @@ import UserContext from "./AccountContext";
 
 import useApplicationData from "../hooks/useApplicationData";
 import { getShowForPost, getUserForPost } from "../helpers/selectors";
+import Spacing from "./Spacing";
 
 function App_2() {
   const {
@@ -39,6 +40,7 @@ function App_2() {
     <UserContext>
       <div>
         <Header />
+        <Spacing />
         <main>
           {/* <EditProfile /> */}
           {/* <Profile /> */}
