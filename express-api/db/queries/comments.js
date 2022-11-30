@@ -2,7 +2,7 @@ import db from '../connection.js';
 
 export const getComments = async () => {
   const queryDef = {
-    text: 'SELECT comments.*, users.username, users.icon_url from comments JOIN users ON users.id = user_id ORDER BY comments.created_at ASC'
+    text: 'SELECT * from comments ORDER BY comments.created_at ASC'
   }
 
   const data = await db.query(queryDef);
@@ -13,6 +13,7 @@ export const getComments = async () => {
 export const addComment = async (comment) => {
 
   const setColumns = [...Object.values(comment)]
+  console.log("setColumns in comments",setColumns)
 
   const data = await db.query
   (`
