@@ -9,7 +9,11 @@ router
 
   .get(async (req, res) => {
     if (req.session.user && req.session.user.username) {
-      res.json({ loggedIn: true, username: req.session.user.username });
+      res.json({
+        loggedIn: true,
+        username: req.session.user.username,
+        userId: req.session.user.id,
+      });
     } else {
       res.json({ loggedIn: false });
     }
@@ -36,7 +40,11 @@ router
         console.log("req.session.user from login", req.session.user);
 
         console.log("req.body", req.body);
-        res.json({ loggedIn: true, username: req.body.username });
+        res.json({
+          loggedIn: true,
+          username: req.body.username,
+          userId: req.session.user.id,
+        });
       } else {
         res.json({ loggedIn: false, status: "Wrong username or password!" });
         console.log("Wrong username or password!");
@@ -66,7 +74,11 @@ router.post("/signup", async (req, res) => {
     };
     ////USER ID FOR SESSION
     console.log("req.session.user from signup", req.session.user.id);
-    res.json({ loggedIn: true, username: req.body.username });
+    res.json({
+      loggedIn: true,
+      username: req.body.username,
+      userId: req.session.user.id,
+    });
   } else {
     res.json({ loggedIn: false, status: "Username taken" });
   }
