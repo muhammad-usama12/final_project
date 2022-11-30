@@ -1,27 +1,28 @@
 import "./Write.scss";
 
 import Button from "../Button";
-import MenuItem from '@mui/material/MenuItem';
-import InputLabel from '@mui/material/InputLabel';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
+import MenuItem from "@mui/material/MenuItem";
+import InputLabel from "@mui/material/InputLabel";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import FormGroup from "@mui/material/FormGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
 
 import axios from "axios";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import useApplicationData from "../../hooks/useApplicationData";
+import UserContext, { AccountContext } from "../AccountContext";
 
 export default function Write(props) {
-  const [text, setText] = useState("")
-  const [show, setShow] = useState("")
-  const [selectedImage, setSelectedImage] = useState("")
-  const [spoiler, setSpoiler] = useState(false)
-  const [error, setError] = useState(null)
+  const [text, setText] = useState("");
+  const [show, setShow] = useState("");
+  const [selectedImage, setSelectedImage] = useState("");
+  const [spoiler, setSpoiler] = useState(false);
+  const [error, setError] = useState(null);
 
   const { state, setState } = useApplicationData();
-
+  const user = useContext(AccountContext);
   function cancel() {
     props.onCancel();
   }
@@ -33,12 +34,10 @@ export default function Write(props) {
   function validate() {
     if (text === "") {
       setError("you can't stir nothing");
-    }
-    else if (show === "") {
+    } else if (show === "") {
       setError("what show are you even talking about??");
-    }
-    else {
-      addPost()
+    } else {
+      addPost();
     }
   }
 
@@ -46,39 +45,38 @@ export default function Write(props) {
     if (spoiler) {
       setSpoiler(false);
     } else {
-      setSpoiler(true)
+      setSpoiler(true);
     }
-  }
+  };
 
   // hard coded user_id for now
   const addPost = () => {
-    axios.post("/api/posts/new",{
+    console.log(user.user.userId);
+    axios
+      .post(`/api/posts/${user.user.userId}/new`, {
         text: text,
         img: selectedImage,
         show: show,
         spoiler: spoiler,
-        user_id: 1
-    })
+        user_id: `${user.user.userId}`,
+      })
       .then((res) => {
-        setState(prev => ({...prev, posts: [...prev.posts, res.data] }))
-        console.log("res from write.js", res)
+        setState((prev) => ({ ...prev, posts: [...prev.posts, res.data] }));
+        console.log("res from write.js", res);
       });
-  }
+  };
   const shows = state.shows.reverse().map((show) => {
     return (
-      <MenuItem
-        key={show.id}
-        value={show.id}
-      >
+      <MenuItem key={show.id} value={show.id}>
         {show.name}
       </MenuItem>
-    )
+    );
   });
 
   return (
     <div className="write-post">
       {error !== "" && <section>{error}</section>}
-      <form onSubmit={event => event.preventDefault()} autoComplete="off">
+      <form onSubmit={(event) => event.preventDefault()} autoComplete="off">
         <textarea
           name="text"
           type="text"
@@ -106,31 +104,31 @@ export default function Write(props) {
           </Select>
         </FormControl>
       </form>
-        <div className="write-buttons">
-          <div className="left-buttons">
-            <Button
-              cancel
-              className="button--cancel"
-              message="cancel"
-              onClick={cancel}
-            />
-          </div>
-          <FormGroup>
-            <FormControlLabel
-              control={<Checkbox color="default" />}
-              label="Spoiler"
-              onClick={() => handleSpoilerToggle(spoiler, setSpoiler)}
-            />
-          </FormGroup>
-          <div className="right-buttons">
-            <Button
-              confirm
-              className="button--confirm"
-              message="greenlight"
-              onClick={validate}
-            />
-          </div>
+      <div className="write-buttons">
+        <div className="left-buttons">
+          <Button
+            cancel
+            className="button--cancel"
+            message="cancel"
+            onClick={cancel}
+          />
         </div>
+        <FormGroup>
+          <FormControlLabel
+            control={<Checkbox color="default" />}
+            label="Spoiler"
+            onClick={() => handleSpoilerToggle(spoiler, setSpoiler)}
+          />
+        </FormGroup>
+        <div className="right-buttons">
+          <Button
+            confirm
+            className="button--confirm"
+            message="greenlight"
+            onClick={validate}
+          />
+        </div>
+      </div>
     </div>
   );
 }
