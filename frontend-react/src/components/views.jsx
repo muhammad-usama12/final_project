@@ -2,7 +2,6 @@ import { Route, Routes } from "react-router-dom";
 import Login from "./Registration/Login";
 import SignUp from "./Registration/SignUp";
 import Profile from "./Profile";
-import App from "./App";
 import PrivateRoutes from "./PrivateRoutes";
 import App_2 from "./App_2";
 import Guest from "./Article/Guest";
