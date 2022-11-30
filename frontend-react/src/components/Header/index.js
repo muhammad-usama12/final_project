@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "./Header.scss";
 
 import GuestActions from "./GuestActions";
@@ -56,13 +56,15 @@ export default function Header() {
         </div>
         <div className="header-buttons">
           {!document.cookie && <GuestActions />}
-          {document.cookie && (
-            <img
-              className="profile-icon header-icon"
-              src="https://i.pinimg.com/474x/ce/9c/ab/ce9cab218f2849c81f230e4296fd120c.jpg"
-              alt="profile"
-            ></img>
-          )}
+          <Link to="/profile">
+            {document.cookie && (
+              <img
+                className="profile-icon header-icon"
+                src="https://i.pinimg.com/474x/ce/9c/ab/ce9cab218f2849c81f230e4296fd120c.jpg"
+                alt="profile"
+              ></img>
+            )}
+          </Link>
         </div>
       </header>
     </>
