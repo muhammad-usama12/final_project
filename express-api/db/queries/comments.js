@@ -23,3 +23,19 @@ export const addComment = async (comment) => {
   )
    return data.rows[0];
  };
+
+ export const commentCounter = async (id) => {
+
+  const post_id = id
+
+  const data = await db.query
+  (`
+   SELECT count(*)
+   FROM comments
+   where post_id = $1;
+     `,[post_id],
+  )
+
+   return data.rows[0];
+
+ };

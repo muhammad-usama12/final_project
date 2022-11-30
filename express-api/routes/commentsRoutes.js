@@ -1,5 +1,5 @@
 import express from 'express';
-import { getComments, addComment } from '../db/queries/comments.js';
+import { getComments, addComment , commentCounter } from '../db/queries/comments.js';
 
 const router = express.Router();
 
@@ -21,5 +21,18 @@ router.post("/new", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 })
+
+router.put('/:id/counter', async (req, res) => {
+const id = req.params.id
+
+
+  try {
+    const comment = await commentCounter(id);
+    res.json(comment);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+ })
+
 
 export default router;

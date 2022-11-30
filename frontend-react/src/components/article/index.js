@@ -2,9 +2,11 @@ import "./Article.scss"
 
 import CategoryTag from "./CategoryTag";
 import CommentList from "./CommentList";
-
+import { useState } from "react";
 import useVisualMode from "../../hooks/useVisualMode";
 import classNames from "classnames";
+import axios from "axios";
+
 
 export default function Article(props) {
 
@@ -23,6 +25,29 @@ export default function Article(props) {
       transition(SHOW);
     }
   }
+  const [likecounter, setLikecounter] = useState(props.total_likes);
+  const [commentcounter, setCommentcounter] = useState(props.total_comments);
+
+  const post_id = props.id
+  
+  const addLike = (e) => {
+    e.preventDefault();
+    axios.put(`/api/posts/${post_id}/like`)
+    .then((res) => {
+      setLikecounter(()=>res.data.total_likes)
+     })
+     .catch((err) => console.log("error from addlike",err))
+  }
+  const commentCounter = () => {
+  
+    axios.put(`/api/comments/${post_id}/counter`)
+    .then((res) => {
+      console.log("res from comment", res.data.count)
+       setCommentcounter(()=>res.data.count)
+     })
+     .catch((err) => console.log("error from addlike",err))
+  }
+  commentCounter();
 
   return (
     <article>
@@ -44,14 +69,18 @@ export default function Article(props) {
           >
           </img>
           <div className="actions">
+            <button onClick = {addLike}>
             <i className="fa-solid fa-star"></i>
-              <p>{props.total_likes}</p>
-            <i
-              className="fa-solid fa-comment-dots"
+              <p>{likecounter}</p>
+              </button>
+            <i className="fa-solid fa-comment-dots"
               onClick={toggleComments}
             >
             </i>
-              <p>{props.total_comments}</p>
+           
+            <p>{commentcounter}</p>
+           
+            
             <i className="fa-solid fa-circle-plus"></i>
           </div>
         </div>

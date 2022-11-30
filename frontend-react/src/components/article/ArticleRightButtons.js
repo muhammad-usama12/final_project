@@ -3,11 +3,14 @@ import React, { useState } from "react";
 
 export default function ArticleRightButtons(props) {
 
-  const [like, setLike] = useState(props.likes);
-  const handleClick = () => {
-    setLike( like + 1 );
-  };
+  // const [like, setLike] = useState(props.likes);
+  // const handleClick = () => {
+  //   setLike( like + 1 );
+  // };
 
+
+  
+ 
 
   return (
     <div className="article-buttons">
@@ -18,9 +21,9 @@ export default function ArticleRightButtons(props) {
       >
       </img>
       <div className="actions">
-      <button onClick={handleClick} >
+      <button onClick={addLike} >
         <i className="fa-solid fa-star"></i>
-          <p>{like}</p>
+          <p>{likecounter}</p>
           </button>
         <i
           className="fa-solid fa-comment-dots"
