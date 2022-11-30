@@ -24,7 +24,6 @@ export default function useApplicationData() {
       axios.get("/api/shows"),
       axios.get("/api/comments"),
       axios.get("/api/users"),
-      
     ]).then((res) => {
       setState((prev) => ({
         ...prev,

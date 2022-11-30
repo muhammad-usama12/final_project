@@ -4,7 +4,7 @@ import SignUp from "./Registration/SignUp";
 import Profile from "./Profile";
 import App from "./App";
 import PrivateRoutes from "./PrivateRoutes";
-import Compilation from "./Article/Compilation";
+import App_2 from "./App_2";
 import Guest from "./Article/Guest";
 import { useContext } from "react";
 import { AccountContext } from "./AccountContext";
@@ -19,10 +19,10 @@ const Views = () => {
       <Route path="/signup" element={<SignUp />} />
       <Route path="/guest" element={<Guest />} />
       <Route element={<PrivateRoutes />}>
-        <Route path="/dash" element={<Compilation />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/dash" element={<App_2 />} />
       </Route>
-      <Route path="*" element={<Login />} />
+      <Route path="*" element={<Guest />} />
     </Routes>
   );
 };

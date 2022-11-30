@@ -1,15 +1,15 @@
-import "../App.scss";
+import "./App.scss";
 
-import Header from "../Header/index";
-import Article from "../Article";
-import CategoryList from "../CategoryList";
-import NewPost from "../NewPost";
-import UserContext from "../AccountContext";
+import Header from "./Header/index";
+import Article from "./Article";
+import CategoryList from "./CategoryList";
+import NewPost from "./NewPost";
+import UserContext from "./AccountContext";
 
-import useApplicationData from "../../hooks/useApplicationData";
-import { getShowForPost, getUserForPost } from "../../helpers/selectors";
+import useApplicationData from "../hooks/useApplicationData";
+import { getShowForPost, getUserForPost } from "../helpers/selectors";
 
-function Compilation() {
+function App_2() {
   const {
     state,
     hideSpoiler,
@@ -58,4 +58,4 @@ function Compilation() {
     </UserContext>
   );
 }
-export default Compilation;
+export default App_2;
