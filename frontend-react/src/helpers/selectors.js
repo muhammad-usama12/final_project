@@ -32,3 +32,11 @@ export function getCurrentUser(state, userId) {
 
   return foundUserObj;
 }
+
+export function getPostsByUser(state, userId) {
+  const posts = state.posts;
+
+  let foundPostsArr = posts.filter(post => post.user_id === userId);
+
+  return foundPostsArr;
+}

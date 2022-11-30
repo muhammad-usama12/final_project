@@ -46,6 +46,10 @@ const Views = () => {
           <Route path="/profile" element={<Profile
             state={state}
             user={user}
+            hideSpoiler={hideSpoiler}
+            getFilteredShows={getFilteredShows}
+            getAllShows={getAllShows}
+            handleSpoilerToggle={handleSpoilerToggle}
           />} />
         </Route>
         <Route path="*" element={<Login />} />
