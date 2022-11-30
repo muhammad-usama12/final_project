@@ -1,23 +1,18 @@
+import { useContext } from "react";
+import { AccountContext } from "../AccountContext";
+
 import "../App.scss";
 
-import Header from "../Header/index";
 import Article from "../Article";
 import CategoryList from "../CategoryList";
 import NewPost from "../NewPost";
 import UserContext from "../AccountContext";
 
-import useApplicationData from "../../hooks/useApplicationData";
 import { getShowForPost, getUserForPost } from "../../helpers/selectors";
-import Spacing from "../Spacing";
 
-function Compilation() {
-  const {
-    state,
-    hideSpoiler,
-    handleSpoilerToggle,
-    getFilteredShows,
-    getAllShows,
-  } = useApplicationData();
+function Compilation(props) {
+
+  const state = props.state;
 
   const articleList = state.posts.map((post) => {
     const show = getShowForPost(state, post.tvshow_id);
@@ -29,7 +24,7 @@ function Compilation() {
         {...post}
         show={show}
         user={user}
-        spoiler={hideSpoiler && post.spoiler}
+        spoiler={props.hideSpoiler && post.spoiler}
       />
     );
   });
@@ -40,13 +35,12 @@ function Compilation() {
     <UserContext>
       <div>
         <main>
-          <Spacing />
           <section className="category-filters">
             <CategoryList
               shows={state.shows}
-              hideSpoilers={handleSpoilerToggle}
-              getFilteredShows={getFilteredShows}
-              getAllShows={getAllShows}
+              hideSpoilers={props.handleSpoilerToggle}
+              getFilteredShows={props.getFilteredShows}
+              getAllShows={props.getAllShows}
             />
           </section>
           {/* <button onClick={getCookie}>getCookie</button> */}

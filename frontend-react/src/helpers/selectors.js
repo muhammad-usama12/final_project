@@ -23,3 +23,12 @@ export function getUserForPost(state, userId) {
 
   return foundUserObj;
 }
+
+export function getCurrentUser(state, userId) {
+  const users = state.users;
+
+  let foundUser = users.filter(user => user.id === userId);
+  let foundUserObj = foundUser[0];
+
+  return foundUserObj;
+}
