@@ -41,7 +41,7 @@ export default function Article(props) {
     axios
       .put(`/api/comments/${post_id}/counter`)
       .then((res) => {
-        console.log("res from comment", res.data.count);
+        //console.log("res from comment", res.data.count);
         setCommentcounter(() => res.data.count);
       })
       .catch((err) => console.log("error from addlike", err));

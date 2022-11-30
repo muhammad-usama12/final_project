@@ -3,15 +3,15 @@ import { Link } from "react-router-dom";
 
 import "./Profile.scss";
 
-import CategoryList from "../CategoryList";
 import Header from "../Header";
 import Article from "../Article";
+import CategoryList from "../CategoryList";
 
 import useApplicationData from "../../hooks/useApplicationData";
 import { getCurrentUser, getPostsByUser, getShowForPost } from "../../helpers/selectors";
 import { AccountContext } from "../AccountContext";
 
-export default function Profile(props) {
+export default function Profile() {
   const {
     state,
     hideSpoiler,
@@ -19,14 +19,13 @@ export default function Profile(props) {
     getFilteredShows,
     getAllShows,
   } = useApplicationData()
-
   const { user } = useContext(AccountContext);
 
-  const currentUser = getCurrentUser(state, user.userId);
+  const currentUser = getCurrentUser(state, user.userId);  
   const posts = getPostsByUser(state, user.userId)
 
   const articleList = posts.map((post) => {
-  const show = getShowForPost(state, post.tvshow_id);
+    const show = getShowForPost(state, post.tvshow_id);
 
   return (
     <Article
@@ -45,16 +44,16 @@ export default function Profile(props) {
       <section className="profile-header">
         <img
           className="profile-display-picture"
-          src={currentUser.icon_url}
+          src={ currentUser && currentUser.icon_url }
           alt="profile"
         ></img>
         <div className="handle-and-bio">
           <div className="handle">
-            <h1>@{currentUser.username}</h1>
+            <h1>@{ currentUser && currentUser.username }</h1>
           </div>
           <div className="bio">
-            <p>
-              {currentUser.bio}
+            <p> 
+              asd
             </p>
             <Link to="/dash">
               <div className="pill-container">Dashboard</div>
@@ -62,7 +61,12 @@ export default function Profile(props) {
           </div>
         </div>
       </section>
-      {/* <CategoryList /> */}
+      <CategoryList
+        shows={state.shows}
+        hideSpoilers={handleSpoilerToggle}
+        getFilteredShows={getFilteredShows}
+        getAllShows={getAllShows}
+      />
       <section className="article-container">{articleList}</section>
     </>
   );

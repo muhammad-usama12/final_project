@@ -32,7 +32,7 @@ export default function useApplicationData() {
         comments: res[2].data,
         users: res[3].data,
       }));
-      console.log(state);
+      console.log("state: ", state);
     });
   }, []);
 
