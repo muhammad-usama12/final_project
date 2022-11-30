@@ -18,7 +18,6 @@ export const getMovieById = async (id) => {
 export const updateMovie = async (id, movieInfo) => {
   const setColums = Object.keys(movieInfo).map((property, index) => `${property}=$${index + 2}`).join(', ');
 
-
   const queryDef = {
     text: `
       UPDATE movies
