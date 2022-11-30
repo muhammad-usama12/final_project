@@ -41,7 +41,7 @@ const Login = () => {
               setError(data.status);
             } else if (data.loggedIn) {
               setUser({ ...data });
-              navigate("/profile");
+              navigate("/dash");
             }
           });
       }}

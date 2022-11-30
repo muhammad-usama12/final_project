@@ -1,20 +1,17 @@
 import React from "react";
 import axios from "axios";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./Header.scss";
 
 import GuestActions from "./GuestActions";
 import SettingsBar from "./SettingsBar";
-import Login from "./../Registration/Login";
-import SignUp from "./../Registration/SignUp";
 
 import useVisualMode from "../../hooks/useVisualMode";
+import { getCurrentUser } from "../../helpers/selectors";
 
-export default function Header() {
+export default function Header(props) {
   const SHOW = "SHOW";
   const HIDE = "HIDE";
-  const LOGIN = "LOGIN";
-  const SIGNUP = "SIGNUP";
 
   const { mode, transition, back } = useVisualMode(HIDE);
 
@@ -27,7 +24,7 @@ export default function Header() {
   }
   const logout = async () => {
     try {
-      const result = await axios({
+      await axios({
         url: "/api/auth/logout",
         method: "POST",
       });
@@ -36,6 +33,8 @@ export default function Header() {
       console.log("Err", err);
     }
   };
+
+  const currentUser = getCurrentUser(props.state, props.user.userId)
 
   return (
     <>
@@ -60,7 +59,7 @@ export default function Header() {
             <Link to="/profile">
               <img
                 className="profile-icon header-icon"
-                src="https://i.pinimg.com/474x/ce/9c/ab/ce9cab218f2849c81f230e4296fd120c.jpg"
+                src={currentUser.icon_url}
                 alt="profile"
               ></img>
             </Link>

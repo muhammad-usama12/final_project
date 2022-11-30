@@ -24,13 +24,14 @@ const Views = () => {
     getAllShows,
     updateProfile
   } = useApplicationData();
+
   const { user } = useContext(AccountContext);
 
   return user.loggedIn === null ? (
     ""
   ) : (
     <>
-      <Header />
+      <Header user={user} state={state}/>
       <Spacing />
 
       <Routes>
@@ -48,18 +49,11 @@ const Views = () => {
           <Route path="/profile" element={<Profile
             state={state}
             user={user}
-            hideSpoiler={hideSpoiler}
-            getFilteredShows={getFilteredShows}
             getAllShows={getAllShows}
-            handleSpoilerToggle={handleSpoilerToggle}
           />} />
           <Route path="/profile/edit" element={<EditProfile
             state={state}
             user={user}
-            hideSpoiler={hideSpoiler}
-            getFilteredShows={getFilteredShows}
-            getAllShows={getAllShows}
-            handleSpoilerToggle={handleSpoilerToggle}
             updateProfile={updateProfile}
           />} />
         </Route>

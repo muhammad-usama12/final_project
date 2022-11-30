@@ -5,14 +5,13 @@ import Article from "../Article";
 import { getCurrentUser, getPostsByUser, getShowForPost } from "../../helpers/selectors";
 
 export default function Profile(props) {
-
 const state = props.state;
-const currentUser = getCurrentUser(state, props.user.userId);
 
+const currentUser = getCurrentUser(state, props.user.userId);
 const posts = getPostsByUser(state, props.user.userId)
 
 const articleList = posts.map((post) => {
-  const show = getShowForPost(state, post.tvshow_id);
+const show = getShowForPost(state, post.tvshow_id);
 
   return (
     <Article
@@ -35,11 +34,10 @@ const articleList = posts.map((post) => {
         ></img>
         <div className="handle-and-bio">
           <div className="handle">
-            <h1>@{currentUser.username}lolololl</h1>
+            <h1>@{currentUser.username}</h1>
           </div>
           <div className="bio">
             <p>
-              dsfksjdhfjksdhfksdlhfdfs ksd hfkds;jfh sdkfdsk fjhsdk fjhksdj fhsdfh kjsdh 
               {currentUser.bio}
             </p>
           </div>

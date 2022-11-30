@@ -14,8 +14,8 @@ export default function EditProfile(props) {
   const currentUser = getCurrentUser(state, props.user.userId);
 
   const [save, setSave] = useState()
-  const [previewSelectedImage, setPreviewSelectedImage] = useState(currentUser.icon_url);
-  const [selectedImage, setSelectedImage] = useState(currentUser.icon_url);
+  const [previewSelectedImage, setPreviewSelectedImage] = useState(currentUser.icon_url || "");
+  const [selectedImage, setSelectedImage] = useState(currentUser.icon_url || "");
   const [username, setUsername] = useState(currentUser.username);
   const [bio, setBio] = useState(currentUser.bio || "");
   const [error, setError] = useState(null);

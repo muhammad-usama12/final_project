@@ -6,6 +6,7 @@ export default function useApplicationData() {
   // Session states
   const [loggedIn, setLoggedIn] = useState();
   const [error, setError] = useState("");
+  const [save, setSave] = useState();
 
   // Data state
   const [hideSpoiler, setHideSpoiler] = useState(false);
@@ -59,8 +60,8 @@ export default function useApplicationData() {
     console.log("userobj: ", userObj)
     return axios
       .put(`/api/users/${userId}`, userObj)
-      .then(() => {
-        console.log("update success");
+      .then((res) => {
+        console.log("update success", res.data);
       })
       .catch((err) => console.log("update failed: ", err));
   }
