@@ -11,3 +11,10 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* You won't be able to find root but I think this it essentially App.js
+You can only see id="root" when you look in dev tools*/
+#root {
+  display: flex;
+  justify-content: center;
+}

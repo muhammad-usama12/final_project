@@ -40,10 +40,10 @@ export default function Header() {
   return (
     <>
       {mode === SHOW && <SettingsBar onLogOut={logout} />}
-      <header>
+      <nav>
         <i
           className="fa-solid fa-bars"
-          onClick={document.cookie && toggleSettings}
+          onClick={toggleSettings}
         ></i>
 
         <div className="logo-name">
@@ -64,7 +64,7 @@ export default function Header() {
             ></img>
           )}
         </div>
-      </header>
+      </nav>
     </>
   );
 }

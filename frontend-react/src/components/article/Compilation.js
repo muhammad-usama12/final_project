@@ -38,7 +38,6 @@ function Compilation() {
   return (
     <UserContext>
       <div>
-        <Header />
         <main>
           {/* <EditProfile /> */}
           {/* <Profile /> */}

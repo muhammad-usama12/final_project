@@ -19,9 +19,6 @@ export default function Profile(props) {
             adam / 27 / 🇨🇦 / the office is my personality yes you can bully me
             but occasionally i have opinions on friends
           </p>
-          <Link to="/dash">
-            <div className="pill-container">DASHBOARD</div>
-          </Link>
         </div>
       </div>
     </section>

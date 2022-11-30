@@ -75,7 +75,7 @@ const Login = () => {
 
         <ButtonGroup pt="1rem">
           <Button colorScheme="teal" type="submit">
-            Log In
+            Log in
           </Button>
 
           {/* <Button onClick={() => navigate("/")}>Create Account</Button> */}
