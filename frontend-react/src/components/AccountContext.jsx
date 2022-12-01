@@ -30,6 +30,7 @@ export default function UserContext({ children }) {
         console.log("successfully logged in");
         console.log("data received upon login:", data);
         setUser({ ...data });
+        navigate("/");
       });
   }, []);
   return (

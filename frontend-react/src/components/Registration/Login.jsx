@@ -11,7 +11,6 @@ import Header from "../Header";
 const Login = () => {
   const { error, setError } = useApplicationData();
   const { setUser } = useContext(AccountContext);
-
   const navigate = useNavigate();
   return (
     <>
@@ -80,8 +79,6 @@ const Login = () => {
             <Button colorScheme="teal" type="submit">
               Log In
             </Button>
-
-            {/* <Button onClick={() => navigate("/")}>Create Account</Button> */}
           </ButtonGroup>
         </VStack>
       </Formik>

@@ -46,7 +46,7 @@ export default function Header() {
           onClick={document.cookie && toggleSettings}
         ></i>
 
-        <Link to="/dash">
+        <Link to="/">
           <div className="logo-name">
             <img
               className="logo-image"
