@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-
 import "./Profile.scss";
 import Button from "../Button";
 import { ApplicationContext } from "../App";
 import { useContext } from "react";
 
-export default function EditProfile(props) {
+export default ({ changeToFalse }) => {
   const [selectedImage, setSelectedImage] = useState("");
   const [username, setUsername] = useState("");
   const [bio, setBio] = useState("");
@@ -34,12 +33,13 @@ export default function EditProfile(props) {
     }
 
     setError("");
-    props.onSave(username, bio);
+    // props.onSave(username, bio);
   }
 
   return (
     <section className="edit-profile">
       <div className="profile-header">
+        <div onClick={() => changeToFalse()}>Go back</div>
         <img
           className="profile-display-picture"
           src={selectedImage}
@@ -79,4 +79,4 @@ export default function EditProfile(props) {
       {error !== "" && <section>{error}</section>}
     </section>
   );
-}
+};
