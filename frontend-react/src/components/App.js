@@ -5,6 +5,7 @@ import Article from "./Article";
 import CategoryList from "./CategoryList";
 import NewPost from "./NewPost";
 import Profile from "./Profile"
+import EditProfile from "./Profile/EditProfile";
 import Spacing from "./Spacing";
 
 import { useEffect, createContext } from "react";
@@ -18,6 +19,7 @@ export const ApplicationContext = createContext();
 function App() {
   const DASHBOARD = "DASHBOARD";
   const PROFILE = "PROFILE";
+  const EDIT_PROFILE = "EDIT_PROFILE"
 
   const { mode, transition } = useVisualMode(DASHBOARD)
 
@@ -56,14 +58,13 @@ function App() {
   return (
     <ApplicationContext.Provider value={applicationData}>
       <Header
-        toggleProfile={() => transition(PROFILE)}
-
+        // toggleProfile={() => transition(PROFILE)}
+        toggleEditProfile={() => transition(EDIT_PROFILE)}
       />
       <Spacing />
-      { mode === PROFILE && <Profile
-      />}
+      { mode === PROFILE && <Profile/>}
       <main>
-        {/* <EditProfile /> */}
+        { mode === EDIT_PROFILE && <EditProfile />}
         { mode === DASHBOARD &&
           <section className="category-filters">
             <CategoryList

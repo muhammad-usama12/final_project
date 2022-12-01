@@ -45,7 +45,7 @@ export default function Header(props) {
 
   return (
     <>
-      {mode === SHOW && <SettingsBar onLogOut={logout} />}
+      {mode === SHOW && <SettingsBar toggleEditProfile={props.toggleEditProfile} onLogOut={logout} />}
       <header>
         <i
           className="fa-solid fa-bars"
