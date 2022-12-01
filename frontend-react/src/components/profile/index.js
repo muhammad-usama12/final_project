@@ -23,7 +23,6 @@ export default function Profile(props) {
 
   const {
     state,
-    setState,
     hideSpoiler,
     handleSpoilerToggle
   } = useContext(ApplicationContext);

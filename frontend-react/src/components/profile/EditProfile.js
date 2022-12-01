@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { storage } from "../../firebase/firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage"
 import { v4 } from "uuid"
@@ -7,20 +7,30 @@ import axios from "axios";
 import "./Profile.scss";
 import Button from "../Button";
 import { ApplicationContext } from "../App";
-import { useContext } from "react";
+import { AccountContext } from "../AccountContext";
+import { getCurrentUser } from "../../helpers/selectors";
 
 export default function EditProfile(props) {
-  const [selectedImage, setSelectedImage] = useState("");
-  const [previewSelectedImage, setPreviewSelectedImage] = useState("");
-  const [username, setUsername] = useState("");
-  const [bio, setBio] = useState("");
+  const user = useContext(AccountContext);
+  const { state } = useContext(ApplicationContext);
+  const currentUser = getCurrentUser(state, user.user.userId)
+
+  const [selectedImage, setSelectedImage] = useState(currentUser.icon_url || "");
+  const [previewSelectedImage, setPreviewSelectedImage] = useState(currentUser.icon_url || "");
+  const [username, setUsername] = useState(currentUser.username || "");
+  const [bio, setBio] = useState(currentUser.bio || "");
   const [error, setError] = useState(null);
-  const [save, setSave] = useState()
+  const [save, setSave] = useState(false)
 
-
-
-
-
+  const updateProfile = (userObj, userId) => {
+    console.log("userobj: ", userObj)
+    return axios
+      .put(`/api/users/${userId}`, userObj)
+      .then((res) => {
+        console.log("update success", res.data);
+      })
+      .catch((err) => console.log("update failed: ", err));
+  }
 
   const uploadImage = () => {
     if (selectedImage === null) return;
@@ -44,15 +54,23 @@ export default function EditProfile(props) {
     }
 
     setError("");
-    props.onSave(username, bio);
+    uploadImage()
   }
+
+  useEffect(() => {
+    updateProfile({
+      username: username,
+      bio: bio,
+      icon_url: selectedImage
+    }, user.user.userId)
+  }, [ save ])
 
   return (
     <section className="edit-profile">
       <div className="profile-header">
         <img
           className="profile-display-picture"
-          src={setPreviewSelectedImage}
+          src={previewSelectedImage}
           alt="profile"
         ></img>
         <form>
@@ -85,7 +103,7 @@ export default function EditProfile(props) {
           />
           <i className="fa-solid fa-image"></i>
         </label>
-        <Button confirm message="Save" onSave={validate} />
+        <Button confirm message="Save" onClick={validate} />
       </div>
       {error !== "" && <section>{error}</section>}
     </section>
