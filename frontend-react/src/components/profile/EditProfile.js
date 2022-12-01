@@ -1,4 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { storage } from "../../firebase/firebase";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage"
+import { v4 } from "uuid"
 import axios from "axios";
 
 import "./Profile.scss";
@@ -8,24 +11,31 @@ import { useContext } from "react";
 
 export default function EditProfile(props) {
   const [selectedImage, setSelectedImage] = useState("");
+  const [previewSelectedImage, setPreviewSelectedImage] = useState("");
   const [username, setUsername] = useState("");
   const [bio, setBio] = useState("");
   const [error, setError] = useState(null);
+  const [save, setSave] = useState()
 
-  const { getUsers } = useContext(ApplicationContext);
 
-  useEffect(() => {
-    getUsers()
-      .then((res) => {
-        const user = res.data[0];
-        console.log("user: ", user);
 
-        setSelectedImage(user.icon_url);
-        setUsername(user.username);
-        setBio(user.bio);
+
+
+
+  const uploadImage = () => {
+    if (selectedImage === null) return;
+    const imageRef = ref(storage, `images/${selectedImage.name + v4()}`);
+    uploadBytes(imageRef, selectedImage)
+      .then((snapshot) => {
+        getDownloadURL(snapshot.ref).then((url) => {
+          setSelectedImage(url)
+          setSave(true)
+          console.log("url: ", url)
+          console.log("upload success")
+        })
       })
-      .catch((err) => setError(err.message));
-  }, []);
+      .catch(err => console.log("err message: ", err.message))
+  };
 
   function validate() {
     if (username === "") {
@@ -42,7 +52,7 @@ export default function EditProfile(props) {
       <div className="profile-header">
         <img
           className="profile-display-picture"
-          src={selectedImage}
+          src={setPreviewSelectedImage}
           alt="profile"
         ></img>
         <form>
@@ -68,7 +78,8 @@ export default function EditProfile(props) {
             name="myImage"
             onChange={(event) => {
               if (event.target.files.length !== 0) {
-                setSelectedImage(URL.createObjectURL(event.target.files[0]));
+                setSelectedImage(event.target.files[0]);
+                setPreviewSelectedImage(URL.createObjectURL(event.target.files[0]))
               }
             }}
           />
