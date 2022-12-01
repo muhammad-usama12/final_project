@@ -4,14 +4,25 @@ import Header from "./Header/index";
 import Article from "./Article";
 import CategoryList from "./CategoryList";
 import NewPost from "./NewPost";
+import Profile from "./Profile"
+import Spacing from "./Spacing";
+
 import UserContext from "./AccountContext";
+
 import { useEffect, useContext, createContext } from "react";
+
 import useApplicationData from "../hooks/useApplicationData";
 import { getShowForPost, getUserForPost } from "../helpers/selectors";
-import Spacing from "./Spacing";
+import useVisualMode from "../hooks/useVisualMode";
+
 export const ApplicationContext = createContext();
 
 function App() {
+  const DASHBOARD = "DASHBOARD";
+  const PROFILE = "PROFILE";
+
+  const { mode, transition, back } = useVisualMode(DASHBOARD)
+
   const applicationData = useApplicationData();
   const {
     state,
@@ -45,22 +56,27 @@ function App() {
 
   return (
     <ApplicationContext.Provider value={applicationData}>
-      <Header />
+      <Header
+        toggleProfile={() => transition(PROFILE)}
+      />
       <Spacing />
       <main>
         {/* <EditProfile /> */}
-        {/* <Profile /> */}
-        <section className="category-filters">
-          <CategoryList
-            shows={state.shows}
-            hideSpoilers={handleSpoilerToggle}
-            getFilteredShows={getFilteredShows}
-            getAllShows={getAllShows}
-          />
-        </section>
-        {/* <button onClick={getCookie}>getCookie</button> */}
-        {document.cookie && <NewPost />}
-        <section className="article-container">{articleList}</section>
+        { mode === PROFILE && <Profile />}
+        { mode === DASHBOARD &&
+          <section className="category-filters">
+            <CategoryList
+              shows={state.shows}
+              hideSpoilers={handleSpoilerToggle}
+              getFilteredShows={getFilteredShows}
+              getAllShows={getAllShows}
+            />
+          </section>
+        }
+          
+          {/* <button onClick={getCookie}>getCookie</button> */}
+          {mode === DASHBOARD && (document.cookie && <NewPost />)}
+          {mode === DASHBOARD && <section className="article-container">{articleList}</section>}
       </main>
     </ApplicationContext.Provider>
   );
