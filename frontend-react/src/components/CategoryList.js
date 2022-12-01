@@ -15,6 +15,7 @@ export default function CategoryList(props) {
       onClick={() => props.getFilteredShows(category.id)}
     />
   ));
+  
 
   return (
     <section>

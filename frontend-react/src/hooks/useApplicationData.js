@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export default function useApplicationData() {
   // Session states
@@ -44,19 +44,8 @@ export default function useApplicationData() {
 
   const getFilteredShows = (id) => {
     let processedPosts = state.posts.filter((post) => post.tvshow_id === id);
-    setState((prev) => ({ ...prev, filerteredPosts: processedPosts }));
+    setState((prev) => ({ ...prev, filerteredPosts: processedPosts }))
 
-    // .get("/api/posts")
-    // .then((res) => {
-    //   setState((prev) => ({ ...prev, posts: res.data }));
-    //   console.log("before filtering", res.data);
-    //   return res.data;
-    // })
-    // .then((res) => {
-    //   let processedPosts = res.filter((post) => post.tvshow_id === id);
-    //   console.log("after filtering shows: ", processedPosts);
-    //   setState((prev) => ({ ...prev, posts: processedPosts }));
-    // });
   };
 
   const getUsers = async () => {

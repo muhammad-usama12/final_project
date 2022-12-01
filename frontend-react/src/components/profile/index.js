@@ -28,9 +28,8 @@ export default function Profile(props) {
   console.log("state from applicationData: ", state)
   
   const currentUser = getCurrentUser(state, user.user.userId);
-  console.log("currentuser: ", currentUser)
+  
   const posts = getPostsByUser(state, user.user.userId);
-
   const articleList = posts.map((post) => {
     const show = getShowForPost(state, post.tvshow_id);
 
