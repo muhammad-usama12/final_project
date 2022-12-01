@@ -7,7 +7,6 @@ import Article from "../Article";
 import CategoryList from "../CategoryList";
 import Spacing from "../Spacing";
 
-import useApplicationData from "../../hooks/useApplicationData";
 import {
   getCurrentUser,
   getPostsByUser,
@@ -15,18 +14,22 @@ import {
 } from "../../helpers/selectors";
 import { AccountContext } from "../AccountContext";
 
-export default function Profile() {
+export default function Profile(props) {
+
+  const user = useContext(AccountContext);
   const {
     state,
     hideSpoiler,
     handleSpoilerToggle,
     getFilteredShows,
     getAllShows,
-  } = useApplicationData();
-  const { user } = useContext(AccountContext);
+  } = props.applicationData
 
-  const currentUser = getCurrentUser(state, user.userId);
-  const posts = getPostsByUser(state, user.userId);
+  console.log("state from applicationData: ", state)
+  
+  const currentUser = getCurrentUser(state, user.user.userId);
+  console.log("currentuser: ", currentUser)
+  const posts = getPostsByUser(state, user.user.userId);
 
   const articleList = posts.map((post) => {
     const show = getShowForPost(state, post.tvshow_id);

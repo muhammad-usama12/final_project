@@ -21,7 +21,7 @@ function App() {
   const DASHBOARD = "DASHBOARD";
   const PROFILE = "PROFILE";
 
-  const { mode, transition, back } = useVisualMode(DASHBOARD)
+  const { mode, transition } = useVisualMode(DASHBOARD)
 
   const applicationData = useApplicationData();
   const {
@@ -60,9 +60,11 @@ function App() {
         toggleProfile={() => transition(PROFILE)}
       />
       <Spacing />
+      { mode === PROFILE && <Profile
+        applicationData={applicationData}
+      />}
       <main>
         {/* <EditProfile /> */}
-        { mode === PROFILE && <Profile />}
         { mode === DASHBOARD &&
           <section className="category-filters">
             <CategoryList
