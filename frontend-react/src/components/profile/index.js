@@ -8,7 +8,11 @@ import CategoryList from "../CategoryList";
 import Spacing from "../Spacing";
 
 import useApplicationData from "../../hooks/useApplicationData";
-import { getCurrentUser, getPostsByUser, getShowForPost } from "../../helpers/selectors";
+import {
+  getCurrentUser,
+  getPostsByUser,
+  getShowForPost,
+} from "../../helpers/selectors";
 import { AccountContext } from "../AccountContext";
 
 export default function Profile() {
@@ -18,25 +22,25 @@ export default function Profile() {
     handleSpoilerToggle,
     getFilteredShows,
     getAllShows,
-  } = useApplicationData()
+  } = useApplicationData();
   const { user } = useContext(AccountContext);
 
-  const currentUser = getCurrentUser(state, user.userId);  
-  const posts = getPostsByUser(state, user.userId)
+  const currentUser = getCurrentUser(state, user.userId);
+  const posts = getPostsByUser(state, user.userId);
 
   const articleList = posts.map((post) => {
     const show = getShowForPost(state, post.tvshow_id);
 
-  return (
-    <Article
-      key={post.id}
-      {...post}
-      show={show}
-      user={currentUser}
-      spoiler={hideSpoiler && post.spoiler}
-    />
-  );
-});
+    return (
+      <Article
+        key={post.id}
+        {...post}
+        show={show}
+        user={currentUser}
+        spoiler={hideSpoiler && post.spoiler}
+      />
+    );
+  });
 
   return (
     <>
@@ -45,17 +49,15 @@ export default function Profile() {
       <section className="profile-header">
         <img
           className="profile-display-picture"
-          src={ currentUser && currentUser.icon_url }
+          src={currentUser && currentUser.icon_url}
           alt="profile"
         ></img>
         <div className="handle-and-bio">
           <div className="handle">
-            <h1>@{ currentUser && currentUser.username }</h1>
+            <h1>@{currentUser && currentUser.username}</h1>
           </div>
           <div className="bio">
-            <p> 
-            { currentUser && currentUser.bio }
-            </p>
+            <p>{currentUser && currentUser.bio}</p>
           </div>
         </div>
       </section>

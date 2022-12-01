@@ -8,11 +8,10 @@ import Select from "@mui/material/Select";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-
+import { ApplicationContext } from "../App";
+import { AccountContext } from "../AccountContext";
 import axios from "axios";
 import { useState, useContext } from "react";
-import useApplicationData from "../../hooks/useApplicationData";
-import UserContext, { AccountContext } from "../AccountContext";
 
 export default function Write(props) {
   const [text, setText] = useState("");
@@ -21,7 +20,7 @@ export default function Write(props) {
   const [spoiler, setSpoiler] = useState(false);
   const [error, setError] = useState(null);
 
-  const { state, setState } = useApplicationData();
+  const { state, setState } = useContext(ApplicationContext);
   const user = useContext(AccountContext);
   function cancel() {
     props.onCancel();
@@ -48,7 +47,6 @@ export default function Write(props) {
       setSpoiler(true);
     }
   };
-
   // hard coded user_id for now
   const addPost = () => {
     console.log(user.user.userId);

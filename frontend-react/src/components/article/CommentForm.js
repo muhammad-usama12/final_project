@@ -1,19 +1,19 @@
 import React, { useState } from "react";
 
 import Button from "../Button";
-import useApplicationData from "../../hooks/useApplicationData";
+import { ApplicationContext } from "../App";
+import { useContext } from "react";
 
 export default function CommentForm(props) {
   const [text, setText] = useState("");
   const [error, setError] = useState(null);
 
-  const { saveComment } = useApplicationData();
+  const { saveComment } = useContext(ApplicationContext);
 
   function validate() {
     if (text === "") {
       setError("can't get his ass with no words, bestie");
-    }
-    else {
+    } else {
       saveComment(text, props.postId);
     }
   }
@@ -21,7 +21,7 @@ export default function CommentForm(props) {
   return (
     <div className="comment-form">
       {error !== "" && <section>{error}</section>}
-      <form onSubmit={event => event.preventDefault()} autoComplete="off">
+      <form onSubmit={(event) => event.preventDefault()} autoComplete="off">
         <textarea
           name="text"
           type="text"

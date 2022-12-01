@@ -3,38 +3,36 @@ import axios from "axios";
 
 import "./Profile.scss";
 import Button from "../Button";
-
-import useApplicationData from "../../hooks/useApplicationData";
+import { ApplicationContext } from "../App";
+import { useContext } from "react";
 
 export default function EditProfile(props) {
-
   const [selectedImage, setSelectedImage] = useState("");
   const [username, setUsername] = useState("");
   const [bio, setBio] = useState("");
   const [error, setError] = useState(null);
 
-  const { getUsers } = useApplicationData();
+  const { getUsers } = useContext(ApplicationContext);
 
   useEffect(() => {
     getUsers()
       .then((res) => {
         const user = res.data[0];
-        console.log("user: ", user)
-  
-        setSelectedImage(user.icon_url)
-        setUsername(user.username)
-        setBio(user.bio)
-  
+        console.log("user: ", user);
+
+        setSelectedImage(user.icon_url);
+        setUsername(user.username);
+        setBio(user.bio);
       })
-      .catch(err => setError(err.message))
-  }, [])
+      .catch((err) => setError(err.message));
+  }, []);
 
   function validate() {
     if (username === "") {
       setError("you gotta be called SOMETHING");
       return;
     }
-  
+
     setError("");
     props.onSave(username, bio);
   }
@@ -42,12 +40,11 @@ export default function EditProfile(props) {
   return (
     <section className="edit-profile">
       <div className="profile-header">
-        <img 
+        <img
           className="profile-display-picture"
           src={selectedImage}
           alt="profile"
-        >
-        </img>
+        ></img>
         <form>
           <input
             name="show"
@@ -71,13 +68,13 @@ export default function EditProfile(props) {
             name="myImage"
             onChange={(event) => {
               if (event.target.files.length !== 0) {
-                setSelectedImage(URL.createObjectURL(event.target.files[0]))
+                setSelectedImage(URL.createObjectURL(event.target.files[0]));
               }
             }}
           />
           <i className="fa-solid fa-image"></i>
         </label>
-        <Button confirm message="Save" onSave={validate}/>
+        <Button confirm message="Save" onSave={validate} />
       </div>
       {error !== "" && <section>{error}</section>}
     </section>
