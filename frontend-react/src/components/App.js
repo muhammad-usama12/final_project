@@ -28,13 +28,14 @@ function App() {
     handleSpoilerToggle,
     getFilteredShows,
     getAllShows,
-    loadApplicationState,
+    loadApplicationState
   } = applicationData;
 
-  useEffect(() => {
+  useEffect(()=> {
     loadApplicationState();
-  }, []);
+  }, [])
 
+  console.log("state from app.js", state)
   const articleList = state.filerteredPosts.map((post) => {
     const show = getShowForPost(state, post.tvshow_id);
     const user = getUserForPost(state, post.user_id);
@@ -56,6 +57,7 @@ function App() {
     <ApplicationContext.Provider value={applicationData}>
       <Header
         toggleProfile={() => transition(PROFILE)}
+
       />
       <Spacing />
       { mode === PROFILE && <Profile

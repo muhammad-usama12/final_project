@@ -1,15 +1,17 @@
-import { useContext } from "react";
+import { useContext, createContext, useState } from "react";
 import { Button, ButtonGroup, Heading, Text, VStack } from "@chakra-ui/react";
 import { Form, Formik } from "formik";
 import { useNavigate } from "react-router";
 import TextField from "./TextField";
 import { AccountContext } from "../AccountContext";
 
-import useApplicationData from "../../hooks/useApplicationData";
 import Header from "../Header";
 
+export const LoginContext = createContext();
+
 const Login = () => {
-  const { error, setError } = useApplicationData();
+
+  const [error, setError] = useState();
   const { setUser } = useContext(AccountContext);
   const navigate = useNavigate();
   return (
@@ -43,7 +45,7 @@ const Login = () => {
                 setError(data.status);
               } else if (data.loggedIn) {
                 setUser({ ...data });
-                navigate("/profile");
+                navigate("/");
               }
             });
         }}

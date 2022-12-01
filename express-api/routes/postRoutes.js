@@ -1,5 +1,5 @@
 import express from "express";
-import { getPosts, addPost, addLike } from "../db/queries/posts.js";
+import { getPosts, addPost, addLike, deletePost } from "../db/queries/posts.js";
 
 const router = express.Router();
 
@@ -33,7 +33,20 @@ router.put('/:id/like', async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
- })
+})
+
+router.delete('/:id', async (req, res) => {
+
+  const id = req.params.id;
+
+  try {
+    const post = await deletePost(id);
+    res.json(post);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+})
+
 
 
  export default router;

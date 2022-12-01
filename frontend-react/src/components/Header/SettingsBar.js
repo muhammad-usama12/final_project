@@ -6,7 +6,7 @@ export default function SettingsBar(props) {
   return (
     <section className="settings">
       <div className="pill-container">Edit Profile</div>
-      <Link to="/login">
+      <Link to="/">
         <div className="pill-container" onClick={props.onLogOut}>
           Logout
         </div>

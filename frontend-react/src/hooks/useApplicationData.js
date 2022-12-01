@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function useApplicationData() {
   // Session states
@@ -34,7 +34,7 @@ export default function useApplicationData() {
         comments: res[2].data,
         users: res[3].data,
       }));
-      console.log("state: ", state);
+      console.log("use app data state: ", state);
     });
   };
 
@@ -84,12 +84,11 @@ export default function useApplicationData() {
     setLoggedIn,
     error,
     setError,
-    loadApplicationState,
-
     handleSpoilerToggle,
     getFilteredShows,
     getAllShows,
     getUsers,
     saveComment,
+    loadApplicationState
   };
 }

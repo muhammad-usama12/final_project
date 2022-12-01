@@ -16,20 +16,27 @@ import {
 import { AccountContext } from "../AccountContext";
 import { ApplicationContext } from "../App";
 import Button from "../Button";
+import axios from "axios";
 
 export default function Profile(props) {
   const user = useContext(AccountContext);
 
   const {
     state,
+    setState,
     hideSpoiler,
     handleSpoilerToggle
   } = useContext(ApplicationContext);
   
   const currentUser = getCurrentUser(state, user.user.userId);
 
-  const deleteArticle = () => {
-
+  const deleteArticle = (id) => {
+    return axios.delete(`/api/posts/${id}`)
+      .then((res) => {
+        console.log("delete successful", res)
+      })
+      .then
+      .catch((err) => console.log("delete failed", err.message))
   }
   
   const posts = getPostsByUser(state, user.user.userId);
@@ -37,7 +44,7 @@ export default function Profile(props) {
     const show = getShowForPost(state, post.tvshow_id);
 
     return (
-      <>
+      <div class="profile-article">
         <Article
           key={post.id}
           {...post}
@@ -45,8 +52,8 @@ export default function Profile(props) {
           user={currentUser}
           spoiler={hideSpoiler && post.spoiler}
         />
-        <Button onClick={deleteArticle}/>
-      </>
+        <Button message={<i class="fa-solid fa-trash-can"></i>} onClick={() => deleteArticle(post.id)}/>
+      </div>
     );
   });
 
@@ -69,7 +76,7 @@ export default function Profile(props) {
           </div>
         </div>
       </section>
-      <CategoryListItem name="Hide Spoilers" onClick={handleSpoilerToggle} />
+      <CategoryListItem spoiler name="Hide Spoilers" onClick={handleSpoilerToggle} />
       <section className="article-container">{articleList}</section>
     </>
   );

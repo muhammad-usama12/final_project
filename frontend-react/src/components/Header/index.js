@@ -1,20 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import "./Header.scss";
 
 import GuestActions from "./GuestActions";
 import SettingsBar from "./SettingsBar";
 
-import { AccountContext } from "../AccountContext";
+import { ApplicationContext } from "../App";
+import UserContext, { AccountContext } from "../AccountContext";
 import { useContext } from "react";
 import useVisualMode from "../../hooks/useVisualMode";
-import { getCurrentUser } from "../../helpers/selectors";
-import { ApplicationContext } from "../App";
-
+import useApplicationData from "../../hooks/useApplicationData";
+// import { getCurrentUser } from "../../helpers/selectors";
+ 
 export default function Header(props) {
-  const user = useContext(AccountContext);
-  const { state } = useContext(ApplicationContext);
-  const currentUser = getCurrentUser(state, user.user.userId);
+  // const context = useContext(ApplicationContext)
+  const user = useContext(AccountContext)
+
+  console.log(user)
 
   const SHOW = "SHOW";
   const HIDE = "HIDE";
@@ -64,7 +66,7 @@ export default function Header(props) {
           {document.cookie && 
             <img
               className="profile-icon header-icon"
-              src={currentUser && currentUser.icon_url}
+              src=''
               alt="profile"
               onClick={props.toggleProfile}
             ></img>

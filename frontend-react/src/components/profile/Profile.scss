@@ -101,3 +101,36 @@
     }
   }
 }
+
+.profile-article {
+  display: flex;
+
+  button {
+    height: 3rem;
+    background-color: transparent;
+
+    .fa-trash-can {
+      font-size: 30px;
+      color: $secondary-colour;
+      margin-left: 1rem;
+
+      transition-duration: 200ms;
+    }
+    .fa-trash-can:hover{
+      font-size: 30px;
+      color: rgb(149, 61, 61);
+    }
+    .fa-trash-can:active{
+      font-size: 50px;
+    }
+  }
+}
+
+.profile-hide-spoiler {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+  font-size: medium;
+  font-weight: 600;
+  height: 2rem;
+}
