@@ -9,6 +9,7 @@ import { useEffect, useContext, createContext } from "react";
 import useApplicationData from "../hooks/useApplicationData";
 import { getShowForPost, getUserForPost } from "../helpers/selectors";
 import Spacing from "./Spacing";
+
 export const ApplicationContext = createContext();
 
 function App() {
