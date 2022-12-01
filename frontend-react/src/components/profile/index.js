@@ -4,7 +4,7 @@ import "./Profile.scss";
 
 import Header from "../Header";
 import Article from "../Article";
-import CategoryList from "../CategoryList";
+import CategoryListItem from "../CategoryListItem";
 import Spacing from "../Spacing";
 
 import {
@@ -12,35 +12,41 @@ import {
   getPostsByUser,
   getShowForPost,
 } from "../../helpers/selectors";
+
 import { AccountContext } from "../AccountContext";
+import { ApplicationContext } from "../App";
+import Button from "../Button";
 
 export default function Profile(props) {
-
   const user = useContext(AccountContext);
+
   const {
     state,
     hideSpoiler,
-    handleSpoilerToggle,
-    getFilteredShows,
-    getAllShows,
-  } = props.applicationData
-
-  console.log("state from applicationData: ", state)
+    handleSpoilerToggle
+  } = useContext(ApplicationContext);
   
   const currentUser = getCurrentUser(state, user.user.userId);
+
+  const deleteArticle = () => {
+
+  }
   
   const posts = getPostsByUser(state, user.user.userId);
   const articleList = posts.map((post) => {
     const show = getShowForPost(state, post.tvshow_id);
 
     return (
-      <Article
-        key={post.id}
-        {...post}
-        show={show}
-        user={currentUser}
-        spoiler={hideSpoiler && post.spoiler}
-      />
+      <>
+        <Article
+          key={post.id}
+          {...post}
+          show={show}
+          user={currentUser}
+          spoiler={hideSpoiler && post.spoiler}
+        />
+        <Button onClick={deleteArticle}/>
+      </>
     );
   });
 
@@ -63,12 +69,7 @@ export default function Profile(props) {
           </div>
         </div>
       </section>
-      <CategoryList
-        shows={state.shows}
-        hideSpoilers={handleSpoilerToggle}
-        getFilteredShows={getFilteredShows}
-        getAllShows={getAllShows}
-      />
+      <CategoryListItem name="Hide Spoilers" onClick={handleSpoilerToggle} />
       <section className="article-container">{articleList}</section>
     </>
   );

@@ -7,9 +7,7 @@ import NewPost from "./NewPost";
 import Profile from "./Profile"
 import Spacing from "./Spacing";
 
-import UserContext from "./AccountContext";
-
-import { useEffect, useContext, createContext } from "react";
+import { useEffect, createContext } from "react";
 
 import useApplicationData from "../hooks/useApplicationData";
 import { getShowForPost, getUserForPost } from "../helpers/selectors";
@@ -61,7 +59,6 @@ function App() {
       />
       <Spacing />
       { mode === PROFILE && <Profile
-        applicationData={applicationData}
       />}
       <main>
         {/* <EditProfile /> */}

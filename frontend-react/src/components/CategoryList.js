@@ -6,6 +6,7 @@ import CategoryListItem from "./CategoryListItem";
 
 // We pass props from Article.js, and App.js
 export default function CategoryList(props) {
+
   const categoriesArray = props.shows;
   const categories = categoriesArray.map((category) => (
     <CategoryListItem
@@ -16,7 +17,6 @@ export default function CategoryList(props) {
     />
   ));
   
-
   return (
     <section>
       <div className="general-filter">

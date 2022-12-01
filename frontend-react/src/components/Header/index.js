@@ -1,14 +1,21 @@
 import React from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
 import "./Header.scss";
 
 import GuestActions from "./GuestActions";
 import SettingsBar from "./SettingsBar";
 
+import { AccountContext } from "../AccountContext";
+import { useContext } from "react";
 import useVisualMode from "../../hooks/useVisualMode";
+import { getCurrentUser } from "../../helpers/selectors";
+import { ApplicationContext } from "../App";
 
 export default function Header(props) {
+  const user = useContext(AccountContext);
+  const { state } = useContext(ApplicationContext);
+  const currentUser = getCurrentUser(state, user.user.userId);
+
   const SHOW = "SHOW";
   const HIDE = "HIDE";
 
@@ -21,6 +28,7 @@ export default function Header(props) {
       transition(SHOW);
     }
   }
+  
   const logout = async () => {
     try {
       await axios({
@@ -56,7 +64,7 @@ export default function Header(props) {
           {document.cookie && 
             <img
               className="profile-icon header-icon"
-              src="https://i.pinimg.com/474x/ce/9c/ab/ce9cab218f2849c81f230e4296fd120c.jpg"
+              src={currentUser && currentUser.icon_url}
               alt="profile"
               onClick={props.toggleProfile}
             ></img>

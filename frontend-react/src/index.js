@@ -8,7 +8,6 @@ import UserContext from "./components/AccountContext";
 import "./index.css";
 
 import Scripts from "./components/Scripts";
-import App from "./components/App";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
