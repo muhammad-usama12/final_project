@@ -1,20 +1,16 @@
 import React from "react";
 import axios from "axios";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./Header.scss";
 
 import GuestActions from "./GuestActions";
 import SettingsBar from "./SettingsBar";
-import Login from "./../Registration/Login";
-import SignUp from "./../Registration/SignUp";
 
 import useVisualMode from "../../hooks/useVisualMode";
 
 export default function Header() {
   const SHOW = "SHOW";
   const HIDE = "HIDE";
-  const LOGIN = "LOGIN";
-  const SIGNUP = "SIGNUP";
 
   const { mode, transition, back } = useVisualMode(HIDE);
 
@@ -27,7 +23,7 @@ export default function Header() {
   }
   const logout = async () => {
     try {
-      const result = await axios({
+      await axios({
         url: "/api/auth/logout",
         method: "POST",
       });
@@ -58,15 +54,13 @@ export default function Header() {
         </Link>
         <div className="header-buttons">
           {!document.cookie && <GuestActions />}
-          <Link to="/profile">
-            {document.cookie && (
-              <img
-                className="profile-icon header-icon"
-                src="https://i.pinimg.com/474x/ce/9c/ab/ce9cab218f2849c81f230e4296fd120c.jpg"
-                alt="profile"
-              ></img>
-            )}
-          </Link>
+          {document.cookie && (
+            <img
+              className="profile-icon header-icon"
+              src="https://i.pinimg.com/474x/ce/9c/ab/ce9cab218f2849c81f230e4296fd120c.jpg"
+              alt="profile"
+            ></img>
+          )}
         </div>
       </header>
     </>
