@@ -11,12 +11,12 @@ import { useContext } from "react";
 import useVisualMode from "../../hooks/useVisualMode";
 import useApplicationData from "../../hooks/useApplicationData";
 // import { getCurrentUser } from "../../helpers/selectors";
- 
+
 export default function Header(props) {
   // const context = useContext(ApplicationContext)
-  const user = useContext(AccountContext)
+  const user = useContext(AccountContext);
 
-  console.log(user)
+  console.log(user);
 
   const SHOW = "SHOW";
   const HIDE = "HIDE";
@@ -30,7 +30,7 @@ export default function Header(props) {
       transition(SHOW);
     }
   }
-  
+
   const logout = async () => {
     try {
       await axios({
@@ -45,7 +45,12 @@ export default function Header(props) {
 
   return (
     <>
-      {mode === SHOW && <SettingsBar toggleEditProfile={props.toggleEditProfile} onLogOut={logout} />}
+      {mode === SHOW && (
+        <SettingsBar
+          toggleEditProfile={props.toggleEditProfile}
+          onLogOut={logout}
+        />
+      )}
       <header>
         <i
           className="fa-solid fa-bars"
@@ -60,17 +65,17 @@ export default function Header(props) {
           ></img>
           teebo
         </div>
-        
+
         <div className="header-buttons">
           {!document.cookie && <GuestActions />}
-          {document.cookie && 
+          {document.cookie && (
             <img
               className="profile-icon header-icon"
-              src=''
+              src=""
               alt="profile"
               onClick={props.toggleProfile}
             ></img>
-          }
+          )}
         </div>
       </header>
     </>
