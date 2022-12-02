@@ -41,3 +41,22 @@ export function getPostsByUser(state, userId) {
 
   return foundPostsArr;
 }
+
+export function getFavouritesByUser(state, userId) {
+  const shows = state.shows;
+  const favourites = state.favourites;
+
+  let favouriteShowsForUser = favourites.filter(favourite => favourite.user_id === userId)
+
+  let allFavouriteShows = favouriteShowsForUser.map(favourite => {
+    let someShow;
+    for (let show of shows) {
+      if (show.id === favourite.tvshow_id) {
+        someShow = show
+      }
+    }
+    return someShow;
+  })
+
+  return allFavouriteShows;
+}

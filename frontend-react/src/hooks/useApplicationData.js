@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export default function useApplicationData() {
   // Session states
@@ -13,16 +13,16 @@ export default function useApplicationData() {
     posts: [],
     filerteredPosts: [],
     shows: [],
+    favourites: [],
     comments: [],
     users: [],
   });
-
-  // const [loading, setLoading] = useState(true);
 
   const loadApplicationState = () => {
     Promise.all([
       axios.get("/api/posts"),
       axios.get("/api/shows"),
+      axios.get("/api/favourites"),
       axios.get("/api/comments"),
       axios.get("/api/users"),
     ]).then((res) => {
@@ -31,8 +31,9 @@ export default function useApplicationData() {
         posts: res[0].data,
         filerteredPosts: res[0].data,
         shows: res[1].data,
-        comments: res[2].data,
-        users: res[3].data,
+        favourites: res[2].data,
+        comments: res[3].data,
+        users: res[4].data,
       }));
       console.log("use app data state: ", state);
     });
@@ -46,14 +47,6 @@ export default function useApplicationData() {
     let processedPosts = state.posts.filter((post) => post.tvshow_id === id);
     setState((prev) => ({ ...prev, filerteredPosts: processedPosts }))
 
-  };
-
-  const getUsers = async () => {
-    return axios.get("/api/users").then((res) => {
-      setState((prev) => ({ ...prev, users: res.data }));
-      console.log("lolol", res.data);
-      return res.data;
-    });
   };
 
   const saveComment = (text, postId) => {
@@ -87,7 +80,6 @@ export default function useApplicationData() {
     handleSpoilerToggle,
     getFilteredShows,
     getAllShows,
-    getUsers,
     saveComment,
     loadApplicationState
   };

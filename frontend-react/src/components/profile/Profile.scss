@@ -133,3 +133,19 @@
   font-weight: 600;
   height: 2rem;
 }
+
+.edit-profile-categories {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  text-align: center;
+
+  .category-item {
+    height: 2rem;
+  }
+  
+  img {
+    display: none;
+  }
+}

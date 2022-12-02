@@ -8,11 +8,12 @@ import Profile from "./Profile";
 import EditProfile from "./Profile/EditProfile";
 import Spacing from "./Spacing";
 
-import { useEffect, createContext } from "react";
+import { useEffect, createContext, useContext } from "react";
 
 import useApplicationData from "../hooks/useApplicationData";
-import { getShowForPost, getUserForPost } from "../helpers/selectors";
+import { getShowForPost, getUserForPost, getFavouritesByUser } from "../helpers/selectors";
 import useVisualMode from "../hooks/useVisualMode";
+import { AccountContext } from "./AccountContext";
 
 export const ApplicationContext = createContext();
 
@@ -37,7 +38,9 @@ function App() {
     loadApplicationState();
   }, []);
 
-  console.log("state from app.js", state);
+  const user = useContext(AccountContext);
+  const favouriteShows = getFavouritesByUser(state, 1)
+
   const articleList = state.filerteredPosts.map((post) => {
     const show = getShowForPost(state, post.tvshow_id);
     const user = getUserForPost(state, post.user_id);
@@ -54,6 +57,8 @@ function App() {
   });
 
   console.log("cookie", document.cookie);
+  console.log("******USER *******:", user)
+  console.log("getfavouritesbyuser: ", getFavouritesByUser(state, 1))
 
   return (
     <ApplicationContext.Provider value={applicationData}>
@@ -68,7 +73,7 @@ function App() {
         {mode === DASHBOARD && (
           <section className="category-filters">
             <CategoryList
-              shows={state.shows}
+              shows={favouriteShows}
               hideSpoilers={handleSpoilerToggle}
               getFilteredShows={getFilteredShows}
               getAllShows={getAllShows}

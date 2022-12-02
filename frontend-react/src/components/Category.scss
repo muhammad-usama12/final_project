@@ -52,14 +52,12 @@
     margin: 0px;
     align-self: center;
     vertical-align: middle;
+    text-align: center;
   }
 
   img {
     display: none;
   }
-    .category-item {
-      text-align: center;
-    }
 
     .category-item:hover {
       display: flex;

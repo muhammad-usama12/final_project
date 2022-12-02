@@ -1,7 +1,6 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { storage } from "../../firebase/firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { v4 } from "uuid";
 import axios from "axios";
 import useVisualMode from "../../hooks/useVisualMode";
 
@@ -10,6 +9,7 @@ import Button from "../Button";
 import { ApplicationContext } from "../App";
 import { AccountContext } from "../AccountContext";
 import { getCurrentUser } from "../../helpers/selectors";
+import CategoryListItem from "../CategoryListItem";
 import Profile from ".";
 
 export default function EditProfile(props) {
@@ -81,6 +81,16 @@ export default function EditProfile(props) {
     console.log("currentuser after update profile: ", currentUser);
   };
 
+  const categoriesArray = state.shows;
+  const categories = categoriesArray.map((category) => (
+    <CategoryListItem
+      key={category.id}
+      name={category.name}
+      img={category.image_url}
+      onClick={() => props.getFilteredShows(category.id)}
+    />
+  ));
+
   return (
     <>
       {mode === PROFILE && <Profile />}
@@ -105,6 +115,9 @@ export default function EditProfile(props) {
               onChange={(event) => setBio(event.target.value)}
             />
           </form>
+        </div>
+        <div className="edit-profile-categories">
+          {categories}
         </div>
 
         <div className="edit-buttons">
