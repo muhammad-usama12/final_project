@@ -4,8 +4,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 12rem;
   color: $secondary-colour;
+  margin-bottom: 2rem;
 
   .fa-marker {
     transition-duration: 200ms;

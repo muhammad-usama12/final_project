@@ -59,6 +59,28 @@ export default function useApplicationData() {
       });
   };
 
+  const updateFavourites = (tvShowId, userId) => {
+    axios.post(`/api/favourites/new`, {
+      user_id: userId,
+      tvshow_id: tvShowId
+    })
+    .then(() => {
+      console.log("update success")
+    })
+    .catch(err => console.log("update favourites failed", err.message))
+  }
+
+  const deleteFavourites = (tvShowId, userId) => {
+    axios.post(`/api/favourites/`, {
+      user_id: userId,
+      tvshow_id: tvShowId
+    })
+    .then(() => {
+      console.log("delete success")
+    })
+    .catch(err => console.log("deleted favourites failed", err.message))
+  }
+
   const handleSpoilerToggle = () => {
     if (hideSpoiler) {
       setHideSpoiler(false);
@@ -76,10 +98,15 @@ export default function useApplicationData() {
     setLoggedIn,
     error,
     setError,
+
     handleSpoilerToggle,
     getFilteredShows,
     getAllShows,
+
     saveComment,
+    updateFavourites,
+    deleteFavourites,
+
     loadApplicationState,
   };
 }

@@ -1,16 +1,22 @@
 import React, { useContext, useState } from "react";
 import classNames from "classnames";
-import axios from "axios";
+
 import { ApplicationContext } from "./App";
 import { getFavouritesByUser } from "../helpers/selectors";
+import { AccountContext } from "./AccountContext";
 
 export default function CategoryListItem(props) {
   const [clicked, setClicked] = useState(false);
 
   // hardcoded user
-  const userId = 1;
-  const { state } = useContext(ApplicationContext)
-  const favouriteShows = getFavouritesByUser(state, 1)
+  const { user } = useContext(AccountContext)
+  const {
+    state,
+    updateFavourites,
+    deleteFavourites
+  } = useContext(ApplicationContext)
+
+  const favouriteShows = getFavouritesByUser(state, user.userId)
   const currentFavouriteShow = favouriteShows.find 
   (favouriteShows => favouriteShows.id === props.tvShowId);
 
@@ -20,28 +26,6 @@ export default function CategoryListItem(props) {
     "clicked": props.spoiler && clicked,
     "favourite-show": currentFavouriteShow
   });
-  
-  const updateFavourites = (tvShowId, userId) => {
-    axios.post(`/api/favourites/new`, {
-      user_id: userId,
-      tvshow_id: tvShowId
-    })
-    .then(() => {
-      console.log("user favourites after update", favouriteShows)
-    })
-    .catch(err => console.log("update favourites failed", err.message))
-  }
-
-  const deleteFavourites = (tvShowId, userId) => {
-    axios.post(`/api/favourites/`, {
-      user_id: userId,
-      tvshow_id: tvShowId
-    })
-    .then(() => {
-      console.log("user favourites after delete", favouriteShows)
-    })
-    .catch(err => console.log("deleted favourites failed", err.message))
-  }
 
   const handleClick = () => {
     if (props.spoiler) {
@@ -55,9 +39,9 @@ export default function CategoryListItem(props) {
     }
     if (props.tvShowId) {
       if (currentFavouriteShow) {
-        return deleteFavourites(props.tvShowId, userId);
+        return deleteFavourites(props.tvShowId, user.userId);
       } else {
-        return updateFavourites(props.tvShowId, userId)
+        return updateFavourites(props.tvShowId, user.userId)
       }
     }
     props.onClick()

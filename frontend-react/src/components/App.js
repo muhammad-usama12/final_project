@@ -38,8 +38,10 @@ function App() {
     loadApplicationState();
   }, []);
 
-  const user = useContext(AccountContext);
-  const favouriteShows = getFavouritesByUser(state, 1)
+  const { user } = useContext(AccountContext);
+  const favouriteShows = getFavouritesByUser(state, user.userId)
+
+  console.log("favourite shows",favouriteShows)
 
   const articleList = state.filerteredPosts.map((post) => {
     const show = getShowForPost(state, post.tvshow_id);
@@ -68,7 +70,7 @@ function App() {
       {mode === PROFILE && <Profile />}
       <main>
         {mode === EDIT_PROFILE && <EditProfile />}
-        {mode === DASHBOARD && ( user.user.loggedIn &&
+        {mode === DASHBOARD && ( user.loggedIn &&
           <section className="category-filters">
             <CategoryList
               shows={favouriteShows}
@@ -78,8 +80,9 @@ function App() {
             />
           </section>
         )}
+        {favouriteShows.length === 0 &&
+        <h4>you have no favourite shows! :( <br /> add your favourite shows to filter them :)</h4>}
 
-        {/* <button onClick={getCookie}>getCookie</button> */}
         {mode === DASHBOARD && document.cookie && <NewPost />}
         {mode === DASHBOARD && (
           <section className="article-container">{articleList}</section>
