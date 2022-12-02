@@ -21,7 +21,7 @@ export default function CategoryList(props) {
     <section>
       <div className="general-filter">
         <CategoryListItem name="Show All" onClick={props.getAllShows} />
-        <CategoryListItem name="Hide Spoilers" onClick={props.hideSpoilers} />
+        <CategoryListItem spoiler name="Hide Spoilers" onClick={props.hideSpoilers} />
       </div>
       <div className="category-list">{categories}</div>
     </section>

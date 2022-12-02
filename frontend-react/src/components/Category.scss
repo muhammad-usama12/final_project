@@ -1,6 +1,13 @@
 @import "../styles/variables.scss";
 
+.category-filters {
+  height: 250px;
+}
+
 .pill-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: $secondary-colour;
   color: $primary-colour;
   font-family: $font-fam;
@@ -72,4 +79,10 @@
         display: none;
       }
     }
+}
+
+.clicked {
+  background-color: $primary-colour;
+  color: $secondary-colour;
+  border: 3px solid white;
 }
