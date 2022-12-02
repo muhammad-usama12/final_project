@@ -70,7 +70,7 @@ function App() {
       {mode === PROFILE && <Profile />}
       <main>
         {mode === EDIT_PROFILE && <EditProfile />}
-        {mode === DASHBOARD && ( user.loggedIn &&
+        {mode === DASHBOARD && user.loggedIn &&
           <section className="category-filters">
             <CategoryList
               shows={favouriteShows}
@@ -79,11 +79,11 @@ function App() {
               getAllShows={getAllShows}
             />
           </section>
-        )}
-        {favouriteShows.length === 0 &&
+        }
+        {(favouriteShows.length === 0 && user.loggedIn) &&
         <h4>you have no favourite shows! :( <br /> add your favourite shows to filter them :)</h4>}
 
-        {mode === DASHBOARD && document.cookie && <NewPost />}
+        {mode === DASHBOARD && user.loggedIn && <NewPost />}
         {mode === DASHBOARD && (
           <section className="article-container">{articleList}</section>
         )}
