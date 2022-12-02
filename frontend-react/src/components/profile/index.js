@@ -93,7 +93,7 @@ export default function Profile(props) {
             name="Hide Spoilers"
             onClick={handleSpoilerToggle}
           />
-          <section className="article-container">{articleList}</section>
+          <section className="article-container profile-article-container">{articleList}</section>
         </>
       )}
     </>
