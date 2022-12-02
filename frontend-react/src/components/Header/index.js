@@ -10,7 +10,6 @@ import { AccountContext } from "../AccountContext";
 import { useContext } from "react";
 import useVisualMode from "../../hooks/useVisualMode";
 import { redirect, useNavigate } from "react-router-dom";
-import ModeEditIcon from "@mui/icons-material/ModeEdit";
 // import { getCurrentUser } from "../../helpers/selectors";
 
 export default function Header(props) {
@@ -81,7 +80,6 @@ export default function Header(props) {
                 alt="profile"
                 onClick={props.toggleProfile}
               ></img>
-              <i></i>
             </>
           )}
         </div>

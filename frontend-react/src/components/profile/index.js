@@ -9,15 +9,12 @@ import { ApplicationContext } from "../App";
 import Button from "../Button";
 import axios from "axios";
 import useVisualMode from "../../hooks/useVisualMode";
-import EditIcon from "@mui/icons-material/Edit";
 import EditProfile from "./EditProfile";
 import {
   getCurrentUser,
   getPostsByUser,
   getShowForPost,
 } from "../../helpers/selectors";
-import { Outlet } from "react-router-dom";
-import Edit from "@mui/icons-material/Edit";
 
 export default function Profile() {
   const PROFILE = "PROFILE";
@@ -92,9 +89,6 @@ export default function Profile() {
             name="Hide Spoilers"
             onClick={handleSpoilerToggle}
           />
-          <i>
-            <EditIcon />
-          </i>
           <section className="article-container">{articleList}</section>
         </>
       )}
