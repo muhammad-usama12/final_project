@@ -6,6 +6,7 @@ export default function CategoryListItem(props) {
 
   const categoryclass = classNames("pill-container category-item", {
     "profile-hide-spoiler": props.spoiler,
+    "show-all": props.showAll,
     "clicked": props.spoiler && clicked
   });
 
