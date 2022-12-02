@@ -56,7 +56,7 @@ export default function Write(props) {
         img: selectedImage,
         show: show,
         spoiler: spoiler,
-        user_id: `${user.user.userId}`,
+        user_id: user.user.userId
       })
       .then((res) => {
         setState((prev) => ({ ...prev, posts: [...prev.posts, res.data] }));

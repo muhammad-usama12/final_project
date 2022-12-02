@@ -31,7 +31,7 @@ function App() {
     handleSpoilerToggle,
     getFilteredShows,
     getAllShows,
-    loadApplicationState,
+    loadApplicationState
   } = applicationData;
 
   useEffect(() => {
@@ -57,7 +57,6 @@ function App() {
   });
 
   console.log("cookie", document.cookie);
-  console.log("******USER *******:", user)
   console.log("getfavouritesbyuser: ", getFavouritesByUser(state, 1))
 
   return (
@@ -70,7 +69,7 @@ function App() {
       {mode === PROFILE && <Profile />}
       <main>
         {mode === EDIT_PROFILE && <EditProfile />}
-        {mode === DASHBOARD && (
+        {mode === DASHBOARD && ( user.user.loggedIn &&
           <section className="category-filters">
             <CategoryList
               shows={favouriteShows}

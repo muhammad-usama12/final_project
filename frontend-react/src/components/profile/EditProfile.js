@@ -29,7 +29,6 @@ export default function EditProfile(props) {
   const [error, setError] = useState(null);
 
   const updateProfile = (userObj, userId) => {
-    console.log("userobj: ", userObj);
     return axios
       .put(`/api/users/${userId}`, userObj)
       .then((res) => {
@@ -45,15 +44,13 @@ export default function EditProfile(props) {
       console.log("snapshot", snapshot);
       getDownloadURL(snapshot.ref).then((url) => {
         setSelectedImage(url);
-        console.log("url: ", url);
-        console.log("upload success");
+        console.log("upload success", url);
         updateProfile(
           {
             icon_url: url,
           },
           user.user.userId
         );
-        console.log("currentUser in uploadimage: ", currentUser);
       });
     });
   };
@@ -82,14 +79,18 @@ export default function EditProfile(props) {
   };
 
   const categoriesArray = state.shows;
-  const categories = categoriesArray.map((category) => (
-    <CategoryListItem
-      key={category.id}
-      name={category.name}
-      img={category.image_url}
-      onClick={() => props.getFilteredShows(category.id)}
-    />
-  ));
+  const categories = categoriesArray.map((category) => {
+    return (
+      <CategoryListItem
+        edit
+        key={category.id}
+        tvShowId={category.id}
+        name={category.name}
+        img={category.image_url}
+        onClick={() => props.getFilteredShows(category.id)}
+      />
+    )
+  });
 
   return (
     <>
@@ -105,12 +106,14 @@ export default function EditProfile(props) {
             <input
               name="show"
               type="text"
+              placeholder="who are you king"
               value={username}
               onChange={(event) => setUsername(event.target.value)}
             />
             <textarea
               name="show"
               type="text"
+              placeholder="tell me about yourself"
               value={bio}
               onChange={(event) => setBio(event.target.value)}
             />

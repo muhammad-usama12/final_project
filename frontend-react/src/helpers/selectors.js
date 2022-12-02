@@ -30,7 +30,6 @@ export function getCurrentUser(state, userId) {
   let foundUser = users.filter(user => user.id === userId);
   let foundUserObj = foundUser[0];
 
-  console.log("founduserobj", foundUserObj)
   return foundUserObj;
 }
 
@@ -42,7 +41,7 @@ export function getPostsByUser(state, userId) {
   return foundPostsArr;
 }
 
-export function getFavouritesByUser(state, userId) {
+export function getFavouritesByUser (state, userId) {
   const shows = state.shows;
   const favourites = state.favourites;
 
@@ -57,6 +56,5 @@ export function getFavouritesByUser(state, userId) {
     }
     return someShow;
   })
-
   return allFavouriteShows;
 }

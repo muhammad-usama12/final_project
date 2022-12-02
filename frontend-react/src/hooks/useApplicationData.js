@@ -46,7 +46,6 @@ export default function useApplicationData() {
   const getFilteredShows = (id) => {
     let processedPosts = state.posts.filter((post) => post.tvshow_id === id);
     setState((prev) => ({ ...prev, filerteredPosts: processedPosts }))
-
   };
 
   const saveComment = (text, postId) => {
@@ -81,6 +80,6 @@ export default function useApplicationData() {
     getFilteredShows,
     getAllShows,
     saveComment,
-    loadApplicationState
+    loadApplicationState,
   };
 }
