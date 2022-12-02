@@ -12,16 +12,14 @@ export default function Header(props) {
 
   return (
       <header>
-        <Link to="/">
-          <div className="logo-name">
-            <img
-              className="logo-image"
-              src={logo}
-              alt="logo"
-            ></img>
-            teebo
-          </div>
-        </Link>
+        <div className="logo-name" onClick={props.toggleDashboard}>
+          <img
+            className="logo-image"
+            src={logo}
+            alt="logo"
+          ></img>
+          teebo
+        </div>
 
         <div className="header-buttons">
           <Actions 

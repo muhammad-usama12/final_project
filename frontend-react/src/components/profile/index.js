@@ -64,11 +64,6 @@ export default function Profile(props) {
 
   return (
     <>
-      <Header
-        toggleProfile={() => transition(PROFILE)}
-        toggleEditProfile={() => transition(EDIT_PROFILE)}
-      />
-      <Spacing />
       {mode === EDIT_PROFILE ? (
         <EditProfile />
       ) : (
@@ -86,6 +81,12 @@ export default function Profile(props) {
               <div className="bio">
                 <p>{currentUser && currentUser.bio}</p>
               </div>
+            </div>
+            <div
+            className="pill-container edit-profile-button"
+            onClick={() => transition(EDIT_PROFILE)}
+            >
+              edit profile
             </div>
           </section>
           <CategoryListItem

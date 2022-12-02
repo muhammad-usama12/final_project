@@ -62,13 +62,14 @@ function App() {
     <ApplicationContext.Provider value={applicationData}>
       <Header
         toggleProfile={() => transition(PROFILE)}
-        toggleSettings={() => transition(EDIT_PROFILE)}
+        toggleDashboard={() => transition(DASHBOARD)}
       />
       <Spacing />
-      {mode === PROFILE && <Profile />}
-      <main>
-        {mode === EDIT_PROFILE && <EditProfile />}
-        {mode === DASHBOARD && user.loggedIn &&
+      {mode === PROFILE ? (
+      <Profile />
+      ) : (
+        <main>
+        {user.loggedIn &&
           <section className="category-filters">
             <CategoryList
               shows={favouriteShows}
@@ -78,14 +79,14 @@ function App() {
             />
           </section>
         }
-        {mode === DASHBOARD && favouriteShows.length === 0 && user.loggedIn &&
+        {favouriteShows.length === 0 && user.loggedIn &&
         <h4>you have no favourite shows! :( <br /> add your favourite shows to filter them :)</h4>}
 
-        {mode === DASHBOARD && user.loggedIn && <NewPost />}
-        {mode === DASHBOARD && (
-          <section className="article-container">{articleList}</section>
-        )}
+        {user.loggedIn && <NewPost />}
+        <section className="article-container">{articleList}</section>
       </main>
+      )}
+    
     </ApplicationContext.Provider>
   );
 }
