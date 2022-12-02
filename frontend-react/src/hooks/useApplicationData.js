@@ -43,8 +43,10 @@ export default function useApplicationData() {
   };
 
   const getFilteredShows = (id) => {
+    console.log("state.posts.length before", state.posts.length)
     let processedPosts = state.posts.filter((post) => post.tvshow_id === id);
     setState((prev) => ({ ...prev, filerteredPosts: processedPosts }))
+    console.log("state.posts.length after", state.posts.length)
   };
 
   const saveComment = (text, postId) => {
@@ -63,13 +65,13 @@ export default function useApplicationData() {
       .post(`/api/posts/${id}/new`, {
       data: data
     })
-    .then(() => {
-      setState((prev) => ({
-        ...prev,
-        posts: state.posts,
-      }));
-    });
-};
+    .then((res) => {
+      const posts = [...state.posts]
+      posts.push(res.data)
+      setState({ ...state, posts })
+      // window.location.reload()
+    })
+  };
 
   const commentCounter = (postId) => {
     axios.post(`/api/comments/${postId}/counter`)
