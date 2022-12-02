@@ -3,7 +3,6 @@ import "./Header.scss";
 
 import Actions from "./Actions";
 import { ApplicationContext } from "../App";
-import { Link } from "react-router-dom";
 
 export default function Header(props) {
   const state = useContext(ApplicationContext)
