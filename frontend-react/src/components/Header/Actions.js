@@ -18,13 +18,15 @@ export default function Actions(props) {
       >
         profile
       </div>}
-      {document.cookie &&
-      <div
-        className="pill-container"
-        onClick={props.onLogOut}
-      >
-        log out
-      </div>}
+      <Link to="/login">
+        {document.cookie &&
+        <div
+          className="pill-container"
+          onClick={props.logOut}
+        >
+          log out
+        </div>}
+      </Link>
     </div>
   );
 }

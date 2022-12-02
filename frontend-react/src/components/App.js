@@ -31,6 +31,7 @@ function App() {
     handleSpoilerToggle,
     getFilteredShows,
     getAllShows,
+    logout,
     loadApplicationState
   } = applicationData;
 
@@ -63,6 +64,7 @@ function App() {
       <Header
         toggleProfile={() => transition(PROFILE)}
         toggleDashboard={() => transition(DASHBOARD)}
+        logOut={logout}
       />
       <Spacing />
       {mode === PROFILE ? (
