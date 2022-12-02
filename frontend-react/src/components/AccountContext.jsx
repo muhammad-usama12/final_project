@@ -5,7 +5,7 @@ export const AccountContext = createContext();
 
 export default function UserContext({ children }) {
   const [user, setUser] = useState({ loggedIn: false });
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   useEffect(() => {
     fetch("/api/auth/login", {
       credentials: "include",
@@ -27,10 +27,8 @@ export default function UserContext({ children }) {
           setUser({ loggedIn: false });
           return;
         }
-        console.log("successfully logged in");
         console.log("data received upon login:", data);
         setUser({ ...data });
-        navigate("/");
       });
   }, []);
   return (

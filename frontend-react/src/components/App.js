@@ -1,27 +1,29 @@
 import "./App.scss";
-
 import Header from "./Header/index";
 import Article from "./Article";
 import CategoryList from "./CategoryList";
 import NewPost from "./NewPost";
-import Profile from "./Profile"
+import Profile from "./Profile";
 import EditProfile from "./Profile/EditProfile";
 import Spacing from "./Spacing";
+import UserContext from "./AccountContext";
 
-import { useEffect, createContext } from "react";
+import { useEffect, createContext, useState } from "react";
 
 import useApplicationData from "../hooks/useApplicationData";
 import { getShowForPost, getUserForPost } from "../helpers/selectors";
 import useVisualMode from "../hooks/useVisualMode";
+import { Outlet, redirect } from "react-router-dom";
 
-export const ApplicationContext = createContext();
+export const ApplicationContext = createContext({});
 
 function App() {
   const DASHBOARD = "DASHBOARD";
   const PROFILE = "PROFILE";
-  const EDIT_PROFILE = "EDIT_PROFILE"
+  const EDIT_PROFILE = "EDIT_PROFILE";
+  const NEWPOST = "NEW_POST";
 
-  const { mode, transition } = useVisualMode(DASHBOARD)
+  const { mode, transition } = useVisualMode(DASHBOARD);
 
   const applicationData = useApplicationData();
   const {
@@ -30,14 +32,14 @@ function App() {
     handleSpoilerToggle,
     getFilteredShows,
     getAllShows,
-    loadApplicationState
+    loadApplicationState,
   } = applicationData;
 
-  useEffect(()=> {
+  useEffect(() => {
     loadApplicationState();
-  }, [])
+  }, []);
 
-  console.log("state from app.js", state)
+  console.log("state from app.js", state);
   const articleList = state.filerteredPosts.map((post) => {
     const show = getShowForPost(state, post.tvshow_id);
     const user = getUserForPost(state, post.user_id);
@@ -58,14 +60,14 @@ function App() {
   return (
     <ApplicationContext.Provider value={applicationData}>
       <Header
-        // toggleProfile={() => transition(PROFILE)}
+        toggleProfile={() => transition(PROFILE)}
         toggleEditProfile={() => transition(EDIT_PROFILE)}
       />
       <Spacing />
-      { mode === PROFILE && <Profile/>}
+      {mode === PROFILE && <Profile />}
       <main>
-        { mode === EDIT_PROFILE && <EditProfile />}
-        { mode === DASHBOARD &&
+        {mode === EDIT_PROFILE && <EditProfile />}
+        {mode === DASHBOARD && (
           <section className="category-filters">
             <CategoryList
               shows={state.shows}
@@ -74,11 +76,16 @@ function App() {
               getAllShows={getAllShows}
             />
           </section>
-        }
-          
-          {/* <button onClick={getCookie}>getCookie</button> */}
-          {mode === DASHBOARD && (document.cookie && <NewPost />)}
-          {mode === DASHBOARD && <section className="article-container">{articleList}</section>}
+        )}
+
+        {/* <button onClick={getCookie}>getCookie</button> */}
+
+        {mode === DASHBOARD && document.cookie && <NewPost />}
+
+        {mode === DASHBOARD && (
+          <section className="article-container">{articleList}</section>
+        )}
+        {/* <>{mode === DASHBOARD && document.cookie && <NewPost />}</> */}
       </main>
     </ApplicationContext.Provider>
   );

@@ -20,7 +20,7 @@ export default function Write(props) {
   const [spoiler, setSpoiler] = useState(false);
   const [error, setError] = useState(null);
 
-  const { state, setState } = useContext(ApplicationContext);
+  const { state, setState, addPost } = useContext(ApplicationContext);
   const user = useContext(AccountContext);
   function cancel() {
     props.onCancel();
@@ -36,7 +36,14 @@ export default function Write(props) {
     } else if (show === "") {
       setError("what show are you even talking about??");
     } else {
-      addPost();
+      const data = {
+        text: text,
+        img: selectedImage,
+        show: show,
+        spoiler: spoiler,
+      };
+      addPost(user.user.userId, data);
+      props.onSave();
     }
   }
 
@@ -48,21 +55,7 @@ export default function Write(props) {
     }
   };
   // hard coded user_id for now
-  const addPost = () => {
-    console.log(user.user.userId);
-    axios
-      .post(`/api/posts/${user.user.userId}/new`, {
-        text: text,
-        img: selectedImage,
-        show: show,
-        spoiler: spoiler,
-        user_id: `${user.user.userId}`,
-      })
-      .then((res) => {
-        setState((prev) => ({ ...prev, posts: [...prev.posts, res.data] }));
-        console.log("res from write.js", res);
-      });
-  };
+
   const shows = state.shows.reverse().map((show) => {
     return (
       <MenuItem key={show.id} value={show.id}>

@@ -4,8 +4,9 @@ import "./Profile.scss";
 import Button from "../Button";
 import { ApplicationContext } from "../App";
 import { useContext } from "react";
+import { redirect, useNavigation } from "react-router-dom";
 
-export default ({ changeToFalse }) => {
+export default function EditProfile(props) {
   const [selectedImage, setSelectedImage] = useState("");
   const [username, setUsername] = useState("");
   const [bio, setBio] = useState("");
@@ -39,7 +40,6 @@ export default ({ changeToFalse }) => {
   return (
     <section className="edit-profile">
       <div className="profile-header">
-        <div onClick={() => changeToFalse()}>Go back</div>
         <img
           className="profile-display-picture"
           src={selectedImage}
@@ -79,4 +79,4 @@ export default ({ changeToFalse }) => {
       {error !== "" && <section>{error}</section>}
     </section>
   );
-};
+}

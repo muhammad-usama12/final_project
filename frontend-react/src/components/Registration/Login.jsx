@@ -10,7 +10,6 @@ import Header from "../Header";
 export const LoginContext = createContext();
 
 const Login = () => {
-
   const [error, setError] = useState();
   const { setUser } = useContext(AccountContext);
   const navigate = useNavigate();

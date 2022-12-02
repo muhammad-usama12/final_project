@@ -6,17 +6,23 @@ import GuestActions from "./GuestActions";
 import SettingsBar from "./SettingsBar";
 
 import { ApplicationContext } from "../App";
-import UserContext, { AccountContext } from "../AccountContext";
+import { AccountContext } from "../AccountContext";
 import { useContext } from "react";
 import useVisualMode from "../../hooks/useVisualMode";
-import useApplicationData from "../../hooks/useApplicationData";
+import { redirect, useNavigate } from "react-router-dom";
+import ModeEditIcon from "@mui/icons-material/ModeEdit";
 // import { getCurrentUser } from "../../helpers/selectors";
- 
+
 export default function Header(props) {
   // const context = useContext(ApplicationContext)
-  const user = useContext(AccountContext)
+  const user = useContext(AccountContext);
+  const navigate = useNavigate();
 
-  console.log(user)
+  const navigateToProfile = () => {
+    navigate("/profile");
+  };
+
+  console.log(user);
 
   const SHOW = "SHOW";
   const HIDE = "HIDE";
@@ -30,7 +36,6 @@ export default function Header(props) {
       transition(SHOW);
     }
   }
-  
   const logout = async () => {
     try {
       await axios({
@@ -45,7 +50,12 @@ export default function Header(props) {
 
   return (
     <>
-      {mode === SHOW && <SettingsBar toggleEditProfile={props.toggleEditProfile} onLogOut={logout} />}
+      {mode === SHOW && (
+        <SettingsBar
+          toggleEditProfile={props.toggleEditProfile}
+          onLogOut={logout}
+        />
+      )}
       <header>
         <i
           className="fa-solid fa-bars"
@@ -60,17 +70,20 @@ export default function Header(props) {
           ></img>
           teebo
         </div>
-        
+
         <div className="header-buttons">
           {!document.cookie && <GuestActions />}
-          {document.cookie && 
-            <img
-              className="profile-icon header-icon"
-              src=''
-              alt="profile"
-              onClick={props.toggleProfile}
-            ></img>
-          }
+          {document.cookie && (
+            <>
+              <img
+                className="profile-icon header-icon"
+                src=""
+                alt="profile"
+                onClick={props.toggleProfile}
+              ></img>
+              <i></i>
+            </>
+          )}
         </div>
       </header>
     </>

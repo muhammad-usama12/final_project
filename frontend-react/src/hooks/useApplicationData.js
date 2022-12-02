@@ -38,14 +38,26 @@ export default function useApplicationData() {
     });
   };
 
+  const addPost = (id, data) => {
+    // console.log(user.user.userId);
+    axios
+      .post(`/api/posts/${id}/new`, {
+        data: data,
+        user_id: `${id}`,
+      })
+      .then((res) => {
+        setState((prev) => ({ ...prev, posts: [...prev.posts, res.data] }));
+        console.log("res from write.js", res);
+      });
+  };
+
   const getAllShows = () => {
     setState((prev) => ({ ...prev, filerteredPosts: state.posts }));
   };
 
   const getFilteredShows = (id) => {
     let processedPosts = state.posts.filter((post) => post.tvshow_id === id);
-    setState((prev) => ({ ...prev, filerteredPosts: processedPosts }))
-
+    setState((prev) => ({ ...prev, filerteredPosts: processedPosts }));
   };
 
   const getUsers = async () => {
@@ -89,6 +101,7 @@ export default function useApplicationData() {
     getAllShows,
     getUsers,
     saveComment,
-    loadApplicationState
+    loadApplicationState,
+    addPost,
   };
 }
