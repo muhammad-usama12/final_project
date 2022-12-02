@@ -22,7 +22,6 @@ router.post("/:id/new", async (req, res) => {
   }
 });
 
-
 router.put('/:id/like', async (req, res) => {
 
   const id = req.params.id;
@@ -35,7 +34,7 @@ router.put('/:id/like', async (req, res) => {
   }
 })
 
-router.delete('/:id', async (req, res) => {
+router.delete('/delete', async (req, res) => {
 
   const id = req.params.id;
 
