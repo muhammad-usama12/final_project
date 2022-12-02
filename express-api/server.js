@@ -1,5 +1,6 @@
 // load .env data into process.env
 import dotenv from "dotenv";
+import cors from "cors";
 dotenv.config();
 import db from "./db/connection.js";
 // Enable __dirname with ES6 modules
@@ -15,6 +16,7 @@ import session from "express-session";
 
 const PORT = process.env.PORT || 3001;
 const app = express();
+app.use(cors());
 
 // var corsOptions = {
 //   origin: "http://localhost:3001",

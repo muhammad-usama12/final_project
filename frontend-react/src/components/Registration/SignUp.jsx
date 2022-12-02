@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState} from "react";
 import { Button, ButtonGroup, Heading, Text, VStack } from "@chakra-ui/react";
 import { Form, Formik } from "formik";
 import { useNavigate } from "react-router";
@@ -9,8 +9,9 @@ import useApplicationData from "../../hooks/useApplicationData";
 import Header from "../Header";
 
 const SignUp = () => {
-  const { setUser } = useContext(AccountContext);
+  // const { setUser } = useContext(AccountContext);
   const { error, setError } = useApplicationData();
+  const [user, setUser] = useState({});
 
   const navigate = useNavigate();
 
