@@ -4,8 +4,8 @@ import Header from "./Header/index";
 import Article from "./Article";
 import CategoryList from "./CategoryList";
 import NewPost from "./NewPost";
-import Profile from "./profile";
-import EditProfile from "./profile/EditProfile";
+import Profile from "./Profile";
+import EditProfile from "./Profile/EditProfile";
 import Spacing from "./Spacing";
 
 import { useEffect, createContext, useContext } from "react";
