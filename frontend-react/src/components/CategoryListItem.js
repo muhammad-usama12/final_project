@@ -7,18 +7,19 @@ import { getFavouritesByUser } from "../helpers/selectors";
 export default function CategoryListItem(props) {
   const [clicked, setClicked] = useState(false);
 
-  const { state} = useContext(ApplicationContext)
-
+  // hardcoded user
+  const userId = 1;
+  const { state } = useContext(ApplicationContext)
   const favouriteShows = getFavouritesByUser(state, 1)
+  const currentFavouriteShow = favouriteShows.find 
+  (favouriteShows => favouriteShows.id === props.tvShowId);
 
   const categoryclass = classNames("pill-container category-item", {
     "profile-hide-spoiler": props.spoiler,
     "show-all": props.showAll,
-    "clicked": props.spoiler && clicked
+    "clicked": props.spoiler && clicked,
+    "favourite-show": currentFavouriteShow
   });
-
-  // hardcoded user
-  const userId = 1;
   
   const updateFavourites = (tvShowId, userId) => {
     axios.post(`/api/favourites/new`, {
@@ -30,8 +31,6 @@ export default function CategoryListItem(props) {
     })
     .catch(err => console.log("update favourites failed", err.message))
   }
-
-  console.log("user favourites before delete/update", favouriteShows)
 
   const deleteFavourites = (tvShowId, userId) => {
     axios.post(`/api/favourites/`, {
@@ -55,17 +54,12 @@ export default function CategoryListItem(props) {
       }
     }
     if (props.tvShowId) {
-      let currentFavouriteShow = favouriteShows.find (favouriteShows => favouriteShows.id === props.tvShowId);
-  
       if (currentFavouriteShow) {
         return deleteFavourites(props.tvShowId, userId);
       } else {
         return updateFavourites(props.tvShowId, userId)
       }
     }
-    // if (props.tvShowId === currentFavouriteShow.id) {
-    // } else if (!props.showAll) {
-    // }
     props.onClick()
   }
 

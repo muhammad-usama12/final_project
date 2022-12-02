@@ -80,6 +80,12 @@
     }
 }
 
+.favourite-show {
+  background-color: $primary-colour;
+  color: $secondary-colour;
+  border: 3px solid white;
+}
+
 .clicked {
   background-color: $primary-colour;
   color: $secondary-colour;
