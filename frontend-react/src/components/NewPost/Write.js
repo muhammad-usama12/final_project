@@ -51,7 +51,7 @@ export default function Write(props) {
         spoiler: spoiler,
         show: show
       }
-      addPost(user.user.userId,data)
+      addPost(user.user.userId, data)
     }
   }
 

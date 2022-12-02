@@ -24,19 +24,15 @@ export default function Profile(props) {
   const EDIT_PROFILE = "EDIT_PROFILE";
   const user = useContext(AccountContext);
 
-  const { state, hideSpoiler, handleSpoilerToggle } =
+  const {
+    state,
+    hideSpoiler,
+    handleSpoilerToggle,
+    deletePost
+  } =
     useContext(ApplicationContext);
 
   const currentUser = getCurrentUser(state, user.user.userId);
-
-  const deleteArticle = (id) => {
-    return axios
-      .delete(`/api/posts/${id}`)
-      .then((res) => {
-        console.log("delete successful", res);
-      })
-      .then.catch((err) => console.log("delete failed", err.message));
-  };
 
   const posts = getPostsByUser(state, user.user.userId);
   const articleList = posts.map((post) => {
@@ -53,7 +49,7 @@ export default function Profile(props) {
         />
         <Button
           message={<i className="fa-solid fa-trash-can"></i>}
-          onClick={() => deleteArticle(post.id)}
+          onClick={() => deletePost(post.id)}
         />
       </div>
     );

@@ -7,6 +7,7 @@ export default function useApplicationData() {
   const [error, setError] = useState("");
 
   // Data state
+  const [loggedIn, setLoggedIn] = useState(null)
   const [hideSpoiler, setHideSpoiler] = useState(false);
   const [state, setState] = useState({
     posts: [],
@@ -14,8 +15,7 @@ export default function useApplicationData() {
     shows: [],
     favourites: [],
     comments: [],
-    users: [],
-    activeUser: false
+    users: []
   });
 
   const loadApplicationState = () => {
@@ -49,6 +49,30 @@ export default function useApplicationData() {
     console.log("state.posts.length after", state.posts.length)
   };
 
+  function addPost (postId, data)  {
+    return axios
+      .post(`/api/posts/${postId}/new`, {
+      data: data
+    })
+    .then((res) => {
+      const posts = [...state.posts]
+      posts.push(res.data)
+      setState({ ...state, posts })
+    })
+  };
+
+  const deletePost = (postId) => {
+    return axios
+      .delete(`/api/posts/${postId}`)
+      .then((res) => {
+        const posts = [...state.posts]
+        posts.push(res.data)
+        setState({ ...state, posts })
+        console.log("delete successful", res);
+      })
+      .then.catch((err) => console.log("delete failed", err.message));
+  };
+
   const saveComment = (text, postId) => {
     return axios
       .post("/api/comments/new", {
@@ -61,18 +85,6 @@ export default function useApplicationData() {
         setState({ ...state, comments })
         commentCounter(res.data.post_id)
       })
-  };
-
-  function addPost (id, data)  {
-    return axios
-      .post(`/api/posts/${id}/new`, {
-      data: data
-    })
-    .then((res) => {
-      const posts = [...state.posts]
-      posts.push(res.data)
-      setState({ ...state, posts })
-    })
   };
 
   const commentCounter = (postId) => {
@@ -109,11 +121,26 @@ export default function useApplicationData() {
     .catch(err => console.log("deleted favourites failed", err.message))
   }
 
+  const updateProfile = (userObj, userId) => {
+    return axios
+      .put(`/api/users/${userId}`, userObj)
+      .then((res) => {
+        const users = [...state.users]
+        users.push(res.data)
+        setState({ ...state, users })
+        console.log("update success", res.data);
+      })
+      .catch(() => {
+        setError("that username is taken king :(")
+      });
+  };
+
   const logout = () => {
     axios.post(`/api/auth/logout`)
     .then(() => {
-      setState((prev) => ({ ...prev, loggedIn: false }));
-      console.log("successfully logged out");    })
+      setLoggedIn(false);
+      console.log("successfully logged out");
+    })
     .catch(err => console.log("logout failed", err.message))
   }
 
@@ -132,15 +159,18 @@ export default function useApplicationData() {
     setHideSpoiler,
     error,
     setError,
+    loggedIn,
     handleSpoilerToggle,
     getFilteredShows,
     getAllShows,
     logout,
 
     addPost,
+    deletePost,
     saveComment,
     updateFavourites,
     deleteFavourites,
+    updateProfile,
 
     loadApplicationState,
   };

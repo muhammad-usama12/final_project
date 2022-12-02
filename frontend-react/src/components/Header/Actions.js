@@ -6,7 +6,7 @@ export default function Actions(props) {
   return (
     <div className="guest-actions">
       {!document.cookie && <Link to="/login">
-      <div className="pill-container">login</div>
+      <div className="pill-container">log in</div>
       </Link>}
       {!document.cookie && <Link to="/signup">
       <div className="pill-container">sign up</div>

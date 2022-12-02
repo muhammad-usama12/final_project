@@ -17,7 +17,7 @@ export default function EditProfile(props) {
 
   const { mode, transition } = useVisualMode();
   const user = useContext(AccountContext);
-  const { state } = useContext(ApplicationContext);
+  const { state, updateProfile } = useContext(ApplicationContext);
   const currentUser = getCurrentUser(state, user.user.userId);
 
   const [selectedImage, setSelectedImage] = useState(null);
@@ -27,17 +27,6 @@ export default function EditProfile(props) {
   const [username, setUsername] = useState(currentUser.username || "");
   const [bio, setBio] = useState(currentUser.bio || "");
   const [error, setError] = useState(null);
-
-  const updateProfile = (userObj, userId) => {
-    return axios
-      .put(`/api/users/${userId}`, userObj)
-      .then((res) => {
-        console.log("update success", res.data);
-      })
-      .catch(() => {
-        setError("that username is taken king :(")
-      });
-  };
 
   const uploadImage = () => {
     if (selectedImage === null) return;
@@ -74,9 +63,7 @@ export default function EditProfile(props) {
         bio: bio,
       },
       user.user.userId
-    ).then(() => {
-      transition(PROFILE);
-    });
+    )
     console.log("currentuser after update profile: ", currentUser);
   };
 
