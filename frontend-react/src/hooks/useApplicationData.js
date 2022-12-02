@@ -56,6 +56,9 @@ export default function useApplicationData() {
         postId: postId,
       })
       .then((res) => {
+        const comments = [...state.comments]
+        comments.push(res.data)
+        setState({ ...state, comments })
         commentCounter(res.data.post_id)
       })
   };
@@ -69,7 +72,6 @@ export default function useApplicationData() {
       const posts = [...state.posts]
       posts.push(res.data)
       setState({ ...state, posts })
-      // window.location.reload()
     })
   };
 
@@ -84,7 +86,10 @@ export default function useApplicationData() {
       user_id: userId,
       tvshow_id: tvShowId
     })
-    .then(() => {
+    .then((res) => {
+      const favourites = [...state.favourites]
+      favourites.push(res.data)
+      setState({ ...state, favourites })
       console.log("update success")
     })
     .catch(err => console.log("update favourites failed", err.message))
@@ -95,7 +100,10 @@ export default function useApplicationData() {
       user_id: userId,
       tvshow_id: tvShowId
     })
-    .then(() => {
+    .then((res) => {
+      const favourites = [...state.favourites]
+      favourites.push(res.data)
+      setState({ ...state, favourites })
       console.log("delete success")
     })
     .catch(err => console.log("deleted favourites failed", err.message))

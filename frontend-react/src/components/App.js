@@ -35,7 +35,7 @@ function App() {
 
   useEffect(() => {
     loadApplicationState();
-  }, [state.posts.length]);
+  }, [state.posts.length, state.comments.length, state.favourites.length]);
 
   const { user } = useContext(AccountContext);
   const favouriteShows = getFavouritesByUser(state, user.userId)
