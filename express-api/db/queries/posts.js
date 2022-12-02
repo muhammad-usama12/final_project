@@ -6,15 +6,16 @@ export const getPosts = async () => {
   return data.rows;
 };
 
-export const addPost = async (post) => {
-  const setColumns = [...Object.values(post)];
-  console.log("setColumns", setColumns);
+export const addPost = async (userId, post) => {
+
+  const setColumns = [...Object.values(post.data)];
+
   const data = await db.query(
     `
-      INSERT INTO posts (text, image, tvshow_id, spoiler, user_id) VALUES ($1,$2,$3,$4,$5)
+      INSERT INTO posts (text, tvshow_id, user_id) VALUES ($1,$2,$3)
       RETURNING *;
       `,
-    [...setColumns]
+    [...setColumns, userId]
   );
 
   return data.rows[0];

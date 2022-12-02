@@ -6,7 +6,7 @@ import CategoryList from "./CategoryList";
 import NewPost from "./NewPost";
 import Profile from "./Profile";
 import EditProfile from "./Profile/EditProfile";
-import Spacing from "./Spacing";
+
 
 import { useEffect, createContext } from "react";
 

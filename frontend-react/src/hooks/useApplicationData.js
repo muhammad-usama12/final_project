@@ -56,6 +56,12 @@ export default function useApplicationData() {
     });
   };
 
+  const commentCounter = (postId) => {
+    axios.post(`/api/comments/${postId}/counter`)
+    .then((res) =>  console.log("res from commentcouneter", res))
+    .catch((err) => console.log("err from commentcouneter", err))
+  }
+  
   const saveComment = (text, postId) => {
     return axios
       .post("/api/comments/new", {
@@ -63,9 +69,25 @@ export default function useApplicationData() {
         postId: postId,
       })
       .then((res) => {
-        console.log("res from commentForm.js: ", res);
-      });
+       commentCounter(res.data.post_id)
+      })
   };
+
+  function addPost (id,data)  {
+   
+    return axios
+      .post(`/api/posts/${id}/new`, {
+      data: data
+    })
+    .then((res) => {
+      setState((prev) => ({
+        ...prev,
+        posts: state.posts,
+      }));
+    });
+};
+
+ 
 
   const handleSpoilerToggle = () => {
     if (hideSpoiler) {
@@ -84,6 +106,7 @@ export default function useApplicationData() {
     setLoggedIn,
     error,
     setError,
+    addPost,
     handleSpoilerToggle,
     getFilteredShows,
     getAllShows,

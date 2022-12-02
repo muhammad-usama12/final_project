@@ -13,9 +13,9 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/:id/new", async (req, res) => {
-
+  const userId = req.params.id
   try {
-    const post = await addPost(req.body);
+    const post = await addPost(userId,req.body);
     res.json(post);
   } catch (err) {
     res.status(500).json({ error: err.message });
