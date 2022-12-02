@@ -120,7 +120,6 @@ export default function EditProfile(props) {
             <p id="change-photo">Change Photo</p>
             <i className="fa-solid fa-circle-user"></i>
           </label>
-          
           <form>
             <input
               name="show"
