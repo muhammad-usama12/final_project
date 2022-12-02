@@ -1,6 +1,9 @@
 @import "../styles/variables.scss";
 
 .pill-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: $secondary-colour;
   color: $primary-colour;
   font-family: $font-fam;
@@ -26,8 +29,10 @@
 .general-filter {
   display: flex;
   justify-content: center;
+  align-items: center;
   margin-bottom: 0.5rem;
-  margin-top: 2rem;
+  margin-top: 1rem;
+  height: 80px;
 
   p {
     margin: 0px;
@@ -52,6 +57,9 @@
   img {
     display: none;
   }
+    .category-item {
+      text-align: center;
+    }
 
     .category-item:hover {
       display: flex;
@@ -72,4 +80,18 @@
         display: none;
       }
     }
+}
+
+.clicked {
+  background-color: $primary-colour;
+  color: $secondary-colour;
+  border: 3px solid white;
+}
+
+.show-all {
+  display: flex;
+  align-items: center;
+  font-size: medium;
+  font-weight: 600;
+  height: 2rem;
 }
