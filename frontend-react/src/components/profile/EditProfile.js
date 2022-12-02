@@ -97,11 +97,28 @@ export default function EditProfile(props) {
       {mode === PROFILE && <Profile />}
       <section className="edit-profile">
         <div className="profile-header">
-          <img
-            className="profile-display-picture"
-            src={previewSelectedImage}
-            alt="profile"
-          ></img>
+          <label className="upload-image">
+            <input
+              type="file"
+              name="myImage"
+              onChange={(event) => {
+                if (event.target.files.length !== 0) {
+                  setSelectedImage(event.target.files[0]);
+                  setPreviewSelectedImage(
+                    URL.createObjectURL(event.target.files[0])
+                  );
+                }
+              }}
+            />
+            <img
+              className="profile-display-picture"
+              src={previewSelectedImage}
+              alt="profile"
+            ></img>
+            <p id="change-photo">Change Photo</p>
+            <i class="fa-solid fa-circle-user"></i>
+          </label>
+          
           <form>
             <input
               name="show"
@@ -124,21 +141,7 @@ export default function EditProfile(props) {
         </div>
 
         <div className="edit-buttons">
-          <label className="upload-image">
-            <input
-              type="file"
-              name="myImage"
-              onChange={(event) => {
-                if (event.target.files.length !== 0) {
-                  setSelectedImage(event.target.files[0]);
-                  setPreviewSelectedImage(
-                    URL.createObjectURL(event.target.files[0])
-                  );
-                }
-              }}
-            />
-            <i className="fa-solid fa-image"></i>
-          </label>
+
           <Button confirm message="Save" onClick={validate} />
         </div>
         {error !== "" && <section>{error}</section>}
