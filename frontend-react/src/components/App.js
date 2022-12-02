@@ -4,7 +4,7 @@ import Header from "./Header/index";
 import Article from "./Article";
 import CategoryList from "./CategoryList";
 import NewPost from "./NewPost";
-import Profile from "./Profile"
+import Profile from "./Profile";
 import EditProfile from "./Profile/EditProfile";
 import Spacing from "./Spacing";
 
@@ -19,9 +19,9 @@ export const ApplicationContext = createContext();
 function App() {
   const DASHBOARD = "DASHBOARD";
   const PROFILE = "PROFILE";
-  const EDIT_PROFILE = "EDIT_PROFILE"
+  const EDIT_PROFILE = "EDIT_PROFILE";
 
-  const { mode, transition } = useVisualMode(DASHBOARD)
+  const { mode, transition } = useVisualMode(DASHBOARD);
 
   const applicationData = useApplicationData();
   const {
@@ -30,14 +30,14 @@ function App() {
     handleSpoilerToggle,
     getFilteredShows,
     getAllShows,
-    loadApplicationState
+    loadApplicationState,
   } = applicationData;
 
-  useEffect(()=> {
+  useEffect(() => {
     loadApplicationState();
-  }, [])
+  }, []);
 
-  console.log("state from app.js", state)
+  console.log("state from app.js", state);
   const articleList = state.filerteredPosts.map((post) => {
     const show = getShowForPost(state, post.tvshow_id);
     const user = getUserForPost(state, post.user_id);
@@ -58,14 +58,14 @@ function App() {
   return (
     <ApplicationContext.Provider value={applicationData}>
       <Header
-        // toggleProfile={() => transition(PROFILE)}
+        toggleProfile={() => transition(PROFILE)}
         toggleEditProfile={() => transition(EDIT_PROFILE)}
       />
       <Spacing />
-      { mode === PROFILE && <Profile/>}
+      {mode === PROFILE && <Profile />}
       <main>
-        { mode === EDIT_PROFILE && <EditProfile />}
-        { mode === DASHBOARD &&
+        {mode === EDIT_PROFILE && <EditProfile />}
+        {mode === DASHBOARD && (
           <section className="category-filters">
             <CategoryList
               shows={state.shows}
@@ -74,11 +74,13 @@ function App() {
               getAllShows={getAllShows}
             />
           </section>
-        }
-          
-          {/* <button onClick={getCookie}>getCookie</button> */}
-          {mode === DASHBOARD && (document.cookie && <NewPost />)}
-          {mode === DASHBOARD && <section className="article-container">{articleList}</section>}
+        )}
+
+        {/* <button onClick={getCookie}>getCookie</button> */}
+        {mode === DASHBOARD && document.cookie && <NewPost />}
+        {mode === DASHBOARD && (
+          <section className="article-container">{articleList}</section>
+        )}
       </main>
     </ApplicationContext.Provider>
   );
