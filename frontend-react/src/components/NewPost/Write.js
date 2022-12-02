@@ -41,9 +41,9 @@ export default function Write(props) {
   function savePost() {
     console.log("user",user.user.userId)
     if (text === "") {
-      setError("you can't stir nothing");
+      setError("well you can't stir nothing :/");
     } else if (show === "") {
-      setError("what show are you even talking about??");
+      setError("sorry, which show again?");
     } else {
       const data = {
         text: text,
@@ -65,7 +65,7 @@ export default function Write(props) {
 
   return (
     <div className="write-post">
-      {error !== "" && <section>{error}</section>}
+      {error !== null && <p className="error">{error}</p>}
       <form onSubmit={(event) => event.preventDefault()} autoComplete="off">
         <textarea
           name="text"

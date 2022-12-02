@@ -20,7 +20,7 @@ export default function CommentForm(props) {
 
   return (
     <div className="comment-form">
-      {error !== "" && <section>{error}</section>}
+      {error !== "" && <p className="error">{error}</p>}
       <form onSubmit={(event) => event.preventDefault()} autoComplete="off">
         <textarea
           name="text"

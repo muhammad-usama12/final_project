@@ -65,6 +65,7 @@ function App() {
       <Header
         toggleProfile={() => transition(PROFILE)}
         toggleEditProfile={() => transition(EDIT_PROFILE)}
+        toggleDashBoard={() => transition(DASHBOARD)}
       />
       <Spacing />
       {mode === PROFILE && <Profile />}

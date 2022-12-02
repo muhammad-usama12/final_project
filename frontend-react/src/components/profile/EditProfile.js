@@ -34,7 +34,9 @@ export default function EditProfile(props) {
       .then((res) => {
         console.log("update success", res.data);
       })
-      .catch((err) => console.log("update failed: ", err));
+      .catch(() => {
+        setError("that username is taken king :(")
+      });
   };
 
   const uploadImage = () => {
@@ -136,15 +138,13 @@ export default function EditProfile(props) {
             />
           </form>
         </div>
+        {error !== "" && <p class="error">{error}</p>}
         <div className="edit-profile-categories">
           {categories}
         </div>
-
-        <div className="edit-buttons">
-
+        <div className="edit-button">
           <Button confirm message="Save" onClick={validate} />
         </div>
-        {error !== "" && <section>{error}</section>}
       </section>
     </>
   );

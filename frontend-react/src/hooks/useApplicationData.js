@@ -100,6 +100,14 @@ export default function useApplicationData() {
     .catch(err => console.log("deleted favourites failed", err.message))
   }
 
+  const logout = () => {
+    axios.post(`/api/auth/logout`)
+    .then(() => {
+      setLoggedIn(false)
+      console.log("successfully logged out");    })
+    .catch(err => console.log("logout failed", err.message))
+  }
+
   const handleSpoilerToggle = () => {
     if (hideSpoiler) {
       setHideSpoiler(false);
@@ -120,6 +128,7 @@ export default function useApplicationData() {
     handleSpoilerToggle,
     getFilteredShows,
     getAllShows,
+    logout,
 
     addPost,
     saveComment,
