@@ -3,6 +3,7 @@ import "./Header.scss";
 
 import Actions from "./Actions";
 import { ApplicationContext } from "../App";
+import { Link } from "react-router-dom";
 
 export default function Header(props) {
   const state = useContext(ApplicationContext)
@@ -11,22 +12,22 @@ export default function Header(props) {
 
   return (
       <header>
-        <div
-          className="logo-name"
-          onClick={props.toggleDashboard}
-        >
-          <img
-            className="logo-image"
-            src={logo}
-            alt="logo"
-          ></img>
-          teebo
-        </div>
+        <Link to="/">
+          <div className="logo-name">
+            <img
+              className="logo-image"
+              src={logo}
+              alt="logo"
+            ></img>
+            teebo
+          </div>
+        </Link>
 
         <div className="header-buttons">
           <Actions 
             onLogOut={state && state.logout}
             toggleProfile={props.toggleProfile}
+            toggleSettings={props.toggleEditProfile}
           />
         </div>
       </header>

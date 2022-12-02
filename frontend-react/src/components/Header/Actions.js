@@ -19,6 +19,13 @@ export default function Actions(props) {
         profile
       </div>}
       {document.cookie &&
+      <div 
+        className="pill-container"
+        onClick={props.toggleSettings}
+      >
+        <i className="fa-solid fa-gear"></i>
+      </div>}
+      {document.cookie &&
       <div
         className="pill-container"
         onClick={props.onLogOut}

@@ -6,12 +6,15 @@ import TextField from "./TextField";
 import { AccountContext } from "../AccountContext";
 
 import Header from "../Header";
+import useApplicationData from "../../hooks/useApplicationData";
 
 export const LoginContext = createContext();
 
-const Login = () => {
-
+export default function Login() {
   const [error, setError] = useState();
+
+  const state = useApplicationData()
+
   const { setUser } = useContext(AccountContext);
   const navigate = useNavigate();
   return (
@@ -45,6 +48,7 @@ const Login = () => {
                 setError(data.status);
               } else if (data.loggedIn) {
                 setUser({ ...data });
+                state.setState((prev) => ({ ...prev, loggedIn: true }))
                 navigate("/");
               }
             });
@@ -87,5 +91,3 @@ const Login = () => {
     </>
   );
 };
-
-export default Login;

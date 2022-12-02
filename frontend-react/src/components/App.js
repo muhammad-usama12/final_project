@@ -41,8 +41,6 @@ function App() {
   const { user } = useContext(AccountContext);
   const favouriteShows = getFavouritesByUser(state, user.userId)
 
-  console.log("favourite shows",favouriteShows)
-
   const articleList = state.filerteredPosts.map((post) => {
     const show = getShowForPost(state, post.tvshow_id);
     const user = getUserForPost(state, post.user_id);
@@ -58,14 +56,13 @@ function App() {
     );
   });
 
-  console.log("cookie", document.cookie);
+  // console.log("cookie", document.cookie);
 
   return (
     <ApplicationContext.Provider value={applicationData}>
       <Header
         toggleProfile={() => transition(PROFILE)}
-        toggleEditProfile={() => transition(EDIT_PROFILE)}
-        toggleDashBoard={() => transition(DASHBOARD)}
+        toggleSettings={() => transition(EDIT_PROFILE)}
       />
       <Spacing />
       {mode === PROFILE && <Profile />}

@@ -118,7 +118,7 @@ export default function EditProfile(props) {
               alt="profile"
             ></img>
             <p id="change-photo">Change Photo</p>
-            <i class="fa-solid fa-circle-user"></i>
+            <i className="fa-solid fa-circle-user"></i>
           </label>
           
           <form>
@@ -138,7 +138,7 @@ export default function EditProfile(props) {
             />
           </form>
         </div>
-        {error !== "" && <p class="error">{error}</p>}
+        {error !== "" && <p className="error">{error}</p>}
         <div className="edit-profile-categories">
           {categories}
         </div>

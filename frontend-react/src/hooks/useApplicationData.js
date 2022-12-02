@@ -4,7 +4,6 @@ import { useState } from "react";
 
 export default function useApplicationData() {
   // Session states
-  const [loggedIn, setLoggedIn] = useState();
   const [error, setError] = useState("");
 
   // Data state
@@ -16,6 +15,7 @@ export default function useApplicationData() {
     favourites: [],
     comments: [],
     users: [],
+    activeUser: false
   });
 
   const loadApplicationState = () => {
@@ -35,7 +35,6 @@ export default function useApplicationData() {
         comments: res[3].data,
         users: res[4].data,
       }));
-      console.log("use app data state: ", state);
     });
   };
 
@@ -103,7 +102,7 @@ export default function useApplicationData() {
   const logout = () => {
     axios.post(`/api/auth/logout`)
     .then(() => {
-      setLoggedIn(false)
+      setState((prev) => ({ ...prev, loggedIn: false }));
       console.log("successfully logged out");    })
     .catch(err => console.log("logout failed", err.message))
   }
@@ -121,8 +120,6 @@ export default function useApplicationData() {
     setState,
     hideSpoiler,
     setHideSpoiler,
-    loggedIn,
-    setLoggedIn,
     error,
     setError,
     handleSpoilerToggle,
