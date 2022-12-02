@@ -5,7 +5,6 @@ import Article from "./Article";
 import CategoryList from "./CategoryList";
 import NewPost from "./NewPost";
 import Profile from "./profile";
-import EditProfile from "./profile/EditProfile";
 import Spacing from "./Spacing";
 
 import { useEffect, createContext, useContext } from "react";
@@ -20,7 +19,6 @@ export const ApplicationContext = createContext();
 function App() {
   const DASHBOARD = "DASHBOARD";
   const PROFILE = "PROFILE";
-  const EDIT_PROFILE = "EDIT_PROFILE";
 
   const { mode, transition } = useVisualMode(DASHBOARD);
 
@@ -37,7 +35,7 @@ function App() {
 
   useEffect(() => {
     loadApplicationState();
-  }, []);
+  }, [state.posts.length, state.comments.length, state.favourites.length]);
 
   const { user } = useContext(AccountContext);
   const favouriteShows = getFavouritesByUser(state, user.userId)

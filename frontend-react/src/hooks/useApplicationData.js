@@ -43,8 +43,10 @@ export default function useApplicationData() {
   };
 
   const getFilteredShows = (id) => {
+    console.log("state.posts.length before", state.posts.length)
     let processedPosts = state.posts.filter((post) => post.tvshow_id === id);
     setState((prev) => ({ ...prev, filerteredPosts: processedPosts }))
+    console.log("state.posts.length after", state.posts.length)
   };
 
   const saveComment = (text, postId) => {
@@ -54,6 +56,9 @@ export default function useApplicationData() {
         postId: postId,
       })
       .then((res) => {
+        const comments = [...state.comments]
+        comments.push(res.data)
+        setState({ ...state, comments })
         commentCounter(res.data.post_id)
       })
   };
@@ -63,13 +68,12 @@ export default function useApplicationData() {
       .post(`/api/posts/${id}/new`, {
       data: data
     })
-    .then(() => {
-      setState((prev) => ({
-        ...prev,
-        posts: state.posts,
-      }));
-    });
-};
+    .then((res) => {
+      const posts = [...state.posts]
+      posts.push(res.data)
+      setState({ ...state, posts })
+    })
+  };
 
   const commentCounter = (postId) => {
     axios.post(`/api/comments/${postId}/counter`)
@@ -82,7 +86,10 @@ export default function useApplicationData() {
       user_id: userId,
       tvshow_id: tvShowId
     })
-    .then(() => {
+    .then((res) => {
+      const favourites = [...state.favourites]
+      favourites.push(res.data)
+      setState({ ...state, favourites })
       console.log("update success")
     })
     .catch(err => console.log("update favourites failed", err.message))
@@ -93,7 +100,10 @@ export default function useApplicationData() {
       user_id: userId,
       tvshow_id: tvShowId
     })
-    .then(() => {
+    .then((res) => {
+      const favourites = [...state.favourites]
+      favourites.push(res.data)
+      setState({ ...state, favourites })
       console.log("delete success")
     })
     .catch(err => console.log("deleted favourites failed", err.message))
