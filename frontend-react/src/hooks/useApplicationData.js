@@ -34,7 +34,7 @@ export default function useApplicationData() {
         comments: res[2].data,
         users: res[3].data,
       }));
-      console.log("state: ", state);
+      console.log("use app data state: ", state);
     });
   };
 
@@ -44,19 +44,8 @@ export default function useApplicationData() {
 
   const getFilteredShows = (id) => {
     let processedPosts = state.posts.filter((post) => post.tvshow_id === id);
-    setState((prev) => ({ ...prev, filerteredPosts: processedPosts }));
+    setState((prev) => ({ ...prev, filerteredPosts: processedPosts }))
 
-    // .get("/api/posts")
-    // .then((res) => {
-    //   setState((prev) => ({ ...prev, posts: res.data }));
-    //   console.log("before filtering", res.data);
-    //   return res.data;
-    // })
-    // .then((res) => {
-    //   let processedPosts = res.filter((post) => post.tvshow_id === id);
-    //   console.log("after filtering shows: ", processedPosts);
-    //   setState((prev) => ({ ...prev, posts: processedPosts }));
-    // });
   };
 
   const getUsers = async () => {
@@ -95,12 +84,11 @@ export default function useApplicationData() {
     setLoggedIn,
     error,
     setError,
-    loadApplicationState,
-
     handleSpoilerToggle,
     getFilteredShows,
     getAllShows,
     getUsers,
     saveComment,
+    loadApplicationState
   };
 }

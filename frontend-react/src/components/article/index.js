@@ -62,15 +62,15 @@ export default function Article(props) {
             alt={props.user.user_name}
           ></img>
           <div className="actions">
-            <button onClick={addLike}>
-              <i className="fa-solid fa-star"></i>
-              <p>{likecounter}</p>
-            </button>
+            <i
+              className="fa-solid fa-star"
+              onClick={addLike}
+            ></i>
+            <p>{likecounter}</p>
             <i
               className="fa-solid fa-comment-dots"
               onClick={toggleComments}
             ></i>
-
             <p>{commentcounter}</p>
 
             <i className="fa-solid fa-circle-plus"></i>

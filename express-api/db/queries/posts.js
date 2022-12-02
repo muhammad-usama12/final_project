@@ -20,6 +20,19 @@ export const addPost = async (post) => {
   return data.rows[0];
 };
 
+export const deletePost = async (id) => {
+  const data = await db.query(
+    `
+      DELETE FROM posts
+      WHERE id = $1
+      RETURNING *;
+      `,
+    [id]
+  );
+
+  return data.rows[0];
+};
+
 export const addLike = async (id) => {
   const post_id = id;
 

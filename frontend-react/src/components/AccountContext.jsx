@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 export const AccountContext = createContext();
 
 export default function UserContext({ children }) {
-  const [user, setUser] = useState({ loggedIn: null });
+  const [user, setUser] = useState({ loggedIn: false });
   const navigate = useNavigate();
   useEffect(() => {
     fetch("/api/auth/login", {

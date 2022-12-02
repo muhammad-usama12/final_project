@@ -4,15 +4,26 @@ import Header from "./Header/index";
 import Article from "./Article";
 import CategoryList from "./CategoryList";
 import NewPost from "./NewPost";
-import UserContext from "./AccountContext";
-import { useEffect, useContext, createContext } from "react";
+import Profile from "./Profile";
+import EditProfile from "./Profile/EditProfile";
+import Spacing from "./Spacing";
+
+import { useEffect, createContext } from "react";
+
 import useApplicationData from "../hooks/useApplicationData";
 import { getShowForPost, getUserForPost } from "../helpers/selectors";
 import Spacing from "./Spacing";
+import useVisualMode from "../hooks/useVisualMode";
 
 export const ApplicationContext = createContext();
 
 function App() {
+  const DASHBOARD = "DASHBOARD";
+  const PROFILE = "PROFILE";
+  const EDIT_PROFILE = "EDIT_PROFILE";
+
+  const { mode, transition } = useVisualMode(DASHBOARD);
+
   const applicationData = useApplicationData();
   const {
     state,
@@ -27,6 +38,7 @@ function App() {
     loadApplicationState();
   }, []);
 
+  console.log("state from app.js", state);
   const articleList = state.filerteredPosts.map((post) => {
     const show = getShowForPost(state, post.tvshow_id);
     const user = getUserForPost(state, post.user_id);
@@ -46,22 +58,30 @@ function App() {
 
   return (
     <ApplicationContext.Provider value={applicationData}>
-      <Header />
+      <Header
+        toggleProfile={() => transition(PROFILE)}
+        toggleEditProfile={() => transition(EDIT_PROFILE)}
+      />
       <Spacing />
+      {mode === PROFILE && <Profile />}
       <main>
-        {/* <EditProfile /> */}
-        {/* <Profile /> */}
-        <section className="category-filters">
-          <CategoryList
-            shows={state.shows}
-            hideSpoilers={handleSpoilerToggle}
-            getFilteredShows={getFilteredShows}
-            getAllShows={getAllShows}
-          />
-        </section>
+        {mode === EDIT_PROFILE && <EditProfile />}
+        {mode === DASHBOARD && (
+          <section className="category-filters">
+            <CategoryList
+              shows={state.shows}
+              hideSpoilers={handleSpoilerToggle}
+              getFilteredShows={getFilteredShows}
+              getAllShows={getAllShows}
+            />
+          </section>
+        )}
+
         {/* <button onClick={getCookie}>getCookie</button> */}
-        {document.cookie && <NewPost />}
-        <section className="article-container">{articleList}</section>
+        {mode === DASHBOARD && document.cookie && <NewPost />}
+        {mode === DASHBOARD && (
+          <section className="article-container">{articleList}</section>
+        )}
       </main>
     </ApplicationContext.Provider>
   );
