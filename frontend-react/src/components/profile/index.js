@@ -21,7 +21,6 @@ import Button from "../Button";
 import axios from "axios";
 
 export default function Profile(props) {
-  const PROFILE = "PROFILE";
   const EDIT_PROFILE = "EDIT_PROFILE";
   const user = useContext(AccountContext);
 
