@@ -6,14 +6,14 @@ import CategoryList from "./CategoryList";
 import NewPost from "./NewPost";
 import Profile from "./Profile";
 import EditProfile from "./Profile/EditProfile";
+import Spacing from "./Spacing";
 
-
-import { useEffect, createContext } from "react";
+import { useEffect, createContext, useContext } from "react";
 
 import useApplicationData from "../hooks/useApplicationData";
-import { getShowForPost, getUserForPost } from "../helpers/selectors";
-import Spacing from "./Spacing";
+import { getShowForPost, getUserForPost, getFavouritesByUser } from "../helpers/selectors";
 import useVisualMode from "../hooks/useVisualMode";
+import { AccountContext } from "./AccountContext";
 
 export const ApplicationContext = createContext();
 
@@ -31,14 +31,18 @@ function App() {
     handleSpoilerToggle,
     getFilteredShows,
     getAllShows,
-    loadApplicationState,
+    loadApplicationState
   } = applicationData;
 
   useEffect(() => {
     loadApplicationState();
   }, []);
 
-  console.log("state from app.js", state);
+  const { user } = useContext(AccountContext);
+  const favouriteShows = getFavouritesByUser(state, user.userId)
+
+  console.log("favourite shows",favouriteShows)
+
   const articleList = state.filerteredPosts.map((post) => {
     const show = getShowForPost(state, post.tvshow_id);
     const user = getUserForPost(state, post.user_id);
@@ -66,18 +70,19 @@ function App() {
       {mode === PROFILE && <Profile />}
       <main>
         {mode === EDIT_PROFILE && <EditProfile />}
-        {mode === DASHBOARD && (
+        {mode === DASHBOARD && ( user.loggedIn &&
           <section className="category-filters">
             <CategoryList
-              shows={state.shows}
+              shows={favouriteShows}
               hideSpoilers={handleSpoilerToggle}
               getFilteredShows={getFilteredShows}
               getAllShows={getAllShows}
             />
           </section>
         )}
+        {favouriteShows.length === 0 &&
+        <h4>you have no favourite shows! :( <br /> add your favourite shows to filter them :)</h4>}
 
-        {/* <button onClick={getCookie}>getCookie</button> */}
         {mode === DASHBOARD && document.cookie && <NewPost />}
         {mode === DASHBOARD && (
           <section className="article-container">{articleList}</section>

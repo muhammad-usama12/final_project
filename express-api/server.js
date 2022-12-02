@@ -77,6 +77,9 @@ app.use("/api/auth", authRoutes);
 import { default as commentsRoutes } from "./routes/commentsRoutes.js";
 app.use("/api/comments", commentsRoutes);
 
+import { default as userTvShowRoutes } from "./routes/user_tvshowRoutes.js";
+app.use("/api/favourites", userTvShowRoutes);
+
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).

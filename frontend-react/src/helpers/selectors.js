@@ -30,7 +30,6 @@ export function getCurrentUser(state, userId) {
   let foundUser = users.filter(user => user.id === userId);
   let foundUserObj = foundUser[0];
 
-  console.log("founduserobj", foundUserObj)
   return foundUserObj;
 }
 
@@ -40,4 +39,22 @@ export function getPostsByUser(state, userId) {
   let foundPostsArr = posts.filter(post => post.user_id === userId);
 
   return foundPostsArr;
+}
+
+export function getFavouritesByUser (state, userId) {
+  const shows = state.shows;
+  const favourites = state.favourites;
+
+  let favouriteShowsForUser = favourites.filter(favourite => favourite.user_id === userId)
+
+  let allFavouriteShows = favouriteShowsForUser.map(favourite => {
+    let someShow;
+    for (let show of shows) {
+      if (show.id === favourite.tvshow_id) {
+        someShow = show
+      }
+    }
+    return someShow;
+  })
+  return allFavouriteShows;
 }

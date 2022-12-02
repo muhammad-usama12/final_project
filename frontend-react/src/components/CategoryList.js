@@ -18,12 +18,12 @@ export default function CategoryList(props) {
   ));
   
   return (
-    <section>
+    <>
       <div className="general-filter">
         <CategoryListItem showAll name="Show All" onClick={props.getAllShows} />
         <CategoryListItem spoiler name="Hide Spoilers" onClick={props.hideSpoilers} />
       </div>
       <div className="category-list">{categories}</div>
-    </section>
+    </>
   );
 }

@@ -20,7 +20,7 @@ export default function Write(props) {
   const [spoiler, setSpoiler] = useState(false);
   const [error, setError] = useState(null);
 
-  const { state, setState, addPost } = useContext(ApplicationContext);
+  const { state, addPost } = useContext(ApplicationContext);
   const user = useContext(AccountContext);
   function cancel() {
     props.onCancel();
@@ -37,10 +37,8 @@ export default function Write(props) {
       setSpoiler(true);
     }
   };
-  // hard coded user_id for now
  
   function savePost() {
-  
     console.log("user",user.user.userId)
     if (text === "") {
       setError("you can't stir nothing");
@@ -49,12 +47,14 @@ export default function Write(props) {
     } else {
       const data = {
         text: text,
+        img: selectedImage,
+        spoiler: spoiler,
         show: show
       }
       addPost(user.user.userId,data)
     }
   }
- 
+
   const shows = state.shows.reverse().map((show) => {
     return (
       <MenuItem key={show.id} value={show.id}>

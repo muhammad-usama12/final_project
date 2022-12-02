@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export default function useApplicationData() {
   // Session states
@@ -13,16 +13,16 @@ export default function useApplicationData() {
     posts: [],
     filerteredPosts: [],
     shows: [],
+    favourites: [],
     comments: [],
     users: [],
   });
-
-  // const [loading, setLoading] = useState(true);
 
   const loadApplicationState = () => {
     Promise.all([
       axios.get("/api/posts"),
       axios.get("/api/shows"),
+      axios.get("/api/favourites"),
       axios.get("/api/comments"),
       axios.get("/api/users"),
     ]).then((res) => {
@@ -31,8 +31,9 @@ export default function useApplicationData() {
         posts: res[0].data,
         filerteredPosts: res[0].data,
         shows: res[1].data,
-        comments: res[2].data,
-        users: res[3].data,
+        favourites: res[2].data,
+        comments: res[3].data,
+        users: res[4].data,
       }));
       console.log("use app data state: ", state);
     });
@@ -45,23 +46,8 @@ export default function useApplicationData() {
   const getFilteredShows = (id) => {
     let processedPosts = state.posts.filter((post) => post.tvshow_id === id);
     setState((prev) => ({ ...prev, filerteredPosts: processedPosts }))
-
   };
 
-  const getUsers = async () => {
-    return axios.get("/api/users").then((res) => {
-      setState((prev) => ({ ...prev, users: res.data }));
-      console.log("lolol", res.data);
-      return res.data;
-    });
-  };
-
-  const commentCounter = (postId) => {
-    axios.post(`/api/comments/${postId}/counter`)
-    .then((res) =>  console.log("res from commentcouneter", res))
-    .catch((err) => console.log("err from commentcouneter", err))
-  }
-  
   const saveComment = (text, postId) => {
     return axios
       .post("/api/comments/new", {
@@ -69,17 +55,16 @@ export default function useApplicationData() {
         postId: postId,
       })
       .then((res) => {
-       commentCounter(res.data.post_id)
+        commentCounter(res.data.post_id)
       })
   };
 
-  function addPost (id,data)  {
-   
+  function addPost (id, data)  {
     return axios
       .post(`/api/posts/${id}/new`, {
       data: data
     })
-    .then((res) => {
+    .then(() => {
       setState((prev) => ({
         ...prev,
         posts: state.posts,
@@ -87,7 +72,33 @@ export default function useApplicationData() {
     });
 };
 
- 
+  const commentCounter = (postId) => {
+    axios.post(`/api/comments/${postId}/counter`)
+    .then((res) =>  console.log("res from commentcouneter", res))
+    .catch((err) => console.log("err from commentcouneter", err))
+  }
+
+  const updateFavourites = (tvShowId, userId) => {
+    axios.post(`/api/favourites/new`, {
+      user_id: userId,
+      tvshow_id: tvShowId
+    })
+    .then(() => {
+      console.log("update success")
+    })
+    .catch(err => console.log("update favourites failed", err.message))
+  }
+
+  const deleteFavourites = (tvShowId, userId) => {
+    axios.post(`/api/favourites/`, {
+      user_id: userId,
+      tvshow_id: tvShowId
+    })
+    .then(() => {
+      console.log("delete success")
+    })
+    .catch(err => console.log("deleted favourites failed", err.message))
+  }
 
   const handleSpoilerToggle = () => {
     if (hideSpoiler) {
@@ -106,12 +117,15 @@ export default function useApplicationData() {
     setLoggedIn,
     error,
     setError,
-    addPost,
     handleSpoilerToggle,
     getFilteredShows,
     getAllShows,
-    getUsers,
+
+    addPost,
     saveComment,
-    loadApplicationState
+    updateFavourites,
+    deleteFavourites,
+
+    loadApplicationState,
   };
 }
