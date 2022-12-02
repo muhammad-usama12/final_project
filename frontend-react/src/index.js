@@ -10,10 +10,11 @@ import Profile from "./Views/Profile";
 import EditProfile from "./Views/EditProfile";
 import Login from "./components/Registration/Login";
 import SignUp from "./components/Registration/SignUp";
+import App from "./components/App"
  
  
 const router = createBrowserRouter([
- {path: "/", element: <div>Hello world!</div> } ,
+ {path: "/", element: <div><App /></div> } ,
  {path: "/profile", element: <Profile /> } ,
  {path: "/profile/edit", element: <EditProfile /> } ,
  {path: "/login", element: <Login /> } ,
