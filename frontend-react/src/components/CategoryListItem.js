@@ -1,15 +1,20 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import classNames from "classnames";
 import axios from "axios";
+import { ApplicationContext } from "./App";
+import { getFavouritesByUser } from "../helpers/selectors";
 
 export default function CategoryListItem(props) {
   const [clicked, setClicked] = useState(false);
 
+  const { state} = useContext(ApplicationContext)
+
+  const favouriteShows = getFavouritesByUser(state, 1)
+
   const categoryclass = classNames("pill-container category-item", {
     "profile-hide-spoiler": props.spoiler,
     "show-all": props.showAll,
-    "clicked": props.spoiler && clicked,
-    "current-user-favourite": props.favourite
+    "clicked": props.spoiler && clicked
   });
 
   // hardcoded user
@@ -20,32 +25,54 @@ export default function CategoryListItem(props) {
       user_id: userId,
       tvshow_id: tvShowId
     })
-    .then(() => console.log("favourites updated"))
-    .catch(err => console.log("update favourites failed", err.message, "userid and tvshowid", userId, tvShowId))
+    .then(() => {
+      console.log("user favourites after update", favouriteShows)
+    })
+    .catch(err => console.log("update favourites failed", err.message))
   }
 
+  console.log("user favourites before delete/update", favouriteShows)
+
   const deleteFavourites = (tvShowId, userId) => {
-    axios.delete(`/api/favourites/delete`, {
+    axios.post(`/api/favourites/`, {
       user_id: userId,
       tvshow_id: tvShowId
     })
-    .then(() => console.log("favourite deleted"))
-    .catch(err => console.log("delete favourite failed", err.message, "userid and tvshowid", userId, tvShowId))
+    .then(() => {
+      console.log("user favourites after delete", favouriteShows)
+    })
+    .catch(err => console.log("deleted favourites failed", err.message))
   }
 
   const handleClick = () => {
-    if (!clicked) {
-      setClicked(true);
-    } else {
-      setClicked(false)
+    if (props.spoiler) {
+      if (!clicked) {
+        props.onClick()
+        return setClicked(true);
+      } else {
+        props.onClick()
+        return setClicked(false)
+      }
     }
-    props.onClick();
+    if (props.tvShowId) {
+      let currentFavouriteShow = favouriteShows.find (favouriteShows => favouriteShows.id === props.tvShowId);
+  
+      if (currentFavouriteShow) {
+        return deleteFavourites(props.tvShowId, userId);
+      } else {
+        return updateFavourites(props.tvShowId, userId)
+      }
+    }
+    // if (props.tvShowId === currentFavouriteShow.id) {
+    // } else if (!props.showAll) {
+    // }
+    props.onClick()
   }
 
   return (
     <div
       className={categoryclass}
-      onClick={() => deleteFavourites(props.tvShowId, userId)}
+      onClick={handleClick}
     >
       <p>{props.name}</p>
       <img src={props.img} alt=""></img>

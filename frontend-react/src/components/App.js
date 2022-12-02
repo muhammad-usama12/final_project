@@ -57,7 +57,6 @@ function App() {
   });
 
   console.log("cookie", document.cookie);
-  console.log("getfavouritesbyuser: ", getFavouritesByUser(state, 1))
 
   return (
     <ApplicationContext.Provider value={applicationData}>
