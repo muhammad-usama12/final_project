@@ -30,6 +30,7 @@ export function getCurrentUser(state, userId) {
   let foundUser = users.filter(user => user.id === userId);
   let foundUserObj = foundUser[0];
 
+  console.log("founduserobj", foundUserObj)
   return foundUserObj;
 }
 

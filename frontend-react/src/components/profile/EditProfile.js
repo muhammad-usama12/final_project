@@ -15,12 +15,11 @@ export default function EditProfile(props) {
   const { state } = useContext(ApplicationContext);
   const currentUser = getCurrentUser(state, user.user.userId)
 
-  const [selectedImage, setSelectedImage] = useState(currentUser.icon_url || "");
+  const [selectedImage, setSelectedImage] = useState(null);
   const [previewSelectedImage, setPreviewSelectedImage] = useState(currentUser.icon_url || "");
   const [username, setUsername] = useState(currentUser.username || "");
   const [bio, setBio] = useState(currentUser.bio || "");
   const [error, setError] = useState(null);
-  const [save, setSave] = useState(false)
 
   const updateProfile = (userObj, userId) => {
     console.log("userobj: ", userObj)
@@ -34,36 +33,40 @@ export default function EditProfile(props) {
 
   const uploadImage = () => {
     if (selectedImage === null) return;
-    const imageRef = ref(storage, `images/${selectedImage.name + v4()}`);
+    const imageRef = ref(storage, `images/${selectedImage.name}`);
     uploadBytes(imageRef, selectedImage)
       .then((snapshot) => {
-        getDownloadURL(snapshot.ref).then((url) => {
-          setSelectedImage(url)
-          setSave(true)
-          console.log("url: ", url)
-          console.log("upload success")
-        })
+        console.log("snapshot", snapshot)
+        getDownloadURL(snapshot.ref)
+          .then((url) => {
+            setSelectedImage(url)
+            console.log("url: ", url)
+            console.log("upload success")
+            updateProfile({
+              icon_url: url
+            }, user.user.userId)
+            console.log("currentUser in uploadimage: ", currentUser)
+          })
       })
-      .catch(err => console.log("err message: ", err.message))
   };
 
-  function validate() {
+  const validate = () => {
     if (username === "") {
       setError("you gotta be called SOMETHING");
       return;
     }
-
+    
+    if (selectedImage) {
+      uploadImage();
+    }
+    
     setError("");
-    uploadImage()
-  }
-
-  useEffect(() => {
     updateProfile({
       username: username,
       bio: bio,
-      icon_url: selectedImage
-    }, user.user.userId)
-  }, [ save ])
+    }, user.user.userId);
+    console.log("currentuser after update profile: ", currentUser)
+  }
 
   return (
     <section className="edit-profile">
