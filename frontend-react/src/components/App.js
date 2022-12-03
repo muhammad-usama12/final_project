@@ -46,7 +46,7 @@ function App() {
     loadApplicationState();
   }, [ state.posts.length, state.favourites.length ]);
 
-  const favouriteShows = getFavouritesByUser(state, userId)
+  const favouriteShows = getFavouritesByUser(state, user.id)
   console.log("favouriteShows", favouriteShows)
 
   // state.posts.length, state.comments.length, state.favourites.length
@@ -76,7 +76,7 @@ function App() {
       <Header/>
       <Spacing />
         <main>
-        {user &&
+        {
           <section className="category-filters">
             <CategoryList
               state={state}

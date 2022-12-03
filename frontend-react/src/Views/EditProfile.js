@@ -40,7 +40,7 @@ export default function EditProfile () {
       console.log("userid response", userId, res)
       setUser(res.data)
     })
-  },[])
+  },[ state.favourites.length ])
  
   function onChange(e) {
     setUser({ ...user, [e.target.id]: e.target.value})
