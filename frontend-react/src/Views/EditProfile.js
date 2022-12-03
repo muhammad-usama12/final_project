@@ -17,6 +17,8 @@ export default function EditProfile () {
   const [selectedImage, setSelectedImage] = useState(null)
   const [previewSelectedImage, setPreviewSelectedImage] = useState(null)
 
+  const navigate = useNavigate()
+
   const applicationData = useApplicationData();
   const {
     state,
@@ -31,7 +33,7 @@ export default function EditProfile () {
 
     const userId = localStorage.getItem('teeboUser');
     if (!userId) {
-      // redirect to login
+      navigate("/login");
     }
     axios.get(`http://localhost:3001/api/users/${userId}`)
     .then(res => {
@@ -44,8 +46,6 @@ export default function EditProfile () {
     setUser({ ...user, [e.target.id]: e.target.value})
   }
   
-  const navigate = useNavigate()
-
   function submitForm(e) {
     if (user.username === "") {
       return setError("you gotta be called SOMETHING");
@@ -67,12 +67,28 @@ export default function EditProfile () {
             console.log("profile update success payload", payload)
             axios.put(`http://localhost:3001/api/users/${user.id}`, payload)
           })
+          .then(() => {
+            setError(null)
+            const payload = { bio: user.bio, username: user.username }
+            console.log("profile update success payload", payload)
+            axios.put(`http://localhost:3001/api/users/${user.id}`, payload)
+              .then(() => navigate("/profile"))
+              .catch((err) => {
+                if (err.response.status === 500) {
+                  setError("that username is taken luv, xx")
+                }
+              })
+          })
           .then(() => navigate("/profile"))
           .catch((err) => console.log("submit failed: ", err.message))
       })
+    } else {
+      setError(null)
+
     }
-    
-    setError(null)
+  }
+
+  const submitText = () => {
     const payload = { bio: user.bio, username: user.username }
     console.log("profile update success payload", payload)
     axios.put(`http://localhost:3001/api/users/${user.id}`, payload)

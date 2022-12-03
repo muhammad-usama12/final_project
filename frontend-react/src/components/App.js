@@ -1,3 +1,6 @@
+import { useEffect, createContext, useState } from "react";
+import axios from "axios";
+
 import "./App.scss";
 
 import Header from "./Header";
@@ -6,12 +9,9 @@ import CategoryList from "./CategoryList";
 import NewPost from "./NewPost";
 import Spacing from "./Spacing";
 
-import { useEffect, createContext, useState } from "react";
-import axios from "axios";
-
 import useApplicationData from "../hooks/useApplicationData";
-import { getShowForPost, getUserForPost, getFavouritesByUser } from "../helpers/selectors";
 import useVisualMode from "../hooks/useVisualMode";
+import { getShowForPost, getUserForPost, getFavouritesByUser } from "../helpers/selectors";
 
 export const ApplicationContext = createContext();
 

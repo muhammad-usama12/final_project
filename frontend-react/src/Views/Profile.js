@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
-import "../components/Profile/Profile.scss"
 import axios from 'axios';
+
+import "../components/Profile/Profile.scss"
+
 import Header from '../components/Header';
 import Spacing from '../components/Spacing';
 import CategoryListItem from '../components/CategoryListItem';
-import useApplicationData from '../hooks/useApplicationData'; 
 import Article from '../components/Article';
 import Button from '../components/Button';
 
+import useApplicationData from '../hooks/useApplicationData'; 
 import { getPostsByUser, getShowForPost } from '../helpers/selectors';
 
-const Profile = () => {
+export default function Profile() {
   const [user, setUser] = useState({})
 
   const navigate = useNavigate()
@@ -39,6 +41,7 @@ const Profile = () => {
     })
   },[ state.posts.length ])
 
+  // TO DO: CHANGE HARDCODED 3 TO user.id
   const posts = getPostsByUser(state, 3);
   const articleList = posts.map((post) => {
     const show = getShowForPost(state, post.tvshow_id);
@@ -95,5 +98,3 @@ const Profile = () => {
     </>
   )
 }
- 
-export default Profile
