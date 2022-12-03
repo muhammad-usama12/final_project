@@ -5,6 +5,8 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 import BeatLoader from "react-spinners/BeatLoader";
 
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
 import Header from '../components/Header';
 import Spacing from '../components/Spacing';
 import Button from '../components/Button'
@@ -105,20 +107,24 @@ export default function EditProfile () {
   console.log("state: ", state)
   const categories = categoriesArray.map((category) => {
     return (
-      <CategoryListItem
-        edit
-        state={state}
-        user={user}
-        updateFavourites={updateFavourites}
-        deleteFavourites={deleteFavourites}
-        key={category.id}
-        tvShowId={category.id}
-        name={category.name}
-        onClick={() => getFilteredShows(category.id)}
-      />
+      // <CategoryListItem
+      //   edit
+      //   state={state}
+      //   user={user}
+      //   updateFavourites={updateFavourites}
+      //   deleteFavourites={deleteFavourites}
+      //   key={category.id}
+      //   tvShowId={category.id}
+      //   name={category.name}
+      //   onClick={() => getFilteredShows(category.id)}
+      // />
+      {
+        name: category.name,
+        tvShowId: category.id
+      }
     )
   });
- 
+
   return (
     <>
       <Header
@@ -137,6 +143,7 @@ export default function EditProfile () {
         :
         <>
           <section className="edit-profile">
+            <h1>tell me about yourself :)</h1>
             <div className="profile-header">
               <label className="upload-image">
                 <input
@@ -186,9 +193,17 @@ export default function EditProfile () {
               </form>
             </div>
             {error !== "" && <p className="error">{error}</p>}
-            <div className="edit-profile-categories">
+            <h1>what are your favourite shows?</h1>
+            <Autocomplete
+              disablePortal
+              id="combo-box-demo"
+              options={categories}
+              sx={{ width: 300 }}
+              renderInput={(params) => <TextField {...params} label="Show" />}
+            />
+            {/* <div className="edit-profile-categories">
               {categories}
-            </div>
+            </div> */}
             <div className="edit-button">
               <Button confirm message="Save" onClick={submitForm}/>
             </div>
