@@ -7,9 +7,11 @@ import Header from '../components/Header';
 import Spacing from '../components/Spacing';
 import Button from '../components/Button'
  
-const EditProfile = () => {
- 
+export default function EditProfile () {
   const [user, setUser] = useState({})
+  const [selectedImage, setSelectedImage] = useState(null)
+  const [previewSelectedImage, setPreviewSelectedImage] = useState(null)
+
   useEffect(() => {
     const userId = localStorage.getItem('teeboUser');
     if (!userId) {
@@ -25,10 +27,6 @@ const EditProfile = () => {
   function onChange(e) {
     setUser({ ...user, [e.target.id]: e.target.value})
   }
-
-  
-  const [selectedImage, setSelectedImage] = useState(null)
-  const [previewSelectedImage, setPreviewSelectedImage] = useState(null)
   
   function submitForm(e) {
     console.log("attempt submit")
@@ -58,16 +56,6 @@ const EditProfile = () => {
   }
  
   return (
-    //  <div>Profile
-    //    <div>{user.id}</div>
-    //    <div>{user.username}</div>
-    //    <img src={user.icon_url} />
-    //    <form onSubmit={submitForm}>
-    //    <input onChange={onChange} name="username" value={user.username} id="username" />
-    //    <input onChange={onChange} name="bio" value={user.bio} id="bio" />
-    //    <button type="submit">Edit profile</button>
-    //    </form>
-    //  </div>
     <>
       <Header />
       <Spacing />
@@ -124,14 +112,3 @@ const EditProfile = () => {
     </>
   )
 }
- 
-export default EditProfile
-
-              // onChange={(event) => {
-              //   if (event.target.files.length !== 0) {
-              //     setSelectedImage(event.target.files[0]);
-              //     setPreviewSelectedImage(
-              //       URL.createObjectURL(event.target.files[0])
-              //     );
-              //   }
-              // }}

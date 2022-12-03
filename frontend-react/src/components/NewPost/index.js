@@ -4,7 +4,7 @@ import Write from "./Write";
 import useVisualMode from "../../hooks/useVisualMode";
 
 // We pass props from App.js
-export default function NewPost() {
+export default function NewPost(props) {
   const CREATE = "CREATE";
   const WRITE = "WRITE";
   
@@ -17,6 +17,8 @@ export default function NewPost() {
       )}
       {mode === WRITE && (
         <Write
+          user={props.user}
+          state={props.state}
           onCancel={() => back()}
           onSave={() => transition()}
         />

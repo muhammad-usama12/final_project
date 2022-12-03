@@ -9,22 +9,19 @@ export default function CategoryListItem(props) {
   const [clicked, setClicked] = useState(false);
 
   // hardcoded user
-  const { user } = useContext(AccountContext)
-  const {
-    state,
-    updateFavourites,
-    deleteFavourites
-  } = useContext(ApplicationContext)
+  const user = props.user;
+  console.log("user", user)
+  const state = props.state;
 
-  const favouriteShows = getFavouritesByUser(state, user.userId)
-  const currentFavouriteShow = favouriteShows.find 
-  (favouriteShows => favouriteShows.id === props.tvShowId);
+  // const favouriteShows = getFavouritesByUser(state, user.id)
+  // const currentFavouriteShow = favouriteShows.find 
+  // (favouriteShows => favouriteShows.id === props.tvShowId);
 
   const categoryclass = classNames("pill-container category-item", {
     "profile-hide-spoiler": props.spoiler,
     "show-all": props.showAll,
     "clicked": props.spoiler && clicked,
-    "favourite-show": currentFavouriteShow
+    // "favourite-show": currentFavouriteShow
   });
 
   const handleClick = () => {
@@ -37,13 +34,13 @@ export default function CategoryListItem(props) {
         return setClicked(false)
       }
     }
-    if (props.tvShowId) {
-      if (currentFavouriteShow) {
-        return deleteFavourites(props.tvShowId, user.userId);
-      } else {
-        return updateFavourites(props.tvShowId, user.userId)
-      }
-    }
+    // if (props.tvShowId) {
+    //   if (currentFavouriteShow) {
+    //     return props.deleteFavourites(props.tvShowId, user.userId);
+    //   } else {
+    //     return props.updateFavourites(props.tvShowId, user.userId)
+    //   }
+    // }
     props.onClick()
   }
 

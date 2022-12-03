@@ -11,7 +11,7 @@ export default function Actions(props) {
       {!document.cookie && <Link to="/signup">
       <div className="pill-container">sign up</div>
       </Link>}
-      {document.cookie && <Link to="profile">
+      {document.cookie && <Link to="/profile">
         <div 
           className="pill-container"
           onClick={props.toggleProfile}

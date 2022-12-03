@@ -5,6 +5,7 @@ import {
  RouterProvider
 } from "react-router-dom";
 import "./index.css";
+import Scripts from './components/Scripts'
 import Profile from "./Views/Profile";
 import EditProfile from "./Views/EditProfile";
 import Login from "./components/Registration/Login";
@@ -13,7 +14,7 @@ import App from "./components/App"
  
  
 const router = createBrowserRouter([
- {path: "/", element: <div><App /></div> } ,
+ {path: "/", element: <App />} ,
  {path: "/profile", element: <Profile /> } ,
  {path: "/profile/edit", element: <EditProfile /> } ,
  {path: "/login", element: <Login /> } ,
@@ -22,6 +23,7 @@ const router = createBrowserRouter([
  
 ReactDOM.createRoot(document.getElementById("root")).render(
  <React.StrictMode>
+    <Scripts />
    <RouterProvider router={router} />
  </React.StrictMode>
 );

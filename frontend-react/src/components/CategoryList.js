@@ -10,6 +10,10 @@ export default function CategoryList(props) {
   const categoriesArray = props.shows;
   const categories = categoriesArray.map((category) => (
     <CategoryListItem
+      state={props.state}
+      user={props.user}
+      deleteFavourites={props.deleteFavourites}
+      updateFavourites={props.updateFavourites}
       key={category.id}
       name={category.name}
       img={category.image_url}
