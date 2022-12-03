@@ -49,6 +49,7 @@ export default function EditProfile () {
             console.log("profile update success payload", payload)
             axios.put(`http://localhost:3001/api/users/${user.id}`, payload)
           })
+          .then(() => navigate("/profile"))
           .catch((err) => console.log("submit failed: ", err.message))
       })
     }
@@ -56,7 +57,6 @@ export default function EditProfile () {
     const payload = { bio: user.bio, username: user.username }
     console.log("profile update success payload", payload)
     axios.put(`http://localhost:3001/api/users/${user.id}`, payload)
-    navigate("/profile")
   }
  
   return (
