@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { storage } from "../firebase/firebase"
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
 
 import Header from '../components/Header';
 import Spacing from '../components/Spacing';
@@ -28,6 +29,8 @@ export default function EditProfile () {
     setUser({ ...user, [e.target.id]: e.target.value})
   }
   
+  const navigate = useNavigate()
+
   function submitForm(e) {
     console.log("attempt submit")
     e.preventDefault();
@@ -53,6 +56,7 @@ export default function EditProfile () {
     const payload = { bio: user.bio, username: user.username }
     console.log("profile update success payload", payload)
     axios.put(`http://localhost:3001/api/users/${user.id}`, payload)
+    navigate("/profile")
   }
  
   return (
