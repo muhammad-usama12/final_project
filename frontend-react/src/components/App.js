@@ -6,13 +6,12 @@ import CategoryList from "./CategoryList";
 import NewPost from "./NewPost";
 import Spacing from "./Spacing";
 
-import { useEffect, createContext, useState, useContext } from "react";
+import { useEffect, createContext, useState } from "react";
 import axios from "axios";
 
 import useApplicationData from "../hooks/useApplicationData";
 import { getShowForPost, getUserForPost, getFavouritesByUser } from "../helpers/selectors";
 import useVisualMode from "../hooks/useVisualMode";
-import { AccountContext } from "./AccountContext";
 
 export const ApplicationContext = createContext();
 
@@ -69,7 +68,7 @@ function App() {
       <Header/>
       <Spacing />
         <main>
-        {/* {user &&
+        {user &&
           <section className="category-filters">
             <CategoryList
               state={state}
@@ -82,7 +81,7 @@ function App() {
               getAllShows={getAllShows}
             />
           </section>
-        } */}
+        }
         {favouriteShows.length === 0 && user &&
         <h4>you have no favourite shows! :( <br /> add your favourite shows to filter them :)</h4>}
 

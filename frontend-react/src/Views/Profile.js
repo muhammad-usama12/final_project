@@ -39,7 +39,7 @@ const Profile = () => {
     })
   },[ state.posts.length ])
 
-  const posts = getPostsByUser(state, 1);
+  const posts = getPostsByUser(state, 3);
   const articleList = posts.map((post) => {
     const show = getShowForPost(state, post.tvshow_id);
 

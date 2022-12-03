@@ -4,7 +4,6 @@ import "./Category.scss";
 
 import CategoryListItem from "./CategoryListItem";
 
-// We pass props from Article.js, and App.js
 export default function CategoryList(props) {
 
   const categoriesArray = props.shows;
@@ -24,8 +23,20 @@ export default function CategoryList(props) {
   return (
     <>
       <div className="general-filter">
-        <CategoryListItem showAll name="Show All" onClick={props.getAllShows} />
-        <CategoryListItem spoiler name="Hide Spoilers" onClick={props.hideSpoilers} />
+        <CategoryListItem
+          showAll
+          name="Show All"
+          onClick={props.getAllShows}
+          user={props.user}
+          state={props.state}
+        />
+        <CategoryListItem
+          spoiler
+          name="Hide Spoilers"
+          onClick={props.hideSpoilers}
+          user={props.user}
+          state={props.state}
+        />
       </div>
       <div className="category-list">{categories}</div>
     </>
