@@ -90,7 +90,7 @@ function App() {
           </section>
         }
         {favouriteShows.length === 0 && user.id &&
-        <h4>you have no favourite shows! :( <br /> add your favourite shows to filter them :)</h4>}
+        <h4>you have no favourite shows! :( <br /><Link to="/profile/edit">add your favourite shows</Link> to filter them :)</h4>}
 
         {user.id && <NewPost
           user={user}

@@ -50,6 +50,15 @@ h4 {
   color: $secondary-colour;
   text-align: center;
   margin-top: 0;
+
+  a {
+    color: $star;
+    transition-duration: 300ms;
+  }
+
+  a:hover {
+    text-shadow: 2px 2px #ff0000;
+  }
 }
 
 .error {

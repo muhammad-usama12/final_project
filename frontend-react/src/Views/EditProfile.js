@@ -141,22 +141,29 @@ export default function EditProfile () {
           </label>
           
           <form>
-            <input
-              name="username"
-              type="text"
-              id="username"
-              placeholder="who are you king"
-              value={user.username}
-              onChange={onChange}
-            />
-            <textarea
-              name="bio"
-              type="text"
-              id="bio"
-              placeholder="tell me about yourself"
-              value={user.bio}
-              onChange={onChange}
-            />
+            <div>
+              <input
+                name="username"
+                type="text"
+                id="username"
+                placeholder="who are you king"
+                value={user.username}
+                onChange={onChange}
+              />
+              <p>username</p>
+            </div>
+            <div>
+              <textarea
+                name="bio"
+                type="text"
+                id="bio"
+                placeholder="tell me about yourself"
+                value={user.bio}
+                onChange={onChange}
+              />
+              <p>bio</p>
+
+            </div>
           </form>
         </div>
         {error !== "" && <p className="error">{error}</p>}
