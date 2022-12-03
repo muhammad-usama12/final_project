@@ -113,9 +113,7 @@ export default function EditProfile () {
  
   return (
     <>
-      <Header
-        logout={logout}
-      />
+      <Header logout={logout}/>
       <Spacing />
       <section className="edit-profile">
         <div className="profile-header">
@@ -168,5 +166,4 @@ export default function EditProfile () {
         </div>
   </section>
     </>
-  )
-}
+  )}
