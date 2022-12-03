@@ -1,5 +1,12 @@
 @import "../styles/variables.scss";
 
+.loader {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-self: center;
+}
+
 body {
   background-color: $primary-colour;
 }

@@ -3,6 +3,7 @@ import { storage } from "../firebase/firebase"
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
+import BeatLoader from "react-spinners/BeatLoader";
 
 import Header from '../components/Header';
 import Spacing from '../components/Spacing';
@@ -12,8 +13,10 @@ import CategoryListItem from '../components/CategoryListItem';
 import useApplicationData from '../hooks/useApplicationData';
  
 export default function EditProfile () {
-  const [user, setUser] = useState({})
+  const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
+
+  const [user, setUser] = useState({})
   const [selectedImage, setSelectedImage] = useState(null)
   const [previewSelectedImage, setPreviewSelectedImage] = useState(null)
 
@@ -28,6 +31,10 @@ export default function EditProfile () {
     deleteFavourites,
     logout
   } = applicationData;
+
+  setTimeout(() => {
+    setLoading(false);
+  }, 5000)
 
   useEffect(() => {
     loadApplicationState();
@@ -48,6 +55,7 @@ export default function EditProfile () {
   }
   
   function submitForm(e) {
+    setLoading(true)
     if (user.username === "") {
       return setError("you gotta be called SOMETHING");
     }
@@ -117,63 +125,76 @@ export default function EditProfile () {
         logout={logout}
       />
       <Spacing />
-      <section className="edit-profile">
-        <div className="profile-header">
-          <label className="upload-image">
-            <input
-              type="file"
-              name="myImage"
-              id="icon_url"
-              onChange={(e) => {
-                if (e.target.files.length !== 0) {
-                  setPreviewSelectedImage(URL.createObjectURL(e.target.files[0]));
-                  setSelectedImage(e.target.files[0]);
-                }
-              }}
-            />
-            <img
-              className="profile-display-picture"
-              src={previewSelectedImage ? previewSelectedImage : user.icon_url}
-              alt="profile"
-            ></img>
-            <p id="change-photo">Change Photo</p>
-            <i className="fa-solid fa-circle-user"></i>
-          </label>
-          
-          <form>
-            <div>
-              <input
-                name="username"
-                type="text"
-                id="username"
-                placeholder="who are you king"
-                value={user.username}
-                onChange={onChange}
-              />
-              <p>username</p>
-            </div>
-            <div>
-              <textarea
-                name="bio"
-                type="text"
-                id="bio"
-                placeholder="tell me about yourself"
-                value={user.bio}
-                onChange={onChange}
-              />
-              <p>bio</p>
+      { loading ? 
+        <BeatLoader
+          className="loader"
+          color={"#D9D9D9"}
+          loading={loading}
+          size={30}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+        />
+        :
+        <>
+          <section className="edit-profile">
+            <div className="profile-header">
+              <label className="upload-image">
+                <input
+                  type="file"
+                  name="myImage"
+                  id="icon_url"
+                  onChange={(e) => {
+                    if (e.target.files.length !== 0) {
+                      setPreviewSelectedImage(URL.createObjectURL(e.target.files[0]));
+                      setSelectedImage(e.target.files[0]);
+                    }
+                  }}
+                />
+                <img
+                  className="profile-display-picture"
+                  src={previewSelectedImage ? previewSelectedImage : user.icon_url}
+                  alt="profile"
+                ></img>
+                <p id="change-photo">Change Photo</p>
+                <i className="fa-solid fa-circle-user"></i>
+              </label>
+              
+              <form>
+                <div>
+                  <input
+                    name="username"
+                    type="text"
+                    id="username"
+                    placeholder="who are you king"
+                    value={user.username}
+                    onChange={onChange}
+                  />
+                  <p>username</p>
+                </div>
+                <div>
+                  <textarea
+                    name="bio"
+                    type="text"
+                    id="bio"
+                    placeholder="tell me about yourself"
+                    value={user.bio}
+                    onChange={onChange}
+                  />
+                  <p>bio</p>
 
+                </div>
+              </form>
             </div>
-          </form>
-        </div>
-        {error !== "" && <p className="error">{error}</p>}
-        <div className="edit-profile-categories">
-          {categories}
-        </div>
-        <div className="edit-button">
-          <Button confirm message="Save" onClick={submitForm}/>
-        </div>
-  </section>
+            {error !== "" && <p className="error">{error}</p>}
+            <div className="edit-profile-categories">
+              {categories}
+            </div>
+            <div className="edit-button">
+              <Button confirm message="Save" onClick={submitForm}/>
+            </div>
+          </section>
+        </>
+      }
     </>
   )
 }

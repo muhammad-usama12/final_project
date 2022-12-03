@@ -1,5 +1,6 @@
 import { useEffect, createContext, useState } from "react";
 import axios from "axios";
+import BeatLoader from "react-spinners/BeatLoader";
 
 import "./App.scss";
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
@@ -17,6 +18,7 @@ import { getShowForPost, getUserForPost, getFavouritesByUser } from "../helpers/
 export const ApplicationContext = createContext();
 
 function App() {
+  const [loading, setLoading] = useState(false)
   const [user, setUser] = useState({})
   const applicationData = useApplicationData();
   const {
@@ -32,6 +34,10 @@ function App() {
   } = applicationData;
 
   useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 500)
     const userId = localStorage.getItem('teeboUser');
     console.log("userId", userId)
     if (!userId) {
@@ -69,36 +75,46 @@ function App() {
 
   return (
     
-    <ApplicationContext.Provider value={applicationData}>    
+    <ApplicationContext.Provider value={applicationData}>
       <Header
         logout={logout}
       />
       <Spacing />
+      { loading ?
+        <BeatLoader
+          className="loader"
+          color={"#D9D9D9"}
+          loading={loading}
+          size={30}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+        />
+        :
         <main>
-        { user.id &&
-          <section className="category-filters">
-            <CategoryList
-              state={state}
-              user={user}
-              deleteFavourites={deleteFavourites}
-              updateFavourites={updateFavourites}
-              shows={favouriteShows}
-              hideSpoilers={handleSpoilerToggle}
-              getFilteredShows={getFilteredShows}
-              getAllShows={getAllShows}
-            />
-          </section>
-        }
-        {favouriteShows.length === 0 && user.id &&
-        <h4>you have no favourite shows! :( <br /><Link to="/profile/edit">add your favourite shows</Link> to filter them :)</h4>}
+          { user.id &&
+            <section className="category-filters">
+              <CategoryList
+                state={state}
+                user={user}
+                deleteFavourites={deleteFavourites}
+                updateFavourites={updateFavourites}
+                shows={favouriteShows}
+                hideSpoilers={handleSpoilerToggle}
+                getFilteredShows={getFilteredShows}
+                getAllShows={getAllShows}
+              />
+            </section>
+          }
+          {favouriteShows.length === 0 && user.id &&
+          <h4>you have no favourite shows! :( <br /><Link to="/profile/edit">add your favourite shows</Link> to filter them :)</h4>}
 
-        {user.id && <NewPost
-          user={user}
-          state={state}
-        />}
-        <section className="article-container">{articleList}</section>
-      </main>    
-  
+          {user.id && <NewPost
+            user={user}
+            state={state}
+          />}
+          <section className="article-container">{articleList}</section>
+        </main>
+      }
     </ApplicationContext.Provider>
   );
 }
