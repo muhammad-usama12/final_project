@@ -7,13 +7,26 @@ import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import Spacing from '../components/Spacing';
 import Button from '../components/Button'
+import CategoryListItem from '../components/CategoryListItem';
+
+import useApplicationData from '../hooks/useApplicationData';
  
 export default function EditProfile () {
   const [user, setUser] = useState({})
+  const [error, setError] = useState(null)
   const [selectedImage, setSelectedImage] = useState(null)
   const [previewSelectedImage, setPreviewSelectedImage] = useState(null)
 
+  const applicationData = useApplicationData();
+  const {
+    state,
+    getFilteredShows,
+    loadApplicationState
+  } = applicationData;
+
   useEffect(() => {
+    loadApplicationState();
+
     const userId = localStorage.getItem('teeboUser');
     if (!userId) {
       // redirect to login
@@ -32,6 +45,9 @@ export default function EditProfile () {
   const navigate = useNavigate()
 
   function submitForm(e) {
+    if (user.username === "") {
+      return setError("you gotta be called SOMETHING");
+    }
     console.log("attempt submit")
     e.preventDefault();
 
@@ -54,10 +70,31 @@ export default function EditProfile () {
       })
     }
     
+    setError(null)
     const payload = { bio: user.bio, username: user.username }
     console.log("profile update success payload", payload)
     axios.put(`http://localhost:3001/api/users/${user.id}`, payload)
+      .then(() => navigate("/profile"))
+      .catch((err) => {
+        if (err.response.status === 500) {
+          setError("that username is taken luv, xx")
+        }
+      })
   }
+
+  const categoriesArray = state.shows;
+  console.log("state: ", state)
+  const categories = categoriesArray.map((category) => {
+    return (
+      <CategoryListItem
+        edit
+        key={category.id}
+        tvShowId={category.id}
+        name={category.name}
+        onClick={() => getFilteredShows(category.id)}
+      />
+    )
+  });
  
   return (
     <>
@@ -105,10 +142,10 @@ export default function EditProfile () {
             />
           </form>
         </div>
-        {/* {error !== "" && <p className="error">{error}</p>}
+        {error !== "" && <p className="error">{error}</p>}
         <div className="edit-profile-categories">
-          {categories}
-        </div> */}
+          {categories}fdgdfg
+        </div>
         <div className="edit-button">
           <Button confirm message="Save" onClick={submitForm}/>
         </div>
