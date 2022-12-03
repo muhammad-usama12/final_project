@@ -5,12 +5,15 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 import BeatLoader from "react-spinners/BeatLoader";
 
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
 import Header from '../components/Header';
 import Spacing from '../components/Spacing';
 import Button from '../components/Button'
 import CategoryListItem from '../components/CategoryListItem';
 
 import useApplicationData from '../hooks/useApplicationData';
+import { getFavouritesByUser } from '../helpers/selectors';
  
 export default function EditProfile () {
   const [loading, setLoading] = useState(false)
@@ -19,6 +22,7 @@ export default function EditProfile () {
   const [user, setUser] = useState({})
   const [selectedImage, setSelectedImage] = useState(null)
   const [previewSelectedImage, setPreviewSelectedImage] = useState(null)
+  const [newFavouriteShowId, setNewFavouriteShowId] = useState(null)
 
   const navigate = useNavigate()
 
@@ -32,10 +36,6 @@ export default function EditProfile () {
     logout
   } = applicationData;
 
-  setTimeout(() => {
-    setLoading(false);
-  }, 5000)
-
   useEffect(() => {
     loadApplicationState();
 
@@ -45,7 +45,7 @@ export default function EditProfile () {
     }
     axios.get(`http://localhost:3001/api/users/${userId}`)
     .then(res => {
-      console.log("userid response", userId, res)
+      // console.log("userid response", userId, res)
       setUser(res.data)
     })
   },[ state.favourites.length ])
@@ -101,15 +101,29 @@ export default function EditProfile () {
       })
   }
 
-  const categoriesArray = state.shows;
-  console.log("state: ", state)
-  const categories = categoriesArray.map((category) => {
+  const showsArr = state.shows;
+  const shows = showsArr.map((show) => {
+    return (
+      {
+        label: show.name,
+        id: show.id
+      }
+    )
+  });
+
+  const handleAddFavourite = (e, showId) => {
+    console.log(showId)
+    setNewFavouriteShowId(showId)
+  }
+
+  const favouriteShowsArr = getFavouritesByUser(state, user.id)
+
+  const favouriteShows = favouriteShowsArr.map((category) => {
     return (
       <CategoryListItem
         edit
         state={state}
         user={user}
-        updateFavourites={updateFavourites}
         deleteFavourites={deleteFavourites}
         key={category.id}
         tvShowId={category.id}
@@ -118,7 +132,7 @@ export default function EditProfile () {
       />
     )
   });
- 
+
   return (
     <>
       <Header logout={logout}/>
@@ -135,6 +149,7 @@ export default function EditProfile () {
         :
         <>
           <section className="edit-profile">
+            <h1>who the hell are you</h1>
             <div className="profile-header">
               <label className="upload-image">
                 <input
@@ -175,7 +190,7 @@ export default function EditProfile () {
                     type="text"
                     id="bio"
                     placeholder="tell me about yourself"
-                    value={user.bio}
+                    value={user.bio ? user.bio : ""}
                     onChange={onChange}
                   />
                   <p>bio</p>
@@ -184,11 +199,32 @@ export default function EditProfile () {
               </form>
             </div>
             {error !== "" && <p className="error">{error}</p>}
-            <div className="edit-profile-categories">
-              {categories}
-            </div>
-            <div className="edit-button">
-              <Button confirm message="Save" onClick={submitForm}/>
+            <div className="edit-profile-shows">
+              <h1>what are your favourite shows, luv</h1>
+              <form className='add-favourite-show'>
+                <Autocomplete
+                  disablePortal
+                  id="combo-box-demo"
+                  options={shows}
+                  isOptionEqualToValue={(option, value) => option.value === value.value}
+                  sx={{ width: 300 }}
+                  renderInput={(params) => <TextField {...params} label="show" />}
+                  onChange={(e, show) => handleAddFavourite(e, show.id)}
+                />
+                <Button
+                  confirm
+                  type="submit"
+                  message="add show"
+                  onClick={() => {
+                    updateFavourites(newFavouriteShowId, user.id)}}
+                />
+              </form>
+              <div className="edit-profile-categories">
+                {favouriteShows}
+              </div>
+              <div className="edit-button">
+                <Button confirm message="Save" onClick={submitForm}/>
+              </div>
             </div>
           </section>
         </>

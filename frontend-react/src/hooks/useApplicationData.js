@@ -90,10 +90,13 @@ export default function useApplicationData() {
   const deletePost = (id) => {
     return axios.delete(`/api/posts/${id}`)
       .then((res) => {
-        console.log("delete successful", res);
         const posts = [...state.posts]
-        posts.push(res.data)
-        setState({ ...state, posts })
+        for (let i = 0; i < posts.length; i++) {
+          if (posts[i].id === res.data.id) {
+            posts.splice(i, 1)
+          }
+        }
+        setState((prev) => ({...prev, posts}))
       })
       .catch((err) => console.log("delete failed", err.message));
   };
@@ -120,9 +123,14 @@ export default function useApplicationData() {
       tvshow_id: tvShowId
     })
     .then((res) => {
+      console.log(res.data)
       const favourites = [...state.favourites]
-      favourites.push(res.data)
-      setState({ ...state, favourites })
+      for (let i = 0; i < favourites.length; i++) {
+        if (favourites[i].id === res.data.id) {
+          favourites.splice(i, 1)
+        }
+      }
+      setState((prev) => ({...prev, favourites}))
       console.log("delete success")
     })
     .catch(err => console.log("deleted favourites failed", err.message))
