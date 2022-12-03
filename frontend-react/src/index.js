@@ -6,15 +6,15 @@ import {
  Route,
 } from "react-router-dom";
 import "./index.css";
-import Profile from "./Views/Profile";
+import Profile from "../src/components/profile";
 import EditProfile from "./Views/EditProfile";
 import Login from "./components/Registration/Login";
 import SignUp from "./components/Registration/SignUp";
-import App from "./components/App"
+import App from "./components/App";
  
  
 const router = createBrowserRouter([
- {path: "/", element: <div><App /></div> } ,
+ {path: "/", element:<App /> } ,
  {path: "/profile", element: <Profile /> } ,
  {path: "/profile/edit", element: <EditProfile /> } ,
  {path: "/login", element: <Login /> } ,

@@ -47,6 +47,7 @@ export default function Login() {
               if (data.status) {
                 setError(data.status);
               } else if (data.loggedIn) {
+                localStorage.setItem('teeboUser', data.userId);
                 setUser({ ...data });
                 state.setState((prev) => ({ ...prev, loggedIn: true }))
                 navigate("/");

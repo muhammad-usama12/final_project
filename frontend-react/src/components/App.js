@@ -1,4 +1,5 @@
 import "./App.scss";
+import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 
 import Header from "./Header/index";
 import Article from "./Article";
@@ -21,45 +22,48 @@ function App() {
   const PROFILE = "PROFILE";
 
   const { mode, transition } = useVisualMode(DASHBOARD);
+  const userId = localStorage.getItem('teeboUser');
 
   const applicationData = useApplicationData();
   const {
     state,
-    hideSpoiler,
-    handleSpoilerToggle,
-    getFilteredShows,
-    getAllShows,
-    logout,
     loadApplicationState
   } = applicationData;
 
   useEffect(() => {
     loadApplicationState();
-  }, [state.posts.length, state.comments.length, state.favourites.length]);
+  }, []);
 
-  const { user } = useContext(AccountContext);
-  const favouriteShows = getFavouritesByUser(state, user.userId)
+  console.log("state",state)
 
-  const articleList = state.filerteredPosts.map((post) => {
-    const show = getShowForPost(state, post.tvshow_id);
-    const user = getUserForPost(state, post.user_id);
+  // state.posts.length, state.comments.length, state.favourites.length
+  // const { user } = useContext(AccountContext);
+  // const favouriteShows = getFavouritesByUser(state, user.userId)
 
-    return (
-      <Article
-        key={post.id}
-        {...post}
-        show={show}
-        user={user}
-        spoiler={hideSpoiler && post.spoiler}
-      />
-    );
-  });
+  // const articleList = state.filerteredPosts.map((post) => {
+  //   const show = getShowForPost(state, post.tvshow_id);
+  //   const user = getUserForPost(state, post.user_id);
+
+  //   return (
+  //     <Article
+  //       key={post.id}
+  //       {...post}
+  //       show={show}
+  //       user={user}
+  //       spoiler={hideSpoiler && post.spoiler}
+  //     />
+  //   );
+  // });
 
   // console.log("cookie", document.cookie);
 
   return (
     <ApplicationContext.Provider value={applicationData}>
-      <Header
+       <Link to="/profile">
+      <button>Profile</button>
+      </Link>
+      <>yess</>
+      {/* <Header
         toggleProfile={() => transition(PROFILE)}
         toggleDashboard={() => transition(DASHBOARD)}
         logOut={logout}
@@ -85,7 +89,7 @@ function App() {
         {user.loggedIn && <NewPost />}
         <section className="article-container">{articleList}</section>
       </main>
-      )}
+      )} */}
     
     </ApplicationContext.Provider>
   );
