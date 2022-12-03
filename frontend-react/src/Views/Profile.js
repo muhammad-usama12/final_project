@@ -7,6 +7,7 @@ import Spacing from '../components/Spacing';
 import CategoryListItem from '../components/CategoryListItem';
 import useApplicationData from '../hooks/useApplicationData'; 
 import Article from '../components/Article';
+import Button from '../components/Button';
 
 import { getPostsByUser, getShowForPost } from '../helpers/selectors';
 
@@ -18,7 +19,8 @@ const Profile = () => {
     state,
     handleSpoilerToggle,
     hideSpoiler,
-    loadApplicationState
+    loadApplicationState,
+    deletePost
   } = applicationData;
 
   useEffect(() => {
@@ -33,9 +35,9 @@ const Profile = () => {
       console.log("userid response", userId, res)
       setUser(res.data)
     })
-  },[])
+  },[ state.posts.length ])
 
-  const posts = getPostsByUser(state, 1);
+  const posts = getPostsByUser(state, 2);
   const articleList = posts.map((post) => {
     const show = getShowForPost(state, post.tvshow_id);
 
@@ -48,10 +50,10 @@ const Profile = () => {
           user={user}
           spoiler={hideSpoiler && post.spoiler}
         />
-        {/* <Button
+        <Button
           message={<i className="fa-solid fa-trash-can"></i>}
-          onClick={() => deleteArticle(post.id)}
-        /> */}
+          onClick={() => deletePost(post.id)}
+        />
       </div>
     );
   });

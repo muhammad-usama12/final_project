@@ -29,15 +29,6 @@ export default function Profile(props) {
 
   const currentUser = getCurrentUser(state, user.user.userId);
 
-  const deleteArticle = (id) => {
-    return axios
-      .delete(`/api/posts/${id}`)
-      .then((res) => {
-        console.log("delete successful", res);
-      })
-      .then.catch((err) => console.log("delete failed", err.message));
-  };
-
   const posts = getPostsByUser(state, user.user.userId);
   const articleList = posts.map((post) => {
     const show = getShowForPost(state, post.tvshow_id);

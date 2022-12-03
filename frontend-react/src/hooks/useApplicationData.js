@@ -75,6 +75,17 @@ export default function useApplicationData() {
     })
   };
 
+  const deletePost = (id) => {
+    return axios.delete(`/api/posts/${id}`)
+      .then((res) => {
+        console.log("delete successful", res);
+        const posts = [...state.posts]
+        posts.push(res.data)
+        setState({ ...state, posts })
+      })
+      .catch((err) => console.log("delete failed", err.message));
+  };
+
   const commentCounter = (postId) => {
     axios.post(`/api/comments/${postId}/counter`)
     .then((res) =>  console.log("res from commentcouneter", res))
@@ -138,6 +149,7 @@ export default function useApplicationData() {
     logout,
 
     addPost,
+    deletePost,
     saveComment,
     updateFavourites,
     deleteFavourites,
