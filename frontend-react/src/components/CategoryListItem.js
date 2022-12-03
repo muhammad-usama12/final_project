@@ -20,6 +20,8 @@ export default function CategoryListItem(props) {
     "favourite-show": currentFavouriteShow
   });
 
+  const someFavouriteShow = props.tvShowId;
+
   const handleClick = () => {
     if (props.spoiler) {
       if (!clicked) {
@@ -31,11 +33,7 @@ export default function CategoryListItem(props) {
       }
     }
     if (props.tvShowId) {
-      if (currentFavouriteShow) {
-        return props.deleteFavourites(props.tvShowId, user.id);
-      } else {
-        return props.updateFavourites(props.tvShowId, user.id)
-      }
+      return props.deleteFavourites(props.tvShowId, 1);
     }
     props.onClick()
   }
@@ -45,8 +43,9 @@ export default function CategoryListItem(props) {
       className={categoryclass}
       onClick={handleClick}
     >
-      <p>{props.name}</p>
+      <p>{props.name}&nbsp;</p>
       <img src={props.img} alt=""></img>
+      {someFavouriteShow && <i className="fa-regular fa-circle-xmark"></i>}
     </div>
   );
 }

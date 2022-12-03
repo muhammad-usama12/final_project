@@ -13,6 +13,7 @@ import Button from '../components/Button'
 import CategoryListItem from '../components/CategoryListItem';
 
 import useApplicationData from '../hooks/useApplicationData';
+import { getFavouritesByUser } from '../helpers/selectors';
  
 export default function EditProfile () {
   const [loading, setLoading] = useState(false)
@@ -21,6 +22,7 @@ export default function EditProfile () {
   const [user, setUser] = useState({})
   const [selectedImage, setSelectedImage] = useState(null)
   const [previewSelectedImage, setPreviewSelectedImage] = useState(null)
+  const [newFavouriteShowId, setNewFavouriteShowId] = useState(null)
 
   const navigate = useNavigate()
 
@@ -47,7 +49,7 @@ export default function EditProfile () {
     }
     axios.get(`http://localhost:3001/api/users/${userId}`)
     .then(res => {
-      console.log("userid response", userId, res)
+      // console.log("userid response", userId, res)
       setUser(res.data)
     })
   },[ state.favourites.length ])
@@ -103,25 +105,40 @@ export default function EditProfile () {
       })
   }
 
-  const categoriesArray = state.shows;
-  console.log("state: ", state)
-  const categories = categoriesArray.map((category) => {
+  const showsArr = state.shows;
+  const shows = showsArr.map((show) => {
     return (
-      // <CategoryListItem
-      //   edit
-      //   state={state}
-      //   user={user}
-      //   updateFavourites={updateFavourites}
-      //   deleteFavourites={deleteFavourites}
-      //   key={category.id}
-      //   tvShowId={category.id}
-      //   name={category.name}
-      //   onClick={() => getFilteredShows(category.id)}
-      // />
       {
-        name: category.name,
-        tvShowId: category.id
+        label: show.name,
+        id: show.id
       }
+    )
+  });
+
+  const handleAddFavourite = (e, showId) => {
+    console.log(showId)
+    setNewFavouriteShowId(showId)
+  }
+
+  const handleInputChange = (e, value) => {
+    console.log(e, value)
+  }
+
+  //  HARD CODED USER ID **************
+  const favouriteShowsArr = getFavouritesByUser(state, user.id)
+
+  const favouriteShows = favouriteShowsArr.map((category) => {
+    return (
+      <CategoryListItem
+        edit
+        state={state}
+        user={user}
+        deleteFavourites={deleteFavourites}
+        key={category.id}
+        tvShowId={category.id}
+        name={category.name}
+        onClick={() => getFilteredShows(category.id)}
+      />
     )
   });
 
@@ -184,7 +201,7 @@ export default function EditProfile () {
                     type="text"
                     id="bio"
                     placeholder="tell me about yourself"
-                    value={user.bio}
+                    value={user.bio ? user.bio : ""}
                     onChange={onChange}
                   />
                   <p>bio</p>
@@ -197,13 +214,20 @@ export default function EditProfile () {
             <Autocomplete
               disablePortal
               id="combo-box-demo"
-              options={categories}
+              options={shows}
               sx={{ width: 300 }}
-              renderInput={(params) => <TextField {...params} label="Show" />}
+              renderInput={(params) => <TextField {...params} label="show" />}
+              onChange={(e, show) => handleAddFavourite(e, show.id)}
             />
-            {/* <div className="edit-profile-categories">
-              {categories}
-            </div> */}
+            <Button
+              confirm
+              message={<i className="fa-solid fa-circle-plus"></i>}
+              onClick={() => {
+                updateFavourites(newFavouriteShowId, user.id)}}
+            />
+            <div className="edit-profile-categories">
+              {favouriteShows}
+            </div>
             <div className="edit-button">
               <Button confirm message="Save" onClick={submitForm}/>
             </div>

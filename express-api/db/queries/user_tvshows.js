@@ -18,12 +18,19 @@ export const addFavourite = async (favourite) => {
   const data = await db.query(
     `
       INSERT INTO user_tvshows (user_id, tvshow_id)
-      VALUES ($1,$2)
+      SELECT $1,$2
+      WHERE
+        NOT EXISTS (
+          SELECT user_id, tvshow_id
+          FROM user_tvshows
+          WHERE user_id = $1
+          AND tvshow_id = $2
+        )
       RETURNING *;
       `,
     [...setColumns]
   );
-
+  
   return data.rows[0];
 };
 
