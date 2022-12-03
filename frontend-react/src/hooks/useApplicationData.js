@@ -66,14 +66,10 @@ export default function useApplicationData() {
         comments.push(response.data)
         setState({ ...state, comments })
         return (await commentCounter(response.data.post_id)).data.count
-      
-    
     } catch (error) {
       console.error("error from save",error)
     }
   }
- 
-
 
   function addPost (id, data)  {
     return axios

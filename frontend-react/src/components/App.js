@@ -40,15 +40,12 @@ function App() {
     }, 500)
 
     const userId = localStorage.getItem('teeboUser');
-    console.log("userId", userId)
-    if (!userId) {
-      // redirect to login
-    }
+
     axios.get(`http://localhost:3001/api/users/${userId}`)
-    .then(res => {
-      console.log("userid response", res.data);
-      setUser(res.data);
-    })
+      .then(res => {
+        console.log("userid response", res.data);
+        setUser(res.data);
+      })
 
     loadApplicationState();
   }, [ state.posts.length, state.favourites.length ]);
@@ -59,21 +56,24 @@ function App() {
 
   const articleList = state.filerteredPosts.map((post) => {
     const show = getShowForPost(state, post.tvshow_id);
-    const user = getUser(state, post.user_id);
+    const postUser = getUser(state, post.user_id);
 
+
+    // This is confusing I know but...
+    // user = user for the specific post
+    // loggedInUser = the user who is logged in >>> this is used to make sure people who aren't logged in can't like posts
     return (
       <Article
         key={post.id}
         {...post}
         show={show}
-        user={user}
+        user={postUser}
+        loggedInUser={user}
         saveComment = {saveComment}
         spoiler={hideSpoiler && post.spoiler}
       />
     );
   });
-
-  // console.log("cookie", document.cookie);
 
   return (
     

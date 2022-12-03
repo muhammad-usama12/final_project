@@ -1,13 +1,13 @@
+import { useState } from "react";
+import axios from "axios";
+import classNames from "classnames";
+
 import "./Article.scss";
+
 import CategoryTag from "./CategoryTag";
 import CommentList from "./CommentList";
-import { useState } from "react";
-import useVisualMode from "../../hooks/useVisualMode";
-import classNames from "classnames";
-import { ApplicationContext } from "../App";
-import axios from "axios";
-import { useContext } from "react";
 
+import useVisualMode from "../../hooks/useVisualMode";
 
 export default function Article(props) {
   // This checks if props.spoiler is true, and if it is, apply the "spoiler" class to blur spoiler posts
@@ -30,16 +30,17 @@ export default function Article(props) {
   }
 
   function validate(text) {
-   
     if (text === "") {
       setError("can't get his ass with no words, bestie");
     } else {
       props.saveComment(text, post_id)
-     
     }
   }
 
   const addLike = (e) => {
+    if (Object.keys(props.loggedInUser).length === 0) {
+      return;
+    }
     e.preventDefault();
     axios
       .put(`/api/posts/${post_id}/like`)
@@ -48,7 +49,6 @@ export default function Article(props) {
       })
       .catch((err) => console.error(err));
   };
-
 
   return (
     <article>

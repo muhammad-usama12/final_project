@@ -7,7 +7,6 @@ import { useContext } from "react";
 export default function CommentList(props) {
   const { state } = useContext(ApplicationContext);
 
-
   const comments = getCommentsForPost(state, props.postId);
   const commentsList = comments.reverse().map((comment) => {
    
@@ -33,6 +32,7 @@ export default function CommentList(props) {
       validate = {props.validate}
       />}
       <hr />
+      {!document.cookie && <h5>log in to participate in the discourse :)</h5>}
       {commentsList}
     </section>
   );

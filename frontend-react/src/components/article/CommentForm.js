@@ -30,7 +30,6 @@ export default function CommentForm(props) {
         message="greenlight"
         onClick={handleSubmit}
       />
-       
     </div>
    
   );
