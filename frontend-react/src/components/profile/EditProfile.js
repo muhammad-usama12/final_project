@@ -8,7 +8,7 @@ import "./Profile.scss";
 import Button from "../Button";
 import { ApplicationContext } from "../App";
 import { AccountContext } from "../AccountContext";
-import { getCurrentUser } from "../../helpers/selectors";
+import { getUser } from "../../helpers/selectors";
 import CategoryListItem from "../CategoryListItem";
 import Profile from ".";
 
@@ -18,7 +18,7 @@ export default function EditProfile(props) {
   const { mode, transition } = useVisualMode();
   const user = useContext(AccountContext);
   const { state } = useContext(ApplicationContext);
-  const currentUser = getCurrentUser(state, user.user.userId);
+  const currentUser = getUser(state, user.user.userId);
 
   const [selectedImage, setSelectedImage] = useState(null);
   const [previewSelectedImage, setPreviewSelectedImage] = useState(

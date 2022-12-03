@@ -10,15 +10,14 @@ export default function NewPost(props) {
   const CREATE = "CREATE";
   const WRITE = "WRITE";
   const userId = localStorage.getItem('teeboUser');
-  const { addPost  } = useContext(ApplicationContext)
+  const { addPost, setError, error } = useContext(ApplicationContext)
 
-   
   function savePost(text, selectedImage, spoiler, show) {
     console.log("user",userId)
     if (text === "") {
-      // setError("well you can't stir nothing :/");
+      setError("well you can't stir nothing :/");
     } else if (show === "") {
-      // setError("sorry, which show again?");
+      setError("sorry, which show again?");
     } else {
       const data = {
         text: text,
@@ -26,6 +25,7 @@ export default function NewPost(props) {
         spoiler: spoiler,
         show: show
       }
+      setError(null)
       addPost(userId,data)
       .then(() => transition(CREATE))
     }
@@ -40,6 +40,7 @@ export default function NewPost(props) {
       )}
       {mode === WRITE && (
         <Write
+          error={error}
           user={props.user}
           state={props.state}
           onCancel={() => back()}

@@ -13,8 +13,9 @@ export default function CommentList(props) {
    
     return (
       <CommentListItem
+        state={state}
         key={comment.id}
-        user={props.user}
+        user={comment.user_id}
         text={comment.text}
         image={comment.icon_url}
         timestamp={comment.created_at}

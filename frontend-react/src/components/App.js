@@ -3,7 +3,7 @@ import axios from "axios";
 import BeatLoader from "react-spinners/BeatLoader";
 
 import "./App.scss";
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import Header from "./Header";
 import Article from "./Article";
@@ -12,8 +12,7 @@ import NewPost from "./NewPost";
 import Spacing from "./Spacing";
 
 import useApplicationData from "../hooks/useApplicationData";
-import useVisualMode from "../hooks/useVisualMode";
-import { getShowForPost, getUserForPost, getFavouritesByUser } from "../helpers/selectors";
+import { getShowForPost, getUser, getFavouritesByUser } from "../helpers/selectors";
 
 export const ApplicationContext = createContext();
 
@@ -60,7 +59,7 @@ function App() {
 
   const articleList = state.filerteredPosts.map((post) => {
     const show = getShowForPost(state, post.tvshow_id);
-    const user = getUserForPost(state, post.user_id);
+    const user = getUser(state, post.user_id);
 
     return (
       <Article

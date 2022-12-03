@@ -17,15 +17,8 @@ export default function Write(props) {
   const [show, setShow] = useState("");
   const [selectedImage, setSelectedImage] = useState("");
   const [spoiler, setSpoiler] = useState(false);
-  const [error, setError] = useState(null);
-  console.log("props in write", props)
 
- 
-
-  const { state  } = useContext(ApplicationContext)
-  console.log("userid from addpost", state);
-
-
+  const { state } = useContext(ApplicationContext)
 
   function cancel() {
     props.onCancel();
@@ -43,7 +36,6 @@ export default function Write(props) {
     }
   };
 
-
   const shows = state.shows.reverse().map((show) => {
     return (
       <MenuItem key={show.id} value={show.id}>
@@ -54,7 +46,7 @@ export default function Write(props) {
 
   return (
     <div className="write-post">
-      {error !== null && <p className="error">{error}</p>}
+      {props.error !== null && <p className="error">{props.error}</p>}
       <form onSubmit={(event) => event.preventDefault()} autoComplete="off">
         <textarea
           name="text"
@@ -96,7 +88,7 @@ export default function Write(props) {
           <FormControlLabel
             control={<Checkbox color="default" />}
             label="Spoiler"
-            onClick={() => handleSpoilerToggle(spoiler, setSpoiler)}
+            onClick={handleSpoilerToggle}
           />
         </FormGroup>
         <div className="right-buttons">

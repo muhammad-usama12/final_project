@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 export default function useApplicationData() {
-  const [error, setError] = useState("");
+  const [error, setError] = useState(null);
   const [hideSpoiler, setHideSpoiler] = useState(false);
 
   const [state, setState] = useState({

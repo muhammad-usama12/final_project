@@ -1,8 +1,10 @@
 import React from "react";
+import { getUser } from "../../helpers/selectors";
 
 export default function CommentListItem(props) {
-  const userId = localStorage.getItem('teeboUser');
-  console.log("user in listitem",props.user)
+
+  const userOfComment = getUser(props.state, props.user)
+
   return (
     <div className="comment-item">
       <div className="comment-and-profile-image">
@@ -11,7 +13,7 @@ export default function CommentListItem(props) {
         </div>
         <img 
           className="profile-icon"
-          src={props.user.icon_url}
+          src={userOfComment.icon_url}
           alt="profile"
         >
         </img>
