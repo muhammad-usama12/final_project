@@ -11,13 +11,15 @@ export default function Actions(props) {
       {!document.cookie && <Link to="/signup">
       <div className="pill-container">sign up</div>
       </Link>}
-      {document.cookie &&
-      <div 
-        className="pill-container"
-        onClick={props.toggleProfile}
-      >
-        profile
-      </div>}
+      {document.cookie && <Link to="profile">
+        <div 
+          className="pill-container"
+          onClick={props.toggleProfile}
+        >
+          profile
+        </div>
+      </Link>}
+
       <Link to="/login">
         {document.cookie &&
         <div

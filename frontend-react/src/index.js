@@ -2,8 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import {
  createBrowserRouter,
- RouterProvider,
- Route,
+ RouterProvider
 } from "react-router-dom";
 import "./index.css";
 import Profile from "./Views/Profile";

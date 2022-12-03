@@ -1,10 +1,10 @@
 import "./App.scss";
 
-import Header from "./Header/index";
+import Header from "./Header";
 import Article from "./Article";
 import CategoryList from "./CategoryList";
 import NewPost from "./NewPost";
-import Profile from "./profile";
+// import Profile from "./profile";
 import Spacing from "./Spacing";
 
 import { useEffect, createContext, useContext } from "react";
@@ -37,8 +37,8 @@ function App() {
     loadApplicationState();
   }, [state.posts.length, state.comments.length, state.favourites.length]);
 
-  const { user } = useContext(AccountContext);
-  const favouriteShows = getFavouritesByUser(state, user.userId)
+  // const { user } = useContext(AccountContext);
+  // const favouriteShows = getFavouritesByUser(state, user.userId)
 
   const articleList = state.filerteredPosts.map((post) => {
     const show = getShowForPost(state, post.tvshow_id);
@@ -65,11 +65,8 @@ function App() {
         logOut={logout}
       />
       <Spacing />
-      {mode === PROFILE ? (
-      <Profile />
-      ) : (
         <main>
-        {user.loggedIn &&
+        {/* {user.loggedIn &&
           <section className="category-filters">
             <CategoryList
               shows={favouriteShows}
@@ -82,11 +79,9 @@ function App() {
         {favouriteShows.length === 0 && user.loggedIn &&
         <h4>you have no favourite shows! :( <br /> add your favourite shows to filter them :)</h4>}
 
-        {user.loggedIn && <NewPost />}
+        {user.loggedIn && <NewPost />} */}
         <section className="article-container">{articleList}</section>
-      </main>
-      )}
-    
+      </main>    
     </ApplicationContext.Provider>
   );
 }

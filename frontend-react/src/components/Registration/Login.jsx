@@ -49,7 +49,8 @@ export default function Login() {
               } else if (data.loggedIn) {
                 setUser({ ...data });
                 state.setState((prev) => ({ ...prev, loggedIn: true }))
-                navigate("/");
+                localStorage.setItem('teeboUser', data.userId);
+                navigate("/profile");
               }
             });
         }}

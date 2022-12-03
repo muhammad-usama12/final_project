@@ -1,6 +1,10 @@
-
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
+import "../components/Profile/Profile.scss"
 import axios from 'axios';
+import Header from '../components/Header';
+import Spacing from '../components/Spacing';
+// import UserContext from '../components/AccountContext';
 
  
 const Profile = () => {
@@ -20,12 +24,41 @@ const Profile = () => {
  },[])
  
  return (
-   <div>Profile
-     <div>{user.id}</div>
-     <div>{user.username}</div>
-     <img src={user.icon_url} />
-   </div>
- 
+  // <div>Profile
+  //   <div>{user.id}</div>
+  //   <div>{user.username}</div>
+  //   <img src={user.icon_url} />
+  // </div>
+  <>
+    <Header />
+    <Spacing />
+    <section className="profile-header">
+      <img
+        className="profile-display-picture"
+        src={user.icon_url}
+        alt="profile"
+      ></img>
+      <div className="handle-and-bio">
+        <div className="handle">
+          <h1>@{user.username}</h1>
+        </div>
+        <div className="bio">
+          <p>{user.bio}</p>
+        </div>
+      </div>
+      <Link to="/profile/edit">
+        <div className="pill-container edit-profile-button">
+          edit profile
+        </div>
+      </Link>
+    </section>
+    {/* <CategoryListItem
+      spoiler
+      name="Hide Spoilers"
+      onClick={handleSpoilerToggle}
+    /> */}
+    {/* <section className="article-container profile-article-container">{articleList}</section> */}
+  </>
  )
 }
  
