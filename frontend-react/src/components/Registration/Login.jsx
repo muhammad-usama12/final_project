@@ -13,13 +13,12 @@ export const LoginContext = createContext();
 export default function Login() {
   const [error, setError] = useState();
 
-  const state = useApplicationData()
+  const state = useApplicationData();
 
   const { setUser } = useContext(AccountContext);
   const navigate = useNavigate();
   return (
     <>
-      <Header />
       <Formik
         initialValues={{ username: "", password: "" }}
         onSubmit={(values, actions) => {
@@ -48,7 +47,7 @@ export default function Login() {
                 setError(data.status);
               } else if (data.loggedIn) {
                 setUser({ ...data });
-                state.setState((prev) => ({ ...prev, loggedIn: true }))
+                state.setState((prev) => ({ ...prev, loggedIn: true }));
                 navigate("/");
               }
             });
@@ -90,4 +89,4 @@ export default function Login() {
       </Formik>
     </>
   );
-};
+}

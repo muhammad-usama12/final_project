@@ -16,7 +16,6 @@ const SignUp = () => {
 
   return (
     <>
-      <Header />
       <Formik
         initialValues={{ username: "", password: "" }}
         onSubmit={(values, actions) => {

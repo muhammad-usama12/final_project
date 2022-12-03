@@ -5,15 +5,20 @@ import Article from "./Article";
 import CategoryList from "./CategoryList";
 import NewPost from "./NewPost";
 import Profile from "./Profile";
-import EditProfile from "./Profile/EditProfile";
-import Spacing from "./Spacing";
 
 import { useEffect, createContext, useContext } from "react";
 
 import useApplicationData from "../hooks/useApplicationData";
-import { getShowForPost, getUserForPost, getFavouritesByUser } from "../helpers/selectors";
+import {
+  getShowForPost,
+  getUserForPost,
+  getFavouritesByUser,
+} from "../helpers/selectors";
 import useVisualMode from "../hooks/useVisualMode";
 import { AccountContext } from "./AccountContext";
+import { ToggleButton } from "@mui/material";
+import ToggleColorMode from "./ToggleColorMode";
+import EditProfile from "./Profile/EditProfile";
 
 export const ApplicationContext = createContext();
 
@@ -32,7 +37,7 @@ function App() {
     getFilteredShows,
     getAllShows,
     logout,
-    loadApplicationState
+    loadApplicationState,
   } = applicationData;
 
   useEffect(() => {
@@ -40,7 +45,7 @@ function App() {
   }, []);
 
   const { user } = useContext(AccountContext);
-  const favouriteShows = getFavouritesByUser(state, user.userId)
+  const favouriteShows = getFavouritesByUser(state, user.userId);
 
   const articleList = state.filerteredPosts.map((post) => {
     const show = getShowForPost(state, post.tvshow_id);
@@ -62,33 +67,36 @@ function App() {
   return (
     <ApplicationContext.Provider value={applicationData}>
       <Header
-        toggleProfile={() => transition(PROFILE)}
-        toggleDashboard={() => transition(DASHBOARD)}
+        profile={() => transition(PROFILE)}
         logOut={logout}
+        edit={() => transition(EDIT_PROFILE)}
       />
-      <Spacing />
+      <ToggleColorMode />
       {mode === PROFILE ? (
-      <Profile />
+        <Profile />
       ) : (
         <main>
-        {user.loggedIn &&
-          <section className="category-filters">
-            <CategoryList
-              shows={favouriteShows}
-              hideSpoilers={handleSpoilerToggle}
-              getFilteredShows={getFilteredShows}
-              getAllShows={getAllShows}
-            />
-          </section>
-        }
-        {favouriteShows.length === 0 && user.loggedIn &&
-        <h4>you have no favourite shows! :( <br /> add your favourite shows to filter them :)</h4>}
+          {user.loggedIn && (
+            <section className="category-filters">
+              <CategoryList
+                shows={favouriteShows}
+                hideSpoilers={handleSpoilerToggle}
+                getFilteredShows={getFilteredShows}
+                getAllShows={getAllShows}
+              />
+            </section>
+          )}
+          {favouriteShows.length === 0 && user.loggedIn && (
+            <h4>
+              you have no favourite shows! :( <br /> add your favourite shows to
+              filter them :)
+            </h4>
+          )}
 
-        {user.loggedIn && <NewPost />}
-        <section className="article-container">{articleList}</section>
-      </main>
+          {user.loggedIn && <NewPost />}
+          <section className="article-container">{articleList}</section>
+        </main>
       )}
-    
     </ApplicationContext.Provider>
   );
 }

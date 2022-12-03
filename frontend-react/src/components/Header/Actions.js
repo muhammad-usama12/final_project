@@ -1,32 +1,45 @@
-import React from "react";
-import { Link } from "react-router-dom";
+// import React from "react";
+// import { Link } from "react-router-dom";
+// import "./Header.scss";
 
-export default function Actions(props) {
+// export default function Actions(props) {
+//   return (
+//     <nav>
+//       <div className="guest-actions">
+//         {!document.cookie && (
+//           <Link to="/login">
+//             <div>login</div>
+//           </Link>
+//         )}
+//         {!document.cookie && (
+//           <Link to="/signup">
+//             <div>signup</div>
+//           </Link>
+//         )}
+//         {document.cookie && <div onClick={props.toggleProfile}>profile</div>}
+//         <Link to="/login">
+//           {document.cookie && <div onClick={props.logOut}>logout</div>}
+//         </Link>
+//       </div>
+//     </nav>
+//   );
+// }
 
-  return (
-    <div className="guest-actions">
-      {!document.cookie && <Link to="/login">
-      <div className="pill-container">login</div>
-      </Link>}
-      {!document.cookie && <Link to="/signup">
-      <div className="pill-container">sign up</div>
-      </Link>}
-      {document.cookie &&
-      <div 
-        className="pill-container"
-        onClick={props.toggleProfile}
-      >
-        profile
-      </div>}
-      <Link to="/login">
-        {document.cookie &&
-        <div
-          className="pill-container"
-          onClick={props.logOut}
-        >
-          log out
-        </div>}
-      </Link>
-    </div>
-  );
-}
+// {
+//   /* <div className="App">
+//   <nav className="Navbar">
+//     <Link to="/" onClick={props.toggleDashboard}>
+//       <h2>teebo</h2>
+//     </Link>
+//     <ul>
+//       <li>
+//         <Link to="/login">login</Link>
+//       </li>
+//       <li>
+//         <Link to="/projects">signup</Link>
+//       </li>
+//     </ul>
+//   </nav>
+//   // <div className="header-buttons"></div>
+// </div>; */
+// }
