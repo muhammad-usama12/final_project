@@ -44,7 +44,7 @@ function App() {
     })
 
     loadApplicationState();
-  }, [ state.posts.length, state.favourites.length, state.a ]);
+  }, [ state.posts.length, state.favourites.length ]);
 
   const favouriteShows = getFavouritesByUser(state, user.id)
 
