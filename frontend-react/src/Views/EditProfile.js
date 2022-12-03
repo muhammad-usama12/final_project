@@ -36,10 +36,6 @@ export default function EditProfile () {
     logout
   } = applicationData;
 
-  setTimeout(() => {
-    setLoading(false);
-  }, 5000)
-
   useEffect(() => {
     loadApplicationState();
 
@@ -155,7 +151,7 @@ export default function EditProfile () {
         :
         <>
           <section className="edit-profile">
-            <h1>tell me about yourself :)</h1>
+            <h1>who the hell are you</h1>
             <div className="profile-header">
               <label className="upload-image">
                 <input
@@ -205,27 +201,32 @@ export default function EditProfile () {
               </form>
             </div>
             {error !== "" && <p className="error">{error}</p>}
-            <h1>what are your favourite shows?</h1>
-            <Autocomplete
-              disablePortal
-              id="combo-box-demo"
-              options={shows}
-              isOptionEqualToValue={(option, value) => option.value === value.value}
-              sx={{ width: 300 }}
-              renderInput={(params) => <TextField {...params} label="show" />}
-              onChange={(e, show) => handleAddFavourite(e, show.id)}
-            />
-            <Button
-              confirm
-              message={<i className="fa-solid fa-circle-plus"></i>}
-              onClick={() => {
-                updateFavourites(newFavouriteShowId, user.id)}}
-            />
-            <div className="edit-profile-categories">
-              {favouriteShows}
-            </div>
-            <div className="edit-button">
-              <Button confirm message="Save" onClick={submitForm}/>
+            <div className="edit-profile-shows">
+              <h1>what are your favourite shows, luv</h1>
+              <form className='add-favourite-show'>
+                <Autocomplete
+                  disablePortal
+                  id="combo-box-demo"
+                  options={shows}
+                  isOptionEqualToValue={(option, value) => option.value === value.value}
+                  sx={{ width: 300 }}
+                  renderInput={(params) => <TextField {...params} label="show" />}
+                  onChange={(e, show) => handleAddFavourite(e, show.id)}
+                />
+                <Button
+                  confirm
+                  type="submit"
+                  message="add show"
+                  onClick={() => {
+                    updateFavourites(newFavouriteShowId, user.id)}}
+                />
+              </form>
+              <div className="edit-profile-categories">
+                {favouriteShows}
+              </div>
+              <div className="edit-button">
+                <Button confirm message="Save" onClick={submitForm}/>
+              </div>
             </div>
           </section>
         </>
