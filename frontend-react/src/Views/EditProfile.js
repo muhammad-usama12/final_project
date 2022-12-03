@@ -23,7 +23,17 @@ export default function EditProfile() {
   const [selectedImage, setSelectedImage] = useState(null);
   const [previewSelectedImage, setPreviewSelectedImage] = useState(null);
   const [newFavouriteShowId, setNewFavouriteShowId] = useState(null);
+  const [search, setSearch] = useState("");
 
+  const onSearchHandler = (e) => {
+    e.preventDefault();
+
+    if (search === "") {
+      alert("Please enter something", "danger");
+    } else {
+      newShow(search);
+    }
+  };
   const navigate = useNavigate();
 
   const applicationData = useApplicationData();
@@ -34,6 +44,7 @@ export default function EditProfile() {
     updateFavourites,
     deleteFavourites,
     logout,
+    newShow,
   } = applicationData;
 
   useEffect(() => {
@@ -136,6 +147,17 @@ export default function EditProfile() {
     <>
       <Header logout={logout} />
       <Spacing />
+      <form className="searchbar__form">
+        <input
+          type="text"
+          placeholder="Search For Tv Show"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+        <button className="btn btn-block" onClick={onSearchHandler}>
+          SEARCH
+        </button>
+      </form>
       {loading ? (
         <BeatLoader
           className="loader"
