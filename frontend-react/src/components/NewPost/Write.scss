@@ -9,6 +9,15 @@
   gap: 1rem;
   border-radius: 30px;
 
+
+  .right-buttons {
+    display: flex;
+    
+    input[type="file"] {
+      display: none;
+    }
+  }
+
   form {
     display: flex;
     flex-direction: column;

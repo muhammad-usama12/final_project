@@ -1,9 +1,10 @@
 import { useState, useContext } from "react";
+import { storage } from "../../firebase/firebase"
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import axios from "axios";
 
 import "./Write.scss";
 
-import MenuItem from "@mui/material/MenuItem";
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -15,8 +16,10 @@ import { ApplicationContext } from "../App";
 export default function Write(props) {
   const [text, setText] = useState("");
   const [show, setShow] = useState("");
-  const [selectedImage, setSelectedImage] = useState("");
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [previewSelectedImage, setPreviewSelectedImage] = useState(null);
   const [spoiler, setSpoiler] = useState(false);
+  const [error, setError] = useState(null);
 
   const { state } = useContext(ApplicationContext)
 
@@ -46,6 +49,31 @@ export default function Write(props) {
     )
   });
 
+  const uploadImage = () => {
+    const imageRef = ref(storage, `images/${selectedImage.name}`);
+    uploadBytes(imageRef, selectedImage)
+      .then((snapshot) => {
+        getDownloadURL(snapshot.ref)
+          .then((url) => {
+            setSelectedImage(url);
+            console.log("upload success", url);
+            return url;
+          })
+          .then((url) => {
+            console.log("url after save: ", url)
+            props.onSave(text, url, spoiler, show)
+          })
+      })
+  };
+
+  const handleSubmitPost = () => {
+    if (selectedImage) {
+      uploadImage();
+    } else {
+      props.onSave(text, selectedImage, spoiler, show)
+    }
+  }
+
   return (
     <div className="write-post">
       {props.error !== null && <p className="error">{props.error}</p>}
@@ -57,13 +85,11 @@ export default function Write(props) {
           value={text}
           onChange={(event) => setText(event.target.value)}
         />
-        <input
-          name="image-link"
-          type="text"
-          placeholder="got a spicy image link?"
-          value={selectedImage}
-          onChange={(event) => setSelectedImage(event.target.value)}
-        />
+        {previewSelectedImage && <img
+          className="profile-display-picture"
+          src={previewSelectedImage}
+          alt="profile"
+        ></img>}
         <Autocomplete
           disablePortal
           id="combo-box-demo"
@@ -72,19 +98,8 @@ export default function Write(props) {
           renderInput={(params) => <TextField {...params} label="what show was that?" />}
           onChange={(e, show) => handleChange(e, show.id)}
         />
-        {/* <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-          <InputLabel id="demo-select-small">show</InputLabel>
-          <Select
-            labelId="demo-select-small"
-            id="demo-select-small"
-            value={show}
-            label="show"
-            onChange={handleChange}
-          >
-            {shows}
-          </Select>
-        </FormControl> */}
       </form>
+      
       <div className="write-buttons">
         <div className="left-buttons">
           <Button
@@ -97,16 +112,33 @@ export default function Write(props) {
         <FormGroup>
           <FormControlLabel
             control={<Checkbox color="default" />}
-            label="Spoiler"
+            label="spoiler"
             onClick={handleSpoilerToggle}
           />
         </FormGroup>
         <div className="right-buttons">
+          <label 
+            className="button--image pill-container"
+            for="file-upload">
+              <i className="fa-solid fa-image"></i></label>
+          <input
+            id="file-upload"
+            type="file"
+            name="myImage"
+            onChange={(event) => {
+              if (event.target.files.length !== 0) {
+                setSelectedImage(event.target.files[0]);
+                setPreviewSelectedImage(
+                  URL.createObjectURL(event.target.files[0])
+                );
+              }
+            }}
+          />
           <Button
             confirm
             className="button--confirm"
             message="greenlight"
-            onClick={() => props.onSave(text,selectedImage,spoiler,show)}
+            onClick={() => handleSubmitPost()}
           />
         </div>
       </div>

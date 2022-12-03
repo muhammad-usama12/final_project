@@ -113,7 +113,7 @@ export default function Profile() {
             spoiler
             user={user}
             state={state}
-            name="Hide Spoilers"
+            name="hide spoilers"
             onClick={handleSpoilerToggle}
           />
           <section className="article-container profile-article-container">{articleList}</section>

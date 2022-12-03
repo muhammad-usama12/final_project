@@ -25,14 +25,14 @@ export default function CategoryList(props) {
       <div className="general-filter">
         <CategoryListItem
           showAll
-          name="Show All"
+          name="show all"
           onClick={props.getAllShows}
           user={props.user}
           state={props.state}
         />
         <CategoryListItem
           spoiler
-          name="Hide Spoilers"
+          name="hide spoilers"
           onClick={props.hideSpoilers}
           user={props.user}
           state={props.state}
