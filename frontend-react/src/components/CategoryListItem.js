@@ -1,23 +1,15 @@
 import React, { useState } from "react";
 import classNames from "classnames";
 
-import { getFavouritesByUser } from "../helpers/selectors";
-
 export default function CategoryListItem(props) {
   const [clicked, setClicked] = useState(false);
 
   const user = props.user;
-  const state = props.state;
-
-  const favouriteShows = getFavouritesByUser(state, user.id)
-  const currentFavouriteShow = favouriteShows.find 
-  (favouriteShows => favouriteShows.id === props.tvShowId);
 
   const categoryclass = classNames("pill-container category-item", {
     "profile-hide-spoiler": props.spoiler,
     "show-all": props.showAll,
-    "clicked": props.spoiler && clicked,
-    "favourite-show": currentFavouriteShow
+    "clicked": props.spoiler && clicked
   });
 
   const someFavouriteShow = props.tvShowId;
@@ -32,8 +24,8 @@ export default function CategoryListItem(props) {
         return setClicked(false)
       }
     }
-    if (props.tvShowId) {
-      return props.deleteFavourites(props.tvShowId, 1);
+    if (someFavouriteShow) {
+      return props.deleteFavourites(someFavouriteShow, user.id);
     }
     props.onClick()
   }

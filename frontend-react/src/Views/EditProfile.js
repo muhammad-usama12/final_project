@@ -120,11 +120,6 @@ export default function EditProfile () {
     setNewFavouriteShowId(showId)
   }
 
-  const handleInputChange = (e, value) => {
-    console.log(e, value)
-  }
-
-  //  HARD CODED USER ID **************
   const favouriteShowsArr = getFavouritesByUser(state, user.id)
 
   const favouriteShows = favouriteShowsArr.map((category) => {
@@ -215,6 +210,7 @@ export default function EditProfile () {
               disablePortal
               id="combo-box-demo"
               options={shows}
+              isOptionEqualToValue={(option, value) => option.value === value.value}
               sx={{ width: 300 }}
               renderInput={(params) => <TextField {...params} label="show" />}
               onChange={(e, show) => handleAddFavourite(e, show.id)}
