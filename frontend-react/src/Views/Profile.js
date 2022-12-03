@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import BeatLoader from "react-spinners/BeatLoader";
 
 import "../components/Profile/Profile.scss"
 
@@ -14,6 +15,7 @@ import useApplicationData from '../hooks/useApplicationData';
 import { getPostsByUser, getShowForPost } from '../helpers/selectors';
 
 export default function Profile() {
+  const [loading, setLoading] = useState(false)
   const [user, setUser] = useState({})
 
   const navigate = useNavigate()
@@ -29,12 +31,19 @@ export default function Profile() {
   } = applicationData;
 
   useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 500)
+
     loadApplicationState()
 
     const userId = localStorage.getItem('teeboUser');
+
     if (!userId) {
       navigate('/login')
     }
+    
     axios.get(`http://localhost:3001/api/users/${userId}`)
     .then(res => {
       console.log("userid response", userId, res)
@@ -69,34 +78,47 @@ export default function Profile() {
         logout={logout}
       />
       <Spacing />
-      <section className="profile-header">
-        <img
-          className="profile-display-picture"
-          src={user.icon_url}
-          alt="profile"
-        ></img>
-        <div className="handle-and-bio">
-          <div className="handle">
-            <h1>@{user.username}</h1>
-          </div>
-          <div className="bio">
-            <p>{user.bio}</p>
-          </div>
-        </div>
-        <Link to="/profile/edit">
-          <div className="pill-container edit-profile-button">
-            edit profile
-          </div>
-        </Link>
-      </section>
-      <CategoryListItem
-        spoiler
-        user={user}
-        state={state}
-        name="Hide Spoilers"
-        onClick={handleSpoilerToggle}
-      />
-      <section className="article-container profile-article-container">{articleList}</section>
+      { loading ? 
+        <BeatLoader
+          className="loader"
+          color={"#D9D9D9"}
+          loading={loading}
+          size={30}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+        />
+        :
+        <>
+          <section className="profile-header">
+            <img
+              className="profile-display-picture"
+              src={user.icon_url}
+              alt="profile"
+            ></img>
+            <div className="handle-and-bio">
+              <div className="handle">
+                <h1>@{user.username}</h1>
+              </div>
+              <div className="bio">
+                <p>{user.bio}</p>
+              </div>
+            </div>
+            <Link to="/profile/edit">
+              <div className="pill-container edit-profile-button">
+                edit profile
+              </div>
+            </Link>
+          </section>
+          <CategoryListItem
+            spoiler
+            user={user}
+            state={state}
+            name="Hide Spoilers"
+            onClick={handleSpoilerToggle}
+          />
+          <section className="article-container profile-article-container">{articleList}</section>
+        </>
+      }
     </>
   )
 }

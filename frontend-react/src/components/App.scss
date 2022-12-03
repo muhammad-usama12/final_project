@@ -1,5 +1,12 @@
 @import "../styles/variables.scss";
 
+.loader {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-self: center;
+}
+
 body {
   background-color: $primary-colour;
 }
@@ -43,13 +50,22 @@ a {
 }
 
 #spacing {
-  height: 130px;
+  height: 100px;
 }
 
 h4 {
   color: $secondary-colour;
   text-align: center;
   margin-top: 0;
+
+  a {
+    color: $star;
+    transition-duration: 300ms;
+  }
+
+  a:hover {
+    text-shadow: 2px 2px #ff0000;
+  }
 }
 
 .error {
