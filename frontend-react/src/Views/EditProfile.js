@@ -1,3 +1,4 @@
+import "./edit.scss";
 import React, { useEffect, useState } from "react";
 import { storage } from "../firebase/firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
@@ -29,7 +30,7 @@ export default function EditProfile() {
     e.preventDefault();
 
     if (search === "") {
-      alert("Please enter something", "danger");
+      return setError("enter a show to find a show");
     } else {
       newShow(search);
     }
@@ -147,7 +148,7 @@ export default function EditProfile() {
     <>
       <Header logout={logout} />
       <Spacing />
-      <form className="searchbar__form">
+      {/* <form className="searchbar__form">
         <input
           type="text"
           placeholder="Search For Tv Show"
@@ -157,7 +158,7 @@ export default function EditProfile() {
         <button className="btn btn-block" onClick={onSearchHandler}>
           SEARCH
         </button>
-      </form>
+      </form> */}
       {loading ? (
         <BeatLoader
           className="loader"
@@ -200,9 +201,9 @@ export default function EditProfile() {
               <form>
                 <div>
                   <input
+                    id="combo-box-demo"
                     name="username"
                     type="text"
-                    id="username"
                     placeholder="who are you king"
                     value={user.username}
                     onChange={onChange}
@@ -223,6 +224,22 @@ export default function EditProfile() {
               </form>
             </div>
             {error !== "" && <p className="error">{error}</p>}
+            <h1>don't see a show? add it!</h1>
+            <form className="add-favourite-show">
+              <TextField
+                id="outlined-basic"
+                onChange={(e) => setSearch(e.target.value)}
+                variant="outlined"
+                label="add a new show?"
+              />
+              <Button
+                className="add-newshow"
+                confirm
+                type="submit"
+                message="add new show"
+                onClick={onSearchHandler}
+              />
+            </form>
             <div className="edit-profile-shows">
               <h1>what are your favourite shows, luv</h1>
               <form className="add-favourite-show">

@@ -11,8 +11,10 @@ const searchShows = async (query) => {
 
   console.log(
     "data from tv maze:",
+    data[0].show,
     data[0].show.name,
-    data[0].show.image.medium
+    data[0].show.image.medium,
+    data[0].show.image.original
   );
 };
 
