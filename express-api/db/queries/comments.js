@@ -29,12 +29,13 @@ export const commentCounter = async (id) => {
 
   const data = await db.query(
     `
-   SELECT count(*)
-   FROM comments
-   where post_id = $1;
+    UPDATE posts
+    SET total_comments = total_comments + 1
+    where id = $1
+    RETURNING *;
      `,
     [post_id]
   );
-
+console.log("updated counter by 1", data.rows[0])
   return data.rows[0];
 };

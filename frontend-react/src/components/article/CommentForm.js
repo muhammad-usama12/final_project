@@ -5,6 +5,12 @@ export default function CommentForm(props) {
  
   const [text, setText] = useState("");
 
+  const handleSubmit = event => {
+    event.preventDefault(); 
+    props.validate(text)
+    setText('');
+    };
+
   return (
     <div className="comment-form">
       {props.error !== "" && <p className="error">{props.error}</p>}
@@ -16,13 +22,16 @@ export default function CommentForm(props) {
           value={text}
           onChange={(event) => setText(event.target.value)}
         />
-      </form>
+     </form>
       <Button
+        type="reset"
         confirm
         className="button--confirm"
         message="greenlight"
-        onClick={() => props.validate(text)}
+        onClick={handleSubmit}
       />
+       
     </div>
+   
   );
 }

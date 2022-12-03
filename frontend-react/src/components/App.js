@@ -30,6 +30,7 @@ function App() {
     deleteFavourites,
     updateFavourites,
     logout,
+    saveComment,
     loadApplicationState
   } = applicationData;
 
@@ -38,6 +39,7 @@ function App() {
     setTimeout(() => {
       setLoading(false);
     }, 500)
+
     const userId = localStorage.getItem('teeboUser');
     console.log("userId", userId)
     if (!userId) {
@@ -66,6 +68,7 @@ function App() {
         {...post}
         show={show}
         user={user}
+        saveComment = {saveComment}
         spoiler={hideSpoiler && post.spoiler}
       />
     );

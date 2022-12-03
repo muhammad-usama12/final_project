@@ -14,8 +14,7 @@ export default function Article(props) {
   const ifSpoilerClass = classNames("screen", { spoiler: props.spoiler });
   const [error, setError] = useState(null);
   const [likecounter, setLikecounter] = useState(props.total_likes);
-  const [commentcounter, setCommentcounter] = useState(props.total_comments);
-  const { saveComment } = useContext(ApplicationContext);
+  const post_id = props.id;
 
   const SHOW = "SHOW";
   const HIDE = "HIDE";
@@ -30,14 +29,13 @@ export default function Article(props) {
     }
   }
 
-
-  const post_id = props.id;
-
   function validate(text) {
+   
     if (text === "") {
       setError("can't get his ass with no words, bestie");
     } else {
-      saveComment(text, props.postId);
+      props.saveComment(text, post_id)
+      text = "";
     }
   }
 
@@ -48,7 +46,7 @@ export default function Article(props) {
       .then((res) => {
         setLikecounter(() => res.data.total_likes);
       })
-      .catch((err) => console.log("error from addlike", err));
+      .catch((err) => console.error(err));
   };
 
 
@@ -75,7 +73,7 @@ export default function Article(props) {
               className="fa-solid fa-comment-dots"
               onClick={toggleComments}
             ></i>
-            <p>{commentcounter}</p>
+            <p>{props.total_comments}</p>
 
             <i className="fa-solid fa-circle-plus"></i>
           </div>

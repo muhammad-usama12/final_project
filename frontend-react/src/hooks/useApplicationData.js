@@ -50,24 +50,29 @@ export default function useApplicationData() {
   };
 
   const commentCounter = (postId) => {
-    axios.post(`/api/comments/${postId}/counter`)
-    .then((res) =>  console.log("res from commentcouneter", res))
-    .catch((err) => console.log("err from commentcouneter", err))
+    return axios.post(`/api/comments/${postId}/counter`)
+      .then(res => console.log("res after counter by 1", res))
+      .catch((err) => console.log("err from commentcouneter", err))
   }
   
-  const saveComment = (text, postId) => {
-    return axios
-      .post("/api/comments/new", {
-        text: text,
-        postId: postId,
-      })
-      .then((res) => {
+  const saveComment = async (text, postId) => {
+    try {
+      const response = await axios
+        .post("/api/comments/new", {
+          text: text,
+          postId: postId,
+        })
         const comments = [...state.comments]
-        comments.push(res.data)
+        comments.push(response.data)
         setState({ ...state, comments })
-        commentCounter(res.data.post_id)
-      })
-  };
+        return (await commentCounter(response.data.post_id)).data.count
+      
+    
+    } catch (error) {
+      console.error("error from save",error)
+    }
+  }
+ 
 
 
   function addPost (id, data)  {

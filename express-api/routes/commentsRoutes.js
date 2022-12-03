@@ -22,10 +22,10 @@ router.post("/new", async (req, res) => {
   }
 })
 
-router.put('/:id/counter', async (req, res) => {
+router.post('/:id/counter', async (req, res) => {
 const id = req.params.id
 
-
+console.log("id from counter",id)
   try {
     const comment = await commentCounter(id);
     res.json(comment);
