@@ -1,16 +1,16 @@
+import { useState, useContext } from "react";
+import axios from "axios";
+
 import "./Write.scss";
 
-import Button from "../Button";
 import MenuItem from "@mui/material/MenuItem";
-import InputLabel from "@mui/material/InputLabel";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-import FormGroup from "@mui/material/FormGroup";
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
+import Button from "../Button";
+
 import { ApplicationContext } from "../App";
-import axios from "axios";
-import { useState, useContext } from "react";
 
 export default function Write(props) {
   const [text, setText] = useState("");
@@ -24,8 +24,8 @@ export default function Write(props) {
     props.onCancel();
   }
 
-  const handleChange = (event) => {
-    setShow(event.target.value);
+  const handleChange = (e, showId) => {
+    setShow(showId);
   };
 
   const handleSpoilerToggle = () => {
@@ -36,12 +36,14 @@ export default function Write(props) {
     }
   };
 
-  const shows = state.shows.reverse().map((show) => {
+  const showsArr = state.shows;
+  const shows = showsArr.map((show) => {
     return (
-      <MenuItem key={show.id} value={show.id}>
-        {show.name}
-      </MenuItem>
-    );
+      {
+        label: show.name,
+        id: show.id
+      }
+    )
   });
 
   return (
@@ -62,7 +64,15 @@ export default function Write(props) {
           value={selectedImage}
           onChange={(event) => setSelectedImage(event.target.value)}
         />
-        <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+        <Autocomplete
+          disablePortal
+          id="combo-box-demo"
+          options={shows}
+          isOptionEqualToValue={(option, value) => option.value === value.value}
+          renderInput={(params) => <TextField {...params} label="what show was that?" />}
+          onChange={(e, show) => handleChange(e, show.id)}
+        />
+        {/* <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
           <InputLabel id="demo-select-small">show</InputLabel>
           <Select
             labelId="demo-select-small"
@@ -73,7 +83,7 @@ export default function Write(props) {
           >
             {shows}
           </Select>
-        </FormControl>
+        </FormControl> */}
       </form>
       <div className="write-buttons">
         <div className="left-buttons">

@@ -35,8 +35,9 @@ export default function CategoryListItem(props) {
       className={categoryclass}
       onClick={handleClick}
     >
-      <p>{props.name}&nbsp;</p>
+      <p>{props.name}</p>
       <img src={props.img} alt=""></img>
+      {someFavouriteShow && <>&nbsp;</>}
       {someFavouriteShow && <i className="fa-regular fa-circle-xmark"></i>}
     </div>
   );

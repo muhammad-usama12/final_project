@@ -45,7 +45,6 @@ export default function EditProfile () {
     }
     axios.get(`http://localhost:3001/api/users/${userId}`)
     .then(res => {
-      // console.log("userid response", userId, res)
       setUser(res.data)
     })
   },[ state.favourites.length ])
@@ -59,6 +58,7 @@ export default function EditProfile () {
     if (user.username === "") {
       return setError("you gotta be called SOMETHING");
     }
+
     console.log("attempt submit")
     e.preventDefault();
 
@@ -212,6 +212,7 @@ export default function EditProfile () {
                   onChange={(e, show) => handleAddFavourite(e, show.id)}
                 />
                 <Button
+                  className="add-favourite"
                   confirm
                   type="submit"
                   message="add show"
@@ -223,7 +224,7 @@ export default function EditProfile () {
                 {favouriteShows}
               </div>
               <div className="edit-button">
-                <Button confirm message="Save" onClick={submitForm}/>
+                <Button confirm message="save" onClick={submitForm}/>
               </div>
             </div>
           </section>

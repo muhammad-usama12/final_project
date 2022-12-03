@@ -97,25 +97,6 @@
     align-items: center;
     justify-content: center;
     margin-top: 1rem;
-
-    .add-favourite-show {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      margin-top: 2rem;
-      margin-bottom: 2rem;
-
-      .MuiInputBase-root {
-        background-color: $secondary-colour;
-
-        input {
-          color: $primary-colour;
-          margin-top: 0;
-          margin-bottom: 0;
-          font-family: monospace;
-        }
-      }
-    }
   }
 
   h1 {
@@ -173,6 +154,31 @@
     justify-content: center;
     margin-top: 2rem;
     margin-bottom: 2rem;
+  }
+
+  .add-favourite-show {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+
+    .add-favourite {
+      height: 10rem;
+      border-radius: 60%;
+    }
+
+    .MuiInputBase-root {
+      background-color: $secondary-colour;
+      height: 3.5rem;
+
+      input {
+        color: $primary-colour;
+        font-family: monospace;
+        font-weight: lighter;
+        margin-top: 0;
+      }
+    }
   }
 }
 

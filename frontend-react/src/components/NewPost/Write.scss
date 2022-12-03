@@ -29,6 +29,16 @@
         outline: none;
       }
     }
+
+    .MuiInputBase-root {
+      width: 100%;
+
+      input {
+        color: $primary-colour;
+        font-family: monospace;
+        font-size: large;
+      }
+    }
   }
 
   #demo-select-small {
