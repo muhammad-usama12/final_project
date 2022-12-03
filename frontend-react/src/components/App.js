@@ -18,7 +18,6 @@ export const ApplicationContext = createContext();
 
 function App() {
   const [user, setUser] = useState({})
-  const userId = localStorage.getItem('teeboUser');
   const applicationData = useApplicationData();
   const {
     state,
@@ -28,6 +27,7 @@ function App() {
     getAllShows,
     deleteFavourites,
     updateFavourites,
+    logout,
     loadApplicationState
   } = applicationData;
 
@@ -44,14 +44,11 @@ function App() {
     })
 
     loadApplicationState();
-  }, [ state.posts.length, state.favourites.length ]);
+  }, [ state.posts.length, state.favourites.length, state.a ]);
 
   const favouriteShows = getFavouritesByUser(state, user.id)
-  console.log("favouriteShows", favouriteShows)
 
-  // state.posts.length, state.comments.length, state.favourites.length
-  // const { user } = useContext(AccountContext);
-  // const favouriteShows = getFavouritesByUser(state, user.userId)
+  console.log("user", user)
 
   const articleList = state.filerteredPosts.map((post) => {
     const show = getShowForPost(state, post.tvshow_id);
@@ -73,10 +70,12 @@ function App() {
   return (
     
     <ApplicationContext.Provider value={applicationData}>    
-      <Header/>
+      <Header
+        logout={logout}
+      />
       <Spacing />
         <main>
-        {
+        { user.id &&
           <section className="category-filters">
             <CategoryList
               state={state}
@@ -90,10 +89,10 @@ function App() {
             />
           </section>
         }
-        {favouriteShows.length === 0 && user &&
+        {favouriteShows.length === 0 && user.id &&
         <h4>you have no favourite shows! :( <br /> add your favourite shows to filter them :)</h4>}
 
-        {user && <NewPost
+        {user.id && <NewPost
           user={user}
           state={state}
         />}

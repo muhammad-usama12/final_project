@@ -25,7 +25,8 @@ export default function Header(props) {
         </Link>
 
         <div className="header-buttons">
-          <Actions 
+          <Actions
+            logout={props.logout}
             toggleProfile={props.toggleProfile}
             toggleSettings={props.toggleEditProfile}
           />

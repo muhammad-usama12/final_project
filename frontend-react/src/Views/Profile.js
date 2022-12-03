@@ -24,6 +24,7 @@ export default function Profile() {
     handleSpoilerToggle,
     hideSpoiler,
     deletePost,
+    logout,
     loadApplicationState
   } = applicationData;
 
@@ -64,7 +65,9 @@ export default function Profile() {
  
   return (
     <>
-      <Header />
+      <Header
+        logout={logout}
+      />
       <Spacing />
       <section className="profile-header">
         <img

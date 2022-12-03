@@ -1,13 +1,11 @@
 import axios from "axios";
-
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 export default function useApplicationData() {
-  // Session states
   const [error, setError] = useState("");
-
-  // Data state
   const [hideSpoiler, setHideSpoiler] = useState(false);
+
   const [state, setState] = useState({
     posts: [],
     filerteredPosts: [],
@@ -15,7 +13,7 @@ export default function useApplicationData() {
     favourites: [],
     comments: [],
     users: [],
-    activeUser: false
+    loggedIn: false
   });
 
   const loadApplicationState = () => {
@@ -37,6 +35,8 @@ export default function useApplicationData() {
       }));
     });
   };
+
+  const navigate = useNavigate()
 
   const getAllShows = () => {
     setState((prev) => ({ ...prev, filerteredPosts: state.posts }));
@@ -123,8 +123,10 @@ export default function useApplicationData() {
   const logout = () => {
     axios.post(`/api/auth/logout`)
     .then(() => {
+      console.log("successful log out")
       setState((prev) => ({ ...prev, loggedIn: false }));
       localStorage.clear();
+      navigate("/login");
     })
     .catch(err => console.log("logout failed", err.message))
   }

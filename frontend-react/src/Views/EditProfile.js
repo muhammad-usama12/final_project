@@ -25,7 +25,8 @@ export default function EditProfile () {
     getFilteredShows,
     loadApplicationState,
     updateFavourites,
-    deleteFavourites
+    deleteFavourites,
+    logout
   } = applicationData;
 
   useEffect(() => {
@@ -69,22 +70,14 @@ export default function EditProfile () {
           })
           .then(() => {
             setError(null)
-            const payload = { bio: user.bio, username: user.username }
-            console.log("profile update success payload", payload)
-            axios.put(`http://localhost:3001/api/users/${user.id}`, payload)
-              .then(() => navigate("/profile"))
-              .catch((err) => {
-                if (err.response.status === 500) {
-                  setError("that username is taken luv, xx")
-                }
-              })
+            submitText()
           })
           .then(() => navigate("/profile"))
           .catch((err) => console.log("submit failed: ", err.message))
       })
     } else {
       setError(null)
-
+      submitText()
     }
   }
 
@@ -120,7 +113,9 @@ export default function EditProfile () {
  
   return (
     <>
-      <Header />
+      <Header
+        logout={logout}
+      />
       <Spacing />
       <section className="edit-profile">
         <div className="profile-header">
