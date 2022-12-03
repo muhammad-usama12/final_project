@@ -22,7 +22,12 @@ export default function CommentList(props) {
   return (
     <section className="comments-container">
       <h1>the discourse:</h1>
-      {document.cookie && <CommentForm postId={props.postId} />}
+      {document.cookie && 
+      <CommentForm 
+      error = {props.error} 
+      postId={props.postId} 
+      validate = {props.validate}
+      />}
       <hr />
       {commentsList}
     </section>

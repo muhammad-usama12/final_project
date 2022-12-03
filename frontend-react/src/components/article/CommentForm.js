@@ -1,26 +1,13 @@
 import React, { useState } from "react";
-
 import Button from "../Button";
-import { ApplicationContext } from "../App";
-import { useContext } from "react";
 
 export default function CommentForm(props) {
+ 
   const [text, setText] = useState("");
-  const [error, setError] = useState(null);
-
-  const { saveComment } = useContext(ApplicationContext);
-
-  function validate() {
-    if (text === "") {
-      setError("can't get his ass with no words, bestie");
-    } else {
-      saveComment(text, props.postId);
-    }
-  }
 
   return (
     <div className="comment-form">
-      {error !== "" && <p className="error">{error}</p>}
+      {props.error !== "" && <p className="error">{props.error}</p>}
       <form onSubmit={(event) => event.preventDefault()} autoComplete="off">
         <textarea
           name="text"
@@ -34,7 +21,7 @@ export default function CommentForm(props) {
         confirm
         className="button--confirm"
         message="greenlight"
-        onClick={validate}
+        onClick={() => props.validate(text)}
       />
     </div>
   );

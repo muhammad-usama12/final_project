@@ -1,15 +1,21 @@
 import "./Article.scss";
-
 import CategoryTag from "./CategoryTag";
 import CommentList from "./CommentList";
 import { useState } from "react";
 import useVisualMode from "../../hooks/useVisualMode";
 import classNames from "classnames";
+import { ApplicationContext } from "../App";
 import axios from "axios";
+import { useContext } from "react";
+
 
 export default function Article(props) {
   // This checks if props.spoiler is true, and if it is, apply the "spoiler" class to blur spoiler posts
   const ifSpoilerClass = classNames("screen", { spoiler: props.spoiler });
+  const [error, setError] = useState(null);
+  const [likecounter, setLikecounter] = useState(props.total_likes);
+  const [commentcounter, setCommentcounter] = useState(props.total_comments);
+  const { saveComment } = useContext(ApplicationContext);
 
   const SHOW = "SHOW";
   const HIDE = "HIDE";
@@ -23,10 +29,17 @@ export default function Article(props) {
       transition(SHOW);
     }
   }
-  const [likecounter, setLikecounter] = useState(props.total_likes);
-  const [commentcounter, setCommentcounter] = useState(props.total_comments);
+
 
   const post_id = props.id;
+
+  function validate(text) {
+    if (text === "") {
+      setError("can't get his ass with no words, bestie");
+    } else {
+      saveComment(text, props.postId);
+    }
+  }
 
   const addLike = (e) => {
     e.preventDefault();
@@ -37,16 +50,7 @@ export default function Article(props) {
       })
       .catch((err) => console.log("error from addlike", err));
   };
-  const commentCounter = () => {
-    axios
-      .put(`/api/comments/${post_id}/counter`)
-      .then((res) => {
-        //console.log("res from comment", res.data.count);
-        setCommentcounter(() => res.data.count);
-      })
-      .catch((err) => console.log("error from addlike", err));
-  };
-  commentCounter();
+
 
   return (
     <article>
@@ -78,7 +82,14 @@ export default function Article(props) {
         </div>
       </div>
       <CategoryTag name={props.show.name} />
-      {mode === SHOW && <CommentList postId={props.id} />}
+
+      {mode === SHOW && 
+      <CommentList 
+      error = {error} 
+      postId={props.id} 
+      validate = {validate}
+      />}
+
     </article>
   );
 }

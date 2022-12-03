@@ -49,6 +49,12 @@ export default function useApplicationData() {
     console.log("state.posts.length after", state.posts.length)
   };
 
+  const commentCounter = (postId) => {
+    axios.post(`/api/comments/${postId}/counter`)
+    .then((res) =>  console.log("res from commentcouneter", res))
+    .catch((err) => console.log("err from commentcouneter", err))
+  }
+  
   const saveComment = (text, postId) => {
     return axios
       .post("/api/comments/new", {
@@ -62,6 +68,7 @@ export default function useApplicationData() {
         commentCounter(res.data.post_id)
       })
   };
+
 
   function addPost (id, data)  {
     return axios
@@ -86,11 +93,7 @@ export default function useApplicationData() {
       .catch((err) => console.log("delete failed", err.message));
   };
 
-  const commentCounter = (postId) => {
-    axios.post(`/api/comments/${postId}/counter`)
-    .then((res) =>  console.log("res from commentcouneter", res))
-    .catch((err) => console.log("err from commentcouneter", err))
-  }
+
 
   const updateFavourites = (tvShowId, userId) => {
     axios.post(`/api/favourites/new`, {
