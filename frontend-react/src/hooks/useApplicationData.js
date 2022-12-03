@@ -113,7 +113,8 @@ export default function useApplicationData() {
     axios.post(`/api/auth/logout`)
     .then(() => {
       setState((prev) => ({ ...prev, loggedIn: false }));
-      console.log("successfully logged out");    })
+      localStorage.clear();
+    })
     .catch(err => console.log("logout failed", err.message))
   }
 

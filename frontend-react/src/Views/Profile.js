@@ -1,32 +1,94 @@
-
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
+import "../components/Profile/Profile.scss"
 import axios from 'axios';
+import Header from '../components/Header';
+import Spacing from '../components/Spacing';
+import CategoryListItem from '../components/CategoryListItem';
+import useApplicationData from '../hooks/useApplicationData'; 
+import Article from '../components/Article';
 
- 
+import { getPostsByUser, getShowForPost } from '../helpers/selectors';
+
 const Profile = () => {
+  const [user, setUser] = useState({})
+
+  const applicationData = useApplicationData();
+  const {
+    state,
+    handleSpoilerToggle,
+    hideSpoiler,
+    loadApplicationState
+  } = applicationData;
+
+  useEffect(() => {
+    loadApplicationState()
+
+    const userId = localStorage.getItem('teeboUser');
+    if (!userId) {
+      // redirect to login
+    }
+    axios.get(`http://localhost:3001/api/users/${userId}`)
+    .then(res => {
+      console.log("userid response", userId, res)
+      setUser(res.data)
+    })
+  },[])
+
+  const posts = getPostsByUser(state, 1);
+  const articleList = posts.map((post) => {
+    const show = getShowForPost(state, post.tvshow_id);
+
+    return (
+      <div className="profile-article">
+        <Article
+          key={post.id}
+          {...post}
+          show={show}
+          user={user}
+          spoiler={hideSpoiler && post.spoiler}
+        />
+        {/* <Button
+          message={<i className="fa-solid fa-trash-can"></i>}
+          onClick={() => deleteArticle(post.id)}
+        /> */}
+      </div>
+    );
+  });
  
- const [user, setUser] = useState({})
- useEffect(() => {
-   const userId = localStorage.getItem('teeboUser');
-   if (!userId) {
-     // redirect to login
-   }
-   axios.get(`http://localhost:3001/api/users/${userId}`)
-   .then(res => {
-     console.log("userid response", userId, res)
-     setUser(res.data)
-   })
- 
- },[])
- 
- return (
-   <div>Profile
-     <div>{user.id}</div>
-     <div>{user.username}</div>
-     <img src={user.icon_url} />
-   </div>
- 
- )
+  return (
+    <>
+      <Header />
+      <Spacing />
+      <section className="profile-header">
+        <img
+          className="profile-display-picture"
+          src={user.icon_url}
+          alt="profile"
+        ></img>
+        <div className="handle-and-bio">
+          <div className="handle">
+            <h1>@{user.username}</h1>
+          </div>
+          <div className="bio">
+            <p>{user.bio}</p>
+          </div>
+        </div>
+        <Link to="/profile/edit">
+          <div className="pill-container edit-profile-button">
+            edit profile
+          </div>
+        </Link>
+      </section>
+      <CategoryListItem
+        spoiler
+        user={user}
+        name="Hide Spoilers"
+        onClick={handleSpoilerToggle}
+      />
+      <section className="article-container profile-article-container">{articleList}</section>
+    </>
+  )
 }
  
 export default Profile

@@ -50,7 +50,8 @@ export default function Login() {
                 localStorage.setItem('teeboUser', data.userId);
                 setUser({ ...data });
                 state.setState((prev) => ({ ...prev, loggedIn: true }))
-                navigate("/");
+                localStorage.setItem('teeboUser', data.userId);
+                navigate("/profile");
               }
             });
         }}
