@@ -22,12 +22,10 @@ export default function Write(props) {
 
  
 
-  const { state, addPost, handleSpoilerToggle  } = useContext(ApplicationContext)
+  const { state  } = useContext(ApplicationContext)
   console.log("userid from addpost", state);
 
 
-  // const { state, addPost } = useContext(ApplicationContext);
-  // const user = useContext(AccountContext);
 
   function cancel() {
     props.onCancel();
@@ -37,13 +35,13 @@ export default function Write(props) {
     setShow(event.target.value);
   };
 
-  // const handleSpoilerToggle = () => {
-  //   if (spoiler) {
-  //     setSpoiler(false);
-  //   } else {
-  //     setSpoiler(true);
-  //   }
-  // };
+  const handleSpoilerToggle = () => {
+    if (spoiler) {
+      setSpoiler(false);
+    } else {
+      setSpoiler(true);
+    }
+  };
 
 
   const shows = state.shows.reverse().map((show) => {

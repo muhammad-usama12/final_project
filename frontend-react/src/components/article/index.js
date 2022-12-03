@@ -35,7 +35,7 @@ export default function Article(props) {
       setError("can't get his ass with no words, bestie");
     } else {
       props.saveComment(text, post_id)
-      text = "";
+     
     }
   }
 
@@ -83,6 +83,7 @@ export default function Article(props) {
 
       {mode === SHOW && 
       <CommentList 
+      user={props.user}
       error = {error} 
       postId={props.id} 
       validate = {validate}

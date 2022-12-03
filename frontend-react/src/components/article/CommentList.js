@@ -7,18 +7,21 @@ import { useContext } from "react";
 export default function CommentList(props) {
   const { state } = useContext(ApplicationContext);
 
+
   const comments = getCommentsForPost(state, props.postId);
   const commentsList = comments.reverse().map((comment) => {
+   
     return (
       <CommentListItem
         key={comment.id}
+        user={props.user}
         text={comment.text}
         image={comment.icon_url}
         timestamp={comment.created_at}
       />
     );
   });
-
+  
   return (
     <section className="comments-container">
       <h1>the discourse:</h1>
