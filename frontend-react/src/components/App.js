@@ -44,9 +44,10 @@ function App() {
     })
 
     loadApplicationState();
-  }, [ state.posts.length]);
+  }, [ state.posts.length, state.favourites.length ]);
 
   const favouriteShows = getFavouritesByUser(state, userId)
+  console.log("favouriteShows", favouriteShows)
 
   // state.posts.length, state.comments.length, state.favourites.length
   // const { user } = useContext(AccountContext);
