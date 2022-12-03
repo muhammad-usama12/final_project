@@ -8,13 +8,17 @@ const searchShows = async (query) => {
   const { data } = await axios.get(
     `https://api.tvmaze.com/search/shows?q=${query}`
   );
-  console.log("data from tv maze:", data);
+
+  console.log(
+    "data from tv maze:",
+    data[0].show.name,
+    data[0].show.image.medium
+  );
 };
 
 // searchShows("The Office");
 
 export default function Search() {
-  const [options, setOptions] = useState([]);
   const [search, setSearch] = useState("");
 
   const onSearchHandler = (e) => {
@@ -27,28 +31,17 @@ export default function Search() {
     }
   };
   return (
-    <div className="searchbar">
-      <Autocomplete
-        id="combo-box-demo"
-        options={data}
-        isOptionEqualToValue={(option, value) => option.value === value.value}
-        sx={{ width: 300 }}
-        renderInput={(params) => <TextField {...params} label="show" />}
+    <form className="searchbar__form">
+      <input
+        type="text"
+        placeholder="Search For Tv Show"
+        value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
-      ;
-      {/* <form className="searchbar__form">
-        <input
-          type="text"
-          placeholder="Search For Tv Show"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
-        <button className="btn btn-block" onClick={onSearchHandler}>
-          SEARCH
-        </button>
-      </form> */}
-    </div>
+      <button className="btn btn-block" onClick={onSearchHandler}>
+        SEARCH
+      </button>
+    </form>
   );
 }
 
