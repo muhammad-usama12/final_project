@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useContext }from "react";
 import { Link } from "react-router-dom";
+import { ApplicationContext } from "../App";
+
 
 export default function Actions(props) {
+  // const { logout  } = useContext(ApplicationContext)
+
 
   return (
-    <div className="guest-actions">
+    <>
+    <p>heyy</p>
+   <div className="guest-actions">
       {!document.cookie && <Link to="/login">
       <div className="pill-container">login</div>
       </Link>}
@@ -19,16 +25,11 @@ export default function Actions(props) {
           profile
         </div>
       </Link>}
-
-      <Link to="/login">
-        {document.cookie &&
-        <div
-          className="pill-container"
-          onClick={props.logOut}
-        >
-          log out
-        </div>}
+      <Link to="/">
+        <button >log out</button>
       </Link>
-    </div>
+
+    </div> 
+    </>
   );
 }

@@ -2,6 +2,7 @@ import { useEffect, createContext, useState } from "react";
 import axios from "axios";
 
 import "./App.scss";
+import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 
 import Header from "./Header";
 import Article from "./Article";
@@ -17,6 +18,7 @@ export const ApplicationContext = createContext();
 
 function App() {
   const [user, setUser] = useState({})
+  const userId = localStorage.getItem('teeboUser');
   const applicationData = useApplicationData();
   const {
     state,
@@ -42,9 +44,13 @@ function App() {
     })
 
     loadApplicationState();
-  }, []);
+  }, [ state.posts.length]);
 
-  const favouriteShows = getFavouritesByUser(state, user.id)
+  const favouriteShows = getFavouritesByUser(state, userId)
+
+  // state.posts.length, state.comments.length, state.favourites.length
+  // const { user } = useContext(AccountContext);
+  // const favouriteShows = getFavouritesByUser(state, user.userId)
 
   const articleList = state.filerteredPosts.map((post) => {
     const show = getShowForPost(state, post.tvshow_id);
@@ -64,7 +70,8 @@ function App() {
   // console.log("cookie", document.cookie);
 
   return (
-    <>
+    
+    <ApplicationContext.Provider value={applicationData}>    
       <Header/>
       <Spacing />
         <main>
@@ -91,7 +98,8 @@ function App() {
         />}
         <section className="article-container">{articleList}</section>
       </main>    
-    </>
+  
+    </ApplicationContext.Provider>
   );
 }
 export default App;

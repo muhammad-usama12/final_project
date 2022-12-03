@@ -41,8 +41,7 @@ export default function Profile() {
     })
   },[ state.posts.length ])
 
-  // TO DO: CHANGE HARDCODED 3 TO user.id
-  const posts = getPostsByUser(state, 3);
+  const posts = getPostsByUser(state, user.id);
   const articleList = posts.map((post) => {
     const show = getShowForPost(state, post.tvshow_id);
 

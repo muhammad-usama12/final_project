@@ -9,7 +9,6 @@ import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import { ApplicationContext } from "../App";
-import { AccountContext } from "../AccountContext";
 import axios from "axios";
 import { useState, useContext } from "react";
 
@@ -19,9 +18,17 @@ export default function Write(props) {
   const [selectedImage, setSelectedImage] = useState("");
   const [spoiler, setSpoiler] = useState(false);
   const [error, setError] = useState(null);
+  console.log("props in write", props)
 
-  const { state, addPost } = useContext(ApplicationContext);
-  const user = useContext(AccountContext);
+ 
+
+  const { state, addPost, handleSpoilerToggle  } = useContext(ApplicationContext)
+  console.log("userid from addpost", state);
+
+
+  // const { state, addPost } = useContext(ApplicationContext);
+  // const user = useContext(AccountContext);
+
   function cancel() {
     props.onCancel();
   }
@@ -30,30 +37,14 @@ export default function Write(props) {
     setShow(event.target.value);
   };
 
-  const handleSpoilerToggle = () => {
-    if (spoiler) {
-      setSpoiler(false);
-    } else {
-      setSpoiler(true);
-    }
-  };
- 
-  function savePost() {
-    console.log("user",user.user.userId)
-    if (text === "") {
-      setError("well you can't stir nothing :/");
-    } else if (show === "") {
-      setError("sorry, which show again?");
-    } else {
-      const data = {
-        text: text,
-        img: selectedImage,
-        spoiler: spoiler,
-        show: show
-      }
-      addPost(user.user.userId,data)
-    }
-  }
+  // const handleSpoilerToggle = () => {
+  //   if (spoiler) {
+  //     setSpoiler(false);
+  //   } else {
+  //     setSpoiler(true);
+  //   }
+  // };
+
 
   const shows = state.shows.reverse().map((show) => {
     return (
@@ -115,7 +106,7 @@ export default function Write(props) {
             confirm
             className="button--confirm"
             message="greenlight"
-            onClick={savePost}
+            onClick={() => props.onSave(text,selectedImage,spoiler,show)}
           />
         </div>
       </div>

@@ -171,7 +171,7 @@ export default function EditProfile () {
         <div className="edit-button">
           <Button confirm message="Save" onClick={submitForm}/>
         </div>
-      </section>
+  </section>
     </>
   )
 }
