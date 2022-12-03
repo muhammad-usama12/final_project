@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import "../components/Profile/Profile.scss"
 import axios from 'axios';
 import Header from '../components/Header';
@@ -14,13 +14,15 @@ import { getPostsByUser, getShowForPost } from '../helpers/selectors';
 const Profile = () => {
   const [user, setUser] = useState({})
 
+  const navigate = useNavigate()
+
   const applicationData = useApplicationData();
   const {
     state,
     handleSpoilerToggle,
     hideSpoiler,
-    loadApplicationState,
-    deletePost
+    deletePost,
+    loadApplicationState
   } = applicationData;
 
   useEffect(() => {
@@ -28,7 +30,7 @@ const Profile = () => {
 
     const userId = localStorage.getItem('teeboUser');
     if (!userId) {
-      // redirect to login
+      navigate('/login')
     }
     axios.get(`http://localhost:3001/api/users/${userId}`)
     .then(res => {
@@ -37,7 +39,7 @@ const Profile = () => {
     })
   },[ state.posts.length ])
 
-  const posts = getPostsByUser(state, 2);
+  const posts = getPostsByUser(state, 1);
   const articleList = posts.map((post) => {
     const show = getShowForPost(state, post.tvshow_id);
 
@@ -85,6 +87,7 @@ const Profile = () => {
       <CategoryListItem
         spoiler
         user={user}
+        state={state}
         name="Hide Spoilers"
         onClick={handleSpoilerToggle}
       />

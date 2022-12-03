@@ -21,7 +21,9 @@ export default function EditProfile () {
   const {
     state,
     getFilteredShows,
-    loadApplicationState
+    loadApplicationState,
+    updateFavourites,
+    deleteFavourites
   } = applicationData;
 
   useEffect(() => {
@@ -88,6 +90,10 @@ export default function EditProfile () {
     return (
       <CategoryListItem
         edit
+        state={state}
+        user={user}
+        updateFavourites={updateFavourites}
+        deleteFavourites={deleteFavourites}
         key={category.id}
         tvShowId={category.id}
         name={category.name}
@@ -144,7 +150,7 @@ export default function EditProfile () {
         </div>
         {error !== "" && <p className="error">{error}</p>}
         <div className="edit-profile-categories">
-          {categories}fdgdfg
+          {categories}
         </div>
         <div className="edit-button">
           <Button confirm message="Save" onClick={submitForm}/>
