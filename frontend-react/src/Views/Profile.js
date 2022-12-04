@@ -33,6 +33,8 @@ export default function Profile() {
     getFilteredShows,
     getAllShows,
     deletePost,
+    addToWatchList,
+    deleteFromWatchlist,
     logout,
     loadApplicationState
   } = applicationData;
@@ -74,6 +76,8 @@ export default function Profile() {
           user={user}
           spoiler={hideSpoiler && post.spoiler}
           getFilteredShows={getFilteredShows}
+          addToWatchList={addToWatchList}
+          deleteFromWatchlist={deleteFromWatchlist}
         />
         <Button
           trash
