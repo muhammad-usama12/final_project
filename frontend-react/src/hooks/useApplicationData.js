@@ -125,7 +125,6 @@ export default function useApplicationData() {
         tvshow_id: tvShowId,
       })
       .then((res) => {
-        console.log(res.data);
         const watchlist = [...state.watchlist];
         for (let i = 0; i < watchlist.length; i++) {
           if (watchlist[i].id === res.data.id) {
@@ -173,7 +172,6 @@ export default function useApplicationData() {
         tvshow_id: tvShowId,
       })
       .then((res) => {
-        console.log(res.data);
         const favourites = [...state.favourites];
         for (let i = 0; i < favourites.length; i++) {
           if (favourites[i].id === res.data.id) {

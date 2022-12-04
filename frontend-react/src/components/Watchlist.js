@@ -4,13 +4,17 @@ import { getWatchlistByUser } from "../helpers/selectors";
 
 export default function Watchlist(props) {
 
-  // ******* HARDCODED USER.ID
-  const userWatchlist = getWatchlistByUser(props.state, 1)
+  const userWatchlist = getWatchlistByUser(props.state, props.user.id)
   const watchlist = userWatchlist.map((show) => {
 
     return (
-      <div className="watchlist-item">
+      <div
+        key={show.id}
+        className="pill-container"
+      >
         {show.name}
+        <>&nbsp;</>
+        <i onClick={() => props.deleteFromWatchlist(show.id, props.user.id)} className="fa-regular fa-circle-xmark"></i>
       </div>
     );
   });

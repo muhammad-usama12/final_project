@@ -31,7 +31,7 @@ export default function CategoryListItem(props) {
   }
 
   return (
-    <button
+    <div
       className={categoryclass}
       onClick={handleClick}
     >
@@ -39,6 +39,6 @@ export default function CategoryListItem(props) {
       <img src={props.img} alt=""></img>
       {someFavouriteShow && <>&nbsp;</>}
       {someFavouriteShow && <i className="fa-regular fa-circle-xmark"></i>}
-    </button>
+    </div>
   );
 }

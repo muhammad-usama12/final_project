@@ -33,7 +33,7 @@ button:active {
   margin-right: 1rem;
 }
 
-.button--garbage {
+.button--trash {
   height: 3rem;
   background-color: transparent;
 
@@ -46,7 +46,7 @@ button:active {
   }
   .fa-trash-can:hover{
     font-size: 30px;
-    color: rgb(149, 61, 61);
+    color: $trash;
   }
   .fa-trash-can:active{
     font-size: 50px;

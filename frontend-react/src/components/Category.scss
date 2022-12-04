@@ -16,6 +16,10 @@
   width: fit-content;
   border-radius: 30px;
   transition-duration: 200ms;
+
+  p {
+    margin: 0px;
+  }
 }
 
 .pill-container:hover {
@@ -106,3 +110,4 @@
   font-size: medium;
   font-weight: 600;
 }
+

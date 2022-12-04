@@ -58,8 +58,7 @@ export default function Article(props) {
       .catch((err) => console.error(err));
   };
 
-  //******* HARDCODED USER ID */
-  const watchlistShows = getWatchlistByUser(props.state, 1)
+  const watchlistShows = getWatchlistByUser(props.state, props.user.id)
   const currentWatchlistShow = watchlistShows.find 
   (watchlistShows => watchlistShows.id === props.show.id);
 
@@ -67,9 +66,9 @@ export default function Article(props) {
 
   const handleWatchlistAction = () => {
     if (currentWatchlistShow) {
-      return props.deleteFromWatchlist(props.show.id, 1);
+      return props.deleteFromWatchlist(props.show.id, props.user.id);
     } else {
-      return props.addToWatchList(props.show.id, 1);
+      return props.addToWatchList(props.show.id, props.user.id);
     }
   }
   

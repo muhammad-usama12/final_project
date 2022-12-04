@@ -76,3 +76,12 @@ h4 {
   bottom: 50px;
   right: 50px;
 }
+
+.fa-circle-xmark {
+  transition-duration: 200ms;
+}
+
+.fa-circle-xmark:hover {
+  color: $trash;
+  cursor: pointer;
+}

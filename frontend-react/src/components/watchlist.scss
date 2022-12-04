@@ -16,17 +16,5 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-  
-    .watchlist-item {
-      text-align: center;
-      background-color: $secondary-colour;
-      color: $primary-colour;
-      margin: 1rem;
-      padding: 1rem;
-      border-radius: 30px;
-      font-family: monospace;
-      font-size: x-large;
-      font-weight: bold;
-    }
   }
 }

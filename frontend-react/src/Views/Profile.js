@@ -169,6 +169,7 @@ export default function Profile() {
           {mode === WATCHLIST && <Watchlist
             state={state}
             user={user}
+            deleteFromWatchlist={deleteFromWatchlist}
           />}
           {mode === POSTS && <section className="category-filters">
             <CategoryList

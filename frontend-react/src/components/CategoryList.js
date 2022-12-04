@@ -25,6 +25,7 @@ export default function CategoryList(props) {
       <div className="general-filter">
         <CategoryListItem
           showAll
+          key={Math.random()}
           name="show all"
           onClick={props.getAllShows}
           user={props.user}
@@ -32,6 +33,7 @@ export default function CategoryList(props) {
         />
         <CategoryListItem
           spoiler
+          key={Math.random()}
           name="hide spoilers"
           onClick={props.hideSpoilers}
           user={props.user}
