@@ -8,26 +8,38 @@ import CategoryTag from "./CategoryTag";
 import CommentList from "./CommentList";
 import { useNavigate } from "react-router-dom";
 import useVisualMode from "../../hooks/useVisualMode";
+<<<<<<< HEAD
 import { useParams, Link } from "react-router-dom";
+=======
+import { getWatchlistByUser } from "../../helpers/selectors";
+>>>>>>> main
 
 export default function Article(props) {
   // This checks if props.spoiler is true, and if it is, apply the "spoiler" class to blur spoiler posts
   const ifSpoilerClass = classNames("screen", { spoiler: props.spoiler });
+
   const [error, setError] = useState(null);
   const [likecounter, setLikecounter] = useState(props.total_likes);
   const [liked, setLiked] = useState(false);
   const [commentCounter, setCommentCounter] = useState(props.total_comments);
+<<<<<<< HEAD
   const [user, setUser] = useState({});
+=======
+
+>>>>>>> main
   const post_id = props.id;
   const navigate = useNavigate();
 
   const SHOW = "SHOW";
   const HIDE = "HIDE";
 
+<<<<<<< HEAD
   const likeButtonClass = classNames("fa-solid fa-star", {
     liked: liked,
   });
 
+=======
+>>>>>>> main
   const { mode, transition, back } = useVisualMode(HIDE);
 
   function toggleComments() {
@@ -42,7 +54,13 @@ export default function Article(props) {
     if (text === "") {
       setError("can't get his ass with no words, bestie");
     } else {
+<<<<<<< HEAD
       props.saveComment(text, post_id).then((res) => setCommentCounter(res));
+=======
+      setError(null);
+      props.saveComment(text, post_id)
+        .then((res) =>setCommentCounter(res));
+>>>>>>> main
     }
   }
 
@@ -59,6 +77,31 @@ export default function Article(props) {
       })
       .catch((err) => console.error(err));
   };
+<<<<<<< HEAD
+=======
+
+  const watchlistShows = getWatchlistByUser(props.state, props.user.id)
+  const currentWatchlistShow = watchlistShows.find 
+  (watchlistShows => watchlistShows.id === props.show.id);
+
+  // console.log("currentWatchlistShow???", currentWatchlistShow)
+
+  const handleWatchlistAction = () => {
+    if (currentWatchlistShow) {
+      return props.deleteFromWatchlist(props.show.id, props.user.id);
+    } else {
+      return props.addToWatchList(props.show.id, props.user.id);
+    }
+  }
+  
+  const likeButtonClass = classNames("fa-solid fa-star", {
+    "liked": liked
+  });
+  const watchlistButtonClass = classNames("fa-solid fa-circle-plus", {
+    "watchlisted": currentWatchlistShow
+  });
+
+>>>>>>> main
   return (
     <article>
       <div className="screen-and-buttons">
@@ -83,12 +126,19 @@ export default function Article(props) {
             ></i>
             <p>{commentCounter}</p>
 
-            <i className="fa-solid fa-circle-plus"></i>
+            <i
+              className={watchlistButtonClass}
+              onClick={handleWatchlistAction}
+            ></i>
           </div>
         </div>
       </div>
-      <CategoryTag name={props.show.name} />
+      <CategoryTag
+        name={props.show.name}
+        onClick={() => props.getFilteredShows(props.show.id)}
+      />
 
+<<<<<<< HEAD
       {mode === SHOW && (
         <CommentList
           user={props.user}
@@ -97,6 +147,17 @@ export default function Article(props) {
           validate={validate}
         />
       )}
+=======
+      {mode === SHOW && 
+      <CommentList 
+      user={props.user}
+      error = {error} 
+      postId={props.id} 
+      validate = {validate}
+      state={props.state}
+      />}
+
+>>>>>>> main
     </article>
   );
 }

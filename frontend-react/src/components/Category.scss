@@ -16,11 +16,19 @@
   width: fit-content;
   border-radius: 30px;
   transition-duration: 200ms;
+
+  p {
+    margin: 0px;
+  }
 }
 
 .pill-container:hover {
   background-color: $primary-colour;
   color: $secondary-colour;
+}
+
+.pill-container:active {
+  filter: brightness(50%);
 }
 
 .pill-container:link {
@@ -29,7 +37,6 @@
 
 .category-filters {
   height: 100%;
-  margin-bottom: 1rem;
 
   .general-filter {
     display: flex;
@@ -46,6 +53,7 @@
 
 .category-item {
   margin-top: 0.5rem;
+  cursor: pointer;
 }
 
 .category-list{
@@ -100,10 +108,3 @@
   border: 3px solid white;
 }
 
-.show-all {
-  display: flex;
-  align-items: center;
-  font-size: medium;
-  font-weight: 600;
-  height: 2rem;
-}

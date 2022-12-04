@@ -7,10 +7,6 @@
   align-self: center;
 }
 
-body {
-  background-color: $primary-colour;
-}
-
 main {
   display: flex;
   flex-direction: column;
@@ -72,5 +68,20 @@ h4 {
   text-align: center;
   color: rgb(187, 63, 63);
   font-weight: bold;
-  margin-top: 0;
+  margin-top: 1rem;
+}
+
+.scroll-to-top {
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+}
+
+.fa-circle-xmark {
+  transition-duration: 200ms;
+}
+
+.fa-circle-xmark:hover {
+  color: $trash;
+  cursor: pointer;
 }

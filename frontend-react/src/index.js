@@ -5,9 +5,9 @@ import "./index.css";
 import Profile from "./Views/Profile";
 import EditProfile from "./Views/EditProfile";
 import Scripts from "./components/Scripts";
-import Login from "./components/Registration/Login";
-import SignUp from "./components/Registration/SignUp";
-import App from "./components/App";
+import Login from "./Views/Login";
+import SignUp from "./Views/SignUp";
+import App from "./Views/App";
 import Search from "./Views/SearchTest";
 import ProfileVisit from "./Views/ProfileVisit";
 

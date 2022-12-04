@@ -1,21 +1,19 @@
-import { useContext, createContext, useState } from "react";
+import { createContext, useState } from "react";
 import { Button, ButtonGroup, Heading, Text, VStack } from "@chakra-ui/react";
 import { Form, Formik } from "formik";
 import { useNavigate } from "react-router";
-import TextField from "./TextField";
-import { AccountContext } from "../AccountContext";
+import TextField from "../components/TextField";
 
-import Header from "../Header";
-import useApplicationData from "../../hooks/useApplicationData";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import useApplicationData from "../hooks/useApplicationData";
 
 export const LoginContext = createContext();
 
 export default function Login() {
   const [error, setError] = useState();
-
-  const state = useApplicationData()
   const [user, setUser] = useState({});
-  // const { setUser } = useContext(AccountContext);
+  const state = useApplicationData()
   const navigate = useNavigate();
   return (
     <>
@@ -90,6 +88,7 @@ export default function Login() {
           </ButtonGroup>
         </VStack>
       </Formik>
+      <Footer />
     </>
   );
 };

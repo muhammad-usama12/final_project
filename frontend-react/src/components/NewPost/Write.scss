@@ -8,10 +8,15 @@
   width: 35vw;
   gap: 1rem;
   border-radius: 30px;
-
+  margin-bottom: 0;
+  margin-top: 3rem;
 
   .right-buttons {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 1rem;
+    
     
     input[type="file"] {
       display: none;
@@ -54,10 +59,8 @@
     font-family: monospace;
   }
 
-  .write-buttons {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 1rem;
+  #upload-image {
+    background-color: $image;
   }
 
   .dropdown {

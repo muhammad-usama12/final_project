@@ -1,31 +1,24 @@
-import React, { useContext }from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { ApplicationContext } from "../App";
-
 
 export default function Actions(props) {
-  // const { logout  } = useContext(ApplicationContext)
-
 
   return (
     <>
       <div className="guest-actions">
-        {!document.cookie && <Link to="/login">
-        <div className="pill-container">login</div>
+        {!document.cookie && <Link key={1} to="/login">
+        <button className="pill-container">login</button>
         </Link>}
-        {!document.cookie && <Link to="/signup">
-        <div className="pill-container">sign up</div>
+        {!document.cookie && <Link key={2} to="/signup">
+        <button className="pill-container">sign up</button>
         </Link>}
-        {document.cookie && <Link to="/profile">
-          <div 
-            className="pill-container"
-            onClick={props.toggleProfile}
-          >
+        {document.cookie && <Link key={3} to="/profile">
+          <button className="pill-container">
             profile
-          </div>
+          </button>
         </Link>}
-        {document.cookie && <Link to="/login">
-          <div className="pill-container" onClick={props.logout}>log out</div>
+        {document.cookie && <Link key={4} to="/login">
+          <button className="pill-container" onClick={props.logout}>log out</button>
         </Link>}
 
       </div> 

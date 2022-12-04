@@ -14,6 +14,7 @@ export default function useApplicationData() {
     favourites: [],
     comments: [],
     users: [],
+    watchlist: [],
     loggedIn: false,
   });
 
@@ -24,6 +25,7 @@ export default function useApplicationData() {
       axios.get("/api/favourites"),
       axios.get("/api/comments"),
       axios.get("/api/users"),
+      axios.get("/api/watchlist")
     ]).then((res) => {
       setState((prev) => ({
         ...prev,
@@ -33,6 +35,7 @@ export default function useApplicationData() {
         favourites: res[2].data,
         comments: res[3].data,
         users: res[4].data,
+        watchlist: res[5].data
       }));
     });
   };
@@ -73,9 +76,9 @@ export default function useApplicationData() {
     }
   };
 
-  function addPost(id, data) {
+  function addPost(postId, data) {
     return axios
-      .post(`/api/posts/${id}/new`, {
+      .post(`/api/posts/${postId}/new`, {
         data: data,
       })
       .then((res) => {
@@ -85,9 +88,9 @@ export default function useApplicationData() {
       });
   }
 
-  const deletePost = (id) => {
+  const deletePost = (postId) => {
     return axios
-      .delete(`/api/posts/${id}`)
+      .delete(`/api/posts/${postId}`)
       .then((res) => {
         const posts = [...state.posts];
         for (let i = 0; i < posts.length; i++) {
@@ -98,6 +101,40 @@ export default function useApplicationData() {
         setState((prev) => ({ ...prev, posts }));
       })
       .catch((err) => console.log("delete failed", err.message));
+  };
+
+  const addToWatchList = (tvShowId, userId) => {
+    axios
+    .post(`/api/watchlist/new`, {
+      user_id: userId,
+      tvshow_id: tvShowId
+    })
+    .then((res) => {
+      const watchlist = [...state.watchlist];
+      watchlist.push(res.data);
+      setState({ ...state, watchlist });
+      console.log("update watchlist success");
+    })
+    .catch((err) => console.log("update watchlist failed", err.message));
+  }
+
+  const deleteFromWatchlist = (tvShowId, userId) => {
+    axios
+      .post(`/api/watchlist/`, {
+        user_id: userId,
+        tvshow_id: tvShowId,
+      })
+      .then((res) => {
+        const watchlist = [...state.watchlist];
+        for (let i = 0; i < watchlist.length; i++) {
+          if (watchlist[i].id === res.data.id) {
+            watchlist.splice(i, 1);
+          }
+        }
+        setState((prev) => ({ ...prev, watchlist }));
+        console.log("delete from watchlist success");
+      })
+      .catch((err) => console.log("deleted from watchlist failed", err.message));
   };
 
   const newShow = async (query) => {
@@ -114,9 +151,6 @@ export default function useApplicationData() {
   };
 
   const updateFavourites = (tvShowId, userId) => {
-    if (!tvShowId) {
-      return;
-    }
     axios
       .post(`/api/favourites/new`, {
         user_id: userId,
@@ -138,7 +172,6 @@ export default function useApplicationData() {
         tvshow_id: tvShowId,
       })
       .then((res) => {
-        console.log(res.data);
         const favourites = [...state.favourites];
         for (let i = 0; i < favourites.length; i++) {
           if (favourites[i].id === res.data.id) {
@@ -174,20 +207,29 @@ export default function useApplicationData() {
   return {
     state,
     setState,
+
     hideSpoiler,
     setHideSpoiler,
+    handleSpoilerToggle,
+    
     error,
     setError,
-    handleSpoilerToggle,
+    
     getFilteredShows,
     getAllShows,
-    logout,
-    newShow,
+    
     addPost,
     deletePost,
     saveComment,
+    
+    newShow,
     updateFavourites,
     deleteFavourites,
+    
+    addToWatchList,
+    deleteFromWatchlist,
+    
+    logout,
 
     loadApplicationState,
   };

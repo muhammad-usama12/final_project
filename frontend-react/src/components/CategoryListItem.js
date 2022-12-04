@@ -7,8 +7,6 @@ export default function CategoryListItem(props) {
   const user = props.user;
 
   const categoryclass = classNames("pill-container category-item", {
-    "profile-hide-spoiler": props.spoiler,
-    "show-all": props.showAll,
     "clicked": props.spoiler && clicked
   });
 
@@ -17,17 +15,18 @@ export default function CategoryListItem(props) {
   const handleClick = () => {
     if (props.spoiler) {
       if (!clicked) {
-        props.onClick()
-        return setClicked(true);
+        setClicked(true);
       } else {
-        props.onClick()
-        return setClicked(false)
+        setClicked(false)
       }
     }
+    props.onClick()
+  }
+
+  const handleDeleteFavourite = () => {
     if (someFavouriteShow) {
       return props.deleteFavourites(someFavouriteShow, user.id);
     }
-    props.onClick()
   }
 
   return (
@@ -35,10 +34,15 @@ export default function CategoryListItem(props) {
       className={categoryclass}
       onClick={handleClick}
     >
-      <p>{props.name}</p>
+      {!clicked && <p>{props.name}</p>}
+      {clicked && <p>show spoilers</p>}
       <img src={props.img} alt=""></img>
       {someFavouriteShow && <>&nbsp;</>}
-      {someFavouriteShow && <i className="fa-regular fa-circle-xmark"></i>}
+      {someFavouriteShow &&
+        <i
+          className="fa-regular fa-circle-xmark"
+          onClick={handleDeleteFavourite}
+        ></i>}
     </div>
   );
 }

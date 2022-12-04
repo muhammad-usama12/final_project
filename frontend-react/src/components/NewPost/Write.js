@@ -1,7 +1,6 @@
 import { useState, useContext } from "react";
 import { storage } from "../../firebase/firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import axios from "axios";
 
 import "./Write.scss";
 
@@ -12,7 +11,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Button from "../Button";
 
-import { ApplicationContext } from "../App";
+import { ApplicationContext } from "../../Views/App";
 
 export default function Write(props) {
   const [text, setText] = useState("");
@@ -20,7 +19,6 @@ export default function Write(props) {
   const [selectedImage, setSelectedImage] = useState(null);
   const [previewSelectedImage, setPreviewSelectedImage] = useState(null);
   const [spoiler, setSpoiler] = useState(false);
-  const [error, setError] = useState(null);
 
   const { state } = useContext(ApplicationContext);
 
@@ -101,16 +99,13 @@ export default function Write(props) {
           onChange={(e, show) => handleChange(e, show.id)}
         />
       </form>
-
-      <div className="write-buttons">
-        <div className="left-buttons">
-          <Button
+      <div className="right-buttons">
+        <Button
             cancel
             className="button--cancel"
             message="cancel"
             onClick={cancel}
-          />
-        </div>
+        />
         <FormGroup>
           <FormControlLabel
             control={<Checkbox color="default" />}
@@ -118,30 +113,26 @@ export default function Write(props) {
             onClick={handleSpoilerToggle}
           />
         </FormGroup>
-        <div className="right-buttons">
-          <label className="button--image pill-container" for="file-upload">
-            <i className="fa-solid fa-image"></i>
-          </label>
-          <input
-            id="file-upload"
-            type="file"
-            name="myImage"
-            onChange={(event) => {
-              if (event.target.files.length !== 0) {
-                setSelectedImage(event.target.files[0]);
-                setPreviewSelectedImage(
-                  URL.createObjectURL(event.target.files[0])
-                );
-              }
-            }}
-          />
-          <Button
-            confirm
-            className="button--confirm"
-            message="greenlight"
-            onClick={() => handleSubmitPost()}
-          />
-        </div>
+        <label className="button--image pill-container" id="upload-image" for="file-upload">
+          <i className="fa-solid fa-image"></i>
+        </label>
+        <input
+          id="file-upload"
+          type="file"
+          name="myImage"
+          onChange={(event) => {
+            if (event.target.files.length !== 0) {
+              setSelectedImage(event.target.files[0]);
+              setPreviewSelectedImage(URL.createObjectURL(event.target.files[0]));
+            }
+          }}
+        />
+        <Button
+          confirm
+          className="button--confirm"
+          message="greenlight"
+          onClick={() => handleSubmitPost()}
+        />
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-@import "../../styles/variables.scss";
+@import "../styles/variables.scss";
 
 .profile-header {
   color: $secondary-colour;
@@ -149,16 +149,33 @@
     }
   }
 
-  .edit-button {
+  .edit-button-save {
     display: flex;
-    justify-content: center;
+    align-self: flex-end;
+    margin: 2rem 2rem 0rem 2rem;
     margin-top: 2rem;
     margin-bottom: 2rem;
+  }
+
+  .add-show-favourites, .add-show-database {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .add-show-database {
+    margin-top: 2rem;
+
+    .css-f779bt-MuiStack-root {
+      margin-bottom: 2rem;
+    }
   }
 
   .add-favourite-show {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     align-items: center;
     margin-top: 2rem;
     margin-bottom: 2rem;
@@ -182,36 +199,34 @@
   }
 }
 
-.profile-article {
+.posts-watchlist {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  .toggleWatchlist {
+    color: $secondary-colour;
+    font-weight: bold;
+    font-size: xx-large;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 1rem;
+    width: 30vw;
+  }
 
-  button {
-    height: 3rem;
-    background-color: transparent;
+  .toggle:hover {
+    cursor: pointer;
+  }
 
-    .fa-trash-can {
-      font-size: 30px;
-      color: $secondary-colour;
-      margin-left: 1rem;
-
-      transition-duration: 200ms;
-    }
-    .fa-trash-can:hover{
-      font-size: 30px;
-      color: rgb(149, 61, 61);
-    }
-    .fa-trash-can:active{
-      font-size: 50px;
-    }
+  .toggle-watchlist, .toggle-posts {
+    text-decoration: underline;
+    text-decoration-color: $star;
   }
 }
 
-.profile-hide-spoiler {
+.profile-article {
   display: flex;
-  align-items: center;
-  font-size: medium;
-  font-weight: 600;
-  height: 2rem;
 }
 
 .edit-profile-categories {
@@ -221,10 +236,6 @@
   justify-content: center;
   text-align: center;
   width: 80%;
-
-  .category-item {
-    height: 2rem;
-  }
   
   img {
     display: none;

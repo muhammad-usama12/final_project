@@ -2,30 +2,60 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import BeatLoader from "react-spinners/BeatLoader";
+import classNames from "classnames";
 
-import "../components/Profile/Profile.scss";
+import "./Profile.scss";
+import "../components/Watchlist.scss";
+import "../components/Button.scss";
 
 import Header from "../components/Header";
 import Spacing from "../components/Spacing";
-import CategoryListItem from "../components/CategoryListItem";
+import CategoryList from "../components/CategoryList";
+import Watchlist from "../components/Watchlist";
 import Article from "../components/Article";
 import Button from "../components/Button";
+import Footer from "../components/Footer";
+import ScrollToTop from "../components/ScrollToTop";
 
 import useApplicationData from "../hooks/useApplicationData";
-import { getPostsByUser, getShowForPost } from "../helpers/selectors";
+import useVisualMode from "../hooks/useVisualMode";
+import {
+  getPostsByUser,
+  getShowForPost,
+  getFavouritesByUser,
+} from "../helpers/selectors";
 
-export default function Profile(props) {
+export default function Profile() {
+  const WATCHLIST = "WATCHLIST";
+  const POSTS = "POSTS";
+
+  const { mode, transition, back } = useVisualMode(POSTS);
+
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState({});
+  const [togglePosts, setTogglePosts] = useState(true);
+  const [toggleWatchlist, setToggleWatchlist] = useState(false);
+
+  const clickPostsClass = classNames("toggle", {
+    "toggle-posts": togglePosts,
+  });
+
+  const clickWatchlistClass = classNames("toggle", {
+    "toggle-watchlist": toggleWatchlist,
+  });
 
   const navigate = useNavigate();
 
   const applicationData = useApplicationData();
   const {
     state,
-    handleSpoilerToggle,
     hideSpoiler,
+    handleSpoilerToggle,
+    getFilteredShows,
+    getAllShows,
     deletePost,
+    addToWatchList,
+    deleteFromWatchlist,
     logout,
     loadApplicationState,
   } = applicationData;
@@ -50,7 +80,7 @@ export default function Profile(props) {
     });
   }, [state.posts.length]);
 
-  console.log("PROPS.ID", props);
+  const favouriteShows = getFavouritesByUser(state, user.id);
 
   const posts = getPostsByUser(state, user.id);
   const articleList = posts.map((post) => {
@@ -61,11 +91,16 @@ export default function Profile(props) {
         <Article
           key={post.id}
           {...post}
+          state={state}
           show={show}
           user={user}
           spoiler={hideSpoiler && post.spoiler}
+          getFilteredShows={getFilteredShows}
+          addToWatchList={addToWatchList}
+          deleteFromWatchlist={deleteFromWatchlist}
         />
         <Button
+          trash
           message={<i className="fa-solid fa-trash-can"></i>}
           onClick={() => deletePost(post.id)}
         />
@@ -103,23 +138,70 @@ export default function Profile(props) {
               </div>
             </div>
             <Link to="/profile/edit">
-              <div className="pill-container edit-profile-button">
+              <button className="pill-container edit-profile-button">
                 edit profile
-              </div>
+              </button>
             </Link>
           </section>
-          <CategoryListItem
+          <section className="posts-watchlist">
+            <div className="toggleWatchlist">
+              <div
+                className={clickPostsClass}
+                onClick={() => {
+                  setTogglePosts(true);
+                  setToggleWatchlist(false);
+                  back();
+                }}
+              >
+                posts
+              </div>
+              <div
+                className={clickWatchlistClass}
+                onClick={() => {
+                  setToggleWatchlist(true);
+                  setTogglePosts(false);
+                  transition(WATCHLIST);
+                }}
+              >
+                watchlist
+              </div>
+            </div>
+          </section>
+          {mode === WATCHLIST && (
+            <Watchlist
+              state={state}
+              user={user}
+              deleteFromWatchlist={deleteFromWatchlist}
+            />
+          )}
+          {mode === POSTS && (
+            <section className="category-filters">
+              <CategoryList
+                state={state}
+                user={user}
+                shows={favouriteShows}
+                hideSpoilers={handleSpoilerToggle}
+                getFilteredShows={getFilteredShows}
+                getAllShows={getAllShows}
+              />
+            </section>
+          )}
+          {/* <CategoryListItem
             spoiler
             user={user}
             state={state}
             name="hide spoilers"
             onClick={handleSpoilerToggle}
-          />
-          <section className="article-container profile-article-container">
-            {articleList}
-          </section>
+          /> */}
+          {mode === POSTS && (
+            <section className="article-container profile-article-container">
+              {articleList}
+            </section>
+          )}
         </>
       )}
+      <ScrollToTop />
+      <Footer />
     </>
   );
 }

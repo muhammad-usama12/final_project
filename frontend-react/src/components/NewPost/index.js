@@ -2,8 +2,8 @@ import React from "react";
 import Create from "./Create";
 import Write from "./Write";
 import useVisualMode from "../../hooks/useVisualMode";
-import { ApplicationContext } from "../App";
-import { useState, useContext } from "react";
+import { ApplicationContext } from "../../Views/App";
+import { useContext } from "react";
 
 // We pass props from App.js
 export default function NewPost(props) {

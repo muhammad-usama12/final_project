@@ -5,11 +5,12 @@ import BeatLoader from "react-spinners/BeatLoader";
 import "./App.scss";
 import { Link } from "react-router-dom";
 
-import Header from "./Header";
-import Article from "./Article";
-import CategoryList from "./CategoryList";
-import NewPost from "./NewPost";
-import Spacing from "./Spacing";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import Article from "../components/Article";
+import CategoryList from "../components/CategoryList";
+import NewPost from "../components/NewPost";
+import Spacing from "../components/Spacing";
 
 import useApplicationData from "../hooks/useApplicationData";
 import {
@@ -17,6 +18,7 @@ import {
   getUser,
   getFavouritesByUser,
 } from "../helpers/selectors";
+import ScrollToTop from "../components/ScrollToTop";
 
 export const ApplicationContext = createContext();
 
@@ -32,6 +34,8 @@ function App() {
     getAllShows,
     deleteFavourites,
     updateFavourites,
+    addToWatchList,
+    deleteFromWatchlist,
     logout,
     saveComment,
     loadApplicationState,
@@ -46,7 +50,6 @@ function App() {
     const userId = localStorage.getItem("teeboUser");
 
     axios.get(`http://localhost:3001/api/users/${userId}`).then((res) => {
-      console.log("userid response", res.data);
       setUser(res.data);
     });
 
@@ -68,11 +71,15 @@ function App() {
       <Article
         key={post.id}
         {...post}
+        state={state}
         show={show}
         user={postUser}
         loggedInUser={user}
         saveComment={saveComment}
         spoiler={hideSpoiler && post.spoiler}
+        getFilteredShows={getFilteredShows}
+        addToWatchList={addToWatchList}
+        deleteFromWatchlist={deleteFromWatchlist}
       />
     );
   });
@@ -118,6 +125,8 @@ function App() {
           <section className="article-container">{articleList}</section>
         </main>
       )}
+      <ScrollToTop />
+      <Footer />
     </ApplicationContext.Provider>
   );
 }
