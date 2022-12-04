@@ -6,6 +6,7 @@ import TextField from "../components/TextField";
  
 import useApplicationData from "../hooks/useApplicationData";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
  
 const SignUp = () => {
  const [user, setUser] = useState({});
@@ -83,6 +84,7 @@ const SignUp = () => {
          </ButtonGroup>
        </VStack>
      </Formik>
+     <Footer />
    </>
  );
 };
