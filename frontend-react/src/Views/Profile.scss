@@ -198,6 +198,32 @@
   }
 }
 
+.posts-watchlist {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  .toggleWatchlist {
+    color: $secondary-colour;
+    font-weight: bold;
+    font-size: xx-large;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 1rem;
+    width: 30vw;
+  }
+
+  .toggle:hover {
+    cursor: pointer;
+  }
+
+  .toggle-watchlist, .toggle-posts {
+    text-decoration: underline;
+    text-decoration-color: $star;
+  }
+}
+
 .profile-article {
   display: flex;
 }

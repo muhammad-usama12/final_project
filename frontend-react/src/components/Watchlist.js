@@ -1,5 +1,5 @@
 import React from "react";
-import "./watchlist.scss"
+import "./Watchlist.scss"
 import { getWatchlistByUser } from "../helpers/selectors";
 
 export default function Watchlist(props) {
@@ -16,8 +16,11 @@ export default function Watchlist(props) {
   });
 
   return (
-    <section className="watchlist">
-      {watchlist}
+    <section className="watchlist-page">
+      <h1>{props.user.username} still needs to watch:</h1>
+      <div className="watchlist">
+        {watchlist}
+      </div>
     </section>
   );
 }
