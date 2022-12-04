@@ -66,7 +66,7 @@ function App() {
 
     // This is confusing I know but...
     // user = user for the specific post
-    // loggedInUser = the user who is logged in >>> this is used to make sure people who aren't logged in can't like posts
+    // profileUser = the user who is logged in >>> this is used to make sure people who aren't logged in can't like posts
     return (
       <Article
         key={post.id}

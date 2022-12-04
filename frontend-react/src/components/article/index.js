@@ -117,7 +117,6 @@ export default function Article(props) {
       {mode === SHOW && (
         <CommentList
           state={props.state}
-          user={props.user}
           error={error}
           postId={props.id}
           validate={validate}

@@ -4,7 +4,7 @@ import { getWatchlistByUser } from "../helpers/selectors";
 
 export default function Watchlist(props) {
 
-  const userWatchlist = getWatchlistByUser(props.state, props.user.id)
+  const userWatchlist = getWatchlistByUser(props.state, props.profileUser.id)
   console.log("props.state", userWatchlist)
   const watchlist = userWatchlist.map((show) => {
 
@@ -15,14 +15,14 @@ export default function Watchlist(props) {
       >
         {show.name}
         <>&nbsp;</>
-        <i onClick={() => props.deleteFromWatchlist(show.id, props.user.id)} className="fa-regular fa-circle-xmark"></i>
+        <i onClick={() => props.deleteFromWatchlist(show.id, props.profileUser.id)} className="fa-regular fa-circle-xmark"></i>
       </div>
     );
   });
 
   return (
     <section className="watchlist-page">
-      <h1>{props.user.username} still needs to watch:</h1>
+      <h1>{props.profileUser.username} still needs to watch:</h1>
       <div className="watchlist">
         {watchlist}
       </div>

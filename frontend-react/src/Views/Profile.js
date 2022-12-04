@@ -93,7 +93,7 @@ export default function Profile() {
           {...post}
           state={state}
           show={show}
-          user={user}
+          profileUser={user}
           spoiler={hideSpoiler && post.spoiler}
           getFilteredShows={getFilteredShows}
           addToWatchList={addToWatchList}
@@ -170,7 +170,7 @@ export default function Profile() {
           {mode === WATCHLIST && (
             <Watchlist
               state={state}
-              user={user}
+              profileUser={user}
               deleteFromWatchlist={deleteFromWatchlist}
             />
           )}

@@ -30,11 +30,12 @@ import { useParams } from "react-router-dom";
 export default function ProfileVisit(props) {
   const [loading, setLoading] = useState(false);
   const { id } = useParams();
-  const [user, setUser] = useState({ id });
+  const [user, setUser] = useState({});
+  const [profileUser, setProfileUser] = useState({ id });
   // const stateParamVal = useLocation().state;
   console.log("Props Parameter Value:", id);
   // console.log("Props State Value:", stateParamVal);
-  console.log("CURRENT USER:", user.id);
+  console.log("CURRENT USER:", profileUser.id);
 
   const WATCHLIST = "WATCHLIST";
   const POSTS = "POSTS";
@@ -51,10 +52,6 @@ export default function ProfileVisit(props) {
     "toggle-watchlist": toggleWatchlist,
   });
 
-  const navigate = useNavigate();
-
-  // const id = props.id;
-
   const applicationData = useApplicationData();
   const {
     state,
@@ -62,10 +59,9 @@ export default function ProfileVisit(props) {
     handleSpoilerToggle,
     getFilteredShows,
     getAllShows,
-    deletePost,
     addToWatchList,
-    deleteFromWatchlist,
     logout,
+    saveComment,
     loadApplicationState,
   } = applicationData;
 
@@ -77,9 +73,17 @@ export default function ProfileVisit(props) {
 
     loadApplicationState();
 
-    axios.get(`http://localhost:3001/api/users/${user.id}`).then((res) => {
-      console.log("userid response", res.data.id);
+    const userId = localStorage.getItem("teeboUser");
+
+    axios.get(`http://localhost:3001/api/users/${userId}`).then((res) => {
+      console.log("userid response", userId, res);
       setUser(res.data);
+    });
+
+
+    axios.get(`http://localhost:3001/api/users/${profileUser.id}`).then((res) => {
+      console.log("userid response", res.data.id);
+      setProfileUser(res.data);
     });
   }, []);
 
@@ -97,9 +101,9 @@ export default function ProfileVisit(props) {
   //   setUser(res.data);
   // });
 
-  const favouriteShows = getFavouritesByUser(state, user.id);
+  const favouriteShows = getFavouritesByUser(state, profileUser.id);
 
-  const posts = getPostsByUser(state, user.id);
+  const posts = getPostsByUser(state, profileUser.id);
   const articleList = posts.map((post) => {
     const show = getShowForPost(state, post.tvshow_id);
 
@@ -110,10 +114,12 @@ export default function ProfileVisit(props) {
           {...post}
           state={state}
           show={show}
-          user={user}
+          loggedInUser={user}
+          user={profileUser}
           spoiler={hideSpoiler && post.spoiler}
           getFilteredShows={getFilteredShows}
           addToWatchList={addToWatchList}
+          saveComment={saveComment}
         />
       </div>
     );
@@ -137,15 +143,15 @@ export default function ProfileVisit(props) {
           <section className="profile-header">
             <img
               className="profile-display-picture"
-              src={user.icon_url}
+              src={profileUser.icon_url}
               alt="profile"
             ></img>
             <div className="handle-and-bio">
               <div className="handle">
-                <h1>@{user.username}</h1>
+                <h1>@{profileUser.username}</h1>
               </div>
               <div className="bio">
-                <p>{user.bio}</p>
+                <p>{profileUser.bio}</p>
               </div>
             </div>
           </section>
@@ -173,12 +179,12 @@ export default function ProfileVisit(props) {
               </div>
             </div>
           </section>
-          {mode === WATCHLIST && <Watchlist state={state} user={user} />}
+          {mode === WATCHLIST && <Watchlist state={state} profileUser={profileUser} />}
           {mode === POSTS && (
             <section className="category-filters">
               <CategoryList
                 state={state}
-                user={user}
+                user={profileUser}
                 shows={favouriteShows}
                 hideSpoilers={handleSpoilerToggle}
                 getFilteredShows={getFilteredShows}
