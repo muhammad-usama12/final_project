@@ -14,6 +14,7 @@ import Spacing from "../components/Spacing";
 
 import useApplicationData from "../hooks/useApplicationData";
 import { getShowForPost, getUser, getFavouritesByUser } from "../helpers/selectors";
+import ScrollToTop from "../components/ScrollToTop";
 
 export const ApplicationContext = createContext();
 
@@ -118,6 +119,7 @@ function App() {
           <section className="article-container">{articleList}</section>
         </main>
       }
+      <ScrollToTop />
       <Footer />
     </ApplicationContext.Provider>
   );
