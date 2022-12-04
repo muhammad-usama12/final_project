@@ -1,43 +1,47 @@
-import React, { useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 import BeatLoader from "react-spinners/BeatLoader";
-import classNames from 'classnames';
+import classNames from "classnames";
 
-import "./Profile.scss"
-import "../components/Watchlist.scss"
-import "../components/Button.scss"
+import "./Profile.scss";
+import "../components/Watchlist.scss";
+import "../components/Button.scss";
 
-import Header from '../components/Header';
-import Spacing from '../components/Spacing';
-import CategoryList from '../components/CategoryList';
-import Watchlist from '../components/Watchlist';
-import Article from '../components/Article';
-import Button from '../components/Button';
-import Footer from '../components/Footer';
-import ScrollToTop from '../components/ScrollToTop';
+import Header from "../components/Header";
+import Spacing from "../components/Spacing";
+import CategoryList from "../components/CategoryList";
+import Watchlist from "../components/Watchlist";
+import Article from "../components/Article";
+import Button from "../components/Button";
+import Footer from "../components/Footer";
+import ScrollToTop from "../components/ScrollToTop";
 
-import useApplicationData from '../hooks/useApplicationData';
-import useVisualMode from '../hooks/useVisualMode';
-import { getPostsByUser, getShowForPost, getFavouritesByUser } from '../helpers/selectors';
+import useApplicationData from "../hooks/useApplicationData";
+import useVisualMode from "../hooks/useVisualMode";
+import {
+  getPostsByUser,
+  getShowForPost,
+  getFavouritesByUser,
+} from "../helpers/selectors";
 
 export default function Profile() {
   const WATCHLIST = "WATCHLIST";
   const POSTS = "POSTS";
 
-  const { mode, transition, back } = useVisualMode(POSTS)
+  const { mode, transition, back } = useVisualMode(POSTS);
 
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState({});
-  const [togglePosts, setTogglePosts] = useState(true)
-  const [toggleWatchlist, setToggleWatchlist] = useState(false)
-  
+  const [togglePosts, setTogglePosts] = useState(true);
+  const [toggleWatchlist, setToggleWatchlist] = useState(false);
+
   const clickPostsClass = classNames("toggle", {
-    "toggle-posts": togglePosts
+    "toggle-posts": togglePosts,
   });
 
   const clickWatchlistClass = classNames("toggle", {
-    "toggle-watchlist": toggleWatchlist
+    "toggle-watchlist": toggleWatchlist,
   });
 
   const navigate = useNavigate();
@@ -53,31 +57,30 @@ export default function Profile() {
     addToWatchList,
     deleteFromWatchlist,
     logout,
-    loadApplicationState
+    loadApplicationState,
   } = applicationData;
 
   useEffect(() => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    }, 500)
+    }, 500);
 
-    loadApplicationState()
+    loadApplicationState();
 
-    const userId = localStorage.getItem('teeboUser');
+    const userId = localStorage.getItem("teeboUser");
 
     if (!userId) {
-      navigate('/login')
+      navigate("/login");
     }
-    
-    axios.get(`http://localhost:3001/api/users/${userId}`)
-    .then(res => {
-      console.log("userid response", userId, res)
-      setUser(res.data)
-    })
-  },[ state.posts.length ])
 
-  const favouriteShows = getFavouritesByUser(state, user.id)
+    axios.get(`http://localhost:3001/api/users/${userId}`).then((res) => {
+      console.log("userid response", userId, res);
+      setUser(res.data);
+    });
+  }, [state.posts.length]);
+
+  const favouriteShows = getFavouritesByUser(state, user.id);
 
   const posts = getPostsByUser(state, user.id);
   const articleList = posts.map((post) => {
@@ -104,14 +107,12 @@ export default function Profile() {
       </div>
     );
   });
- 
+
   return (
     <>
-      <Header
-        logout={logout}
-      />
+      <Header logout={logout} />
       <Spacing />
-      { loading ? 
+      {loading ? (
         <BeatLoader
           className="loader"
           color={"#D9D9D9"}
@@ -120,7 +121,7 @@ export default function Profile() {
           aria-label="Loading Spinner"
           data-testid="loader"
         />
-        :
+      ) : (
         <>
           <section className="profile-header">
             <img
@@ -142,13 +143,13 @@ export default function Profile() {
               </button>
             </Link>
           </section>
-          <section className='posts-watchlist'>
-            <div className='toggleWatchlist'>
-              <div 
+          <section className="posts-watchlist">
+            <div className="toggleWatchlist">
+              <div
                 className={clickPostsClass}
                 onClick={() => {
-                  setTogglePosts(true)
-                  setToggleWatchlist(false)
+                  setTogglePosts(true);
+                  setToggleWatchlist(false);
                   back();
                 }}
               >
@@ -157,30 +158,34 @@ export default function Profile() {
               <div
                 className={clickWatchlistClass}
                 onClick={() => {
-                  setToggleWatchlist(true)
-                  setTogglePosts(false)
-                  transition(WATCHLIST)
+                  setToggleWatchlist(true);
+                  setTogglePosts(false);
+                  transition(WATCHLIST);
                 }}
               >
                 watchlist
               </div>
             </div>
           </section>
-          {mode === WATCHLIST && <Watchlist
-            state={state}
-            user={user}
-            deleteFromWatchlist={deleteFromWatchlist}
-          />}
-          {mode === POSTS && <section className="category-filters">
-            <CategoryList
+          {mode === WATCHLIST && (
+            <Watchlist
               state={state}
               user={user}
-              shows={favouriteShows}
-              hideSpoilers={handleSpoilerToggle}
-              getFilteredShows={getFilteredShows}
-              getAllShows={getAllShows}
+              deleteFromWatchlist={deleteFromWatchlist}
             />
-          </section>}
+          )}
+          {mode === POSTS && (
+            <section className="category-filters">
+              <CategoryList
+                state={state}
+                user={user}
+                shows={favouriteShows}
+                hideSpoilers={handleSpoilerToggle}
+                getFilteredShows={getFilteredShows}
+                getAllShows={getAllShows}
+              />
+            </section>
+          )}
           {/* <CategoryListItem
             spoiler
             user={user}
@@ -188,11 +193,15 @@ export default function Profile() {
             name="hide spoilers"
             onClick={handleSpoilerToggle}
           /> */}
-          {mode === POSTS && <section className="article-container profile-article-container">{articleList}</section>}
+          {mode === POSTS && (
+            <section className="article-container profile-article-container">
+              {articleList}
+            </section>
+          )}
         </>
-      }
+      )}
       <ScrollToTop />
       <Footer />
     </>
-  )
+  );
 }
