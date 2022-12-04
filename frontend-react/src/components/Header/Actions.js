@@ -1,6 +1,6 @@
 import React, { useContext }from "react";
 import { Link } from "react-router-dom";
-import { ApplicationContext } from "../App";
+import { ApplicationContext } from "../../Views/App";
 
 
 export default function Actions(props) {

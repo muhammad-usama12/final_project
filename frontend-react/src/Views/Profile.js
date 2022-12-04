@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import BeatLoader from "react-spinners/BeatLoader";
 
-import "../components/Profile/Profile.scss"
+import "./Profile.scss"
 
 import Header from '../components/Header';
 import Spacing from '../components/Spacing';

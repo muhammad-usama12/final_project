@@ -1,6 +1,6 @@
 import CommentForm from "./CommentForm";
 import CommentListItem from "./CommentListItem";
-import { ApplicationContext } from "../App";
+import { ApplicationContext } from "../../Views/App";
 import { getCommentsForPost } from "../../helpers/selectors";
 import { useContext } from "react";
 
@@ -9,7 +9,6 @@ export default function CommentList(props) {
 
   const comments = getCommentsForPost(state, props.postId);
   const commentsList = comments.reverse().map((comment) => {
-   
     return (
       <CommentListItem
         state={state}
@@ -21,16 +20,17 @@ export default function CommentList(props) {
       />
     );
   });
-  
+
   return (
     <section className="comments-container">
       <h1>the discourse:</h1>
-      {document.cookie && 
-      <CommentForm 
-      error = {props.error} 
-      postId={props.postId} 
-      validate = {props.validate}
-      />}
+      {document.cookie && (
+        <CommentForm
+          error={props.error}
+          postId={props.postId}
+          validate={props.validate}
+        />
+      )}
       <hr />
       {!document.cookie && <h5>log in to participate in the discourse :)</h5>}
       {commentsList}

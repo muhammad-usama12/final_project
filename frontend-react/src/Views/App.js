@@ -5,11 +5,11 @@ import BeatLoader from "react-spinners/BeatLoader";
 import "./App.scss";
 import { Link } from "react-router-dom";
 
-import Header from "./Header";
-import Article from "./Article";
-import CategoryList from "./CategoryList";
-import NewPost from "./NewPost";
-import Spacing from "./Spacing";
+import Header from "../components/Header";
+import Article from "../components/Article";
+import CategoryList from "../components/CategoryList";
+import NewPost from "../components/NewPost";
+import Spacing from "../components/Spacing";
 
 import useApplicationData from "../hooks/useApplicationData";
 import { getShowForPost, getUser, getFavouritesByUser } from "../helpers/selectors";
@@ -57,7 +57,6 @@ function App() {
   const articleList = state.filerteredPosts.map((post) => {
     const show = getShowForPost(state, post.tvshow_id);
     const postUser = getUser(state, post.user_id);
-
 
     // This is confusing I know but...
     // user = user for the specific post
