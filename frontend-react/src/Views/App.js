@@ -121,7 +121,7 @@ function App() {
             </h4>
           )}
 
-          {user.id && <NewPost user={user} state={state} />}
+          {user.id && <NewPost user={user} state={state}/>}
           <section className="article-container">{articleList}</section>
         </main>
       )}

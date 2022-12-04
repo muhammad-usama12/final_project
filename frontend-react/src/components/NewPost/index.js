@@ -25,6 +25,7 @@ export default function NewPost(props) {
         spoiler: spoiler,
         show: show,
       };
+      console.log("data", data)
       setError(null);
       addPost(userId, data).then(() => transition(CREATE));
     }

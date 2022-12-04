@@ -63,14 +63,14 @@ export default function EditProfile() {
   }
 
   function submitForm(e) {
-    setLoading(true);
-    if (user.username === "") {
-      setLoading(false);
-      return setError("you gotta be called SOMETHING");
-    }
-
-    console.log("attempt submit");
     e.preventDefault();
+    setLoading(true);
+
+    if (!user.username) {
+      setLoading(false);
+      setError("you gotta be called SOMETHING");
+      return setOpen(true);
+    }
 
     if (selectedImage !== null) {
       const imageRef = ref(storage, `images/${selectedImage.name}`);

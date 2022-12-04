@@ -110,7 +110,7 @@ export default function Write(props) {
           <FormControlLabel
             control={<Checkbox color="default" />}
             label="spoiler"
-            onClick={handleSpoilerToggle}
+            onChange={handleSpoilerToggle}
           />
         </FormGroup>
         <label className="button--image pill-container" id="upload-image" for="file-upload">
