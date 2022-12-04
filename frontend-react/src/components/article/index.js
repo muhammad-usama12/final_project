@@ -38,9 +38,8 @@ export default function Article(props) {
     if (text === "") {
       setError("can't get his ass with no words, bestie");
     } else {
-      props.saveComment(text, post_id).then((res) => setCommentCounter(res));
       setError(null);
-      props.saveComment(text, post_id).then((res) => setCommentCounter(res));
+      props.saveComment(text, post_id, props.loggedInUser.id).then((res) => setCommentCounter(res));
     }
   }
 

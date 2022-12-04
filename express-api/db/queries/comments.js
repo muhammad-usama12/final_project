@@ -19,7 +19,7 @@ export const addComment = async (comment) => {
      INSERT INTO comments (text, post_id, user_id) VALUES ($1, $2, $3)
      RETURNING *;
      `,
-    [...setColumns, 1]
+    [...setColumns]
   );
   return data.rows[0];
 };
