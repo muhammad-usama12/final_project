@@ -27,6 +27,10 @@
   color: $secondary-colour;
 }
 
+.pill-container:active {
+  filter: brightness(50%);
+}
+
 .pill-container:link {
   text-decoration: none;
 }
@@ -102,12 +106,5 @@
   background-color: $primary-colour;
   color: $secondary-colour;
   border: 3px solid white;
-}
-
-.show-all {
-  display: flex;
-  align-items: center;
-  font-size: medium;
-  font-weight: 600;
 }
 
