@@ -8,14 +8,16 @@ import "../components/Button.scss"
 
 import Header from '../components/Header';
 import Spacing from '../components/Spacing';
-import CategoryListItem from '../components/CategoryListItem';
+import CategoryList from '../components/CategoryList';
 import Article from '../components/Article';
 import Button from '../components/Button';
-
-import useApplicationData from '../hooks/useApplicationData'; 
-import { getPostsByUser, getShowForPost } from '../helpers/selectors';
 import Footer from '../components/Footer';
 import ScrollToTop from '../components/ScrollToTop';
+
+import useApplicationData from '../hooks/useApplicationData'; 
+import { getPostsByUser, getShowForPost, getFavouritesByUser } from '../helpers/selectors';
+
+
 
 export default function Profile() {
   const [loading, setLoading] = useState(false)
@@ -26,8 +28,10 @@ export default function Profile() {
   const applicationData = useApplicationData();
   const {
     state,
-    handleSpoilerToggle,
     hideSpoiler,
+    handleSpoilerToggle,
+    getFilteredShows,
+    getAllShows,
     deletePost,
     logout,
     loadApplicationState
@@ -54,7 +58,7 @@ export default function Profile() {
     })
   },[ state.posts.length ])
 
-  console.log("state in profile: ", state)
+  const favouriteShows = getFavouritesByUser(state, user.id)
 
   const posts = getPostsByUser(state, user.id);
   const articleList = posts.map((post) => {
@@ -69,6 +73,7 @@ export default function Profile() {
           show={show}
           user={user}
           spoiler={hideSpoiler && post.spoiler}
+          getFilteredShows={getFilteredShows}
         />
         <Button
           trash
@@ -116,13 +121,23 @@ export default function Profile() {
               </button>
             </Link>
           </section>
-          <CategoryListItem
+          <section className="category-filters">
+              <CategoryList
+                state={state}
+                user={user}
+                shows={favouriteShows}
+                hideSpoilers={handleSpoilerToggle}
+                getFilteredShows={getFilteredShows}
+                getAllShows={getAllShows}
+              />
+            </section>
+          {/* <CategoryListItem
             spoiler
             user={user}
             state={state}
             name="hide spoilers"
             onClick={handleSpoilerToggle}
-          />
+          /> */}
           <section className="article-container profile-article-container">{articleList}</section>
         </>
       }

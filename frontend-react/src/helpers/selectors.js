@@ -25,7 +25,7 @@ export function getUser(state, userId) {
 }
 
 export function getPostsByUser(state, userId) {
-  const posts = state.posts;
+  const posts = state.filerteredPosts;
 
   let foundPostsArr = posts.filter(post => post.user_id === userId);
 
