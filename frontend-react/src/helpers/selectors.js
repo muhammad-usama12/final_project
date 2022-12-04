@@ -42,10 +42,30 @@ export function getFavouritesByUser (state, userId) {
     let someShow;
     for (let show of shows) {
       if (show.id === favourite.tvshow_id) {
-        someShow = show
+        someShow = show;
       }
     }
     return someShow;
   })
+  
   return allFavouriteShows;
+}
+
+export function getWatchlistByUser (state, userId) {
+  const shows = state.shows;
+  const watchlist = state.watchlist;
+
+  let watchlistShowsForUser = watchlist.filter(watchlistShow => watchlistShow.user_id === userId);
+
+  let allWatchlistShows = watchlistShowsForUser.map(watchlistShow => {
+    let someShow;
+    for (let show of shows) {
+      if (show.id === watchlistShow.tvshow_id) {
+        someShow = show;
+      }
+    }
+    return someShow;
+  });
+
+  return allWatchlistShows;
 }

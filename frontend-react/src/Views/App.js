@@ -30,6 +30,8 @@ function App() {
     getAllShows,
     deleteFavourites,
     updateFavourites,
+    addToWatchList,
+    deleteFromWatchlist,
     logout,
     saveComment,
     loadApplicationState
@@ -73,6 +75,8 @@ function App() {
         saveComment = {saveComment}
         spoiler={hideSpoiler && post.spoiler}
         getFilteredShows={getFilteredShows}
+        addToWatchList={addToWatchList}
+        deleteFromWatchlist={deleteFromWatchlist}
       />
     );
   });

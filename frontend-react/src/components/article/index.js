@@ -8,22 +8,21 @@ import CategoryTag from "./CategoryTag";
 import CommentList from "./CommentList";
 
 import useVisualMode from "../../hooks/useVisualMode";
+import { getWatchlistByUser } from "../../helpers/selectors";
 
 export default function Article(props) {
   // This checks if props.spoiler is true, and if it is, apply the "spoiler" class to blur spoiler posts
   const ifSpoilerClass = classNames("screen", { spoiler: props.spoiler });
+
   const [error, setError] = useState(null);
   const [likecounter, setLikecounter] = useState(props.total_likes);
   const [liked, setLiked] = useState(false);
   const [commentCounter, setCommentCounter] = useState(props.total_comments);
+
   const post_id = props.id;
 
   const SHOW = "SHOW";
   const HIDE = "HIDE";
-
-  const likeButtonClass = classNames("fa-solid fa-star", {
-    "liked" : liked
-  });
 
   const { mode, transition, back } = useVisualMode(HIDE);
 
@@ -59,6 +58,28 @@ export default function Article(props) {
       .catch((err) => console.error(err));
   };
 
+  //******* HARDCODED USER ID */
+  const watchlistShows = getWatchlistByUser(props.state, 1)
+  const currentWatchlistShow = watchlistShows.find 
+  (watchlistShows => watchlistShows.id === props.show.id);
+
+  // console.log("currentWatchlistShow???", currentWatchlistShow)
+
+  const handleWatchlistAction = () => {
+    if (currentWatchlistShow) {
+      return props.deleteFromWatchlist(props.show.id, 1);
+    } else {
+      return props.addToWatchList(props.show.id, 1);
+    }
+  }
+  
+  const likeButtonClass = classNames("fa-solid fa-star", {
+    "liked": liked
+  });
+  const watchlistButtonClass = classNames("fa-solid fa-circle-plus", {
+    "watchlisted": currentWatchlistShow
+  });
+
   return (
     <article>
       <div className="screen-and-buttons">
@@ -84,7 +105,10 @@ export default function Article(props) {
             ></i>
             <p>{commentCounter}</p>
 
-            <i className="fa-solid fa-circle-plus"></i>
+            <i
+              className={watchlistButtonClass}
+              onClick={handleWatchlistAction}
+            ></i>
           </div>
         </div>
       </div>

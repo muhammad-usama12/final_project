@@ -54,6 +54,9 @@ article {
         .fa-circle-plus:hover {
           color: $watchlist;
         }
+        .watchlisted {
+          color: $watchlist;
+        }
         .fa-circle-plus:active {
           text-shadow: 30px -15px $watchlist;
         }
