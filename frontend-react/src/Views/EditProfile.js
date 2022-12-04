@@ -200,7 +200,7 @@ export default function EditProfile() {
               <form>
                 <div>
                   <input
-                    id="combo-box-demo"
+                    id="username"
                     name="username"
                     type="text"
                     placeholder="who are you king"
