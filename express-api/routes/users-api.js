@@ -20,7 +20,7 @@ router.get("/", (req, res) => {
     });
 });
 
-router.get('/:id', async (req, res) => {
+router.get("/:id", async (req, res) => {
   const id = Number(req.params.id);
 
   try {
@@ -31,7 +31,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-router.put('/:id', async (req, res) => {
+router.put("/:id", async (req, res) => {
   const id = Number(req.params.id);
   try {
     const user = await updateUser(id, req.body);
@@ -39,6 +39,6 @@ router.put('/:id', async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
-})
+});
 
 export default router;
