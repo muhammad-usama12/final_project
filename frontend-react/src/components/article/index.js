@@ -6,8 +6,9 @@ import "./Article.scss";
 
 import CategoryTag from "./CategoryTag";
 import CommentList from "./CommentList";
-
+import { useNavigate } from "react-router-dom";
 import useVisualMode from "../../hooks/useVisualMode";
+import { useParams, Link } from "react-router-dom";
 
 export default function Article(props) {
   // This checks if props.spoiler is true, and if it is, apply the "spoiler" class to blur spoiler posts
@@ -16,13 +17,15 @@ export default function Article(props) {
   const [likecounter, setLikecounter] = useState(props.total_likes);
   const [liked, setLiked] = useState(false);
   const [commentCounter, setCommentCounter] = useState(props.total_comments);
+  const [user, setUser] = useState({});
   const post_id = props.id;
+  const navigate = useNavigate();
 
   const SHOW = "SHOW";
   const HIDE = "HIDE";
 
   const likeButtonClass = classNames("fa-solid fa-star", {
-    "liked" : liked
+    liked: liked,
   });
 
   const { mode, transition, back } = useVisualMode(HIDE);
@@ -39,8 +42,7 @@ export default function Article(props) {
     if (text === "") {
       setError("can't get his ass with no words, bestie");
     } else {
-      props.saveComment(text, post_id)
-      .then((res) =>setCommentCounter(res))
+      props.saveComment(text, post_id).then((res) => setCommentCounter(res));
     }
   }
 
@@ -53,11 +55,10 @@ export default function Article(props) {
       .put(`/api/posts/${post_id}/like`)
       .then((res) => {
         setLikecounter(() => res.data.total_likes);
-        setLiked(!liked)
+        setLiked(!liked);
       })
       .catch((err) => console.error(err));
   };
-
   return (
     <article>
       <div className="screen-and-buttons">
@@ -66,16 +67,15 @@ export default function Article(props) {
           <img className="article-image" src={props.image} alt=""></img>
         </div>
         <div className="article-buttons">
-          <img
-            className="profile-icon"
-            src={props.user.icon_url}
-            alt={props.user.user_name}
-          ></img>
+          <Link to={`/profile/${props.user.id}`}>
+            <img
+              className="profile-icon"
+              src={props.user.icon_url}
+              alt={props.user.user_name}
+            ></img>
+          </Link>
           <div className="actions">
-            <i
-              className={likeButtonClass}
-              onClick={addLike}
-            ></i>
+            <i className={likeButtonClass} onClick={addLike}></i>
             <p>{likecounter}</p>
             <i
               className="fa-solid fa-comment-dots"
@@ -89,14 +89,14 @@ export default function Article(props) {
       </div>
       <CategoryTag name={props.show.name} />
 
-      {mode === SHOW && 
-      <CommentList 
-      user={props.user}
-      error = {error} 
-      postId={props.id} 
-      validate = {validate}
-      />}
-
+      {mode === SHOW && (
+        <CommentList
+          user={props.user}
+          error={error}
+          postId={props.id}
+          validate={validate}
+        />
+      )}
     </article>
   );
 }
