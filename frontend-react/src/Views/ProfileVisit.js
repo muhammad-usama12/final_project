@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import axios from "axios";
 import BeatLoader from "react-spinners/BeatLoader";
 import classNames from "classnames";
@@ -13,7 +13,6 @@ import Spacing from "../components/Spacing";
 import CategoryList from "../components/CategoryList";
 import Watchlist from "../components/Watchlist";
 import Article from "../components/Article";
-import Button from "../components/Button";
 import Footer from "../components/Footer";
 import ScrollToTop from "../components/ScrollToTop";
 
@@ -32,6 +31,9 @@ export default function ProfileVisit(props) {
   const { id } = useParams();
   const [user, setUser] = useState({});
   const [profileUser, setProfileUser] = useState({ id });
+  
+  const navigate = useNavigate();
+
   // const stateParamVal = useLocation().state;
   console.log("Props Parameter Value:", id);
   // console.log("Props State Value:", stateParamVal);
@@ -85,6 +87,10 @@ export default function ProfileVisit(props) {
       console.log("userid response", res.data.id);
       setProfileUser(res.data);
     });
+
+    if (profileUser.id === userId) {
+      navigate('/profile');
+    }
   }, []);
 
   // const handleChange = async (query) => {
