@@ -1,4 +1,3 @@
-import "./edit.scss";
 import React, { useEffect, useState } from "react";
 import { storage } from "../firebase/firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
