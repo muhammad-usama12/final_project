@@ -8,7 +8,6 @@ import BeatLoader from "react-spinners/BeatLoader";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import Alert from '@mui/material/Alert';
-import Stack from '@mui/material/Stack';
 import Snackbar from '@mui/material/Snackbar';
 import Header from "../components/Header";
 import Spacing from "../components/Spacing";
@@ -257,9 +256,9 @@ export default function EditProfile() {
                     isOptionEqualToValue={(option, value) =>
                       option.value === value.value
                     }
-                    sx={{ width: 300 }}
+                    sx={{ width: 500 }}
                     renderInput={(params) => (
-                      <TextField {...params} label="show" />
+                      <TextField {...params} label="add favourite show?" />
                     )}
                     onChange={(e, show) => setNewFavouriteShowId(show.id)}
                   />
@@ -267,7 +266,7 @@ export default function EditProfile() {
                     className="add-favourite"
                     confirm
                     type="submit"
-                    message="add favourite show"
+                    message="add"
                     onClick={onAddFavouritesHandler}
                   />
                 </form>
@@ -281,13 +280,14 @@ export default function EditProfile() {
                   id="outlined-basic"
                   onChange={(e) => setSearch(e.target.value)}
                   variant="outlined"
-                  label="add a new show?"
+                  label="add new show?"
+                  sx={{ width: 500 }}
                 />
                 <Button
                   className="add-newshow"
                   confirm
                   type="submit"
-                  message="add new show"
+                  message="add"
                   onClick={onSearchHandler}
                 />
               </form>

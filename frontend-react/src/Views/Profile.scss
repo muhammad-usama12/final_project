@@ -175,6 +175,7 @@
   .add-favourite-show {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     align-items: center;
     margin-top: 2rem;
     margin-bottom: 2rem;
