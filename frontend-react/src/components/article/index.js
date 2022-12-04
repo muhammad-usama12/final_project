@@ -6,9 +6,8 @@ import "./Article.scss";
 
 import CategoryTag from "./CategoryTag";
 import CommentList from "./CommentList";
-import { useNavigate } from "react-router-dom";
 import useVisualMode from "../../hooks/useVisualMode";
-import { useParams, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { getWatchlistByUser } from "../../helpers/selectors";
 
 export default function Article(props) {
@@ -22,7 +21,6 @@ export default function Article(props) {
   const [user, setUser] = useState({});
 
   const post_id = props.id;
-  const navigate = useNavigate();
 
   const SHOW = "SHOW";
   const HIDE = "HIDE";
@@ -121,6 +119,7 @@ export default function Article(props) {
 
       {mode === SHOW && (
         <CommentList
+          state={props.state}
           user={props.user}
           error={error}
           postId={props.id}

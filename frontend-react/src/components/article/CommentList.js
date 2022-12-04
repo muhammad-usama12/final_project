@@ -4,6 +4,7 @@ import { getCommentsForPost } from "../../helpers/selectors";
 
 export default function CommentList(props) {
   const state = props.state;
+  console.log("state in comment list" , state)
 
   const comments = getCommentsForPost(state, props.postId);
   const commentsList = comments.reverse().map((comment) => {
