@@ -30,7 +30,7 @@ export const addFavourite = async (favourite) => {
       `,
     [...setColumns]
   );
-  
+
   return data.rows[0];
 };
 

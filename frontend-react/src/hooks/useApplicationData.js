@@ -143,7 +143,7 @@ export default function useApplicationData() {
     );
     const response = await axios.post(`/api/shows/new`, {
       name: data[0].show.name,
-      image_url: data[0].show.image.medium,
+      image_url: data[0].show.image.medium
     });
 
     setState((prev) => ({ ...prev, shows: [...prev.shows, response.data] }));

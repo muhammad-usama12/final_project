@@ -7,7 +7,7 @@ import BeatLoader from "react-spinners/BeatLoader";
 
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
-import Alert from '@mui/material/Alert';
+import MuiAlert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
 import Header from "../components/Header";
 import Spacing from "../components/Spacing";
@@ -28,6 +28,10 @@ export default function EditProfile() {
   const [previewSelectedImage, setPreviewSelectedImage] = useState(null);
   const [newFavouriteShowId, setNewFavouriteShowId] = useState(null);
   const [search, setSearch] = useState("");
+
+  const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  })
 
   const navigate = useNavigate();
 
@@ -96,14 +100,15 @@ export default function EditProfile() {
     }
   }
 
-  const submitText = () => {
+  const submitText = (e) => {
     const payload = { bio: user.bio, username: user.username };
-    console.log("profile update success payload", payload);
     axios
       .put(`http://localhost:3001/api/users/${user.id}`, payload)
       .then(() => navigate("/profile"))
       .catch((err) => {
         if (err.response.status === 500) {
+          setLoading(false);
+          setOpen(true);
           setError("that username is taken luv, xx");
         }
       });
@@ -112,8 +117,10 @@ export default function EditProfile() {
   const onAddFavouritesHandler = (e) => {
     e.preventDefault();
     if (!newFavouriteShowId || !user.id) {
+      setOpen(true)
       return setError("can't add nothing luv xx")
     } else {
+      setError(null)
       return updateFavourites(newFavouriteShowId, user.id);
     }
   }
@@ -147,10 +154,15 @@ export default function EditProfile() {
     e.preventDefault();
 
     if (search === "") {
+      setOpen(true);
       return setError("um... enter a show to find a show");
     } else {
-      newShow(search);
-      setOpen(true)
+      newShow(search)
+      .then(() => setOpen(true))
+      .catch(() => {
+        setError("we already have that show babe");
+        setOpen(true);
+      })
     }
   }
 
@@ -244,7 +256,6 @@ export default function EditProfile() {
                   <Button confirm message="save" onClick={submitForm} />
               </div>
             </div>
-            {error !== "" && <p className="error">{error}</p>}
             <div className="edit-profile-shows">
               <div className="add-show-favourites">
                 <h1>what are your favourite shows, luv</h1>
@@ -291,11 +302,16 @@ export default function EditProfile() {
                   onClick={onSearchHandler}
                 />
               </form>
-                <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                {error && <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} >
+                  <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+                    {error}
+                  </Alert>
+                </Snackbar>}
+                {!error && <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
                   <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
                     show added! thank you :)
                   </Alert>
-                </Snackbar>
+                </Snackbar>}
             </div>
           </section>
           <Footer />
