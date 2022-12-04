@@ -51,10 +51,10 @@ export default function useApplicationData() {
 
   const commentCounter = (postId) => {
     return axios.post(`/api/comments/${postId}/counter`)
-      .then(res => console.log("res after counter by 1", res))
-      .catch((err) => console.log("err from commentcouneter", err))
+      .then(res => res)
+      .catch((err) => console.error(err))
   }
-  
+
   const saveComment = async (text, postId) => {
     try {
       const response = await axios
@@ -62,25 +62,27 @@ export default function useApplicationData() {
           text: text,
           postId: postId,
         })
-        const comments = [...state.comments]
-        comments.push(response.data)
-        setState({ ...state, comments })
-        return (await commentCounter(response.data.post_id)).data.count
+      const comments = [...state.comments]
+      comments.push(response.data)
+      setState({ ...state, comments })
+      const afterreturn = await commentCounter(response.data.post_id)
+      return afterreturn.data.total_comments
+
     } catch (error) {
-      console.error("error from save",error)
+      console.error("error from save", error)
     }
   }
 
-  function addPost (id, data)  {
+  function addPost(id, data) {
     return axios
       .post(`/api/posts/${id}/new`, {
-      data: data
-    })
-    .then((res) => {
-      const posts = [...state.posts]
-      posts.push(res.data)
-      setState({ ...state, posts })
-    })
+        data: data
+      })
+      .then((res) => {
+        const posts = [...state.posts]
+        posts.push(res.data)
+        setState({ ...state, posts })
+      })
   };
 
   const deletePost = (id) => {
@@ -92,7 +94,7 @@ export default function useApplicationData() {
             posts.splice(i, 1)
           }
         }
-        setState((prev) => ({...prev, posts}))
+        setState((prev) => ({ ...prev, posts }))
       })
       .catch((err) => console.log("delete failed", err.message));
   };
@@ -107,13 +109,13 @@ export default function useApplicationData() {
       user_id: userId,
       tvshow_id: tvShowId
     })
-    .then((res) => {
-      const favourites = [...state.favourites]
-      favourites.push(res.data)
-      setState({ ...state, favourites })
-      console.log("update success")
-    })
-    .catch(err => console.log("update favourites failed", err.message))
+      .then((res) => {
+        const favourites = [...state.favourites]
+        favourites.push(res.data)
+        setState({ ...state, favourites })
+        console.log("update success")
+      })
+      .catch(err => console.log("update favourites failed", err.message))
   }
 
   const deleteFavourites = (tvShowId, userId) => {
@@ -121,29 +123,29 @@ export default function useApplicationData() {
       user_id: userId,
       tvshow_id: tvShowId
     })
-    .then((res) => {
-      console.log(res.data)
-      const favourites = [...state.favourites]
-      for (let i = 0; i < favourites.length; i++) {
-        if (favourites[i].id === res.data.id) {
-          favourites.splice(i, 1)
+      .then((res) => {
+        console.log(res.data)
+        const favourites = [...state.favourites]
+        for (let i = 0; i < favourites.length; i++) {
+          if (favourites[i].id === res.data.id) {
+            favourites.splice(i, 1)
+          }
         }
-      }
-      setState((prev) => ({...prev, favourites}))
-      console.log("delete success")
-    })
-    .catch(err => console.log("deleted favourites failed", err.message))
+        setState((prev) => ({ ...prev, favourites }))
+        console.log("delete success")
+      })
+      .catch(err => console.log("deleted favourites failed", err.message))
   }
 
   const logout = () => {
     axios.post(`/api/auth/logout`)
-    .then(() => {
-      console.log("successful log out")
-      setState((prev) => ({ ...prev, loggedIn: false }));
-      localStorage.clear();
-      navigate("/login");
-    })
-    .catch(err => console.log("logout failed", err.message))
+      .then(() => {
+        console.log("successful log out")
+        setState((prev) => ({ ...prev, loggedIn: false }));
+        localStorage.clear();
+        navigate("/login");
+      })
+      .catch(err => console.log("logout failed", err.message))
   }
 
   const handleSpoilerToggle = () => {

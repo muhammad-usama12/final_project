@@ -14,6 +14,7 @@ export default function Article(props) {
   const ifSpoilerClass = classNames("screen", { spoiler: props.spoiler });
   const [error, setError] = useState(null);
   const [likecounter, setLikecounter] = useState(props.total_likes);
+  const [commentCounter, setCommentCounter] = useState(props.total_comments);
   const post_id = props.id;
 
   const SHOW = "SHOW";
@@ -34,6 +35,7 @@ export default function Article(props) {
       setError("can't get his ass with no words, bestie");
     } else {
       props.saveComment(text, post_id)
+      .then((res) =>setCommentCounter(res))
     }
   }
 
@@ -73,7 +75,7 @@ export default function Article(props) {
               className="fa-solid fa-comment-dots"
               onClick={toggleComments}
             ></i>
-            <p>{props.total_comments}</p>
+            <p>{commentCounter}</p>
 
             <i className="fa-solid fa-circle-plus"></i>
           </div>
