@@ -207,7 +207,6 @@
   align-items: center;
   font-size: medium;
   font-weight: 600;
-  height: 2rem;
 }
 
 .edit-profile-categories {
@@ -217,10 +216,6 @@
   justify-content: center;
   text-align: center;
   width: 80%;
-
-  .category-item {
-    height: 2rem;
-  }
   
   img {
     display: none;

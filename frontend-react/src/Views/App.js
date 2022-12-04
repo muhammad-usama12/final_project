@@ -71,6 +71,7 @@ function App() {
         loggedInUser={user}
         saveComment = {saveComment}
         spoiler={hideSpoiler && post.spoiler}
+        getFilteredShows={getFilteredShows}
       />
     );
   });

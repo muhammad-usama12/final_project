@@ -4,8 +4,8 @@ import "../Category.scss"
 // The show name that appears on the bottom of an article
 export default function CategoryTag(props) {
   return (
-    <div className="pill-container">
+    <button className="pill-container" onClick={props.onClick}>
       {props.name}
-    </div>
+    </button>
   );
 }

@@ -110,9 +110,9 @@ export default function Profile() {
               </div>
             </div>
             <Link to="/profile/edit">
-              <div className="pill-container edit-profile-button">
+              <button className="pill-container edit-profile-button">
                 edit profile
-              </div>
+              </button>
             </Link>
           </section>
           <CategoryListItem

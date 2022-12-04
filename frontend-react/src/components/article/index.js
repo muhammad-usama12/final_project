@@ -39,8 +39,9 @@ export default function Article(props) {
     if (text === "") {
       setError("can't get his ass with no words, bestie");
     } else {
+      setError(null);
       props.saveComment(text, post_id)
-      .then((res) =>setCommentCounter(res))
+        .then((res) =>setCommentCounter(res));
     }
   }
 
@@ -87,7 +88,10 @@ export default function Article(props) {
           </div>
         </div>
       </div>
-      <CategoryTag name={props.show.name} />
+      <CategoryTag
+        name={props.show.name}
+        onClick={() => props.getFilteredShows(props.show.id)}
+      />
 
       {mode === SHOW && 
       <CommentList 

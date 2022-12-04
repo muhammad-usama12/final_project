@@ -114,9 +114,6 @@ export default function useApplicationData() {
   };
 
   const updateFavourites = (tvShowId, userId) => {
-    if (!tvShowId) {
-      return;
-    }
     axios
       .post(`/api/favourites/new`, {
         user_id: userId,

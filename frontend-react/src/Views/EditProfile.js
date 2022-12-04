@@ -9,6 +9,7 @@ import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
+import Snackbar from '@mui/material/Snackbar';
 import Header from "../components/Header";
 import Spacing from "../components/Spacing";
 import Button from "../components/Button";
@@ -20,28 +21,15 @@ import Footer from "../components/Footer";
 
 export default function EditProfile() {
   const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
   const [error, setError] = useState(null);
 
-  const [added, setAdded] = useState(false)
   const [user, setUser] = useState({});
   const [selectedImage, setSelectedImage] = useState(null);
   const [previewSelectedImage, setPreviewSelectedImage] = useState(null);
   const [newFavouriteShowId, setNewFavouriteShowId] = useState(null);
   const [search, setSearch] = useState("");
 
-  const onSearchHandler = (e) => {
-    e.preventDefault();
-
-    if (search === "") {
-      return setError("enter a show to find a show");
-    } else {
-      newShow(search);
-      setAdded(true);
-      setTimeout(() => {
-        setAdded(false);
-      }, 10000)
-    }
-  };
   const navigate = useNavigate();
 
   const applicationData = useApplicationData();
@@ -74,6 +62,7 @@ export default function EditProfile() {
   function submitForm(e) {
     setLoading(true);
     if (user.username === "") {
+      setLoading(false);
       return setError("you gotta be called SOMETHING");
     }
 
@@ -121,6 +110,15 @@ export default function EditProfile() {
       });
   };
 
+  const onAddFavouritesHandler = (e) => {
+    e.preventDefault();
+    if (!newFavouriteShowId || !user.id) {
+      return setError("can't add nothing luv xx")
+    } else {
+      return updateFavourites(newFavouriteShowId, user.id);
+    }
+  }
+
   const showsArr = state.shows;
   const shows = showsArr.map((show) => {
     return {
@@ -128,11 +126,6 @@ export default function EditProfile() {
       id: show.id,
     };
   });
-
-  const handleAddFavourite = (e, showId) => {
-    console.log(showId);
-    setNewFavouriteShowId(showId);
-  };
 
   const favouriteShowsArr = getFavouritesByUser(state, user.id);
 
@@ -150,6 +143,25 @@ export default function EditProfile() {
       />
     );
   });
+
+  const onSearchHandler = (e) => {
+    e.preventDefault();
+
+    if (search === "") {
+      return setError("um... enter a show to find a show");
+    } else {
+      newShow(search);
+      setOpen(true)
+    }
+  }
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
 
   return (
     <>
@@ -249,16 +261,14 @@ export default function EditProfile() {
                     renderInput={(params) => (
                       <TextField {...params} label="show" />
                     )}
-                    onChange={(e, show) => handleAddFavourite(e, show.id)}
+                    onChange={(e, show) => setNewFavouriteShowId(show.id)}
                   />
                   <Button
                     className="add-favourite"
                     confirm
                     type="submit"
                     message="add favourite show"
-                    onClick={() => {
-                      updateFavourites(newFavouriteShowId, user.id);
-                    }}
+                    onClick={onAddFavouritesHandler}
                   />
                 </form>
                 <div className="edit-profile-categories">{favouriteShows}</div>
@@ -281,10 +291,11 @@ export default function EditProfile() {
                   onClick={onSearchHandler}
                 />
               </form>
-              {added &&
-                <Stack sx={{ width: '100%' }} spacing={2}>
-                  <Alert severity="success">show added! thank you :)</Alert>
-                </Stack>}
+                <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                  <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                    show added! thank you :)
+                  </Alert>
+                </Snackbar>
             </div>
           </section>
           <Footer />

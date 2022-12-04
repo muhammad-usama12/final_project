@@ -7,18 +7,18 @@ export default function Actions(props) {
     <>
       <div className="guest-actions">
         {!document.cookie && <Link to="/login">
-        <div className="pill-container">login</div>
+        <button className="pill-container">login</button>
         </Link>}
         {!document.cookie && <Link to="/signup">
-        <div className="pill-container">sign up</div>
+        <button className="pill-container">sign up</button>
         </Link>}
         {document.cookie && <Link to="/profile">
-          <div className="pill-container">
+          <button className="pill-container">
             profile
-          </div>
+          </button>
         </Link>}
         {document.cookie && <Link to="/login">
-          <div className="pill-container" onClick={props.logout}>log out</div>
+          <button className="pill-container" onClick={props.logout}>log out</button>
         </Link>}
 
       </div> 
