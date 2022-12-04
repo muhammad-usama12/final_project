@@ -14,11 +14,16 @@ export default function Article(props) {
   const ifSpoilerClass = classNames("screen", { spoiler: props.spoiler });
   const [error, setError] = useState(null);
   const [likecounter, setLikecounter] = useState(props.total_likes);
+  const [liked, setLiked] = useState(false);
   const [commentCounter, setCommentCounter] = useState(props.total_comments);
   const post_id = props.id;
 
   const SHOW = "SHOW";
   const HIDE = "HIDE";
+
+  const likeButtonClass = classNames("fa-solid fa-star", {
+    "liked" : liked
+  });
 
   const { mode, transition, back } = useVisualMode(HIDE);
 
@@ -48,6 +53,7 @@ export default function Article(props) {
       .put(`/api/posts/${post_id}/like`)
       .then((res) => {
         setLikecounter(() => res.data.total_likes);
+        setLiked(!liked)
       })
       .catch((err) => console.error(err));
   };
@@ -67,7 +73,7 @@ export default function Article(props) {
           ></img>
           <div className="actions">
             <i
-              className="fa-solid fa-star"
+              className={likeButtonClass}
               onClick={addLike}
             ></i>
             <p>{likecounter}</p>

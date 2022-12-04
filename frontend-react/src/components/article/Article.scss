@@ -44,6 +44,9 @@ article {
         .fa-star:hover {
           color: $star;
         }
+        .liked {
+          color: $star;
+        }
         .fa-star:active {
           text-shadow: 30px -15px $star;
         }
@@ -111,7 +114,8 @@ article {
       }
     
       .timestamp {
-        font-size: medium;
+        font-size: small;
+        font-family: monospace;
         margin: 0.3rem 1rem 0.3rem 1rem;
       }
     }

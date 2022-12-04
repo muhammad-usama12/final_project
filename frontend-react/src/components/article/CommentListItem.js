@@ -1,4 +1,5 @@
 import React from "react";
+import Moment from 'react-moment';
 import { getUser } from "../../helpers/selectors";
 
 export default function CommentListItem(props) {
@@ -19,7 +20,7 @@ export default function CommentListItem(props) {
         </img>
       </div>
       <div className="timestamp">
-        {props.timestamp}
+       <Moment fromNow>{props.timestamp}</Moment>
       </div>
     </div>
   );
