@@ -2,18 +2,30 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import BeatLoader from "react-spinners/BeatLoader";
+import classNames from "classnames";
 
-import "../components/Profile/Profile.scss";
+import "./Profile.scss";
+import "../components/Watchlist.scss";
+import "../components/Button.scss";
 
 import Header from "../components/Header";
 import Spacing from "../components/Spacing";
-import CategoryListItem from "../components/CategoryListItem";
+import CategoryList from "../components/CategoryList";
+import Watchlist from "../components/Watchlist";
 import Article from "../components/Article";
 import Button from "../components/Button";
+import Footer from "../components/Footer";
+import ScrollToTop from "../components/ScrollToTop";
 
 import useApplicationData from "../hooks/useApplicationData";
-import { getPostsByUser, getShowForPost } from "../helpers/selectors";
-import { useParams, useLocation } from "react-router-dom";
+import useVisualMode from "../hooks/useVisualMode";
+import {
+  getPostsByUser,
+  getShowForPost,
+  getFavouritesByUser,
+} from "../helpers/selectors";
+
+import { useParams } from "react-router-dom";
 
 export default function ProfileVisit(props) {
   const [loading, setLoading] = useState(false);
@@ -24,15 +36,35 @@ export default function ProfileVisit(props) {
   // console.log("Props State Value:", stateParamVal);
   console.log("CURRENT USER:", user.id);
 
+  const WATCHLIST = "WATCHLIST";
+  const POSTS = "POSTS";
+
+  const { mode, transition, back } = useVisualMode(POSTS);
+  const [togglePosts, setTogglePosts] = useState(true);
+  const [toggleWatchlist, setToggleWatchlist] = useState(false);
+
+  const clickPostsClass = classNames("toggle", {
+    "toggle-posts": togglePosts,
+  });
+
+  const clickWatchlistClass = classNames("toggle", {
+    "toggle-watchlist": toggleWatchlist,
+  });
+
+  const navigate = useNavigate();
+
   // const id = props.id;
-  // const navigate = useNavigate();
 
   const applicationData = useApplicationData();
   const {
     state,
-    handleSpoilerToggle,
     hideSpoiler,
+    handleSpoilerToggle,
+    getFilteredShows,
+    getAllShows,
     deletePost,
+    addToWatchList,
+    deleteFromWatchlist,
     logout,
     loadApplicationState,
   } = applicationData;
@@ -49,7 +81,7 @@ export default function ProfileVisit(props) {
       console.log("userid response", res.data.id);
       setUser(res.data);
     });
-  }, [user.id]);
+  }, []);
 
   // const handleChange = async (query) => {
   //   await axios
@@ -65,8 +97,9 @@ export default function ProfileVisit(props) {
   //   setUser(res.data);
   // });
 
+  const favouriteShows = getFavouritesByUser(state, user.id);
+
   const posts = getPostsByUser(state, user.id);
-  console.log("USER POSTS:", posts);
   const articleList = posts.map((post) => {
     const show = getShowForPost(state, post.tvshow_id);
 
@@ -75,16 +108,20 @@ export default function ProfileVisit(props) {
         <Article
           key={post.id}
           {...post}
+          state={state}
           show={show}
           user={user}
           spoiler={hideSpoiler && post.spoiler}
+          getFilteredShows={getFilteredShows}
+          addToWatchList={addToWatchList}
         />
       </div>
     );
   });
+
   return (
     <>
-      <Header />
+      <Header logout={logout} />
       <Spacing />
       {loading ? (
         <BeatLoader
@@ -112,18 +149,59 @@ export default function ProfileVisit(props) {
               </div>
             </div>
           </section>
-          <CategoryListItem
-            spoiler
-            user={user}
-            state={state}
-            name="hide spoilers"
-            onClick={handleSpoilerToggle}
-          />
-          <section className="article-container profile-article-container">
-            {articleList}
+          <section className="posts-watchlist">
+            <div className="toggleWatchlist">
+              <div
+                className={clickPostsClass}
+                onClick={() => {
+                  setTogglePosts(true);
+                  setToggleWatchlist(false);
+                  back();
+                }}
+              >
+                posts
+              </div>
+              <div
+                className={clickWatchlistClass}
+                onClick={() => {
+                  setToggleWatchlist(true);
+                  setTogglePosts(false);
+                  transition(WATCHLIST);
+                }}
+              >
+                watchlist
+              </div>
+            </div>
           </section>
+          {mode === WATCHLIST && <Watchlist state={state} user={user} />}
+          {mode === POSTS && (
+            <section className="category-filters">
+              <CategoryList
+                state={state}
+                user={user}
+                shows={favouriteShows}
+                hideSpoilers={handleSpoilerToggle}
+                getFilteredShows={getFilteredShows}
+                getAllShows={getAllShows}
+              />
+            </section>
+          )}
+          {/* <CategoryListItem
+              spoiler
+              user={user}
+              state={state}
+              name="hide spoilers"
+              onClick={handleSpoilerToggle}
+            /> */}
+          {mode === POSTS && (
+            <section className="article-container profile-article-container">
+              {articleList}
+            </section>
+          )}
         </>
       )}
+      <ScrollToTop />
+      <Footer />
     </>
   );
 }
