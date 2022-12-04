@@ -43,7 +43,6 @@ function App() {
 
     axios.get(`http://localhost:3001/api/users/${userId}`)
       .then(res => {
-        console.log("userid response", res.data);
         setUser(res.data);
       })
 
@@ -65,6 +64,7 @@ function App() {
       <Article
         key={post.id}
         {...post}
+        state={state}
         show={show}
         user={postUser}
         loggedInUser={user}

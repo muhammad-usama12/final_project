@@ -4,6 +4,7 @@ import axios from 'axios';
 import BeatLoader from "react-spinners/BeatLoader";
 
 import "./Profile.scss"
+import "../components/Button.scss"
 
 import Header from '../components/Header';
 import Spacing from '../components/Spacing';
@@ -51,6 +52,8 @@ export default function Profile() {
     })
   },[ state.posts.length ])
 
+  console.log("state in profile: ", state)
+
   const posts = getPostsByUser(state, user.id);
   const articleList = posts.map((post) => {
     const show = getShowForPost(state, post.tvshow_id);
@@ -60,11 +63,13 @@ export default function Profile() {
         <Article
           key={post.id}
           {...post}
+          state={state}
           show={show}
           user={user}
           spoiler={hideSpoiler && post.spoiler}
         />
         <Button
+          trash
           message={<i className="fa-solid fa-trash-can"></i>}
           onClick={() => deletePost(post.id)}
         />

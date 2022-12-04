@@ -95,6 +95,7 @@ export default function Article(props) {
       error = {error} 
       postId={props.id} 
       validate = {validate}
+      state={props.state}
       />}
 
     </article>

@@ -1,7 +1,6 @@
 import { useState, useContext } from "react";
 import { storage } from "../../firebase/firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import axios from "axios";
 
 import "./Write.scss";
 
@@ -20,7 +19,6 @@ export default function Write(props) {
   const [selectedImage, setSelectedImage] = useState(null);
   const [previewSelectedImage, setPreviewSelectedImage] = useState(null);
   const [spoiler, setSpoiler] = useState(false);
-  const [error, setError] = useState(null);
 
   const { state } = useContext(ApplicationContext);
 
@@ -119,7 +117,7 @@ export default function Write(props) {
           />
         </FormGroup>
         <div className="right-buttons">
-          <label className="button--image pill-container" for="file-upload">
+          <label className="button--image pill-container" id="upload-image" for="file-upload">
             <i className="fa-solid fa-image"></i>
           </label>
           <input
