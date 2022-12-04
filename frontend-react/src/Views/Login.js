@@ -5,6 +5,7 @@ import { useNavigate } from "react-router";
 import TextField from "../components/TextField";
 
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 import useApplicationData from "../hooks/useApplicationData";
 
 export const LoginContext = createContext();
@@ -87,6 +88,7 @@ export default function Login() {
           </ButtonGroup>
         </VStack>
       </Formik>
+      <Footer />
     </>
   );
 };

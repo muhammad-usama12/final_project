@@ -1,11 +1,7 @@
-import React, { useContext }from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { ApplicationContext } from "../../Views/App";
-
 
 export default function Actions(props) {
-  // const { logout  } = useContext(ApplicationContext)
-
 
   return (
     <>
@@ -17,10 +13,7 @@ export default function Actions(props) {
         <div className="pill-container">sign up</div>
         </Link>}
         {document.cookie && <Link to="/profile">
-          <div 
-            className="pill-container"
-            onClick={props.toggleProfile}
-          >
+          <div className="pill-container">
             profile
           </div>
         </Link>}

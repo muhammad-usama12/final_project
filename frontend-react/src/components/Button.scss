@@ -32,6 +32,26 @@ button:active {
   margin-right: 1rem;
 }
 
+.button--garbage {
+  height: 3rem;
+  background-color: transparent;
+
+  .fa-trash-can {
+    font-size: 30px;
+    color: $secondary-colour;
+    margin-left: 1rem;
+
+    transition-duration: 200ms;
+  }
+  .fa-trash-can:hover{
+    font-size: 30px;
+    color: rgb(149, 61, 61);
+  }
+  .fa-trash-can:active{
+    font-size: 50px;
+  }
+}
+
 .button--confirm:hover, .button--cancel:hover, .button--image:hover {
   filter: saturate(200%);
 }

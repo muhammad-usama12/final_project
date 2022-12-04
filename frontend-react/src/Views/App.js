@@ -6,6 +6,7 @@ import "./App.scss";
 import { Link } from "react-router-dom";
 
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 import Article from "../components/Article";
 import CategoryList from "../components/CategoryList";
 import NewPost from "../components/NewPost";
@@ -43,7 +44,6 @@ function App() {
 
     axios.get(`http://localhost:3001/api/users/${userId}`)
       .then(res => {
-        console.log("userid response", res.data);
         setUser(res.data);
       })
 
@@ -65,6 +65,7 @@ function App() {
       <Article
         key={post.id}
         {...post}
+        state={state}
         show={show}
         user={postUser}
         loggedInUser={user}
@@ -116,6 +117,7 @@ function App() {
           <section className="article-container">{articleList}</section>
         </main>
       }
+      <Footer />
     </ApplicationContext.Provider>
   );
 }

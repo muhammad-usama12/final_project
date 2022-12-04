@@ -7,6 +7,8 @@ import BeatLoader from "react-spinners/BeatLoader";
 
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
+import Alert from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
 import Header from "../components/Header";
 import Spacing from "../components/Spacing";
 import Button from "../components/Button";
@@ -14,11 +16,13 @@ import CategoryListItem from "../components/CategoryListItem";
 
 import useApplicationData from "../hooks/useApplicationData";
 import { getFavouritesByUser } from "../helpers/selectors";
+import Footer from "../components/Footer";
 
 export default function EditProfile() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  const [added, setAdded] = useState(false)
   const [user, setUser] = useState({});
   const [selectedImage, setSelectedImage] = useState(null);
   const [previewSelectedImage, setPreviewSelectedImage] = useState(null);
@@ -32,6 +36,10 @@ export default function EditProfile() {
       return setError("enter a show to find a show");
     } else {
       newShow(search);
+      setAdded(true);
+      setTimeout(() => {
+        setAdded(false);
+      }, 10000)
     }
   };
   const navigate = useNavigate();
@@ -200,7 +208,7 @@ export default function EditProfile() {
               <form>
                 <div>
                   <input
-                    id="combo-box-demo"
+                    id="username"
                     name="username"
                     type="text"
                     placeholder="who are you king"
@@ -221,56 +229,65 @@ export default function EditProfile() {
                   <p>bio</p>
                 </div>
               </form>
-            </div>
-            {error !== "" && <p className="error">{error}</p>}
-            <h1>don't see a show? add it!</h1>
-            <form className="add-favourite-show">
-              <TextField
-                id="outlined-basic"
-                onChange={(e) => setSearch(e.target.value)}
-                variant="outlined"
-                label="add a new show?"
-              />
-              <Button
-                className="add-newshow"
-                confirm
-                type="submit"
-                message="add new show"
-                onClick={onSearchHandler}
-              />
-            </form>
-            <div className="edit-profile-shows">
-              <h1>what are your favourite shows, luv</h1>
-              <form className="add-favourite-show">
-                <Autocomplete
-                  disablePortal
-                  id="combo-box-demo"
-                  options={shows}
-                  isOptionEqualToValue={(option, value) =>
-                    option.value === value.value
-                  }
-                  sx={{ width: 300 }}
-                  renderInput={(params) => (
-                    <TextField {...params} label="show" />
-                  )}
-                  onChange={(e, show) => handleAddFavourite(e, show.id)}
-                />
-                <Button
-                  className="add-favourite"
-                  confirm
-                  type="submit"
-                  message="add show"
-                  onClick={() => {
-                    updateFavourites(newFavouriteShowId, user.id);
-                  }}
-                />
-              </form>
-              <div className="edit-profile-categories">{favouriteShows}</div>
-              <div className="edit-button">
-                <Button confirm message="save" onClick={submitForm} />
+              <div className="edit-button-save">
+                  <Button confirm message="save" onClick={submitForm} />
               </div>
             </div>
+            {error !== "" && <p className="error">{error}</p>}
+            <div className="edit-profile-shows">
+              <div className="add-show-favourites">
+                <h1>what are your favourite shows, luv</h1>
+                <form className="add-favourite-show">
+                  <Autocomplete
+                    disablePortal
+                    id="combo-box-demo"
+                    options={shows}
+                    isOptionEqualToValue={(option, value) =>
+                      option.value === value.value
+                    }
+                    sx={{ width: 300 }}
+                    renderInput={(params) => (
+                      <TextField {...params} label="show" />
+                    )}
+                    onChange={(e, show) => handleAddFavourite(e, show.id)}
+                  />
+                  <Button
+                    className="add-favourite"
+                    confirm
+                    type="submit"
+                    message="add favourite show"
+                    onClick={() => {
+                      updateFavourites(newFavouriteShowId, user.id);
+                    }}
+                  />
+                </form>
+                <div className="edit-profile-categories">{favouriteShows}</div>
+              </div>
+            </div>
+            <div className="add-show-database">
+              <h1>don't see a show? help us populate our database!</h1>
+              <form className="add-favourite-show">
+                <TextField
+                  id="outlined-basic"
+                  onChange={(e) => setSearch(e.target.value)}
+                  variant="outlined"
+                  label="add a new show?"
+                />
+                <Button
+                  className="add-newshow"
+                  confirm
+                  type="submit"
+                  message="add new show"
+                  onClick={onSearchHandler}
+                />
+              </form>
+              {added &&
+                <Stack sx={{ width: '100%' }} spacing={2}>
+                  <Alert severity="success">show added! thank you :)</Alert>
+                </Stack>}
+            </div>
           </section>
+          <Footer />
         </>
       )}
     </>

@@ -1,11 +1,9 @@
 import CommentForm from "./CommentForm";
 import CommentListItem from "./CommentListItem";
-import { ApplicationContext } from "../../Views/App";
 import { getCommentsForPost } from "../../helpers/selectors";
-import { useContext } from "react";
 
 export default function CommentList(props) {
-  const { state } = useContext(ApplicationContext);
+  const state = props.state;
 
   const comments = getCommentsForPost(state, props.postId);
   const commentsList = comments.reverse().map((comment) => {

@@ -58,6 +58,10 @@
     display: flex;
     justify-content: space-between;
     margin-top: 1rem;
+
+    #upload-image {
+      background-color: $image;
+    }
   }
 
   .dropdown {
