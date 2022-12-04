@@ -24,6 +24,7 @@ import {
   getShowForPost,
   getFavouritesByUser,
 } from "../helpers/selectors";
+import { propNames } from "@chakra-ui/react";
 
 export default function Profile() {
   const WATCHLIST = "WATCHLIST";
@@ -57,6 +58,7 @@ export default function Profile() {
     addToWatchList,
     deleteFromWatchlist,
     logout,
+    saveComment,
     loadApplicationState,
   } = applicationData;
 
@@ -99,6 +101,7 @@ export default function Profile() {
           getFilteredShows={getFilteredShows}
           addToWatchList={addToWatchList}
           deleteFromWatchlist={deleteFromWatchlist}
+          saveComment={saveComment}
         />
         <Button
           trash

@@ -7,7 +7,7 @@ export default function CommentForm(props) {
 
   const handleSubmit = event => {
     event.preventDefault(); 
-    props.validate(text)
+    props.validate(text);
     setText('');
     };
 
