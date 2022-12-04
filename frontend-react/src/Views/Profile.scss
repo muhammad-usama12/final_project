@@ -149,11 +149,23 @@
     }
   }
 
-  .edit-button {
+  .edit-button-save {
     display: flex;
-    justify-content: center;
+    align-self: flex-end;
+    margin: 2rem 2rem 0rem 2rem;
     margin-top: 2rem;
     margin-bottom: 2rem;
+  }
+
+  .add-show-favourites, .add-show-database {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .add-show-database {
+    margin-top: 2rem;
   }
 
   .add-favourite-show {
