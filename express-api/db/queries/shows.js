@@ -1,7 +1,7 @@
 import db from "../connection.js";
 
 export const getMovies = async () => {
-  const data = await db.query("SELECT * FROM tvshows");
+  const data = await db.query("SELECT * FROM tvshows ORDER BY name ASC");
   return data.rows;
 };
 

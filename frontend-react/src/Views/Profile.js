@@ -9,6 +9,7 @@ import "../components/Button.scss"
 import Header from '../components/Header';
 import Spacing from '../components/Spacing';
 import CategoryList from '../components/CategoryList';
+import Watchlist from '../components/Watchlist';
 import Article from '../components/Article';
 import Button from '../components/Button';
 import Footer from '../components/Footer';
@@ -16,8 +17,6 @@ import ScrollToTop from '../components/ScrollToTop';
 
 import useApplicationData from '../hooks/useApplicationData'; 
 import { getPostsByUser, getShowForPost, getFavouritesByUser } from '../helpers/selectors';
-
-
 
 export default function Profile() {
   const [loading, setLoading] = useState(false)
@@ -125,6 +124,10 @@ export default function Profile() {
               </button>
             </Link>
           </section>
+          <Watchlist
+            state={state}
+            user={user}
+          />
           <section className="category-filters">
               <CategoryList
                 state={state}
