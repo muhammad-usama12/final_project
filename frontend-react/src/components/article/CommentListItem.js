@@ -1,10 +1,9 @@
 import React from "react";
-import Moment from 'react-moment';
+import Moment from "react-moment";
 import { getUser } from "../../helpers/selectors";
 
 export default function CommentListItem(props) {
-
-  const userOfComment = getUser(props.state, props.user)
+  const userOfComment = getUser(props.state, props.user);
 
   return (
     <div className="comment-item">
@@ -12,15 +11,14 @@ export default function CommentListItem(props) {
         <div className="screen">
           <p>{props.text}</p>
         </div>
-        <img 
+        <img
           className="profile-icon"
           src={userOfComment.icon_url}
           alt="profile"
-        >
-        </img>
+        ></img>
       </div>
       <div className="timestamp">
-       <Moment fromNow>{props.timestamp}</Moment>
+        <Moment fromNow>{props.timestamp}</Moment>
       </div>
     </div>
   );
