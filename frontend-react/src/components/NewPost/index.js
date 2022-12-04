@@ -2,7 +2,7 @@ import React from "react";
 import Create from "./Create";
 import Write from "./Write";
 import useVisualMode from "../../hooks/useVisualMode";
-import { ApplicationContext } from "../App";
+import { ApplicationContext } from "../../Views/App";
 import { useState, useContext} from "react";
 
 // We pass props from App.js

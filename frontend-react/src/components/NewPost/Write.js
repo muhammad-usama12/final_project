@@ -11,7 +11,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Button from "../Button";
 
-import { ApplicationContext } from "../App";
+import { ApplicationContext } from "../../Views/App";
 
 export default function Write(props) {
   const [text, setText] = useState("");

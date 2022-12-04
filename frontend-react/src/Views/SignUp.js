@@ -1,16 +1,14 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { Button, ButtonGroup, Heading, Text, VStack } from "@chakra-ui/react";
 import { Form, Formik } from "formik";
 import { useNavigate } from "react-router";
-import TextField from "./TextField";
-import { AccountContext } from "../AccountContext";
+import TextField from "../components/TextField";
  
-import useApplicationData from "../../hooks/useApplicationData";
-import Header from "../Header";
+import useApplicationData from "../hooks/useApplicationData";
+import Header from "../components/Header";
  
 const SignUp = () => {
  const [user, setUser] = useState({});
- // const { setUser } = useContext(AccountContext);
  const { error, setError } = useApplicationData();
  
  const navigate = useNavigate();
@@ -82,9 +80,6 @@ const SignUp = () => {
            <Button colorScheme="teal" type="submit">
              Create Account
            </Button>
-           {/* <Button onClick={() => navigate("/")} leftIcon={<ArrowBackIcon />}>
-             Back
-           </Button> */}
          </ButtonGroup>
        </VStack>
      </Formik>

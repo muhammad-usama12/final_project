@@ -1,6 +1,6 @@
 import React,  { useContext } from "react";
 import "./Header.scss";
-import { ApplicationContext } from "../App";
+import { ApplicationContext } from "../../Views/App";
 
 import Actions from "./Actions";
 import { Link } from "react-router-dom";

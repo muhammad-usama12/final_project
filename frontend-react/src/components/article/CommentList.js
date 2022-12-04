@@ -1,6 +1,6 @@
 import CommentForm from "./CommentForm";
 import CommentListItem from "./CommentListItem";
-import { ApplicationContext } from "../App";
+import { ApplicationContext } from "../../Views/App";
 import { getCommentsForPost } from "../../helpers/selectors";
 import { useContext } from "react";
 
