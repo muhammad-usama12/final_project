@@ -1,24 +1,24 @@
-import React, { useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 import BeatLoader from "react-spinners/BeatLoader";
 
-import "../components/Profile/Profile.scss"
+import "../components/Profile/Profile.scss";
 
-import Header from '../components/Header';
-import Spacing from '../components/Spacing';
-import CategoryListItem from '../components/CategoryListItem';
-import Article from '../components/Article';
-import Button from '../components/Button';
+import Header from "../components/Header";
+import Spacing from "../components/Spacing";
+import CategoryListItem from "../components/CategoryListItem";
+import Article from "../components/Article";
+import Button from "../components/Button";
 
-import useApplicationData from '../hooks/useApplicationData'; 
-import { getPostsByUser, getShowForPost } from '../helpers/selectors';
+import useApplicationData from "../hooks/useApplicationData";
+import { getPostsByUser, getShowForPost } from "../helpers/selectors";
 
-export default function Profile() {
-  const [loading, setLoading] = useState(false)
-  const [user, setUser] = useState({})
+export default function Profile(props) {
+  const [loading, setLoading] = useState(false);
+  const [user, setUser] = useState({});
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const applicationData = useApplicationData();
   const {
@@ -27,29 +27,30 @@ export default function Profile() {
     hideSpoiler,
     deletePost,
     logout,
-    loadApplicationState
+    loadApplicationState,
   } = applicationData;
 
   useEffect(() => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    }, 500)
+    }, 500);
 
-    loadApplicationState()
+    loadApplicationState();
 
-    const userId = localStorage.getItem('teeboUser');
+    const userId = localStorage.getItem("teeboUser");
 
     if (!userId) {
-      navigate('/login')
+      navigate("/login");
     }
-    
-    axios.get(`http://localhost:3001/api/users/${userId}`)
-    .then(res => {
-      console.log("userid response", userId, res)
-      setUser(res.data)
-    })
-  },[ state.posts.length ])
+
+    axios.get(`http://localhost:3001/api/users/${userId}`).then((res) => {
+      console.log("userid response", userId, res);
+      setUser(res.data);
+    });
+  }, [state.posts.length]);
+
+  console.log("PROPS.ID", props);
 
   const posts = getPostsByUser(state, user.id);
   const articleList = posts.map((post) => {
@@ -71,14 +72,12 @@ export default function Profile() {
       </div>
     );
   });
- 
+
   return (
     <>
-      <Header
-        logout={logout}
-      />
+      <Header logout={logout} />
       <Spacing />
-      { loading ? 
+      {loading ? (
         <BeatLoader
           className="loader"
           color={"#D9D9D9"}
@@ -87,7 +86,7 @@ export default function Profile() {
           aria-label="Loading Spinner"
           data-testid="loader"
         />
-        :
+      ) : (
         <>
           <section className="profile-header">
             <img
@@ -116,9 +115,11 @@ export default function Profile() {
             name="hide spoilers"
             onClick={handleSpoilerToggle}
           />
-          <section className="article-container profile-article-container">{articleList}</section>
+          <section className="article-container profile-article-container">
+            {articleList}
+          </section>
         </>
-      }
+      )}
     </>
-  )
+  );
 }

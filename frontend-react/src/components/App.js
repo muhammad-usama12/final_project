@@ -12,13 +12,17 @@ import NewPost from "./NewPost";
 import Spacing from "./Spacing";
 
 import useApplicationData from "../hooks/useApplicationData";
-import { getShowForPost, getUser, getFavouritesByUser } from "../helpers/selectors";
+import {
+  getShowForPost,
+  getUser,
+  getFavouritesByUser,
+} from "../helpers/selectors";
 
 export const ApplicationContext = createContext();
 
 function App() {
-  const [loading, setLoading] = useState(false)
-  const [user, setUser] = useState({})
+  const [loading, setLoading] = useState(false);
+  const [user, setUser] = useState({});
   const applicationData = useApplicationData();
   const {
     state,
@@ -30,34 +34,32 @@ function App() {
     updateFavourites,
     logout,
     saveComment,
-    loadApplicationState
+    loadApplicationState,
   } = applicationData;
 
   useEffect(() => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    }, 500)
+    }, 500);
 
-    const userId = localStorage.getItem('teeboUser');
+    const userId = localStorage.getItem("teeboUser");
 
-    axios.get(`http://localhost:3001/api/users/${userId}`)
-      .then(res => {
-        console.log("userid response", res.data);
-        setUser(res.data);
-      })
+    axios.get(`http://localhost:3001/api/users/${userId}`).then((res) => {
+      console.log("userid response", res.data);
+      setUser(res.data);
+    });
 
     loadApplicationState();
-  }, [ state.posts.length, state.favourites.length ]);
+  }, [state.posts.length, state.favourites.length]);
 
-  const favouriteShows = getFavouritesByUser(state, user.id)
+  const favouriteShows = getFavouritesByUser(state, user.id);
 
-  console.log("user", user)
+  console.log("user", user);
 
   const articleList = state.filerteredPosts.map((post) => {
     const show = getShowForPost(state, post.tvshow_id);
     const postUser = getUser(state, post.user_id);
-
 
     // This is confusing I know but...
     // user = user for the specific post
@@ -69,20 +71,17 @@ function App() {
         show={show}
         user={postUser}
         loggedInUser={user}
-        saveComment = {saveComment}
+        saveComment={saveComment}
         spoiler={hideSpoiler && post.spoiler}
       />
     );
   });
 
   return (
-    
     <ApplicationContext.Provider value={applicationData}>
-      <Header
-        logout={logout}
-      />
+      <Header logout={logout} />
       <Spacing />
-      { loading ?
+      {loading ? (
         <BeatLoader
           className="loader"
           color={"#D9D9D9"}
@@ -91,9 +90,9 @@ function App() {
           aria-label="Loading Spinner"
           data-testid="loader"
         />
-        :
+      ) : (
         <main>
-          { user.id &&
+          {user.id && (
             <section className="category-filters">
               <CategoryList
                 state={state}
@@ -106,17 +105,19 @@ function App() {
                 getAllShows={getAllShows}
               />
             </section>
-          }
-          {favouriteShows.length === 0 && user.id &&
-          <h4>you have no favourite shows! :( <br /><Link to="/profile/edit">add your favourite shows</Link> to filter them :)</h4>}
+          )}
+          {favouriteShows.length === 0 && user.id && (
+            <h4>
+              you have no favourite shows! :( <br />
+              <Link to="/profile/edit">add your favourite shows</Link> to filter
+              them :)
+            </h4>
+          )}
 
-          {user.id && <NewPost
-            user={user}
-            state={state}
-          />}
+          {user.id && <NewPost user={user} state={state} />}
           <section className="article-container">{articleList}</section>
         </main>
-      }
+      )}
     </ApplicationContext.Provider>
   );
 }
