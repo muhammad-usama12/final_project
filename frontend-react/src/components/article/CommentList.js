@@ -9,7 +9,6 @@ export default function CommentList(props) {
 
   const comments = getCommentsForPost(state, props.postId);
   const commentsList = comments.reverse().map((comment) => {
-   
     return (
       <CommentListItem
         state={state}
@@ -21,16 +20,17 @@ export default function CommentList(props) {
       />
     );
   });
-  
+
   return (
     <section className="comments-container">
       <h1>the discourse:</h1>
-      {document.cookie && 
-      <CommentForm 
-      error = {props.error} 
-      postId={props.postId} 
-      validate = {props.validate}
-      />}
+      {document.cookie && (
+        <CommentForm
+          error={props.error}
+          postId={props.postId}
+          validate={props.validate}
+        />
+      )}
       <hr />
       {!document.cookie && <h5>log in to participate in the discourse :)</h5>}
       {commentsList}
