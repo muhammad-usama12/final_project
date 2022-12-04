@@ -16,6 +16,7 @@ import CategoryListItem from "../components/CategoryListItem";
 
 import useApplicationData from "../hooks/useApplicationData";
 import { getFavouritesByUser } from "../helpers/selectors";
+import Footer from "../components/Footer";
 
 export default function EditProfile() {
   const [loading, setLoading] = useState(false);
@@ -38,7 +39,7 @@ export default function EditProfile() {
       setAdded(true);
       setTimeout(() => {
         setAdded(false);
-      }, 3000)
+      }, 10000)
     }
   };
   const navigate = useNavigate();
@@ -286,6 +287,7 @@ export default function EditProfile() {
                 </Stack>}
             </div>
           </section>
+          <Footer />
         </>
       )}
     </>

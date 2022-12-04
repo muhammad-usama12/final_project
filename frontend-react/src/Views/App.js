@@ -6,6 +6,7 @@ import "./App.scss";
 import { Link } from "react-router-dom";
 
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 import Article from "../components/Article";
 import CategoryList from "../components/CategoryList";
 import NewPost from "../components/NewPost";
@@ -116,6 +117,7 @@ function App() {
           <section className="article-container">{articleList}</section>
         </main>
       }
+      <Footer />
     </ApplicationContext.Provider>
   );
 }

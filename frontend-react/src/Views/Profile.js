@@ -14,6 +14,7 @@ import Button from '../components/Button';
 
 import useApplicationData from '../hooks/useApplicationData'; 
 import { getPostsByUser, getShowForPost } from '../helpers/selectors';
+import Footer from '../components/Footer';
 
 export default function Profile() {
   const [loading, setLoading] = useState(false)
@@ -124,6 +125,7 @@ export default function Profile() {
           <section className="article-container profile-article-container">{articleList}</section>
         </>
       }
+      <Footer />
     </>
   )
 }
