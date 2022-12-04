@@ -18,7 +18,6 @@ export default function Article(props) {
   const [likecounter, setLikecounter] = useState(props.total_likes);
   const [liked, setLiked] = useState(false);
   const [commentCounter, setCommentCounter] = useState(props.total_comments);
-  const [user, setUser] = useState({});
 
   const post_id = props.id;
 
@@ -59,18 +58,16 @@ export default function Article(props) {
       .catch((err) => console.error(err));
   };
 
-  const watchlistShows = getWatchlistByUser(props.state, props.user.id);
+  const watchlistShows = getWatchlistByUser(props.state, props.loggedInUser.id);
   const currentWatchlistShow = watchlistShows.find(
     (watchlistShows) => watchlistShows.id === props.show.id
   );
 
-  // console.log("currentWatchlistShow???", currentWatchlistShow)
-
   const handleWatchlistAction = () => {
     if (currentWatchlistShow) {
-      return props.deleteFromWatchlist(props.show.id, props.user.id);
+      return props.deleteFromWatchlist(props.show.id, props.loggedInUser.id);
     } else {
-      return props.addToWatchList(props.show.id, props.user.id);
+      return props.addToWatchList(props.show.id, props.loggedInUser.id);
     }
   };
 

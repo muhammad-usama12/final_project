@@ -26,7 +26,7 @@ export default function ScrollToTop() {
         className="scroll-to-top"
         onClick={handleScrollToTop}
       >
-        <i class="fa-solid fa-arrow-up"></i>
+        <i className="fa-solid fa-arrow-up"></i>
       </button>}
     </>
   );

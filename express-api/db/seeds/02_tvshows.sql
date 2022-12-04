@@ -26,3 +26,13 @@ INSERT INTO tvshows (name, description, image_url) VALUES ('Parks and Recreation
 
 
 INSERT INTO tvshows (name, description, image_url) VALUES ('Game of Thrones', 'Based on the bestselling book series A Song of Ice and Fire by George R.R. Martin, this sprawling new HBO drama is set in a world where summers span decades and winters can last a lifetime. From the scheming south and the savage eastern lands, to the frozen north and ancient Wall that protects the realm from the mysterious darkness beyond, the powerful families of the Seven Kingdoms are locked in a battle for the Iron Throne. This is a story of duplicity and treachery, nobility and honor, conquest and triumph. In the Game of Thrones, you either win or you die.', 'https://static.tvmaze.com/uploads/images/medium_portrait/190/476117.jpg');
+
+INSERT INTO tvshows (name, image_url) VALUES ('The Jerry Springer Show', 'https://static.tvmaze.com/uploads/images/medium_portrait/23/59098.jpg');
+
+INSERT INTO tvshows (name, image_url) VALUES ('Black Mirror', 'https://static.tvmaze.com/uploads/images/medium_portrait/240/601964.jpg');
+
+INSERT INTO tvshows (name, image_url) VALUES ('Pushing Daisies', 'https://static.tvmaze.com/uploads/images/medium_portrait/6/16104.jpg');
+
+INSERT INTO tvshows (name, image_url) VALUES ('Nathan for You', 'https://static.tvmaze.com/uploads/images/medium_portrait/326/816434.jpg');
+
+INSERT INTO tvshows (name, image_url) VALUES ('The Rehearsal', 'https://static.tvmaze.com/uploads/images/medium_portrait/414/1036529.jpg');

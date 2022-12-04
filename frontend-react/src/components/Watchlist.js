@@ -5,6 +5,7 @@ import { getWatchlistByUser } from "../helpers/selectors";
 export default function Watchlist(props) {
 
   const userWatchlist = getWatchlistByUser(props.state, props.user.id)
+  console.log("props.state", userWatchlist)
   const watchlist = userWatchlist.map((show) => {
 
     return (
