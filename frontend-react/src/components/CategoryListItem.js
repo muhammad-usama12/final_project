@@ -9,9 +9,12 @@ export default function CategoryListItem(props) {
   const categoryclass = classNames("pill-container category-item", {
     "profile-hide-spoiler": props.spoiler,
     "show-all": props.showAll,
-    "clicked": props.spoiler && clicked
+    "clicked": props.spoiler && clicked,
+    "pill-image": props.img,
+   
   });
 
+  console.log("props in item", props)
   const someFavouriteShow = props.tvShowId;
 
   const handleClick = () => {
@@ -31,14 +34,16 @@ export default function CategoryListItem(props) {
   }
 
   return (
+    <>
     <div
       className={categoryclass}
       onClick={handleClick}
     >
-      <p>{props.name}</p>
+      <p className="show-name">{props.name}</p>
       <img src={props.img} alt=""></img>
       {someFavouriteShow && <>&nbsp;</>}
       {someFavouriteShow && <i className="fa-regular fa-circle-xmark"></i>}
     </div>
+    </>
   );
 }

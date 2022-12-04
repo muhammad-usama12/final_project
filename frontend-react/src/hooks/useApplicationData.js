@@ -101,16 +101,17 @@ export default function useApplicationData() {
   };
 
   const newShow = async (query) => {
-    const { data } = await axios.get(
+     const { data } = await axios.get(
       `https://api.tvmaze.com/search/shows?q=${query}`
     );
-    const response = await axios.post(`/api/shows/new`, {
+     const response = await axios.post(`/api/shows/new`, {
       name: data[0].show.name,
       image_url: data[0].show.image.medium,
     });
 
     setState((prev) => ({ ...prev, shows: [...prev.shows, response.data] }));
-    console.log("data from tv maze:", data[0].show.name, data[0].show.id);
+    console.log("data from tv maze:", data);
+    return response.data;
   };
 
   const updateFavourites = (tvShowId, userId) => {

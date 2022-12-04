@@ -53,7 +53,7 @@ export default function Article(props) {
       .put(`/api/posts/${post_id}/like`)
       .then((res) => {
         setLikecounter(() => res.data.total_likes);
-        setLiked(!liked)
+       
       })
       .catch((err) => console.error(err));
   };

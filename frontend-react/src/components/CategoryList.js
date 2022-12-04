@@ -1,12 +1,17 @@
 import React from "react";
-
+import classNames from "classnames";
 import "./Category.scss";
-
 import CategoryListItem from "./CategoryListItem";
 
 export default function CategoryList(props) {
 
+  
   const categoriesArray = props.shows;
+
+  const categoryListClass = classNames("category-list", {
+    "overflow" : categoriesArray.length > 4
+  });
+
   const categories = categoriesArray.map((category) => (
     <CategoryListItem
       state={props.state}
@@ -16,6 +21,7 @@ export default function CategoryList(props) {
       key={category.id}
       name={category.name}
       img={category.image_url}
+      favLength = {categoriesArray.length}
       onClick={() => props.getFilteredShows(category.id)}
     />
   ));
@@ -38,7 +44,7 @@ export default function CategoryList(props) {
           state={props.state}
         />
       </div>
-      <div className="category-list">{categories}</div>
+      <div className={categoryListClass}>{categories}</div>
     </>
   );
 }

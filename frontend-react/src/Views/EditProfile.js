@@ -62,7 +62,7 @@ export default function EditProfile() {
     if (!userId) {
       navigate("/login");
     }
-    axios.get(`http://localhost:3001/api/users/${userId}`).then((res) => {
+    axios.get(`/api/users/${userId}`).then((res) => {
       setUser(res.data);
     });
   }, [state.favourites.length]);
