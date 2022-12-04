@@ -82,6 +82,9 @@ app.use("/api/comments", commentsRoutes);
 import { default as userTvShowRoutes } from "./routes/user_tvshowRoutes.js";
 app.use("/api/favourites", userTvShowRoutes);
 
+import { default as watchlistRoutes } from "./routes/watchlistRoutes.js";
+app.use("/api/watchlist", watchlistRoutes);
+
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
