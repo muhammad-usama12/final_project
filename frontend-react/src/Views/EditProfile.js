@@ -7,6 +7,8 @@ import BeatLoader from "react-spinners/BeatLoader";
 
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
+import Alert from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
 import Header from "../components/Header";
 import Spacing from "../components/Spacing";
 import Button from "../components/Button";
@@ -19,6 +21,7 @@ export default function EditProfile() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  const [added, setAdded] = useState(false)
   const [user, setUser] = useState({});
   const [selectedImage, setSelectedImage] = useState(null);
   const [previewSelectedImage, setPreviewSelectedImage] = useState(null);
@@ -32,6 +35,10 @@ export default function EditProfile() {
       return setError("enter a show to find a show");
     } else {
       newShow(search);
+      setAdded(true);
+      setTimeout(() => {
+        setAdded(false);
+      }, 3000)
     }
   };
   const navigate = useNavigate();
@@ -273,6 +280,10 @@ export default function EditProfile() {
                   onClick={onSearchHandler}
                 />
               </form>
+              {added &&
+                <Stack sx={{ width: '100%' }} spacing={2}>
+                  <Alert severity="success">show added! thank you :)</Alert>
+                </Stack>}
             </div>
           </section>
         </>
