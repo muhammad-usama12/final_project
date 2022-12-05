@@ -90,6 +90,9 @@ export default function Profile() {
   const articleList = posts.map((post) => {
     const show = getShowForPost(state, post.tvshow_id);
 
+    // user = user for the specific post
+    // loggedInUser = the user who is logged in
+    // they are the same here because this is for the loggedInUser's profile *** DONT REMOVE ***
     return (
       <div className="profile-article">
         <Article

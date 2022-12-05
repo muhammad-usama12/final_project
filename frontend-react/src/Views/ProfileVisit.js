@@ -29,7 +29,7 @@ import { useParams } from "react-router-dom";
 export default function ProfileVisit(props) {
   const [loading, setLoading] = useState(false);
   const { id } = useParams();
-  const [user, setUser] = useState({});
+  const [loggedInUser, setloggedInUser] = useState({});
   const [profileUser, setProfileUser] = useState({ id });
   
   const navigate = useNavigate();
@@ -82,7 +82,7 @@ export default function ProfileVisit(props) {
 
     axios.get(`http://localhost:3001/api/users/${userId}`).then((res) => {
       console.log("userid response", userId, res);
-      setUser(res.data);
+      setloggedInUser(res.data);
     });
 
 
@@ -116,6 +116,8 @@ export default function ProfileVisit(props) {
   const articleList = posts.map((post) => {
     const show = getShowForPost(state, post.tvshow_id);
 
+    // user = user of the profile we're visiting
+    // loggedInUser = the user who is logged in
     return (
       <div className="profile-article">
         <Article
@@ -126,8 +128,8 @@ export default function ProfileVisit(props) {
           deleteLike = {deleteLike}
           state={state}
           show={show}
-          loggedInUser={user}
           user={profileUser}
+          loggedInUser={loggedInUser}
           spoiler={hideSpoiler && post.spoiler}
           getFilteredShows={getFilteredShows}
           addToWatchList={addToWatchList}
@@ -196,7 +198,7 @@ export default function ProfileVisit(props) {
             <Watchlist
               state={state}
               profileUser={profileUser}
-              loggedInUser={user}
+              loggedInUser={loggedInUser}
             />}
           {mode === POSTS && (
             <section className="category-filters">

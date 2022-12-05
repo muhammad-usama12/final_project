@@ -24,7 +24,7 @@ export const ApplicationContext = createContext();
 
 function App() {
   const [loading, setLoading] = useState(false);
-  const [user, setUser] = useState({});
+  const [loggedInUser, setLoggedInUser] = useState({});
   const applicationData = useApplicationData();
   const {
     state,
@@ -38,9 +38,9 @@ function App() {
     deleteFromWatchlist,
     logout,
     saveComment,
-    loadApplicationState,
     addLike,
-    deleteLike
+    deleteLike,
+    loadApplicationState
   } = applicationData;
 
   useEffect(() => {
@@ -52,23 +52,22 @@ function App() {
     const userId = localStorage.getItem("teeboUser");
 
     axios.get(`http://localhost:3001/api/users/${userId}`).then((res) => {
-      setUser(res.data);
+      setLoggedInUser(res.data);
     });
 
     loadApplicationState();
   }, [state.posts.length, state.favourites.length]);
 
-  const favouriteShows = getFavouritesByUser(state, user.id);
+  const favouriteShows = getFavouritesByUser(state, loggedInUser.id);
 
-  console.log("user", user);
+  console.log("user", loggedInUser);
 
   const articleList = state.filerteredPosts.map((post) => {
     const show = getShowForPost(state, post.tvshow_id);
     const postUser = getUser(state, post.user_id);
 
-    // This is confusing I know but...
     // user = user for the specific post
-    // profileUser = the user who is logged in >>> this is used to make sure people who aren't logged in can't like posts
+    // loggedInUser = the user who is logged in
     return (
       <Article
         key={post.id}
@@ -79,12 +78,12 @@ function App() {
         state={state}
         show={show}
         user={postUser}
-        loggedInUser={user}
-        saveComment={saveComment}
+        loggedInUser={loggedInUser}
         spoiler={hideSpoiler && post.spoiler}
         getFilteredShows={getFilteredShows}
         addToWatchList={addToWatchList}
         deleteFromWatchlist={deleteFromWatchlist}
+        saveComment={saveComment}
       />
     );
   });
@@ -107,7 +106,7 @@ function App() {
           <section className="category-filters">
             <CategoryList
               state={state}
-              user={user}
+              user={loggedInUser}
               deleteFavourites={deleteFavourites}
               updateFavourites={updateFavourites}
               shows={favouriteShows}
@@ -116,7 +115,7 @@ function App() {
               getAllShows={getAllShows}
             />
           </section>
-          {favouriteShows.length === 0 && user.id && (
+          {favouriteShows.length === 0 && loggedInUser.id && (
             <h4>
               you have no favourite shows! :( <br />
               <Link to="/profile/edit">add your favourite shows</Link> to filter
@@ -124,7 +123,7 @@ function App() {
             </h4>
           )}
 
-          {user.id && <NewPost user={user} state={state}/>}
+          {loggedInUser.id && <NewPost user={loggedInUser} state={state}/>}
           <section className="article-container">{articleList}</section>
         </main>
       )}
