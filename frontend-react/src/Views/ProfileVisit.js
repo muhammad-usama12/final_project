@@ -62,6 +62,7 @@ export default function ProfileVisit(props) {
     getFilteredShows,
     getAllShows,
     addToWatchList,
+    deleteFromWatchlist,
     logout,
     saveComment,
     loadApplicationState,
@@ -125,6 +126,7 @@ export default function ProfileVisit(props) {
           spoiler={hideSpoiler && post.spoiler}
           getFilteredShows={getFilteredShows}
           addToWatchList={addToWatchList}
+          deleteFromWatchlist={deleteFromWatchlist}
           saveComment={saveComment}
         />
       </div>
