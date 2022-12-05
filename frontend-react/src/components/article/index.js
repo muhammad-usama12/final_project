@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import classNames from "classnames";
+import Moment from "react-moment";
 
 import "./Article.scss";
 
@@ -25,6 +26,8 @@ export default function Article(props) {
   const HIDE = "HIDE";
 
   const { mode, transition, back } = useVisualMode(HIDE);
+
+  console.log("props",props.timestamp)
 
   function toggleComments() {
     if (mode === SHOW) {
@@ -109,10 +112,13 @@ export default function Article(props) {
           </div>
         </div>
       </div>
+      <div className="category-timestamp">
       <CategoryTag
         name={props.show.name}
         onClick={() => props.getFilteredShows(props.show.id)}
       />
+       <Moment fromNow>{props.timestamp}</Moment>
+      </div>
 
       {mode === SHOW && (
         <CommentList

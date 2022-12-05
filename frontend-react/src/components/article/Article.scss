@@ -94,6 +94,21 @@ article {
     }
   }
 
+  .category-timestamp{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    time{
+      margin-right: 4em;
+      font-family: monospace;
+      font-size: large;
+      color: #797474;
+    }
+
+  }
+
   .spoiler {
     filter: blur(10px);
   }
