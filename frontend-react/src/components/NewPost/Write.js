@@ -22,6 +22,7 @@ export default function Write(props) {
   const [selectedImage, setSelectedImage] = useState("");
   const [previewSelectedImage, setPreviewSelectedImage] = useState(null);
   const [spoiler, setSpoiler] = useState(false);
+  const [gifs, setGifs] = useState(false);
 
   const { state } = useContext(ApplicationContext);
 
@@ -139,17 +140,21 @@ export default function Write(props) {
         />
         <Button
           message={<GifBoxIcon />}
-          // {/* message="gifs" */}
+          onClick={() => {
+            setGifs(true);
+          }}
         ></Button>
-        <ReactGiphySearchbox
-          apiKey={"6TLFFlfm48okMpvqfUU3vDQfoVan5W2t"}
-          onSelect={(item) => console.log(item.url)}
-          masonryConfig={[
-            { columns: 2, imageWidth: 140, gutter: 10 },
-            { mq: "700px", columns: 3, imageWidth: 200, gutter: 10 },
-            { mq: "750px", columns: 4, imageWidth: 175, gutter: 10 },
-          ]}
-        />
+        {gifs && (
+          <ReactGiphySearchbox
+            apiKey={"6TLFFlfm48okMpvqfUU3vDQfoVan5W2t"}
+            onSelect={(item) => console.log(item.url)}
+            masonryConfig={[
+              { columns: 2, imageWidth: 140, gutter: 10 },
+              { mq: "700px", columns: 3, imageWidth: 200, gutter: 10 },
+              { mq: "750px", columns: 4, imageWidth: 175, gutter: 10 },
+            ]}
+          />
+        )}
         <Button
           confirm
           className="button--confirm"
