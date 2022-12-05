@@ -63,11 +63,12 @@ export default function useApplicationData() {
       .catch((err) => console.error(err));
   };
 
-  const saveComment = async (text, postId) => {
+  const saveComment = async (text, postId, userId) => {
     try {
       const response = await axios.post("/api/comments/new", {
         text: text,
         postId: postId,
+        userId: userId
       });
       const comments = [...state.comments];
       comments.push(response.data);

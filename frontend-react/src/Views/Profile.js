@@ -24,6 +24,7 @@ import {
   getShowForPost,
   getFavouritesByUser,
 } from "../helpers/selectors";
+import { propNames } from "@chakra-ui/react";
 
 export default function Profile() {
   const WATCHLIST = "WATCHLIST";
@@ -32,7 +33,7 @@ export default function Profile() {
   const { mode, transition, back } = useVisualMode(POSTS);
 
   const [loading, setLoading] = useState(false);
-  const [user, setUser] = useState({});
+  const [loggedInUser, setLoggedInUser] = useState({});
   const [togglePosts, setTogglePosts] = useState(true);
   const [toggleWatchlist, setToggleWatchlist] = useState(false);
 
@@ -57,6 +58,7 @@ export default function Profile() {
     addToWatchList,
     deleteFromWatchlist,
     logout,
+    saveComment,
     loadApplicationState,
   } = applicationData;
 
@@ -76,13 +78,13 @@ export default function Profile() {
 
     axios.get(`http://localhost:3001/api/users/${userId}`).then((res) => {
       console.log("userid response", userId, res);
-      setUser(res.data);
+      setLoggedInUser(res.data);
     });
   }, [state.posts.length]);
 
-  const favouriteShows = getFavouritesByUser(state, user.id);
+  const favouriteShows = getFavouritesByUser(state, loggedInUser.id);
 
-  const posts = getPostsByUser(state, user.id);
+  const posts = getPostsByUser(state, loggedInUser.id);
   const articleList = posts.map((post) => {
     const show = getShowForPost(state, post.tvshow_id);
 
@@ -93,11 +95,13 @@ export default function Profile() {
           {...post}
           state={state}
           show={show}
-          user={user}
+          user={loggedInUser}
+          loggedInUser={loggedInUser}
           spoiler={hideSpoiler && post.spoiler}
           getFilteredShows={getFilteredShows}
           addToWatchList={addToWatchList}
           deleteFromWatchlist={deleteFromWatchlist}
+          saveComment={saveComment}
         />
         <Button
           trash
@@ -126,15 +130,15 @@ export default function Profile() {
           <section className="profile-header">
             <img
               className="profile-display-picture"
-              src={user.icon_url}
+              src={loggedInUser.icon_url}
               alt="profile"
             ></img>
             <div className="handle-and-bio">
               <div className="handle">
-                <h1>@{user.username}</h1>
+                <h1>@{loggedInUser.username}</h1>
               </div>
               <div className="bio">
-                <p>{user.bio}</p>
+                <p>{loggedInUser.bio}</p>
               </div>
             </div>
             <Link to="/profile/edit">
@@ -170,7 +174,8 @@ export default function Profile() {
           {mode === WATCHLIST && (
             <Watchlist
               state={state}
-              user={user}
+              profileUser={loggedInUser}
+              loggedInUser={loggedInUser}
               deleteFromWatchlist={deleteFromWatchlist}
             />
           )}
@@ -178,7 +183,7 @@ export default function Profile() {
             <section className="category-filters">
               <CategoryList
                 state={state}
-                user={user}
+                user={loggedInUser}
                 shows={favouriteShows}
                 hideSpoilers={handleSpoilerToggle}
                 getFilteredShows={getFilteredShows}

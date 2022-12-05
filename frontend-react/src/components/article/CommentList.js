@@ -4,17 +4,18 @@ import { getCommentsForPost } from "../../helpers/selectors";
 
 export default function CommentList(props) {
   const state = props.state;
-  console.log("state in comment list" , state)
 
   const comments = getCommentsForPost(state, props.postId);
   const commentsList = comments.reverse().map((comment) => {
+
+    console.log("comment.iconurl", comment.icon_url)
+
     return (
       <CommentListItem
         state={state}
         key={comment.id}
         user={comment.user_id}
         text={comment.text}
-        image={comment.icon_url}
         timestamp={comment.created_at}
       />
     );

@@ -16,5 +16,9 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
+
+    .watchlist-item {
+      margin-bottom: 1rem;
+    }
   }
 }

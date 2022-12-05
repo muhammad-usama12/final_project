@@ -68,7 +68,7 @@ function App() {
 
     // This is confusing I know but...
     // user = user for the specific post
-    // loggedInUser = the user who is logged in >>> this is used to make sure people who aren't logged in can't like posts
+    // profileUser = the user who is logged in >>> this is used to make sure people who aren't logged in can't like posts
     return (
       <Article
         key={post.id}
@@ -103,20 +103,18 @@ function App() {
         />
       ) : (
         <main>
-          {user.id && (
-            <section className="category-filters">
-              <CategoryList
-                state={state}
-                user={user}
-                deleteFavourites={deleteFavourites}
-                updateFavourites={updateFavourites}
-                shows={favouriteShows}
-                hideSpoilers={handleSpoilerToggle}
-                getFilteredShows={getFilteredShows}
-                getAllShows={getAllShows}
-              />
-            </section>
-          )}
+          <section className="category-filters">
+            <CategoryList
+              state={state}
+              user={user}
+              deleteFavourites={deleteFavourites}
+              updateFavourites={updateFavourites}
+              shows={favouriteShows}
+              hideSpoilers={handleSpoilerToggle}
+              getFilteredShows={getFilteredShows}
+              getAllShows={getAllShows}
+            />
+          </section>
           {favouriteShows.length === 0 && user.id && (
             <h4>
               you have no favourite shows! :( <br />

@@ -18,7 +18,6 @@ export default function Article(props) {
   const [likecounter, setLikecounter] = useState(props.total_likes);
   const [likedOrNot, setLikedOrNot] = useState();
   const [commentCounter, setCommentCounter] = useState(props.total_comments);
-  const [user, setUser] = useState({});
 
   const post_id = props.id;
   const user_id = localStorage.getItem("teeboUser")
@@ -39,13 +38,13 @@ export default function Article(props) {
     if (text === "") {
       setError("can't get his ass with no words, bestie");
     } else {
-      props.saveComment(text, post_id).then((res) => setCommentCounter(res));
       setError(null);
-      props.saveComment(text, post_id).then((res) => setCommentCounter(res));
+      props.saveComment(text, post_id, props.loggedInUser.id).then((res) => setCommentCounter(res));
     }
   }
 
-  const watchlistShows = getWatchlistByUser(props.state, props.user.id);
+
+  const watchlistShows = getWatchlistByUser(props.state, props.loggedInUser.id);
   const currentWatchlistShow = watchlistShows.find(
     (watchlistShows) => watchlistShows.id === props.show.id
   );
@@ -65,9 +64,9 @@ export default function Article(props) {
 
   const handleWatchlistAction = () => {
     if (currentWatchlistShow) {
-      return props.deleteFromWatchlist(props.show.id, props.user.id);
+      return props.deleteFromWatchlist(props.show.id, props.loggedInUser.id);
     } else {
-      return props.addToWatchList(props.show.id, props.user.id);
+      return props.addToWatchList(props.show.id, props.loggedInUser.id);
     }
   };
   
@@ -118,7 +117,6 @@ export default function Article(props) {
       {mode === SHOW && (
         <CommentList
           state={props.state}
-          user={props.user}
           error={error}
           postId={props.id}
           validate={validate}
