@@ -24,7 +24,6 @@ import {
   getShowForPost,
   getFavouritesByUser,
 } from "../helpers/selectors";
-import { propNames } from "@chakra-ui/react";
 import DeleteDialog from "../components/Article/DeleteDialog";
 
 export default function Profile() {
@@ -72,7 +71,7 @@ export default function Profile() {
     setTimeout(() => {
       setLoading(false);
     }, 500);
-    
+
     loadApplicationState();
 
     const userId = localStorage.getItem("teeboUser");
@@ -85,7 +84,6 @@ export default function Profile() {
         setLoggedInUser(res.data);
       });
     }
-
   }, [state.posts.length]);
 
   const favouriteShows = getFavouritesByUser(state, loggedInUser.id);

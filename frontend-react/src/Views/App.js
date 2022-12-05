@@ -40,7 +40,7 @@ function App() {
     saveComment,
     addLike,
     deleteLike,
-    loadApplicationState
+    loadApplicationState,
   } = applicationData;
 
   useEffect(() => {
@@ -56,12 +56,10 @@ function App() {
     if (!userId) {
       return;
     } else {
-      axios.get(`http://localhost:3001/api/users/${userId}`)
-        .then((res) => {
-          setLoggedInUser(res.data);
-        });
+      axios.get(`http://localhost:3001/api/users/${userId}`).then((res) => {
+        setLoggedInUser(res.data);
+      });
     }
-
   }, [state.posts.length, state.favourites.length]);
 
   const favouriteShows = getFavouritesByUser(state, loggedInUser.id);
@@ -77,10 +75,10 @@ function App() {
     return (
       <Article
         key={post.id}
-        timestamp = {post.created_at}
+        timestamp={post.created_at}
         {...post}
-        addLike = {addLike}
-        deleteLike = {deleteLike}
+        addLike={addLike}
+        deleteLike={deleteLike}
         state={state}
         show={show}
         user={postUser}
@@ -129,7 +127,7 @@ function App() {
             </h4>
           )}
 
-          {loggedInUser.id && <NewPost user={loggedInUser} state={state}/>}
+          {loggedInUser.id && <NewPost user={loggedInUser} state={state} />}
           <section className="article-container">{articleList}</section>
         </main>
       )}

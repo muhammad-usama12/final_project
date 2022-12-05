@@ -7,8 +7,8 @@ import BeatLoader from "react-spinners/BeatLoader";
 
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
-import MuiAlert from '@mui/material/Alert';
-import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from "@mui/material/Alert";
+import Snackbar from "@mui/material/Snackbar";
 import Header from "../components/Header";
 import Spacing from "../components/Spacing";
 import Button from "../components/Button";
@@ -31,7 +31,7 @@ export default function EditProfile() {
 
   const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-  })
+  });
 
   const navigate = useNavigate();
 
@@ -117,13 +117,13 @@ export default function EditProfile() {
   const onAddFavouritesHandler = (e) => {
     e.preventDefault();
     if (!newFavouriteShowId || !user.id) {
-      setOpen(true)
-      return setError("can't add nothing luv xx")
+      setOpen(true);
+      return setError("can't add nothing luv xx");
     } else {
-      setError(null)
+      setError(null);
       return updateFavourites(newFavouriteShowId, user.id);
     }
-  }
+  };
 
   const showsArr = state.shows;
   const shows = showsArr.map((show) => {
@@ -158,16 +158,16 @@ export default function EditProfile() {
       return setError("um... enter a show to find a show");
     } else {
       newShow(search)
-      .then(() => setOpen(true))
-      .catch(() => {
-        setError("we already have that show babe");
-        setOpen(true);
-      })
+        .then(() => setOpen(true))
+        .catch(() => {
+          setError("we already have that show babe");
+          setOpen(true);
+        });
     }
-  }
+  };
 
   const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
+    if (reason === "clickaway") {
       return;
     }
 
@@ -253,7 +253,7 @@ export default function EditProfile() {
                 </div>
               </form>
               <div className="edit-button-save">
-                  <Button confirm message="save" onClick={submitForm} />
+                <Button confirm message="save" onClick={submitForm} />
               </div>
             </div>
             <div className="edit-profile-shows">
@@ -302,16 +302,36 @@ export default function EditProfile() {
                   onClick={onSearchHandler}
                 />
               </form>
-                {error && <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} >
-                  <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+              {error && (
+                <Snackbar
+                  open={open}
+                  autoHideDuration={6000}
+                  onClose={handleClose}
+                >
+                  <Alert
+                    onClose={handleClose}
+                    severity="error"
+                    sx={{ width: "100%" }}
+                  >
                     {error}
                   </Alert>
-                </Snackbar>}
-                {!error && <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-                  <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                </Snackbar>
+              )}
+              {!error && (
+                <Snackbar
+                  open={open}
+                  autoHideDuration={6000}
+                  onClose={handleClose}
+                >
+                  <Alert
+                    onClose={handleClose}
+                    severity="success"
+                    sx={{ width: "100%" }}
+                  >
                     show added! thank you :)
                   </Alert>
-                </Snackbar>}
+                </Snackbar>
+              )}
             </div>
           </section>
           <Footer />

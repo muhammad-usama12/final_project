@@ -4,7 +4,7 @@ import { Form, Formik } from "formik";
 import { useNavigate } from "react-router";
 import TextField from "../components/TextField";
 import theme from "../components/theme";
-import { ChakraProvider, ColorModeScript } from "@chakra-ui/react";
+import { ChakraProvider } from "@chakra-ui/react";
 
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -21,7 +21,6 @@ export default function Login() {
     <>
       <Header />
       <ChakraProvider theme={theme}>
-        <ColorModeScript initialColorMode={theme.config.initialColorMode} />
         <Formik
           initialValues={{ username: "", password: "" }}
           onSubmit={(values, actions) => {

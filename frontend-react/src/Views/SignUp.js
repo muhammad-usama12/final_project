@@ -20,7 +20,6 @@ const SignUp = () => {
     <>
       <Header />
       <ChakraProvider theme={theme}>
-        <ColorModeScript initialColorMode={theme.config.initialColorMode} />
         <Formik
           initialValues={{ username: "", password: "" }}
           onSubmit={(values, actions) => {
@@ -82,7 +81,7 @@ const SignUp = () => {
             />
 
             <ButtonGroup pt="1rem">
-              <Button colorScheme="green" type="submit">
+              <Button colorScheme="yellow" type="submit">
                 Create Account
               </Button>
             </ButtonGroup>
