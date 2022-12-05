@@ -7,8 +7,8 @@ import BeatLoader from "react-spinners/BeatLoader";
 
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
-import Alert from '@mui/material/Alert';
-import Snackbar from '@mui/material/Snackbar';
+import Alert from "@mui/material/Alert";
+import Snackbar from "@mui/material/Snackbar";
 import Header from "../components/Header";
 import Spacing from "../components/Spacing";
 import Button from "../components/Button";
@@ -112,11 +112,11 @@ export default function EditProfile() {
   const onAddFavouritesHandler = (e) => {
     e.preventDefault();
     if (!newFavouriteShowId || !user.id) {
-      return setError("can't add nothing luv xx")
+      return setError("can't add nothing luv xx");
     } else {
       return updateFavourites(newFavouriteShowId, user.id);
     }
-  }
+  };
 
   const showsArr = state.shows;
   const shows = showsArr.map((show) => {
@@ -150,12 +150,12 @@ export default function EditProfile() {
       return setError("um... enter a show to find a show");
     } else {
       newShow(search);
-      setOpen(true)
+      setOpen(true);
     }
-  }
+  };
 
   const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
+    if (reason === "clickaway") {
       return;
     }
 
@@ -241,7 +241,7 @@ export default function EditProfile() {
                 </div>
               </form>
               <div className="edit-button-save">
-                  <Button confirm message="save" onClick={submitForm} />
+                <Button confirm message="save" onClick={submitForm} />
               </div>
             </div>
             {error !== "" && <p className="error">{error}</p>}
@@ -291,11 +291,19 @@ export default function EditProfile() {
                   onClick={onSearchHandler}
                 />
               </form>
-                <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-                  <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-                    show added! thank you :)
-                  </Alert>
-                </Snackbar>
+              <Snackbar
+                open={open}
+                autoHideDuration={6000}
+                onClose={handleClose}
+              >
+                <Alert
+                  onClose={handleClose}
+                  severity="success"
+                  sx={{ width: "100%" }}
+                >
+                  show added! thank you :)
+                </Alert>
+              </Snackbar>
             </div>
           </section>
           <Footer />

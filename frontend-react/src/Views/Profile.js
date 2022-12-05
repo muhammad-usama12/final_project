@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import BeatLoader from "react-spinners/BeatLoader";
 import classNames from "classnames";
+import DeleteDialog from "../components/Article/DeleteDialog";
 
 import "./Profile.scss";
 import "../components/Watchlist.scss";
@@ -35,6 +36,7 @@ export default function Profile() {
   const [user, setUser] = useState({});
   const [togglePosts, setTogglePosts] = useState(true);
   const [toggleWatchlist, setToggleWatchlist] = useState(false);
+  const [deleteBox, setDeleteBox] = useState(false);
 
   const clickPostsClass = classNames("toggle", {
     "toggle-posts": togglePosts,
@@ -99,11 +101,17 @@ export default function Profile() {
           addToWatchList={addToWatchList}
           deleteFromWatchlist={deleteFromWatchlist}
         />
+        <div>
         <Button
           trash
           message={<i className="fa-solid fa-trash-can"></i>}
-          onClick={() => deletePost(post.id)}
-        />
+          onClick={() => setDeleteBox(true)}
+          // onClick={() => deletePost(post.id)}
+          />
+          {deleteBox && ( <DeleteDialog close={setDeleteBox} open={() => deletePost(post.id)}
+          />
+          )}
+          </div>
       </div>
     );
   });

@@ -10,6 +10,8 @@ import SignUp from "./Views/SignUp";
 import App from "./Views/App";
 import Search from "./Views/SearchTest";
 import ProfileVisit from "./Views/ProfileVisit";
+import { ColorModeScript } from "@chakra-ui/react";
+import theme from "./theme";
 
 const router = createBrowserRouter([
   { path: "/", element: <App /> },

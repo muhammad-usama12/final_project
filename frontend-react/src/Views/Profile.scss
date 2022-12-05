@@ -22,7 +22,6 @@
     border-radius: 30px;
     transition-duration: 200ms;
 
-
     input[type="file"] {
       display: none;
     }
@@ -31,10 +30,10 @@
       position: absolute;
       transform: translate(-180%, 400%);
       font-size: 40px;
-      color: #F6F1F1;
+      color: #f6f1f1;
     }
   }
-  
+
   .profile-display-picture {
     width: 200px;
     height: 200px;
@@ -52,7 +51,7 @@
     transform: translate(45%, -700%);
     font-weight: bold;
   }
-  
+
   .profile-display-picture:hover ~ #change-photo {
     display: block;
   }
@@ -119,7 +118,7 @@
       margin-top: 5px;
       margin-bottom: 0;
     }
-    
+
     textarea {
       font-size: large;
       height: 3rem;
@@ -132,7 +131,8 @@
       margin-top: 1rem;
     }
 
-    textarea, input {
+    textarea,
+    input {
       resize: none;
       background-color: $secondary-colour;
       color: $primary-colour;
@@ -157,7 +157,8 @@
     margin-bottom: 2rem;
   }
 
-  .add-show-favourites, .add-show-database {
+  .add-show-favourites,
+  .add-show-database {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -203,7 +204,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  
+
   .toggleWatchlist {
     color: $secondary-colour;
     font-weight: bold;
@@ -219,7 +220,8 @@
     cursor: pointer;
   }
 
-  .toggle-watchlist, .toggle-posts {
+  .toggle-watchlist,
+  .toggle-posts {
     text-decoration: underline;
     text-decoration-color: $star;
   }
@@ -236,7 +238,7 @@
   justify-content: center;
   text-align: center;
   width: 80%;
-  
+
   img {
     display: none;
   }
