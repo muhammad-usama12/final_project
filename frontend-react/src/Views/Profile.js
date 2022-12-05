@@ -59,7 +59,9 @@ export default function Profile() {
     deleteFromWatchlist,
     logout,
     saveComment,
-    loadApplicationState,
+    addLike,
+    deleteLike,
+    loadApplicationState
   } = applicationData;
 
   useEffect(() => {
@@ -92,7 +94,10 @@ export default function Profile() {
       <div className="profile-article">
         <Article
           key={post.id}
+          timestamp = {post.created_at}
           {...post}
+          addLike = {addLike}
+          deleteLike = {deleteLike}
           state={state}
           show={show}
           user={loggedInUser}

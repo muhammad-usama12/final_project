@@ -38,9 +38,9 @@ function App() {
     deleteFromWatchlist,
     logout,
     saveComment,
-    loadApplicationState,
     addLike,
-    deleteLike
+    deleteLike,
+    loadApplicationState
   } = applicationData;
 
   useEffect(() => {
@@ -80,11 +80,11 @@ function App() {
         show={show}
         user={postUser}
         loggedInUser={user}
-        saveComment={saveComment}
         spoiler={hideSpoiler && post.spoiler}
         getFilteredShows={getFilteredShows}
         addToWatchList={addToWatchList}
         deleteFromWatchlist={deleteFromWatchlist}
+        saveComment={saveComment}
       />
     );
   });

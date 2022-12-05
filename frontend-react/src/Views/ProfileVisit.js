@@ -65,6 +65,8 @@ export default function ProfileVisit(props) {
     deleteFromWatchlist,
     logout,
     saveComment,
+    addLike,
+    deleteLike,
     loadApplicationState,
   } = applicationData;
 
@@ -118,7 +120,10 @@ export default function ProfileVisit(props) {
       <div className="profile-article">
         <Article
           key={post.id}
+          timestamp = {post.created_at}
           {...post}
+          addLike = {addLike}
+          deleteLike = {deleteLike}
           state={state}
           show={show}
           loggedInUser={user}
