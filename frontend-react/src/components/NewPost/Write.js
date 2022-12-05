@@ -66,6 +66,13 @@ export default function Write(props) {
     });
   };
 
+  const selectedGif = (item) => {
+    if (item) {
+      console.log("gif selected:", item.images.original.url);
+      setSelectedImage(item.images.original.url);
+    }
+  };
+
   const handleSubmitPost = () => {
     // if (selectedImage) {
     //   uploadImage();
@@ -147,7 +154,7 @@ export default function Write(props) {
         {gifs && (
           <ReactGiphySearchbox
             apiKey={"6TLFFlfm48okMpvqfUU3vDQfoVan5W2t"}
-            onSelect={(item) => console.log(item.url)}
+            onSelect={selectedGif}
             masonryConfig={[
               { columns: 2, imageWidth: 140, gutter: 10 },
               { mq: "700px", columns: 3, imageWidth: 200, gutter: 10 },
