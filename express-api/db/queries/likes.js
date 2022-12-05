@@ -29,7 +29,7 @@ export const addLike = async (id, user_id) => {
 
 export const likeAddCounter = async (id) => {
   const post_id = id;
-  console.log("from router",post_id)
+
   const data = await db.query(
     `
     UPDATE posts
@@ -55,13 +55,13 @@ export const deleteLike = async (id, user_id) => {
      `,
     [post_id, user_id]
   );
-console.log("inside deletelike", data.rows[0])
+
   return data.rows[0];
 };
 
 export const likeDeleteCounter = async (id) => {
   const post_id = id;
-  console.log("from router",post_id)
+
   const data = await db.query(
     `
     UPDATE  posts
@@ -71,6 +71,6 @@ export const likeDeleteCounter = async (id) => {
      `,
     [post_id]
   );
-  console.log("inside deletelikecounter", data.rows[0])
+
   return data.rows[0];
 };

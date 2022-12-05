@@ -7,7 +7,9 @@ export default function CategoryListItem(props) {
   const user = props.user;
 
   const categoryclass = classNames("pill-container category-item", {
-    "clicked": props.spoiler && clicked
+    "clicked": props.spoiler && clicked,
+    "pill-image": props.img
+
   });
 
   const someFavouriteShow = props.tvShowId;
