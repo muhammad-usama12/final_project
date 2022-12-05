@@ -99,20 +99,18 @@ function App() {
         />
       ) : (
         <main>
-          {user.id && (
-            <section className="category-filters">
-              <CategoryList
-                state={state}
-                user={user}
-                deleteFavourites={deleteFavourites}
-                updateFavourites={updateFavourites}
-                shows={favouriteShows}
-                hideSpoilers={handleSpoilerToggle}
-                getFilteredShows={getFilteredShows}
-                getAllShows={getAllShows}
-              />
-            </section>
-          )}
+          <section className="category-filters">
+            <CategoryList
+              state={state}
+              user={user}
+              deleteFavourites={deleteFavourites}
+              updateFavourites={updateFavourites}
+              shows={favouriteShows}
+              hideSpoilers={handleSpoilerToggle}
+              getFilteredShows={getFilteredShows}
+              getAllShows={getAllShows}
+            />
+          </section>
           {favouriteShows.length === 0 && user.id && (
             <h4>
               you have no favourite shows! :( <br />

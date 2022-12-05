@@ -185,7 +185,12 @@ export default function ProfileVisit(props) {
               </div>
             </div>
           </section>
-          {mode === WATCHLIST && <Watchlist state={state} profileUser={profileUser} />}
+          {mode === WATCHLIST &&
+            <Watchlist
+              state={state}
+              profileUser={profileUser}
+              loggedInUser={user}
+            />}
           {mode === POSTS && (
             <section className="category-filters">
               <CategoryList

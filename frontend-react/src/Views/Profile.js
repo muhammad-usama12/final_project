@@ -175,6 +175,7 @@ export default function Profile() {
             <Watchlist
               state={state}
               profileUser={loggedInUser}
+              loggedInUser={loggedInUser}
               deleteFromWatchlist={deleteFromWatchlist}
             />
           )}

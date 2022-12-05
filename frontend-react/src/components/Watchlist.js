@@ -15,7 +15,7 @@ export default function Watchlist(props) {
       >
         {show.name}
         <>&nbsp;</>
-        <i onClick={() => props.deleteFromWatchlist(show.id, props.profileUser.id)} className="fa-regular fa-circle-xmark"></i>
+        {props.loggedInUser.id === props.profileUser.id && <i onClick={() => props.deleteFromWatchlist(show.id, props.profileUser.id)} className="fa-regular fa-circle-xmark"></i>}
       </div>
     );
   });
