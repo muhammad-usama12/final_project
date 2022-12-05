@@ -23,6 +23,10 @@ export default function Write(props) {
   const [previewSelectedImage, setPreviewSelectedImage] = useState(null);
   const [spoiler, setSpoiler] = useState(false);
   const [gifs, setGifs] = useState(false);
+  const [mediaType, setMediaType] = useState(null);
+
+  const MEDIA_TYPE_GIF = "gif";
+  const MEDIA_TYPE_IMAGE = "image";
 
   const { state } = useContext(ApplicationContext);
 
@@ -70,13 +74,16 @@ export default function Write(props) {
     if (item) {
       console.log("gif selected:", item.images.original.url);
       setSelectedImage(item.images.original.url);
+      setMediaType(MEDIA_TYPE_GIF);
     }
   };
 
   const handleSubmitPost = () => {
-    // if (selectedImage) {
-    //   uploadImage();
-    props.onSave(text, selectedImage, spoiler, show);
+    if (selectedImage && mediaType === MEDIA_TYPE_IMAGE) {
+      uploadImage();
+    } else {
+      props.onSave(text, selectedImage, spoiler, show);
+    }
   };
 
   console.log(props.onSave);
@@ -139,6 +146,7 @@ export default function Write(props) {
           onChange={(event) => {
             if (event.target.files.length !== 0) {
               setSelectedImage(event.target.files[0]);
+              setMediaType(MEDIA_TYPE_IMAGE);
               setPreviewSelectedImage(
                 URL.createObjectURL(event.target.files[0])
               );
@@ -156,9 +164,9 @@ export default function Write(props) {
             apiKey={"6TLFFlfm48okMpvqfUU3vDQfoVan5W2t"}
             onSelect={selectedGif}
             masonryConfig={[
-              { columns: 2, imageWidth: 140, gutter: 10 },
-              { mq: "700px", columns: 3, imageWidth: 200, gutter: 10 },
-              { mq: "750px", columns: 4, imageWidth: 175, gutter: 10 },
+              { columns: 2, imageWidth: "100%", gutter: 10 },
+              { mq: "700px", columns: 2, imageWidth: 200, gutter: 10 },
+              { mq: "100%", columns: 2, imageWidth: 175, gutter: 10 },
             ]}
           />
         )}
