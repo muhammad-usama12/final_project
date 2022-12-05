@@ -164,9 +164,9 @@ export default function Write(props) {
             apiKey={"6TLFFlfm48okMpvqfUU3vDQfoVan5W2t"}
             onSelect={selectedGif}
             masonryConfig={[
-              { columns: 2, imageWidth: "100%", gutter: 10 },
-              { mq: "700px", columns: 2, imageWidth: 200, gutter: 10 },
-              { mq: "100%", columns: 2, imageWidth: 175, gutter: 10 },
+              { columns: 2, imageWidth: 140, gutter: 10 },
+              { mq: "100%", columns: 3, imageWidth: 200, gutter: 10 },
+              { mq: "100%", columns: 4, imageWidth: 175, gutter: 10 },
             ]}
           />
         )}
