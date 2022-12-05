@@ -25,6 +25,7 @@ import {
   getFavouritesByUser,
 } from "../helpers/selectors";
 import { propNames } from "@chakra-ui/react";
+import DeleteDialog from "../components/Article/DeleteDialog";
 
 export default function Profile() {
   const WATCHLIST = "WATCHLIST";
@@ -36,6 +37,8 @@ export default function Profile() {
   const [loggedInUser, setLoggedInUser] = useState({});
   const [togglePosts, setTogglePosts] = useState(true);
   const [toggleWatchlist, setToggleWatchlist] = useState(false);
+  const [deleteBox, setDeleteBox] = useState(false);
+  const [currentAricle, setCurrentArticle] = useState({});
 
   const clickPostsClass = classNames("toggle", {
     "toggle-posts": togglePosts,
@@ -97,10 +100,10 @@ export default function Profile() {
       <div className="profile-article">
         <Article
           key={post.id}
-          timestamp = {post.created_at}
+          timestamp={post.created_at}
           {...post}
-          addLike = {addLike}
-          deleteLike = {deleteLike}
+          addLike={addLike}
+          deleteLike={deleteLike}
           state={state}
           show={show}
           user={loggedInUser}
@@ -114,8 +117,14 @@ export default function Profile() {
         <Button
           trash
           message={<i className="fa-solid fa-trash-can"></i>}
-          onClick={() => deletePost(post.id)}
-        />
+          onClick={() => {
+            setDeleteBox(true);
+            setCurrentArticle(post);
+          }}
+        ></Button>
+        {deleteBox && post.id === currentAricle.id && (
+          <DeleteDialog close={setDeleteBox} open={() => deletePost(post.id)} />
+        )}
       </div>
     );
   });
