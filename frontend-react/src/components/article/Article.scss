@@ -107,6 +107,10 @@ article {
     .comment-item {
       margin-top: 1rem;
 
+      img {
+        cursor: pointer;
+      }
+
       p {
         font-size: larger;
       }

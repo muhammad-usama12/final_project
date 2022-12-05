@@ -36,3 +36,5 @@ INSERT INTO tvshows (name, image_url) VALUES ('Pushing Daisies', 'https://static
 INSERT INTO tvshows (name, image_url) VALUES ('Nathan for You', 'https://static.tvmaze.com/uploads/images/medium_portrait/326/816434.jpg');
 
 INSERT INTO tvshows (name, image_url) VALUES ('The Rehearsal', 'https://static.tvmaze.com/uploads/images/medium_portrait/414/1036529.jpg');
+
+INSERT INTO tvshows (name, image_url) VALUES ('Flight of the Conchords', 'https://static.tvmaze.com/uploads/images/medium_portrait/41/103111.jpg');
