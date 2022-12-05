@@ -18,9 +18,19 @@
 }
 
 body {
-  width: 100%;
   font-family: var(--font);
   color: var(--color-txt);
+}
+
+header {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1;
 }
 
 .App .Navbar {
@@ -43,20 +53,20 @@ body {
   /* transition for the change in background color (occurring as the nav items are pressed) */
 }
 
-// .App .Navbar h2:before {
-//   /* with a pseudo element include a string, which is hidden by default below the header, to the left of the page  */
-//   content: "teebo";
-//   position: absolute;
-//   left: 100%;
-//   transform: translateX(-50vw);
-//   /* top to match the vertical padding */
-//   top: 0.25rem;
-//   color: var(--color-txt);
-//   /* transition for the transform property, to translate the string into view and to the right of the header */
-//   transition: all 0.5s ease-in-out;
-//   /* z-index to have the pseudo element below the header itself */
-//   z-index: -5;
-// }
+.App .Navbar h2:before {
+  /* with a pseudo element include a string, which is hidden by default below the header, to the left of the page  */
+  content: "teebo";
+  position: absolute;
+  left: 100%;
+  transform: translateX(-50vw);
+  /* top to match the vertical padding */
+  top: 0.25rem;
+  color: var(--color-txt);
+  /* transition for the transform property, to translate the string into view and to the right of the header */
+  transition: all 0.5s ease-in-out;
+  /* z-index to have the pseudo element below the header itself */
+  z-index: -5;
+}
 
 .App .Navbar h2:hover:before {
   /* translate the pseudo element into view on hover */

@@ -10,10 +10,10 @@ footer {
   height: 64px;
   font-family: monospace;
   font-size: large;
-  border-top: 3px solid $secondary-colour;
+  border-top: 1px outset $secondary-colour;
   bottom: 0;
   margin-top: auto;
-  
+
   a {
     color: $secondary-colour;
     font-weight: 600;
