@@ -9,7 +9,10 @@ import CategoryTag from "./CategoryTag";
 import CommentList from "./CommentList";
 import useVisualMode from "../../hooks/useVisualMode";
 import { Link } from "react-router-dom";
-import { getWatchlistByUser, getLikeByUserandPost } from "../../helpers/selectors";
+import {
+  getWatchlistByUser,
+  getLikeByUserandPost,
+} from "../../helpers/selectors";
 
 export default function Article(props) {
   // This checks if props.spoiler is true, and if it is, apply the "spoiler" class to blur spoiler posts
@@ -21,13 +24,11 @@ export default function Article(props) {
   const [commentCounter, setCommentCounter] = useState(props.total_comments);
 
   const post_id = props.id;
-  const user_id = localStorage.getItem("teeboUser")
+  const user_id = localStorage.getItem("teeboUser");
   const SHOW = "SHOW";
   const HIDE = "HIDE";
 
   const { mode, transition, back } = useVisualMode(HIDE);
-
-  console.log("props",props.timestamp)
 
   function toggleComments() {
     if (mode === SHOW) {
@@ -42,10 +43,11 @@ export default function Article(props) {
       setError("can't get his ass with no words, bestie");
     } else {
       setError(null);
-      props.saveComment(text, post_id, props.loggedInUser.id).then((res) => setCommentCounter(res));
+      props
+        .saveComment(text, post_id, props.loggedInUser.id)
+        .then((res) => setCommentCounter(res));
     }
   }
-
 
   const watchlistShows = getWatchlistByUser(props.state, props.loggedInUser.id);
   const currentWatchlistShow = watchlistShows.find(
@@ -53,17 +55,20 @@ export default function Article(props) {
   );
 
   const handleLikeButton = () => {
-    
-    const likedbyUser =  getLikeByUserandPost(props.state, post_id, user_id)
+    const likedbyUser = getLikeByUserandPost(props.state, post_id, user_id);
 
-       if (likedbyUser[0]) {
-        setLikedOrNot(false) //Temporary fix
-        return props.deleteLike(post_id, user_id).then((res) => setLikecounter(res.data.total_likes))
-       } else  {
-        setLikedOrNot(true) //Temporary fix
-        return props.addLike(post_id, user_id).then(res => setLikecounter(res.data.total_likes)) 
-     }
- };
+    if (likedbyUser[0]) {
+      setLikedOrNot(false); //Temporary fix
+      return props
+        .deleteLike(post_id, user_id)
+        .then((res) => setLikecounter(res.data.total_likes));
+    } else {
+      setLikedOrNot(true); //Temporary fix
+      return props
+        .addLike(post_id, user_id)
+        .then((res) => setLikecounter(res.data.total_likes));
+    }
+  };
 
   const handleWatchlistAction = () => {
     if (currentWatchlistShow) {
@@ -72,9 +77,9 @@ export default function Article(props) {
       return props.addToWatchList(props.show.id, props.loggedInUser.id);
     }
   };
-  
+
   const likeButtonClass = classNames("fa-solid fa-star", {
-         liked: likedOrNot
+    liked: likedOrNot,
   });
   const watchlistButtonClass = classNames("fa-solid fa-circle-plus", {
     watchlisted: currentWatchlistShow,
@@ -82,28 +87,25 @@ export default function Article(props) {
 
   return (
     <article>
- <div className="article-header">
+      <div className="article-header">
         <Link to={`/profile/${props.user.id}`}>
-           <img
-             className="profile-icon"
-             src={props.user.icon_url}
-             alt={props.user.user_name}
-           ></img>
-         </Link>
-         <p>@{props.user.username}</p> 
-        </div>
-        {/* <p>{props.user.username}</p> */}
+          <img
+            className="profile-icon"
+            src={props.user.icon_url}
+            alt={props.user.user_name}
+          ></img>
+        </Link>
+        <p>@{props.user.username}</p>
+      </div>
+      {/* <p>{props.user.username}</p> */}
       <div className="screen-and-buttons">
-       
         <div className={ifSpoilerClass}>
           <p>{props.text}</p>
           <img className="article-image" src={props.image} alt=""></img>
         </div>
         <div className="article-buttons">
-         
           <div className="actions">
-            <i className={likeButtonClass} 
-               onClick={handleLikeButton}></i>
+            <i className={likeButtonClass} onClick={handleLikeButton}></i>
             <p>{likecounter}</p>
             <i
               className="fa-solid fa-comment-dots"
@@ -119,11 +121,11 @@ export default function Article(props) {
         </div>
       </div>
       <div className="category-timestamp">
-      <CategoryTag
-        name={props.show.name}
-        onClick={() => props.getFilteredShows(props.show.id)}
-      />
-       <Moment fromNow>{props.timestamp}</Moment>
+        <CategoryTag
+          name={props.show.name}
+          onClick={() => props.getFilteredShows(props.show.id)}
+        />
+        <Moment fromNow>{props.timestamp}</Moment>
       </div>
 
       {mode === SHOW && (
