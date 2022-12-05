@@ -8,14 +8,14 @@ export default function CommentList(props) {
   const comments = getCommentsForPost(state, props.postId);
   const commentsList = comments.reverse().map((comment) => {
 
-    console.log("comment.user_id", comment.user_id)
+    console.log("comment.iconurl", comment.icon_url)
+
     return (
       <CommentListItem
         state={state}
         key={comment.id}
         user={comment.user_id}
         text={comment.text}
-        image={comment.icon_url}
         timestamp={comment.created_at}
       />
     );

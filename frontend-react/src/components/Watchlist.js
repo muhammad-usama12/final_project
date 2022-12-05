@@ -11,7 +11,7 @@ export default function Watchlist(props) {
     return (
       <div
         key={show.id}
-        className="pill-container"
+        className="pill-container watchlist-item"
       >
         {show.name}
         <>&nbsp;</>
