@@ -6,12 +6,17 @@ import { getUser } from "../../helpers/selectors";
 export default function CommentListItem(props) {
   const userOfComment = getUser(props.state, props.user);
   const navigate = useNavigate()
+  console.log("props in comment", userOfComment)
 
   return (
     <div className="comment-item">
-      
-      <div className="comment-and-profile-image">
+      <div className="comment-header">
      
+      
+         <p>@{userOfComment.username}</p>
+      </div>
+      <div className="comment-and-profile-image">
+    
         <div className="screen">
           <p>{props.text}</p>
         </div>
@@ -24,6 +29,7 @@ export default function CommentListItem(props) {
             navigate(0)
           }}
         ></img>
+       
       </div>
       <div className="timestamp">
         <Moment fromNow>{props.timestamp}</Moment>

@@ -6,7 +6,7 @@ article {
   flex-direction: column;
   word-wrap: break-word;
   width: 35vw;
-  padding: 2rem;
+  padding: 0 1.5em 1.5em 2em;
   margin-top: 0;
   margin-bottom: 4rem;
   box-shadow: 10px 10px $article-shadow;
@@ -120,7 +120,7 @@ article {
     }
 
     .comment-item {
-      margin-top: 1rem;
+      
 
       img {
         cursor: pointer;
@@ -133,12 +133,19 @@ article {
       .comment-and-profile-image {
         display: flex;
         font-size: large;
+        flex-direction: row;
+
+        .screen{
+          margin-right: .2em;
+        }
+      
       }
     
       .timestamp {
         font-size: small;
         font-family: monospace;
         margin: 0.3rem 1rem 0.3rem 1rem;
+        color: #6f6a6a;
       }
     }
   }
@@ -180,4 +187,32 @@ hr {
 
 .profile-article-container {
   margin-top: 2rem;
+}
+.article-header{
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: self-end;
+  margin: 0.5em 2.5em 0em 1em;
+
+    p{
+    margin-right: 0.5em;
+    font-family: monospace;
+    color: #6f6a6a;
+    margin-bottom: 10px;
+    font-size: large;
+    }
+}
+.comment-header{
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  font-size: large;
+
+  p{
+    margin: 0;
+    margin: 0.5em 4em 0.5em 1em;
+    font-family: monospace;
+    color: #6f6a6a;
+  }
+ 
 }
