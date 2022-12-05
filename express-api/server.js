@@ -88,6 +88,7 @@ app.use("/api/watchlist", watchlistRoutes);
 import { default as likeRoutes } from "./routes/likeRoutes.js";
 app.use("/api/like", likeRoutes);
 
+
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
@@ -95,6 +96,7 @@ app.use("/api/like", likeRoutes);
 app.get("/", (req, res) => {
   res.redirect("/api/auth/login");
 });
+
 app.get("/api/dashboard", (req, res) => {
   res.render("index");
 });

@@ -49,13 +49,19 @@ function App() {
       setLoading(false);
     }, 500);
 
+    loadApplicationState();
+
     const userId = localStorage.getItem("teeboUser");
 
-    axios.get(`http://localhost:3001/api/users/${userId}`).then((res) => {
-      setLoggedInUser(res.data);
-    });
+    if (!userId) {
+      return;
+    } else {
+      axios.get(`http://localhost:3001/api/users/${userId}`)
+        .then((res) => {
+          setLoggedInUser(res.data);
+        });
+    }
 
-    loadApplicationState();
   }, [state.posts.length, state.favourites.length]);
 
   const favouriteShows = getFavouritesByUser(state, loggedInUser.id);

@@ -48,4 +48,7 @@ const runResetDB = async () => {
     process.exit();
   }
 };
+
 runResetDB();
+
+export default runResetDB;
