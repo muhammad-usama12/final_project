@@ -39,6 +39,8 @@ function App() {
     logout,
     saveComment,
     loadApplicationState,
+    addLike,
+    deleteLike
   } = applicationData;
 
   useEffect(() => {
@@ -71,6 +73,8 @@ function App() {
       <Article
         key={post.id}
         {...post}
+        addLike = {addLike}
+        deleteLike = {deleteLike}
         state={state}
         show={show}
         user={postUser}

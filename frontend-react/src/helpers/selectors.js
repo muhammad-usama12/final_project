@@ -69,3 +69,22 @@ export function getWatchlistByUser (state, userId) {
 
   return allWatchlistShows;
 }
+
+export const  getLikeByUserandPost = (state, postId, userId) =>  {
+     
+    const likesDb = state.likes
+    const postsDb = state.posts
+    
+    const postIdafterFilter =  postsDb.filter(post => post.id === postId);
+  
+    const afterMappedlikes = postIdafterFilter.map(eachpost => {
+     let likeafterfilter;
+     for(let like of likesDb){
+       if(like.posts_id === eachpost.id && like.user_id === Number(userId)){
+        likeafterfilter = like
+      }
+    }
+    return likeafterfilter
+    })
+   return afterMappedlikes
+  };
