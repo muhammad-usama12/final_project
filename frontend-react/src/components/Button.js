@@ -7,7 +7,8 @@ export default function Button(props) {
     "button--confirm": props.confirm,
     "button--cancel": props.cancel,
     "button--image": props.image,
-    "button--trash": props.trash
+    "button--trash": props.trash,
+    // "button--gif": props.gif
   });
 
   return (
