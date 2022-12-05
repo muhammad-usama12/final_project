@@ -30,6 +30,13 @@ button:active {
   background-color: $image;
   border-color: $image;
   margin-left: 1rem;
+  // margin-right: 1rem;
+}
+
+.button--gif {
+  background-color: $gif;
+  border-color: $gif;
+  margin-left: 1rem;
   margin-right: 1rem;
 }
 

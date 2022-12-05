@@ -3,7 +3,8 @@ import { storage } from "../../firebase/firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 import "./Write.scss";
-
+import GifBoxIcon from "@mui/icons-material/GifBox";
+import GifIcon from "@mui/icons-material/Gif";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import FormGroup from "@mui/material/FormGroup";
@@ -11,12 +12,14 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Button from "../Button";
 
+import ReactGiphySearchbox from "react-giphy-searchbox";
+
 import { ApplicationContext } from "../../Views/App";
 
 export default function Write(props) {
   const [text, setText] = useState("");
   const [show, setShow] = useState("");
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedImage, setSelectedImage] = useState("");
   const [previewSelectedImage, setPreviewSelectedImage] = useState(null);
   const [spoiler, setSpoiler] = useState(false);
 
@@ -63,12 +66,12 @@ export default function Write(props) {
   };
 
   const handleSubmitPost = () => {
-    if (selectedImage) {
-      uploadImage();
-    } else {
-      props.onSave(text, selectedImage, spoiler, show);
-    }
+    // if (selectedImage) {
+    //   uploadImage();
+    props.onSave(text, selectedImage, spoiler, show);
   };
+
+  console.log(props.onSave);
 
   return (
     <div className="write-post">
@@ -101,10 +104,10 @@ export default function Write(props) {
       </form>
       <div className="right-buttons">
         <Button
-            cancel
-            className="button--cancel"
-            message="cancel"
-            onClick={cancel}
+          cancel
+          className="button--cancel"
+          message="cancel"
+          onClick={cancel}
         />
         <FormGroup>
           <FormControlLabel
@@ -113,19 +116,39 @@ export default function Write(props) {
             onChange={handleSpoilerToggle}
           />
         </FormGroup>
-        <label className="button--image pill-container" id="upload-image" for="file-upload">
+        <label
+          className="button--image pill-container"
+          id="upload-image"
+          for="file-upload"
+        >
           <i className="fa-solid fa-image"></i>
         </label>
         <input
           id="file-upload"
           type="file"
           name="myImage"
+          autoFocus={true}
           onChange={(event) => {
             if (event.target.files.length !== 0) {
               setSelectedImage(event.target.files[0]);
-              setPreviewSelectedImage(URL.createObjectURL(event.target.files[0]));
+              setPreviewSelectedImage(
+                URL.createObjectURL(event.target.files[0])
+              );
             }
           }}
+        />
+        <Button
+          message={<GifBoxIcon />}
+          // {/* message="gifs" */}
+        ></Button>
+        <ReactGiphySearchbox
+          apiKey={"6TLFFlfm48okMpvqfUU3vDQfoVan5W2t"}
+          onSelect={(item) => console.log(item.url)}
+          masonryConfig={[
+            { columns: 2, imageWidth: 140, gutter: 10 },
+            { mq: "700px", columns: 3, imageWidth: 200, gutter: 10 },
+            { mq: "750px", columns: 4, imageWidth: 175, gutter: 10 },
+          ]}
         />
         <Button
           confirm
