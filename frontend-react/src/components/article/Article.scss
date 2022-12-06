@@ -21,6 +21,7 @@ article {
       flex-direction: column;
       align-items: center;
       justify-content: space-between;
+      margin-top: 1em;
 
       .actions {
         color: $primary-colour;
@@ -186,8 +187,8 @@ hr {
 .article-header {
   display: flex;
   flex-direction: row-reverse;
-  align-items: self-end;
-  margin: 0.5em 2.5em 0em 1em;
+  align-items: center;
+  margin: 1.5em -0.2em -0.5em 1em;
 
   p {
     margin-right: 0.5em;
@@ -205,7 +206,7 @@ hr {
 
   p {
     margin: 0;
-    margin: 0.5em 4em 0.5em 1em;
+    margin: 0.5em 0.5em 0.5em 1em;
     font-family: monospace;
     color: #6f6a6a;
   }

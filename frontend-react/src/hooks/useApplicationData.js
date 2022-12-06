@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { async } from "@firebase/util";
 
 export default function useApplicationData() {
   const [error, setError] = useState(null);
