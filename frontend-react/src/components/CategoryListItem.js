@@ -32,7 +32,7 @@ export default function CategoryListItem(props) {
   }
 
   return (
-    <div
+    <button
       className={categoryclass}
       onClick={handleClick}
     >
@@ -45,6 +45,6 @@ export default function CategoryListItem(props) {
           className="fa-regular fa-circle-xmark"
           onClick={handleDeleteFavourite}
         ></i>}
-    </div>
+    </button>
   );
 }

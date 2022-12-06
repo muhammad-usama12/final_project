@@ -1,6 +1,6 @@
 import React from "react";
 import Moment from "react-moment";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { getUser } from "../../helpers/selectors";
 
 export default function CommentListItem(props) {
@@ -10,13 +10,7 @@ export default function CommentListItem(props) {
 
   return (
     <div className="comment-item">
-      <div className="comment-header">
-     
-      
-         <p>@{userOfComment.username}</p>
-      </div>
       <div className="comment-and-profile-image">
-    
         <div className="screen">
           <p>{props.text}</p>
         </div>
@@ -31,9 +25,7 @@ export default function CommentListItem(props) {
         ></img>
        
       </div>
-      <div className="timestamp">
-        <Moment fromNow>{props.timestamp}</Moment>
-      </div>
+      <div className="timestamp"><Moment fromNow>{props.timestamp}</Moment> by <Link to={`/profile/${userOfComment.id}`}>@{userOfComment.username}</Link></div>
     </div>
   );
 }

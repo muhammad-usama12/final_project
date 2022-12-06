@@ -2,13 +2,13 @@
 /* define the fonts and colors used in the project */
 :root {
   --font: "Open Sans", sans-serif;
-  --color-bg: #252525;
-  --color-txt: #fff;
-  --color-home: #f4ff5c;
-  --color-login: #f4ff5c;
-  --color-signup: #f4ff5c;
-  --color-profile: #f4ff5c;
-  --color-logout: #f4ff5c;
+  --color-bg: #282c34;
+  --color-txt: #F6F1F1;
+  --color-home: #F6F1F1;
+  --color-login: #FF8C00;
+  --color-signup: #FF8C00;
+  --color-profile: #FF8C00;
+  --color-logout: #FF8C00;
 }
 
 * {
@@ -30,7 +30,6 @@ header {
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 1;
 }
 
 .App .Navbar {

@@ -3,25 +3,26 @@ import { storage } from "../firebase/firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import BeatLoader from "react-spinners/BeatLoader";
 
+import BeatLoader from "react-spinners/BeatLoader";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import MuiAlert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 import Spacing from "../components/Spacing";
 import Button from "../components/Button";
 import CategoryListItem from "../components/CategoryListItem";
 
 import useApplicationData from "../hooks/useApplicationData";
 import { getFavouritesByUser } from "../helpers/selectors";
-import Footer from "../components/Footer";
 
 export default function EditProfile() {
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const [error, setError] = useState(null);
+  const [message, setMessage] = useState(null);
 
   const [user, setUser] = useState({});
   const [selectedImage, setSelectedImage] = useState(null);
@@ -48,22 +49,44 @@ export default function EditProfile() {
 
   useEffect(() => {
     loadApplicationState();
-
+    
     const userId = localStorage.getItem("teeboUser");
     if (!userId) {
       navigate("/login");
     }
-    axios.get(`http://localhost:3001/api/users/${userId}`).then((res) => {
-      setUser(res.data);
-    });
+    axios.get(`http://localhost:3001/api/users/${userId}`)
+      .then((res) => {
+        setUser(res.data);
+      });
   }, [state.favourites.length]);
 
   function onChange(e) {
     setUser({ ...user, [e.target.id]: e.target.value });
   }
 
-  function submitForm(e) {
-    e.preventDefault();
+  const submitText = (e) => {
+    setError(null);
+    setMessage(null);
+
+    const payload = { bio: user.bio, username: user.username };
+    axios.put(`http://localhost:3001/api/users/${user.id}`, payload)
+      .then(() => {
+        setMessage("profile saved!");
+        setOpen(true);
+        return setLoading(false);
+      })
+      .catch((err) => {
+        if (err.response.status === 500) {
+          setLoading(false);
+          setError("that username is taken luv, xx");
+          return setOpen(true);
+        }
+      });
+  };
+
+  const submitForm = (e) => {
+    setError(null);
+    setMessage(null);
     setLoading(true);
 
     if (!user.username) {
@@ -74,53 +97,41 @@ export default function EditProfile() {
 
     if (selectedImage !== null) {
       const imageRef = ref(storage, `images/${selectedImage.name}`);
-      uploadBytes(imageRef, selectedImage).then((snapshot) => {
-        getDownloadURL(snapshot.ref)
-          .then((url) => {
-            setSelectedImage(url);
-            console.log("upload success", url);
-            return url;
-          })
-          .then((url) => {
-            console.log("url after upload", url);
-            const payload = { icon_url: url };
-            console.log("profile update success payload", payload);
-            axios.put(`http://localhost:3001/api/users/${user.id}`, payload);
-          })
-          .then(() => {
-            setError(null);
-            submitText();
-          })
-          .then(() => navigate("/profile"))
-          .catch((err) => console.log("submit failed: ", err.message));
-      });
+      uploadBytes(imageRef, selectedImage)
+        .then((snapshot) => {
+          getDownloadURL(snapshot.ref)
+            .then((url) => {
+              setSelectedImage(url);
+              console.log("upload success", url);
+              return url;
+            })
+            .then((url) => {
+              console.log("url after upload", url);
+              const payload = { icon_url: url };
+              console.log("profile update success payload", payload);
+              axios.put(`http://localhost:3001/api/users/${user.id}`, payload);
+            })
+            .then(() => {
+              submitText();
+            })
+            .catch((err) => console.log("submit failed: ", err.message));
+        });
     } else {
-      setError(null);
       submitText();
     }
   }
 
-  const submitText = (e) => {
-    const payload = { bio: user.bio, username: user.username };
-    axios
-      .put(`http://localhost:3001/api/users/${user.id}`, payload)
-      .then(() => navigate("/profile"))
-      .catch((err) => {
-        if (err.response.status === 500) {
-          setLoading(false);
-          setOpen(true);
-          setError("that username is taken luv, xx");
-        }
-      });
-  };
-
   const onAddFavouritesHandler = (e) => {
+    setMessage(null);
+    setError(null);
     e.preventDefault();
+
     if (!newFavouriteShowId || !user.id) {
-      setOpen(true);
-      return setError("can't add nothing luv xx");
+      setError("can't add nothing luv xx");
+      return setOpen(true);
     } else {
-      setError(null);
+      setMessage("new favourite added!");
+      setOpen(true);
       return updateFavourites(newFavouriteShowId, user.id);
     }
   };
@@ -151,6 +162,8 @@ export default function EditProfile() {
   });
 
   const onSearchHandler = (e) => {
+    setMessage(null);
+    setError(null);
     e.preventDefault();
 
     if (search === "") {
@@ -158,7 +171,10 @@ export default function EditProfile() {
       return setError("um... enter a show to find a show");
     } else {
       newShow(search)
-        .then(() => setOpen(true))
+        .then(() => {
+          setMessage("new show added!");
+          setOpen(true);
+        })
         .catch(() => {
           setError("we already have that show babe");
           setOpen(true);
@@ -224,7 +240,7 @@ export default function EditProfile() {
                   }
                   alt="profile"
                 ></img>
-                <p id="change-photo">Change Photo</p>
+                <p id="change-photo">change photo</p>
                 <i className="fa-solid fa-circle-user"></i>
               </label>
 
@@ -317,7 +333,7 @@ export default function EditProfile() {
                   </Alert>
                 </Snackbar>
               )}
-              {!error && (
+              {message && (
                 <Snackbar
                   open={open}
                   autoHideDuration={6000}
@@ -328,7 +344,7 @@ export default function EditProfile() {
                     severity="success"
                     sx={{ width: "100%" }}
                   >
-                    show added! thank you :)
+                    {message}
                   </Alert>
                 </Snackbar>
               )}

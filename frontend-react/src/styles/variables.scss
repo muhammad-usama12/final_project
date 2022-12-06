@@ -11,12 +11,9 @@ $confirm: #b1ceae;
 $cancel: #E2B3B3;
 $spoiler: #cfa8cf;
 $image: #dbdbb1;
-$gif: #509fe9;
+$gif: #82acd3;
 
 $trash: #953d3d;
 
-$font-fam: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-sans-serif;
-
+$primary-font: var(--font);
 $primary-font-size: calc(10px + 2vmin);

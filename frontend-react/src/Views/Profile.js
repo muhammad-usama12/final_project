@@ -68,11 +68,11 @@ export default function Profile() {
 
   useEffect(() => {
     setLoading(true);
+    loadApplicationState();
+
     setTimeout(() => {
       setLoading(false);
-    }, 500);
-
-    loadApplicationState();
+    }, 1000);
 
     const userId = localStorage.getItem("teeboUser");
 

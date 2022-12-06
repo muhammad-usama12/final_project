@@ -5,11 +5,16 @@ button {
   font-weight: 600;
   padding: 0.5rem 1rem 0.5rem 1rem;
   width: fit-content;
-  // height: 40px;
+  min-height: 42px;
+  font-family: var(--font);
   border: 0px;
   border-radius: 30px;
   transition-duration: 200ms;
   cursor: pointer;
+}
+
+.MuiButtonBase-root{
+  min-height: 0;
 }
 
 button:active {
@@ -30,14 +35,13 @@ button:active {
   background-color: $image;
   border-color: $image;
   margin-left: 1rem;
-  // margin-right: 1rem;
 }
 
 .button--gif {
+  display: flex;
+  align-items: center;
   background-color: $gif;
   border-color: $gif;
-  margin-left: 1rem;
-  margin-right: 1rem;
 }
 
 .button--trash {
@@ -60,6 +64,6 @@ button:active {
   }
 }
 
-.button--confirm:hover, .button--cancel:hover, .button--image:hover {
-  filter: saturate(200%);
+.button--confirm:hover, .button--cancel:hover, .button--image:hover, .button--gif:hover {
+  color: $secondary-colour
 }

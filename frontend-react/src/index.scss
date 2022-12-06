@@ -1,10 +1,31 @@
-@import "../styles/variables.scss";
+@import "./styles/variables.scss";
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #282c34;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
 
 .loader {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-self: center;
+  top: 300px;
+  position: auto;
 }
 
 main {
@@ -21,10 +42,6 @@ main {
   align-items: center;
   color: #000;
   margin-top: 3rem;
-}
-
-hr {
-  width: 50%;
 }
 
 a {
@@ -46,7 +63,7 @@ a {
 }
 
 #spacing {
-  height: 100px;
+  height: 64px;
 }
 
 h4 {

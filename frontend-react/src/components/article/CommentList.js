@@ -31,7 +31,6 @@ export default function CommentList(props) {
           validate={props.validate}
         />
       )}
-      <hr />
       {!document.cookie && <h5>log in to participate in the discourse :)</h5>}
       {commentsList}
     </section>

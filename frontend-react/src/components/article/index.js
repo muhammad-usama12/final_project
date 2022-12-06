@@ -1,14 +1,14 @@
 import { useState } from "react";
-import axios from "axios";
+import { Link } from "react-router-dom";
 import classNames from "classnames";
 import Moment from "react-moment";
 
 import "./Article.scss";
 
+import Tooltip from '@mui/material/Tooltip';
 import CategoryTag from "./CategoryTag";
 import CommentList from "./CommentList";
 import useVisualMode from "../../hooks/useVisualMode";
-import { Link } from "react-router-dom";
 import {
   getWatchlistByUser,
   getLikeByUserandPost,
@@ -25,10 +25,8 @@ export default function Article(props) {
   const [likedOrNot, setLikedOrNot] = useState(getLikeByUserandPost(props.state, post_id, user_id));
   const [commentCounter, setCommentCounter] = useState(props.total_comments);
 
-
   const SHOW = "SHOW";
   const HIDE = "HIDE";
-
 
   const handleLikeButton = () => {
     const likedbyUser = getLikeByUserandPost(props.state, post_id, user_id);
@@ -72,7 +70,6 @@ export default function Article(props) {
     (watchlistShows) => watchlistShows.id === props.show.id
   );
 
-
   const handleWatchlistAction = () => {
     if (currentWatchlistShow) {
       return props.deleteFromWatchlist(props.show.id, props.loggedInUser.id);
@@ -90,25 +87,26 @@ export default function Article(props) {
 
   return (
     <article>
-      <div className="article-header">
-        <Link to={`/profile/${props.user.id}`}>
-          <img
-            className="profile-icon"
-            src={props.user.icon_url}
-            alt={props.user.user_name}
-          ></img>
-        </Link>
-        <p>@{props.user.username}</p>
-      </div>
-      {/* <p>{props.user.username}</p> */}
       <div className="screen-and-buttons">
         <div className={ifSpoilerClass}>
           <p>{props.text}</p>
           <img className="article-image" src={props.image} alt=""></img>
         </div>
         <div className="article-buttons">
+          <Link to={`/profile/${props.user.id}`}>
+            <img
+              className="profile-icon"
+              src={props.user.icon_url}
+              alt={props.user.user_name}
+            ></img>
+          </Link>
           <div className="actions">
-            <i className={likeButtonClass} onClick={handleLikeButton}></i>
+            {!document.cookie && 
+              <Tooltip title="log in to give props :)">
+                <i className={likeButtonClass}></i>
+              </Tooltip>
+            }
+            {document.cookie && <i className={likeButtonClass} onClick={handleLikeButton}></i>}
             <p>{likecounter}</p>
             <i
               className="fa-solid fa-comment-dots"
@@ -116,10 +114,10 @@ export default function Article(props) {
             ></i>
             <p>{commentCounter}</p>
 
-            <i
+            {document.cookie && <i
               className={watchlistButtonClass}
               onClick={handleWatchlistAction}
-            ></i>
+            ></i>}
           </div>
         </div>
       </div>
@@ -128,7 +126,7 @@ export default function Article(props) {
           name={props.show.name}
           onClick={() => props.getFilteredShows(props.show.id)}
         />
-        <Moment fromNow>{props.timestamp}</Moment>
+        <div class="timestamp"><Moment fromNow>{props.timestamp}</Moment> by <Link to={`/profile/${props.user.id}`}>@{props.user.username}</Link></div>
       </div>
 
       {mode === SHOW && (

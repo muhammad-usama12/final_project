@@ -5,11 +5,24 @@ article {
   display: flex;
   flex-direction: column;
   word-wrap: break-word;
-  width: 35vw;
-  padding: 0 1.5em 1.5em 2em;
+  width: 43vw;
+  padding: 2rem 2rem 2rem 2rem;
   margin-top: 0;
   margin-bottom: 4rem;
   box-shadow: 10px 10px $article-shadow;
+
+  .timestamp {
+    font-family: monospace;
+    color: $article-shadow;
+  }
+
+  a {
+    color: $article-shadow;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
 
   .screen-and-buttons {
     display: flex;
@@ -21,7 +34,6 @@ article {
       flex-direction: column;
       align-items: center;
       justify-content: space-between;
-      margin-top: 1em;
 
       .actions {
         color: $primary-colour;
@@ -98,15 +110,16 @@ article {
   .category-timestamp {
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
     justify-content: space-between;
+    align-items: center;
+    margin-right: 4rem;
 
-    time {
-      margin-right: 4em;
-      font-family: monospace;
+    .timestamp {
+      margin-right: 1rem;
       font-size: large;
-      color: #797474;
+      text-align: right
     }
+
   }
 
   .spoiler {
@@ -115,16 +128,20 @@ article {
 
   .comments-container {
     h1 {
+      margin-top: 2rem;
       margin-bottom: 0rem;
+      font-size: x-large;
     }
 
     .comment-item {
+      margin-top: 1rem;
+
       img {
         cursor: pointer;
       }
 
       p {
-        font-size: larger;
+        font-size: 18px;
       }
 
       .comment-and-profile-image {
@@ -133,22 +150,16 @@ article {
         flex-direction: row;
 
         .screen {
-          margin-right: 0.2em;
+          margin-right: 1rem;
         }
       }
 
       .timestamp {
-        font-size: small;
-        font-family: monospace;
-        margin: 0.3rem 1rem 0.3rem 1rem;
-        color: #6f6a6a;
+        font-size: large;
+        margin: 0.3rem 1rem 1rem 1rem;
       }
     }
   }
-}
-
-hr {
-  width: 100%;
 }
 
 .comment-form {
@@ -171,8 +182,7 @@ hr {
       border: 0px;
       border-radius: 30px;
       padding: 1rem;
-      font-family: $font-fam;
-      font-size: medium;
+      font-size: 18px;
 
       &:focus {
         outline: none;

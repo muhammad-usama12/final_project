@@ -6,7 +6,7 @@
   flex-direction: row;
   align-items: center;
   margin-bottom: 1rem;
-  margin-top: 1rem;
+  margin-top: 2rem;
 
   a {
     display: flex;
@@ -49,7 +49,7 @@
   #change-photo {
     display: none;
     position: absolute;
-    transform: translate(45%, -700%);
+    transform: translate(43%, -520%);
     font-weight: bold;
   }
   
@@ -75,6 +75,7 @@
 
     h1 {
       font-size: xx-large;
+      margin-bottom: 1rem;
     }
 
     p {
@@ -121,15 +122,15 @@
     }
     
     textarea {
+      font-family: $primary-font;
       font-size: large;
-      height: 3rem;
+      height: 5rem;
     }
 
     input {
       font-size: x-large;
       font-weight: bold;
-      height: 0.5rem;
-      margin-top: 1rem;
+      height: 1rem;
     }
 
     textarea, input {
@@ -138,7 +139,6 @@
       color: $primary-colour;
       border-radius: 5px;
       padding: 1rem;
-      font-family: $font-fam;
       background-color: $secondary-colour;
       border: 0px;
       width: 35vw;
