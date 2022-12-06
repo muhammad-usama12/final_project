@@ -1,5 +1,9 @@
 @import "../../styles/variables.scss";
 
+h1 {
+  padding-bottom: 60px;
+}
+
 .create-post {
   display: flex;
   flex-direction: column;
@@ -28,5 +32,6 @@
 
   .fa-marker:active {
     font-size: 70px;
+    padding-top: 40px;
   }
 }
