@@ -7,7 +7,6 @@
   text-align: center;
   background-color: $secondary-colour;
   color: $primary-colour;
-  font-family: $font-fam;
   display: flex;
   font-size: medium;
   font-weight: 600;
@@ -16,6 +15,7 @@
   width: fit-content;
   border-radius: 30px;
   transition-duration: 200ms;
+  font-family: var(--font);
 
   p {
     margin: 0px;
