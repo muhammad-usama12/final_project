@@ -1,7 +1,7 @@
 @import "../../styles/variables.scss";
 
 h1 {
-  padding-bottom: 60px;
+  padding-bottom: 2rem;
 }
 
 .create-post {
@@ -17,7 +17,7 @@ h1 {
   }
 
   .fa-marker:hover {
-    background-color: $tertiary-colour;
+    background-color: $secondary-colour;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -32,6 +32,5 @@ h1 {
 
   .fa-marker:active {
     font-size: 70px;
-    padding-top: 40px;
   }
 }

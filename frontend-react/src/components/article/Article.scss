@@ -221,3 +221,9 @@ article {
     color: #6f6a6a;
   }
 }
+
+@media (max-width: 820px) {
+  article {
+    width: 90vw;
+  }
+}

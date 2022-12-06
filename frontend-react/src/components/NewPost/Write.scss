@@ -2,15 +2,12 @@
 
 .write-post {
   background-color: $secondary-colour;
-  margin: 2rem;
-  margin-top: 2rem;
   padding: 2rem;
+  min-width: 600px;
   width: 43vw;
   gap: 1rem;
   border-radius: 30px;
   margin-bottom: 0;
-  margin-top: 3rem;
-  width: 100%;
 
   .right-buttons {
     display: flex;
@@ -91,9 +88,16 @@
 
   #upload-image {
     background-color: $image;
+    height: 42px;
   }
 
   .dropdown {
     width: 100%;
+  }
+}
+
+@media (max-width: 820px) {
+  .write-post {
+    width: 90vw;
   }
 }
