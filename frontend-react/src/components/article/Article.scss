@@ -117,10 +117,13 @@ article {
 
   .comments-container {
     h1 {
+      margin-top: 2rem;
       margin-bottom: 0rem;
     }
 
     .comment-item {
+      margin-top: 1rem;
+
       img {
         cursor: pointer;
       }
@@ -147,10 +150,6 @@ article {
       }
     }
   }
-}
-
-hr {
-  width: 100%;
 }
 
 .comment-form {
