@@ -13,7 +13,7 @@ button {
   cursor: pointer;
 }
 
-.MuiButtonBase-root{
+.MuiButtonBase-root {
   min-height: 0;
 }
 
@@ -55,15 +55,18 @@ button:active {
 
     transition-duration: 200ms;
   }
-  .fa-trash-can:hover{
+  .fa-trash-can:hover {
     font-size: 30px;
     color: $trash;
   }
-  .fa-trash-can:active{
+  .fa-trash-can:active {
     font-size: 50px;
   }
 }
 
-.button--confirm:hover, .button--cancel:hover, .button--image:hover, .button--gif:hover {
-  color: $secondary-colour
+.button--confirm:hover,
+.button--cancel:hover,
+.button--image:hover,
+.button--gif:hover {
+  color: $secondary-colour;
 }

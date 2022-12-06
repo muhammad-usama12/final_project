@@ -13,6 +13,7 @@ import Button from "../Button";
 import ReactGiphySearchbox from "react-giphy-searchbox";
 
 import { ApplicationContext } from "../../Views/App";
+import { css } from "@emotion/react";
 
 export default function Write(props) {
   const [text, setText] = useState("");
@@ -162,9 +163,8 @@ export default function Write(props) {
             apiKey={"6TLFFlfm48okMpvqfUU3vDQfoVan5W2t"}
             onSelect={selectedGif}
             masonryConfig={[
-              { columns: 2, imageWidth: 140, gutter: 10 },
-              { mq: "100%", columns: 3, imageWidth: 200, gutter: 10 },
-              { mq: "100%", columns: 4, imageWidth: 175, gutter: 10 },
+              { columns: 3, imageWidth: 200, gutter: 10 },
+              { mq: "100%", columns: 2, imageWidth: 200, gutter: 10 },
             ]}
           />
         )}

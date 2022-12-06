@@ -10,10 +10,12 @@
   border-radius: 30px;
   margin-bottom: 0;
   margin-top: 3rem;
+  width: 100%;
 
   .right-buttons {
     display: flex;
     flex-wrap: wrap;
+    align-items: flex-end;
     justify-content: space-between;
     margin-top: 1rem;
 
@@ -22,7 +24,7 @@
       padding-bottom: 0;
       background-color: rgb(217, 180, 146);
       margin-right: 0;
-      
+
       &:hover span {
         background-color: transparent;
         color: $secondary-colour;
@@ -45,11 +47,10 @@
         margin-right: 0.25rem;
       }
     }
-    
+
     input[type="file"] {
       display: none;
     }
-    
   }
 
   form {
@@ -62,7 +63,8 @@
       height: 5rem;
     }
 
-    textarea, input {
+    textarea,
+    input {
       font-size: $primary-font-size;
       background-color: $secondary-colour;
       border: 0px;
