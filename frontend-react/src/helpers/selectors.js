@@ -32,7 +32,7 @@ export function getPostsByUser(state, userId) {
   return foundPostsArr;
 }
 
-export function getFavouritesByUser (state, userId) {
+export function getFavouritesByUser(state, userId) {
   const shows = state.shows;
   const favourites = state.favourites;
 
@@ -47,11 +47,11 @@ export function getFavouritesByUser (state, userId) {
     }
     return someShow;
   })
-  
+
   return allFavouriteShows;
 }
 
-export function getWatchlistByUser (state, userId) {
+export function getWatchlistByUser(state, userId) {
   const shows = state.shows;
   const watchlist = state.watchlist;
 
@@ -66,25 +66,25 @@ export function getWatchlistByUser (state, userId) {
     }
     return someShow;
   });
-
   return allWatchlistShows;
 }
 
-export const  getLikeByUserandPost = (state, postId, userId) =>  {
-     
-    const likesDb = state.likes
-    const postsDb = state.posts
-    
-    const postIdafterFilter =  postsDb.filter(post => post.id === postId);
-  
-    const afterMappedlikes = postIdafterFilter.map(eachpost => {
-     let likeafterfilter;
-     for(let like of likesDb){
-       if(like.posts_id === eachpost.id && like.user_id === Number(userId)){
-        likeafterfilter = like
-      }
+export const getLikeByUserandPost = (state, postId, userId) => {
+
+  const likesDb = state.likes
+  const postsDb = state.posts
+
+  const post = postsDb.find(post => post.id === postId);
+
+  if (!post) {
+    return false;
+  }
+
+  for (let i = 0; i < likesDb.length; i++) {
+    const like = likesDb[i]
+    if (like.posts_id === post.id && like.user_id === Number(userId)) {
+      return true
     }
-    return likeafterfilter
-    })
-   return afterMappedlikes
-  };
+  }
+  return false
+};

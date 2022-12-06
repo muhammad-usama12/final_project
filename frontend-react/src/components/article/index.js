@@ -17,16 +17,34 @@ import {
 export default function Article(props) {
   // This checks if props.spoiler is true, and if it is, apply the "spoiler" class to blur spoiler posts
   const ifSpoilerClass = classNames("screen", { spoiler: props.spoiler });
+  const post_id = props.id;
+  const user_id = localStorage.getItem("teeboUser");
 
   const [error, setError] = useState(null);
   const [likecounter, setLikecounter] = useState(props.total_likes);
-  const [likedOrNot, setLikedOrNot] = useState();
+  const [likedOrNot, setLikedOrNot] = useState(getLikeByUserandPost(props.state, post_id, user_id));
   const [commentCounter, setCommentCounter] = useState(props.total_comments);
 
-  const post_id = props.id;
-  const user_id = localStorage.getItem("teeboUser");
+
   const SHOW = "SHOW";
   const HIDE = "HIDE";
+
+
+  const handleLikeButton = () => {
+    const likedbyUser = getLikeByUserandPost(props.state, post_id, user_id);
+
+    if (likedbyUser) {
+      setLikedOrNot(false); 
+      return props
+        .deleteLike(post_id, user_id)
+        .then((res) => setLikecounter(res.data.total_likes));
+    } else {
+      setLikedOrNot(true); 
+      return props
+        .addLike(post_id, user_id)
+        .then((res) => setLikecounter(res.data.total_likes));
+    }
+  };
 
   const { mode, transition, back } = useVisualMode(HIDE);
 
@@ -54,21 +72,6 @@ export default function Article(props) {
     (watchlistShows) => watchlistShows.id === props.show.id
   );
 
-  const handleLikeButton = () => {
-    const likedbyUser = getLikeByUserandPost(props.state, post_id, user_id);
-
-    if (likedbyUser[0]) {
-      setLikedOrNot(false); //Temporary fix
-      return props
-        .deleteLike(post_id, user_id)
-        .then((res) => setLikecounter(res.data.total_likes));
-    } else {
-      setLikedOrNot(true); //Temporary fix
-      return props
-        .addLike(post_id, user_id)
-        .then((res) => setLikecounter(res.data.total_likes));
-    }
-  };
 
   const handleWatchlistAction = () => {
     if (currentWatchlistShow) {

@@ -245,7 +245,6 @@ export default function useApplicationData() {
             likes.splice(i, 1);
           }
         }
-
         setState((prev) => ({ ...prev, likes }));
         console.log("after set delete", likes)
         return deleteLikeCounter(post_id, user_id)
