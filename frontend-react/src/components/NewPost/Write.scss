@@ -5,7 +5,7 @@
   margin: 2rem;
   margin-top: 2rem;
   padding: 2rem;
-  width: 45vw;
+  width: 43vw;
   gap: 1rem;
   border-radius: 30px;
   margin-bottom: 0;
@@ -26,6 +26,7 @@
       span {
         color: $primary-colour;
         font-weight: bold;
+        font-family: var(--font);
         padding-left: 0;
       }
 
