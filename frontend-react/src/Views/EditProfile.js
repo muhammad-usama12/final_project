@@ -48,8 +48,13 @@ export default function EditProfile() {
   } = applicationData;
 
   useEffect(() => {
+    setLoading(true);
     loadApplicationState();
 
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+    
     const userId = localStorage.getItem("teeboUser");
     if (!userId) {
       navigate("/login");

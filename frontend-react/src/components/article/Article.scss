@@ -11,6 +11,19 @@ article {
   margin-bottom: 4rem;
   box-shadow: 10px 10px $article-shadow;
 
+  .timestamp {
+    font-family: monospace;
+    color: $article-shadow;
+  }
+
+  a {
+    color: $article-shadow;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
   .screen-and-buttons {
     display: flex;
     justify-content: space-between;
@@ -103,9 +116,7 @@ article {
 
     .timestamp {
       margin-right: 1rem;
-      font-family: monospace;
       font-size: large;
-      color: #797474;
       text-align: right
     }
 
@@ -145,9 +156,7 @@ article {
 
       .timestamp {
         font-size: large;
-        font-family: monospace;
-        margin: 0.3rem 1rem 0.3rem 1rem;
-        color: #6f6a6a;
+        margin: 0.3rem 1rem 1rem 1rem;
       }
     }
   }

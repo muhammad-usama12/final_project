@@ -2,7 +2,7 @@ import { useEffect, createContext, useState } from "react";
 import axios from "axios";
 import BeatLoader from "react-spinners/BeatLoader";
 
-import "./App.scss";
+import "../index.scss";
 import { Link } from "react-router-dom";
 
 import Header from "../components/Header";
@@ -45,11 +45,11 @@ function App() {
 
   useEffect(() => {
     setLoading(true);
+    loadApplicationState();
+
     setTimeout(() => {
       setLoading(false);
-    }, 500);
-
-    loadApplicationState();
+    }, 1000);
 
     const userId = localStorage.getItem("teeboUser");
 

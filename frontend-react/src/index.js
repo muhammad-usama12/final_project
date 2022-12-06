@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import "./index.css";
+import "./index.scss";
 import Profile from "./Views/Profile";
 import EditProfile from "./Views/EditProfile";
 import Scripts from "./components/Scripts";

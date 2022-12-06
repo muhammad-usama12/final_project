@@ -124,7 +124,7 @@ export default function Article(props) {
           name={props.show.name}
           onClick={() => props.getFilteredShows(props.show.id)}
         />
-        <div class="timestamp"><Moment fromNow>{props.timestamp}</Moment> by @{props.user.username}</div>
+        <div class="timestamp"><Moment fromNow>{props.timestamp}</Moment> by <Link to={`/profile/${props.user.id}`}>@{props.user.username}</Link></div>
       </div>
 
       {mode === SHOW && (

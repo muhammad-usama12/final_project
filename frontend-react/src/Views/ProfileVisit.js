@@ -74,7 +74,7 @@ export default function ProfileVisit(props) {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    }, 500);
+    }, 1000);
 
     loadApplicationState();
 
