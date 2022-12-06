@@ -233,10 +233,11 @@
     left: 0;
     right: 0;
     transition: all 0.3s ease-out;
+    background: var(--color-profile);
   }
 
-  a:before {
-    background: var(--color-profile);
+  .toggleTrue {
+    border-bottom: 5px solid $star;
   }
 
   a:hover:before {

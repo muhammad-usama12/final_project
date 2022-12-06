@@ -3,7 +3,7 @@
 /* define the fonts and colors used in the project */
 :root {
   --font: "Open Sans", sans-serif;
-  --color-bg: #ffffff;
+  --color-bg: #f6f1f1;
   --color-txt: #f6f1f1;
   --color-home: #f6f1f1;
   --color-login: #ff8c00;
@@ -49,14 +49,15 @@ header {
   /* include padding instead of margin to have the header attached to the window's borders (and therefore to avoid the string included with a pseudo element from being displayed inappropriately to the left of the header) */
   padding: 0.25rem 0.75rem;
   font-size: 2.5rem;
-  color: $star;
+  color: #f6f1f1;
+  transition-duration: 200ms;
 
   /* position relative to absolute position the pseudo element */
   position: relative;
   /* transition for the change in background color (occurring as the nav items are pressed) */
 }
 .App .Navbar h2:hover {
-  text-shadow: 2px 2px #ff0000;
+  text-shadow: 3px 3px #ff8c00;
 }
 
 // .App .Navbar img {
@@ -82,7 +83,7 @@ header {
 
 .App .Navbar h2:before {
   /* with a pseudo element include a string, which is hidden by default below the header, to the left of the page  */
-  content: "🖥";
+  content: url('https://i.imgur.com/VGZEYrg.png');
   position: absolute;
   left: 93%;
   transform: translateX(-50vw);
@@ -113,7 +114,7 @@ header {
   /* separate the list items more prominently */
   margin: 0 0.75rem;
   font-size: 1.4rem;
-  text-transform: uppercase;
+  // text-transform: uppercase;
 }
 
 .App .Navbar ul li a {

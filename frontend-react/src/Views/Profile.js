@@ -40,11 +40,11 @@ export default function Profile() {
   const [currentAricle, setCurrentArticle] = useState({});
 
   const clickPostsClass = classNames("toggle", {
-    "toggle-posts": togglePosts,
+    "toggleTrue": togglePosts,
   });
 
   const clickWatchlistClass = classNames("toggle", {
-    "toggle-watchlist": toggleWatchlist,
+    "toggleTrue": toggleWatchlist,
   });
 
   const navigate = useNavigate();

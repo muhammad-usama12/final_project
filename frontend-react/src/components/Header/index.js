@@ -22,19 +22,19 @@ export default function Header(props) {
             {/* <TvIcon className="logo" /> */}
           </Link>
           <ul>
-            <li>{!document.cookie && <Link to="/signup">Sign Up</Link>}</li>
-            <li>{!document.cookie && <Link to="/login">Log In</Link>}</li>
+            <li>{!document.cookie && <Link to="/signup">sign up</Link>}</li>
+            <li>{!document.cookie && <Link to="/login">log in</Link>}</li>
             <li>
               {document.cookie && (
                 <Link to="/profile" onClick={props.profile}>
-                  Profile
+                  profile
                 </Link>
               )}
             </li>
             <li>
               {document.cookie && (
                 <Link to="#" onClick={props.logout}>
-                  Log out
+                  log out
                 </Link>
               )}
             </li>
