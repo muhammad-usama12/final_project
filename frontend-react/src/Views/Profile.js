@@ -173,7 +173,7 @@ export default function Profile() {
                   back();
                 }}
               >
-                posts
+                <Link to="#">posts</Link>
               </div>
               <div
                 className={clickWatchlistClass}
@@ -183,7 +183,7 @@ export default function Profile() {
                   transition(WATCHLIST);
                 }}
               >
-                watchlist
+                <Link to="#">watchlist</Link>
               </div>
             </div>
           </section>
