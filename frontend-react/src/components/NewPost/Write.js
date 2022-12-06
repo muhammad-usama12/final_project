@@ -93,7 +93,7 @@ export default function Write(props) {
       {props.error !== null && <p className="error">{props.error}</p>}
       <form onSubmit={(event) => event.preventDefault()} autoComplete="off">
         <textarea
-          name="text"
+          name="create-post"
           type="text"
           placeholder="what do the people need to hear..."
           value={text}

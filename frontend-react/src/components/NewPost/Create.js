@@ -7,7 +7,7 @@ export default function Create(props) {
     <section className="create-post">
       <h1>which pot are you stirring today?</h1>
       <i
-        className="fa-solid fa-marker fa-bounce"
+        className="pen-icon fa-solid fa-marker fa-bounce"
         onClick={props.onClick}></i>
     </section>
   );
