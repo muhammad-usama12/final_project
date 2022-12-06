@@ -13,6 +13,10 @@ button {
   cursor: pointer;
 }
 
+.MuiButtonBase-root{
+  min-height: 0;
+}
+
 button:active {
   filter: brightness(50%);
 }

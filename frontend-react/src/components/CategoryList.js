@@ -7,8 +7,6 @@ import CategoryListItem from "./CategoryListItem";
 
 
 export default function CategoryList(props) {
-
- 
   
   const categoriesArray = props.shows;
 
