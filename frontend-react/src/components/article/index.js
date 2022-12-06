@@ -90,23 +90,19 @@ export default function Article(props) {
 
   return (
     <article>
-      <div className="article-header">
-        <Link to={`/profile/${props.user.id}`}>
-          <img
-            className="profile-icon"
-            src={props.user.icon_url}
-            alt={props.user.user_name}
-          ></img>
-        </Link>
-        <p>@{props.user.username}</p>
-      </div>
-      {/* <p>{props.user.username}</p> */}
       <div className="screen-and-buttons">
         <div className={ifSpoilerClass}>
           <p>{props.text}</p>
           <img className="article-image" src={props.image} alt=""></img>
         </div>
         <div className="article-buttons">
+          <Link to={`/profile/${props.user.id}`}>
+            <img
+              className="profile-icon"
+              src={props.user.icon_url}
+              alt={props.user.user_name}
+            ></img>
+          </Link>
           <div className="actions">
             <i className={likeButtonClass} onClick={handleLikeButton}></i>
             <p>{likecounter}</p>
@@ -128,7 +124,7 @@ export default function Article(props) {
           name={props.show.name}
           onClick={() => props.getFilteredShows(props.show.id)}
         />
-        <Moment fromNow>{props.timestamp}</Moment>
+        <div class="timestamp"><Moment fromNow>{props.timestamp}</Moment> by {props.user.username}</div>
       </div>
 
       {mode === SHOW && (
