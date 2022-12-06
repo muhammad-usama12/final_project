@@ -27,7 +27,7 @@ export default function Header(props) {
             <li>
               {document.cookie && (
                 <Link to="#" onClick={props.logout}>
-                  Logout
+                  Log out
                 </Link>
               )}
             </li>
