@@ -38,6 +38,8 @@ button:active {
 }
 
 .button--gif {
+  display: flex;
+  align-items: center;
   background-color: $gif;
   border-color: $gif;
 }
