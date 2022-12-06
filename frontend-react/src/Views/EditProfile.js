@@ -48,12 +48,7 @@ export default function EditProfile() {
   } = applicationData;
 
   useEffect(() => {
-    setLoading(true);
     loadApplicationState();
-
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
     
     const userId = localStorage.getItem("teeboUser");
     if (!userId) {
@@ -68,6 +63,26 @@ export default function EditProfile() {
   function onChange(e) {
     setUser({ ...user, [e.target.id]: e.target.value });
   }
+
+  const submitText = (e) => {
+    setError(null);
+    setMessage(null);
+
+    const payload = { bio: user.bio, username: user.username };
+    axios.put(`http://localhost:3001/api/users/${user.id}`, payload)
+      .then(() => {
+        setMessage("profile saved!");
+        setOpen(true);
+        return setLoading(false);
+      })
+      .catch((err) => {
+        if (err.response.status === 500) {
+          setLoading(false);
+          setError("that username is taken luv, xx");
+          return setOpen(true);
+        }
+      });
+  };
 
   const submitForm = (e) => {
     setError(null);
@@ -106,31 +121,11 @@ export default function EditProfile() {
     }
   }
 
-  const submitText = (e) => {
-    setError(null);
-    setMessage(null);
-
-    const payload = { bio: user.bio, username: user.username };
-    axios.put(`http://localhost:3001/api/users/${user.id}`, payload)
-      .then(() => {
-        setMessage("profile saved!");
-        setOpen(true);
-        return setLoading(false);
-      })
-      .catch((err) => {
-        if (err.response.status === 500) {
-          setLoading(false);
-          setError("that username is taken luv, xx");
-          return setOpen(true);
-        }
-      });
-  };
-
   const onAddFavouritesHandler = (e) => {
-    setError(null);
     setMessage(null);
-
+    setError(null);
     e.preventDefault();
+
     if (!newFavouriteShowId || !user.id) {
       setError("can't add nothing luv xx");
       return setOpen(true);
