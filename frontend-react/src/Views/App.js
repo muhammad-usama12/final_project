@@ -95,16 +95,18 @@ function App() {
   return (
     <ApplicationContext.Provider value={applicationData}>
       <Header logout={logout} />
-      <Spacing />
       {loading ? (
-        <BeatLoader
-          className="loader"
-          color={"#D9D9D9"}
-          loading={loading}
-          size={30}
-          aria-label="Loading Spinner"
-          data-testid="loader"
-        />
+        <>
+          <Spacing />
+          <BeatLoader
+            className="loader"
+            color={"#D9D9D9"}
+            loading={loading}
+            size={30}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+          />
+        </>
       ) : (
         <main>
           <section className="category-filters">
