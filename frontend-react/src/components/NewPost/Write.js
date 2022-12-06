@@ -13,7 +13,6 @@ import Button from "../Button";
 import ReactGiphySearchbox from "react-giphy-searchbox";
 
 import { ApplicationContext } from "../../Views/App";
-import { css } from "@emotion/react";
 
 export default function Write(props) {
   const [text, setText] = useState("");
@@ -116,6 +115,16 @@ export default function Write(props) {
           onChange={(e, show) => handleChange(e, show.id)}
         />
       </form>
+      {gifs && (
+          <ReactGiphySearchbox
+            apiKey={"6TLFFlfm48okMpvqfUU3vDQfoVan5W2t"}
+            onSelect={selectedGif}
+            masonryConfig={[
+              { columns: 3, imageWidth: 180, gutter: 10 },
+              { mq: "100%", columns: 2, imageWidth: 100, gutter: 10 },
+            ]}
+          />
+        )}
       <div className="right-buttons">
         <Button
           cancel
@@ -158,16 +167,6 @@ export default function Write(props) {
             setGifs(true);
           }}
         ></Button>
-        {gifs && (
-          <ReactGiphySearchbox
-            apiKey={"6TLFFlfm48okMpvqfUU3vDQfoVan5W2t"}
-            onSelect={selectedGif}
-            masonryConfig={[
-              { columns: 3, imageWidth: 200, gutter: 10 },
-              { mq: "100%", columns: 2, imageWidth: 200, gutter: 10 },
-            ]}
-          />
-        )}
         <Button
           confirm
           className="button--confirm"
