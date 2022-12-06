@@ -22,16 +22,17 @@
       padding-bottom: 0;
       background-color: rgb(217, 180, 146);
       margin-right: 0;
-
+      
+      &:hover span {
+        background-color: transparent;
+        color: $secondary-colour;
+      }
       span {
         color: $primary-colour;
         font-weight: bold;
         font-family: var(--font);
         padding-left: 0;
-      }
-
-      span:hover {
-        background-color: transparent;
+        transition-duration: 200ms;
       }
     }
 

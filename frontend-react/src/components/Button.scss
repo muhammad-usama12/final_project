@@ -62,6 +62,6 @@ button:active {
   }
 }
 
-.button--confirm:hover, .button--cancel:hover, .button--image:hover {
-  filter: saturate(200%);
+.button--confirm:hover, .button--cancel:hover, .button--image:hover, .button--gif:hover {
+  color: $secondary-colour
 }
