@@ -1,7 +1,6 @@
 @import "../styles/variables.scss";
 
 footer {
-  background-color: $primary-colour;
   color: $secondary-colour;
   display: flex;
   justify-content: center;
@@ -10,7 +9,6 @@ footer {
   height: 64px;
   font-family: monospace;
   font-size: large;
-  border-top: 1px outset $secondary-colour;
   bottom: 0;
   margin-top: auto;
 
