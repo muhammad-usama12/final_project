@@ -8,7 +8,7 @@ export default function Button(props) {
     "button--cancel": props.cancel,
     "button--image": props.image,
     "button--trash": props.trash,
-    // "button--gif": props.gif
+    "button--gif": props.gif
   });
 
   return (

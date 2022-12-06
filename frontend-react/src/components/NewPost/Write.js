@@ -4,10 +4,8 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 import "./Write.scss";
 import GifBoxIcon from "@mui/icons-material/GifBox";
-import GifIcon from "@mui/icons-material/Gif";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
-import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Button from "../Button";
@@ -124,13 +122,12 @@ export default function Write(props) {
           message="cancel"
           onClick={cancel}
         />
-        <FormGroup>
-          <FormControlLabel
-            control={<Checkbox color="default" />}
-            label="spoiler"
-            onChange={handleSpoilerToggle}
-          />
-        </FormGroup>
+        <FormControlLabel
+          className="pill-container spoiler-checkbox"
+          control={<Checkbox color="default" />}
+          label="spoiler"
+          onChange={handleSpoilerToggle}
+        />
         <label
           className="button--image pill-container"
           id="upload-image"
@@ -154,6 +151,7 @@ export default function Write(props) {
           }}
         />
         <Button
+          gif
           message={<GifBoxIcon />}
           onClick={() => {
             setGifs(true);

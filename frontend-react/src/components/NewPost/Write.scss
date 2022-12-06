@@ -5,22 +5,49 @@
   margin: 2rem;
   margin-top: 2rem;
   padding: 2rem;
-  width: 35vw;
+  width: 45vw;
   gap: 1rem;
   border-radius: 30px;
   margin-bottom: 0;
-  margin-top: 3rem;
+  margin-top: 2rem;
 
   .right-buttons {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     margin-top: 1rem;
-    
+
+    .spoiler-checkbox {
+      padding-top: 0;
+      padding-bottom: 0;
+      background-color: rgb(217, 180, 146);
+      margin-right: 0;
+
+      span {
+        color: $primary-colour;
+        font-weight: bold;
+        padding-left: 0;
+      }
+
+      span:hover {
+        background-color: transparent;
+      }
+    }
+
+    label {
+      margin: 0;
+
+      .fa-image {
+        font-size: large;
+        margin-left: 0.25rem;
+        margin-right: 0.25rem;
+      }
+    }
     
     input[type="file"] {
       display: none;
     }
+    
   }
 
   form {
