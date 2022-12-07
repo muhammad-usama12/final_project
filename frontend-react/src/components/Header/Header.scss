@@ -32,12 +32,11 @@ header {
   left: 0;
   width: 100%;
   padding-top: 20px;
-  padding-left: 30px;
-  padding-right: 25px;
+  padding-left: 40px;
+  padding-right: 84px;
 }
 
 .App .Navbar {
-  /* display the items of the navigation bar in a grid, where the anchor link elements take the space left available by the header  */
   display: flex;
   flex-direction: row;
   grid-template-columns: auto 1fr;
@@ -46,63 +45,32 @@ header {
 }
 
 .App .Navbar h2 {
-  /* include padding instead of margin to have the header attached to the window's borders (and therefore to avoid the string included with a pseudo element from being displayed inappropriately to the left of the header) */
   padding: 0.25rem 0.75rem;
   font-size: 2.5rem;
   color: #f6f1f1;
   transition-duration: 200ms;
-
-  /* position relative to absolute position the pseudo element */
   position: relative;
-  /* transition for the change in background color (occurring as the nav items are pressed) */
 }
 .App .Navbar h2:hover {
   text-shadow: 3px 3px #ff8c00;
 }
 
-// .App .Navbar img {
-//   display: inherit;
-//   padding-left: 0.1rem;
-//   padding-right: 0.1rem;
-//   width: 35px;
-//   height: auto;
-// }
-
-// .App .Navbar .logo {
-//   display: inherit;
-//   padding-left: 0.1rem;
-//   padding-right: 0.1rem;
-//   width: 35px;
-//   height: auto;
-//   color: $star;
-// }
-
-// a {
-//   display: inherit;
-// }
-
 .App .Navbar h2:before {
-  /* with a pseudo element include a string, which is hidden by default below the header, to the left of the page  */
-  content: url('https://i.imgur.com/VGZEYrg.png');
+  content: url("https://i.imgur.com/VGZEYrg.png");
   position: absolute;
   left: 93%;
   transform: translateX(-50vw);
-  /* top to match the vertical padding */
   top: 0.25rem;
   color: var(--color-txt);
-  /* transition for the transform property, to translate the string into view and to the right of the header */
   transition: all 0.4s ease-in-out;
-  /* z-index to have the pseudo element below the header itself */
   z-index: -5;
 }
 
 .App .Navbar h2:hover:before {
-  /* translate the pseudo element into view on hover */
   transform: translateX(10px);
 }
 
 .App .Navbar ul {
-  /* display the unordered list in a single row, placing the elements at the end of the grid column */
   display: flex;
   justify-content: flex-end;
   padding: 0.25rem 0.75rem;
@@ -111,36 +79,28 @@ header {
 }
 
 .App .Navbar ul li {
-  /* separate the list items more prominently */
-  margin: 0 0.75rem;
+  margin: 0 0.5rem;
   font-size: 1.4rem;
-  // text-transform: uppercase;
 }
 
 .App .Navbar ul li a {
-  /* reset the anchor link styles */
   color: inherit;
   text-decoration: none;
   padding: 0 0.25rem;
   letter-spacing: 0.2rem;
-  /* position relative to absolute position the connected pseudo element */
   position: relative;
 }
 
 .App .Navbar ul li a:before {
-  /* include a faux-border with a pseudo element  */
   content: "";
   position: absolute;
-  /* by default have the faux-border hidden from view */
   top: 100%;
   bottom: 0;
   left: 0;
   right: 0;
-  /* transition for the hover state */
   transition: all 0.3s ease-out;
 }
 
-/* include the different colors for the different anchor links */
 .App .Navbar ul li:nth-of-type(1) a:before {
   background: var(--color-login);
 }
@@ -155,24 +115,16 @@ header {
 }
 
 .App .Navbar ul li a:hover:before {
-  /* on hover, change the bottom property to have the faux-border stretch from the top down */
   bottom: -5px;
 }
 
 .App h1 {
-  /* style the header to have the color matching the background of the header in the navbar */
   color: var(--color-login);
   text-transform: uppercase;
   text-align: center;
   margin-top: 20vh;
   font-size: calc(2rem + 1.5vw);
 }
-
-/*
-for relatively smaller and smaller viewports:
-- start by hiding the pseudo element responsible for the string 
-- continue by removing the header bearing the "logo" as well 
-*/
 
 @media (max-width: 750px) {
   .App .Navbar h2:before {
@@ -181,7 +133,6 @@ for relatively smaller and smaller viewports:
 }
 
 @media (max-width: 400px) {
-  /* adjust the visible anchor link elements to show them in a single column, centered in the page */
   .App .Navbar h2 {
     display: none;
   }
