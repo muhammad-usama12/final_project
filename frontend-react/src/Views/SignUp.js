@@ -5,6 +5,7 @@ import { useNavigate } from "react-router";
 import TextField from "../components/TextField";
 import { ChakraProvider, ColorModeScript } from "@chakra-ui/react";
 import theme from "../components/theme";
+import Toggle from "../components/Toggle";
 
 import useApplicationData from "../hooks/useApplicationData";
 import Header from "../components/Header";
@@ -20,6 +21,8 @@ const SignUp = () => {
     <>
       <Header />
       <ChakraProvider theme={theme}>
+        <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+        <Toggle />
         <Formik
           initialValues={{ username: "", password: "" }}
           onSubmit={(values, actions) => {
