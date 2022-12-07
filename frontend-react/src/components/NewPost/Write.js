@@ -116,15 +116,15 @@ export default function Write(props) {
         />
       </form>
       {gifs && (
-          <ReactGiphySearchbox
-            apiKey={"6TLFFlfm48okMpvqfUU3vDQfoVan5W2t"}
-            onSelect={selectedGif}
-            masonryConfig={[
-              { columns: 3, imageWidth: 180, gutter: 10 },
-              { mq: "100%", columns: 2, imageWidth: 100, gutter: 10 },
-            ]}
-          />
-        )}
+        <ReactGiphySearchbox
+          apiKey={"6TLFFlfm48okMpvqfUU3vDQfoVan5W2t"}
+          onSelect={selectedGif}
+          masonryConfig={[
+            { columns: 3, imageWidth: 180, gutter: 10 },
+            { mq: "100%", columns: 2, imageWidth: 100, gutter: 10 },
+          ]}
+        />
+      )}
       <div className="right-buttons">
         <Button
           cancel
