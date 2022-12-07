@@ -8,3 +8,6 @@ INSERT INTO comments (text, user_id, post_id) VALUES ('Im going to have to disre
 
 INSERT INTO comments (text, user_id, post_id) VALUES ('fr fr', 1, 7);
 
+
+
+
