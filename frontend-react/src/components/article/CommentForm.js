@@ -18,7 +18,7 @@ export default function CommentForm(props) {
         <textarea
           name="text"
           type="text"
-          placeholder="get his ass"
+          placeholder="let em hear it"
           value={text}
           onChange={(event) => setText(event.target.value)}
         />

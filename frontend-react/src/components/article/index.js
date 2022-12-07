@@ -56,7 +56,7 @@ export default function Article(props) {
 
   function validate(text) {
     if (text === "") {
-      setError("can't get his ass with no words, bestie");
+      setError("can't let him hear it with no words, bestie");
     } else {
       setError(null);
       props

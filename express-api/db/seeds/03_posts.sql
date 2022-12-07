@@ -30,7 +30,7 @@ INSERT INTO posts (text, total_likes, total_comments, user_id, tvshow_id) VALUES
 INSERT INTO posts (text, image, total_likes, total_comments, user_id, tvshow_id) VALUES ('charles boyle was the real goat of b99 #99', 'https://media1.giphy.com/media/Wn0nr2fpersAuprfpn/giphy.gif?cid=29cbd928njgg0xqvqg4ct1is51x6qakjwrwlfr4gl7fu7hgi&rid=giphy.gif&ct=g', 10, 1, 2, 2);
 
 
-INSERT INTO posts (text, image, total_likes, total_comments, spoiler, user_id, tvshow_id) VALUES ('when ur fav has daddy issues', 'https://pbs.twimg.com/ext_tw_video_thumb/1555612752844029952/pu/img/DnfaXAisz0d0Sof0.jpg', 54, 3, true, 2, 6);
+INSERT INTO posts (text, image, total_likes, total_comments, spoiler, user_id, tvshow_id) VALUES ('when ur fav has [REDACTED] issues', 'https://pbs.twimg.com/ext_tw_video_thumb/1555612752844029952/pu/img/DnfaXAisz0d0Sof0.jpg', 54, 3, true, 2, 6);
 
 INSERT INTO posts (text, image, total_likes, total_comments, spoiler, user_id, tvshow_id) VALUES ('spoiler alert? nah new drip alert', 'https://www.indiewire.com/wp-content/uploads/2017/11/nathan-for-you-season-4-suit.jpg?resize=1024,576', 54, 2, true, 2, 14);
 

@@ -217,7 +217,7 @@ export default function EditProfile() {
       ) : (
         <>
           <section className="edit-profile">
-            <h1>who the hell are you</h1>
+            <h1>so who are you</h1>
             <div className="profile-header">
               <label className="upload-image">
                 <input
