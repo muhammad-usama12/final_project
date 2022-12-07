@@ -117,9 +117,8 @@ article {
     .timestamp {
       margin-right: 1rem;
       font-size: large;
-      text-align: right
+      text-align: right;
     }
-
   }
 
   .spoiler {
@@ -178,7 +177,7 @@ article {
 
     textarea {
       background-color: $secondary-colour;
-      color: $primary-colour;
+      // color: $primary-colour;
       resize: none;
       border: 0px;
       border-radius: 30px;
