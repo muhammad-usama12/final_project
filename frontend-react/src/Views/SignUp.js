@@ -61,7 +61,7 @@ const SignUp = () => {
             h="100vh"
             spacing="1rem"
           >
-            <Heading>Sign Up</Heading>
+            <Heading>sign up</Heading>
             <Text as="p" color="red.500">
               {error}
             </Text>
@@ -69,20 +69,20 @@ const SignUp = () => {
               name="username"
               placeholder="Enter username"
               autoComplete="off"
-              label="Username"
+              label="username"
             />
 
             <TextField
               name="password"
               placeholder="Enter password"
               autoComplete="off"
-              label="Password"
+              label="password"
               type="password"
             />
 
             <ButtonGroup pt="1rem">
-              <Button colorScheme="yellow" type="submit">
-                Create Account
+              <Button colorScheme="orange" type="submit">
+                create account
               </Button>
             </ButtonGroup>
           </VStack>
