@@ -40,8 +40,6 @@ INSERT INTO posts (text, image, total_likes, total_comments, user_id, tvshow_id)
 
 
 
-
-
-INSERT INTO posts (text, image, total_likes, total_comments, user_id, tvshow_id) VALUES ('chandler is my bae', 'https://media1.giphy.com/media/3o7qDQ4kcSD1PLM3BK/giphy.gif?cid=29cbd928u6t322g97g1qzytufnor2a39n62mvo1mvsxsuear&rid=giphy.gif&ct=g', 0, 0, 3, 4);
+INSERT INTO posts (text, image, total_likes, total_comments, user_id, tvshow_id) VALUES ('chandler is my bae', 'https://media1.giphy.com/media/3o7qDQ4kcSD1PLM3BK/giphy.gif?cid=29cbd928u6t322g97g1qzytufnor2a39n62mvo1mvsxsuear&rid=giphy.gif&ct=g', 238, 4, 3, 4);
 
 

@@ -8,6 +8,17 @@ INSERT INTO comments (text, user_id, post_id) VALUES ('Im going to have to disre
 
 INSERT INTO comments (text, user_id, post_id) VALUES ('fr fr', 1, 7);
 
+INSERT INTO comments (text, user_id, post_id) VALUES ('chandlerrrrr🤣😂', 3, 17);
+
+INSERT INTO comments (text, user_id, post_id) VALUES ('He is the best!!!!!😻😻', 2, 17);
+
+INSERT INTO comments (text, user_id, post_id) VALUES ('chandlerrrrr💃', 2, 17);
+
+INSERT INTO comments (text, user_id, post_id) VALUES ('He is not even that funny!😏', 1, 17);
+
+
+
+
 
 
 
