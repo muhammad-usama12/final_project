@@ -4,11 +4,11 @@ body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #282c34;
+  background-color: #1a202c;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
@@ -34,6 +34,11 @@ main {
   align-items: center;
   min-height: 100vh;
   font-size: $primary-font-size;
+  padding-top: 60px;
+}
+
+main section {
+  padding-bottom: 40px;
 }
 
 .article-container {

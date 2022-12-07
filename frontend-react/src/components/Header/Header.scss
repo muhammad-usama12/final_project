@@ -1,14 +1,15 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:700");
+@import "../../styles/variables.scss";
 /* define the fonts and colors used in the project */
 :root {
   --font: "Open Sans", sans-serif;
-  --color-bg: #282c34;
-  --color-txt: #F6F1F1;
-  --color-home: #F6F1F1;
-  --color-login: #FF8C00;
-  --color-signup: #FF8C00;
-  --color-profile: #FF8C00;
-  --color-logout: #FF8C00;
+  --color-bg: #f6f1f1;
+  --color-txt: #f6f1f1;
+  --color-home: #f6f1f1;
+  --color-login: #ff8c00;
+  --color-signup: #ff8c00;
+  --color-profile: #ff8c00;
+  --color-logout: #ff8c00;
 }
 
 * {
@@ -30,6 +31,9 @@ header {
   top: 0;
   left: 0;
   width: 100%;
+  padding-top: 20px;
+  padding-left: 30px;
+  padding-right: 25px;
 }
 
 .App .Navbar {
@@ -45,24 +49,49 @@ header {
   /* include padding instead of margin to have the header attached to the window's borders (and therefore to avoid the string included with a pseudo element from being displayed inappropriately to the left of the header) */
   padding: 0.25rem 0.75rem;
   font-size: 2.5rem;
-  color: var(--color-bg);
-  background: var(--color-home);
+  color: #f6f1f1;
+  transition-duration: 200ms;
+
   /* position relative to absolute position the pseudo element */
   position: relative;
   /* transition for the change in background color (occurring as the nav items are pressed) */
 }
+.App .Navbar h2:hover {
+  text-shadow: 3px 3px #ff8c00;
+}
+
+// .App .Navbar img {
+//   display: inherit;
+//   padding-left: 0.1rem;
+//   padding-right: 0.1rem;
+//   width: 35px;
+//   height: auto;
+// }
+
+// .App .Navbar .logo {
+//   display: inherit;
+//   padding-left: 0.1rem;
+//   padding-right: 0.1rem;
+//   width: 35px;
+//   height: auto;
+//   color: $star;
+// }
+
+// a {
+//   display: inherit;
+// }
 
 .App .Navbar h2:before {
   /* with a pseudo element include a string, which is hidden by default below the header, to the left of the page  */
-  content: "teebo";
+  content: url('https://i.imgur.com/VGZEYrg.png');
   position: absolute;
-  left: 100%;
+  left: 93%;
   transform: translateX(-50vw);
   /* top to match the vertical padding */
   top: 0.25rem;
   color: var(--color-txt);
   /* transition for the transform property, to translate the string into view and to the right of the header */
-  transition: all 0.5s ease-in-out;
+  transition: all 0.4s ease-in-out;
   /* z-index to have the pseudo element below the header itself */
   z-index: -5;
 }
@@ -85,7 +114,7 @@ header {
   /* separate the list items more prominently */
   margin: 0 0.75rem;
   font-size: 1.4rem;
-  text-transform: uppercase;
+  // text-transform: uppercase;
 }
 
 .App .Navbar ul li a {
@@ -163,5 +192,18 @@ for relatively smaller and smaller viewports:
   }
   .App .Navbar ul li {
     margin: 0.5rem 0;
+  }
+  .logo-image {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    width: 35px;
+    height: auto;
+  }
+  .logo-name {
+    color: $secondary-colour;
+    display: flex;
+    align-items: center;
+    font-size: xx-large;
+    font-weight: 700;
   }
 }

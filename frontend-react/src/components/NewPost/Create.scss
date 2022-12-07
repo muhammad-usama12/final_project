@@ -1,5 +1,9 @@
 @import "../../styles/variables.scss";
 
+h1 {
+  padding-bottom: 2rem;
+}
+
 .create-post {
   display: flex;
   flex-direction: column;
@@ -13,7 +17,7 @@
   }
 
   .fa-marker:hover {
-    background-color: $tertiary-colour;
+    background-color: $secondary-colour;
     display: flex;
     justify-content: center;
     align-items: center;
