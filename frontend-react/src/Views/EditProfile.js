@@ -253,6 +253,7 @@ export default function EditProfile() {
                     placeholder="who are you king"
                     value={user.username}
                     onChange={onChange}
+                    autoComplete="off"
                   />
                   <p>username</p>
                 </div>
