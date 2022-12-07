@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import axios from "axios";
 import BeatLoader from "react-spinners/BeatLoader";
 import classNames from "classnames";
+import { Link } from "react-router-dom";
 
 import "./Profile.scss";
 import "../components/Watchlist.scss";
@@ -47,11 +48,11 @@ export default function ProfileVisit(props) {
   const [toggleWatchlist, setToggleWatchlist] = useState(false);
 
   const clickPostsClass = classNames("toggle", {
-    "toggle-posts": togglePosts,
+    "toggleTrue": togglePosts,
   });
 
   const clickWatchlistClass = classNames("toggle", {
-    "toggle-watchlist": toggleWatchlist,
+    "toggleTrue": toggleWatchlist,
   });
 
   const applicationData = useApplicationData();
@@ -180,7 +181,7 @@ export default function ProfileVisit(props) {
                   back();
                 }}
               >
-                posts
+                <Link to="#">posts</Link>
               </div>
               <div
                 className={clickWatchlistClass}
@@ -190,7 +191,7 @@ export default function ProfileVisit(props) {
                   transition(WATCHLIST);
                 }}
               >
-                watchlist
+                <Link to="#">watchlist</Link>
               </div>
             </div>
           </section>

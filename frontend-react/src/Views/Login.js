@@ -65,7 +65,7 @@ export default function Login() {
             h="100vh"
             spacing="1rem"
           >
-            <Heading>Log In</Heading>
+            <Heading>log in</Heading>
             <Text as="p" color="red.500">
               {error}
             </Text>
@@ -73,20 +73,20 @@ export default function Login() {
               name="username"
               placeholder="Enter username"
               autoComplete="off"
-              label="Username"
+              label="username"
             />
 
             <TextField
               name="password"
               placeholder="Enter password"
               autoComplete="off"
-              label="Password"
+              label="password"
               type="password"
             />
 
             <ButtonGroup pt="1rem">
-              <Button colorScheme="yellow" type="submit">
-                Log In
+              <Button colorScheme="orange" type="submit">
+                log in
               </Button>
             </ButtonGroup>
           </VStack>

@@ -82,11 +82,12 @@
   cursor: pointer;
 }
 
-.category-list{
+.category-list {
   color: $primary-colour;
   display: flex;
   flex-direction: row;
   justify-content: center;
+  margin-bottom: 2rem;
   // flex-wrap: wrap;
    .pill-image{
     padding: 0;
