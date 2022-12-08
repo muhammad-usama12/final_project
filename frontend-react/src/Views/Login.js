@@ -18,6 +18,7 @@ export default function Login() {
   const [user, setUser] = useState({});
   const state = useApplicationData();
   const navigate = useNavigate();
+  
   return (
     <>
       <Header />
@@ -62,7 +63,7 @@ export default function Login() {
         >
           <VStack
             as={Form}
-            w={{ base: "90%", md: "500px" }}
+            w={{ base: "80%", md: "500px" }}
             m="auto"
             justify="center"
             h="100vh"

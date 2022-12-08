@@ -15,21 +15,21 @@ export default function Header(props) {
             <li className="spacing">
               {!document.cookie && <Link to="/signup">sign up</Link>}
             </li>
-            <li>{!document.cookie && <Link to="/login">log in</Link>}</li>
+            <li id="log-in">{!document.cookie && <Link to="/login">log in</Link>}</li>
+            {document.cookie && (
             <li>
-              {document.cookie && (
-                <Link to="/profile" onClick={props.profile}>
-                  profile
-                </Link>
-              )}
+              <Link to="/profile" onClick={props.profile}>
+                profile
+              </Link>
             </li>
+            )}
+            {document.cookie && (
             <li>
-              {document.cookie && (
-                <Link to="#" onClick={props.logout}>
-                  log out
-                </Link>
-              )}
+              <Link to="#" onClick={props.logout}>
+                log out
+              </Link>
             </li>
+            )}
           </ul>
         </nav>
       </div>

@@ -47,12 +47,12 @@ header {
 .App .Navbar h2 {
   padding: 0.25rem 0.75rem;
   font-size: 2.5rem;
-  color: #ff8c00;
+  color: #f6f1f1;
   transition-duration: 200ms;
   position: relative;
 }
 .App .Navbar h2:hover {
-  text-shadow: 3px 3px #f6f1f1;
+  text-shadow: 3px 3px #ff8c00;
 }
 
 .App .Navbar h2:before {
