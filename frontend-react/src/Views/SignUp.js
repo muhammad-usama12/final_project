@@ -50,7 +50,7 @@ const SignUp = () => {
                 if (data.status) {
                   setError(data.status);
                 } else if (data.loggedIn) {
-                  setUser({ ...data });
+                  // setUser({ ...data });
                   navigate("/login");
                 }
               });
