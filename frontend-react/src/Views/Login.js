@@ -66,7 +66,7 @@ export default function Login() {
             w={{ base: "80%", md: "500px" }}
             m="auto"
             justify="center"
-            h="100vh"
+            h="90vh"
             spacing="1rem"
           >
             <Heading>log in</Heading>

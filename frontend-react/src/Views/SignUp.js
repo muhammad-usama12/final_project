@@ -65,7 +65,7 @@ const SignUp = () => {
             w={{ base: "90%", md: "500px" }}
             m="auto"
             justify="center"
-            h="100vh"
+            h="90vh"
             spacing="1rem"
           >
             <Heading>sign up</Heading>
