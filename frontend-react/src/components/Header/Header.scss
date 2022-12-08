@@ -33,7 +33,7 @@ header {
   width: 100%;
   padding-top: 20px;
   padding-left: 40px;
-  padding-right: 84px;
+  padding-right: 40px;
 }
 
 .App .Navbar {
@@ -47,12 +47,12 @@ header {
 .App .Navbar h2 {
   padding: 0.25rem 0.75rem;
   font-size: 2.5rem;
-  color: #f6f1f1;
+  color: #ff8c00;
   transition-duration: 200ms;
   position: relative;
 }
 .App .Navbar h2:hover {
-  text-shadow: 3px 3px #ff8c00;
+  text-shadow: 3px 3px #f6f1f1;
 }
 
 .App .Navbar h2:before {
@@ -61,7 +61,7 @@ header {
   left: 93%;
   transform: translateX(-50vw);
   top: 0.25rem;
-  color: var(--color-txt);
+  // color: var(--color-txt);
   transition: all 0.4s ease-in-out;
   z-index: -5;
 }
