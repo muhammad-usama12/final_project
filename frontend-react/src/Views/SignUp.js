@@ -14,6 +14,7 @@ import Footer from "../components/Footer";
 const SignUp = () => {
   const [user, setUser] = useState({});
   const { error, setError } = useApplicationData();
+  const state = useApplicationData();
 
   const navigate = useNavigate();
 
@@ -50,8 +51,11 @@ const SignUp = () => {
                 if (data.status) {
                   setError(data.status);
                 } else if (data.loggedIn) {
-                  // setUser({ ...data });
-                  navigate("/login");
+                  localStorage.setItem("teeboUser", data.userId);
+                  setUser({ ...data });
+                  state.setState((prev) => ({ ...prev, loggedIn: true }));
+                  localStorage.setItem("teeboUser", data.userId);
+                  navigate("/");
                 }
               });
           }}
