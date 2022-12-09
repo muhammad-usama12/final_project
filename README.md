@@ -2,7 +2,7 @@
 
 #### By [Devi Raju](https://github.com/DeviRaju27), Muhammad Usama, [Kasey Valdez](https://github.com/kaseyvee)
 
-A community where users can discuss any TV show they like. This app caters to passionate fans who want to actively discuss their favourite shows.
+A community where users can discuss any TV show they like. This app caters to passionate fans who want to engage with other fans and discuss their desired TV shows.
 
 ## Final Product
 
