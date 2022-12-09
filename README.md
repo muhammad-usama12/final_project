@@ -1,12 +1,8 @@
 # teebo
 
-### By [Devi Raju](https://github.com/DeviRaju27), Muhammad Usama, [Kasey Valdez](https://github.com/kaseyvee)
+#### By [Devi Raju](https://github.com/DeviRaju27), Muhammad Usama, [Kasey Valdez](https://github.com/kaseyvee)
 
-#
-
-A community where users can discuss any TV show they like. This app caters to passionate fans who want to actively discuss on their favourite shows.
-
-#
+A community where users can discuss any TV show they like. This app caters to passionate fans who want to actively discuss their favourite shows.
 
 ## Final Product
 
@@ -21,8 +17,6 @@ Posts marked as spoiler are blurred
 Users can edit their profile to make it more personalized
 
 ![Edit profile page.](https://github.com/muhammad-usama12/teebo/blob/main/frontend-react/docs/teebo-edit-profile.png?raw=true)
-
-#
 
 ## Getting Started
 
